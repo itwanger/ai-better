@@ -1,4 +1,4 @@
-面试官问你："Multi-Agent 协作是怎么实现的？"如果你回答"每个 Agent 各干各的，最后合并结果就行了"，那这道送分题，你算浪费了。
+面试官问你：“Multi-Agent 协作是怎么实现的？”如果你回答“每个 Agent 各干各的，最后合并结果就行了”，那这道送分题，你算浪费了。
 
 ![](https://cdn.paicoding.com/stutymore/multi-agent-collaboration-b51988da1509079c45d910beff2b2b6e.png)
 
@@ -18,7 +18,7 @@
 
 四步讲清楚。
 
-第一步，任务拆解。用户说"帮我做份竞品分析报告"，编排器调 LLM 把需求拆成子任务——搜集数据、分析对比、撰写报告。前两个能并行，第三个依赖前两个。
+第一步，任务拆解。用户说“帮我做份竞品分析报告”，编排器调 LLM 把需求拆成子任务——搜集数据、分析对比、撰写报告。前两个能并行，第三个依赖前两个。
 
 第二步，Agent 分配。Orchestrator 看每个子 Agent 的角色描述，做语义匹配。搜集数据派给 Research Agent，分析对比派给 Analysis Agent。怎么匹配的？跟上期讲的 Skill 触发一个道理——靠 description。
 
@@ -32,7 +32,7 @@ Handoff 模式——Agent 之间直接传递控制权。比如客服场景，用
 
 Pipeline 模式——固定链条，A 输出喂 B，B 输出喂 C。适合步骤确定的任务，代码生成、审查、测试三步走。
 
-面试官如果追问："Multi-Agent 和单 Agent 加多 Tool，怎么选？"
+面试官如果追问：“Multi-Agent 和单 Agent 加多 Tool，怎么选？”
 
 告诉他——核心看专业化程度。跨领域知识，法律加金融加代码，单 Agent 一个 context 装不下，上 Multi-Agent。工具不超过十个、领域单一，单 Agent 够用，别增加协调成本。
 

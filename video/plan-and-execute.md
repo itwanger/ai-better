@@ -51,3 +51,5 @@ Plan-and-Execute 怎么解决？靠三个组件。
 最后一句口诀——强模型想、弱模型干，跑偏了重来不怕烦；五步以上先规划，三步以内 ReAct 干。
 
 这道题你学废了吗？想解锁更多 Agent 面试题的源码级拆解，点赞关注，我是二哥，下期见！
+
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=116810863153541&bvid=BV1xy7a65EA1&cid=39401422863&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
