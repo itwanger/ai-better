@@ -1,0 +1,107 @@
+<!doctype html>
+<!--
+  README 头图和 GitHub 社交预览图的源文件，配色取自视频共享色板 C（script/shared/remotion/components/index.tsx）。
+  重新生成：
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --hide-scrollbars \
+      --window-size=1280,640 --force-device-scale-factor=2 --screenshot=.github/assets/banner.png .github/assets/banner.html
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --hide-scrollbars \
+      --window-size=1280,640 --force-device-scale-factor=1 --screenshot=.github/assets/social-preview.png .github/assets/banner.html
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #f7f2e8; --card: #fefdf9; --ink: #232838; --blue: #2150b4; --rust: #b8532a;
+    --green: #2f7d4f; --gray: #6b6f7d; --line: #d8d1c3; --shadow: #dcdee0; --select: #dce4f6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    position: relative;
+  }
+  /* 背景细网格，和视频画面的纸张质感保持一致 */
+  body::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 40px 40px; opacity: .35;
+  }
+  .left { position: absolute; left: 72px; top: 52px; width: 660px; }
+  .kicker {
+    display: inline-block; font-family: Arial, "PingFang SC", sans-serif; font-weight: 700;
+    font-size: 18px; letter-spacing: 3px; color: var(--blue);
+    border: 2px solid var(--blue); padding: 8px 14px; background: var(--card);
+  }
+  h1 { margin-top: 26px; font-size: 72px; line-height: 1.12; font-weight: 900; letter-spacing: -1px; }
+  h1 em { font-style: normal; color: var(--blue); }
+  h1 .mark { background: linear-gradient(transparent 68%, rgba(184, 83, 42, .28) 68%); }
+  .sub { margin-top: 22px; font-size: 23px; line-height: 1.6; color: var(--gray); font-weight: 500; }
+  .sub b { color: var(--ink); font-weight: 700; }
+  .chips { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; width: 640px; }
+  .chip {
+    font-size: 16px; font-weight: 600; padding: 6px 14px; border: 2px solid var(--line);
+    border-radius: 999px; background: var(--card); color: var(--gray);
+  }
+  .chip.on { border-color: var(--blue); background: var(--blue); color: #fff; }
+  .footer {
+    position: absolute; left: 72px; bottom: 40px; display: flex; align-items: center; gap: 16px;
+    font-size: 20px; font-weight: 600;
+  }
+  .footer img { width: 54px; height: 54px; object-fit: cover; object-position: top; border: 3px solid var(--blue); }
+  .footer .url { font-family: Arial, "PingFang SC", sans-serif; color: var(--blue); font-weight: 700; }
+  .footer .dot { color: var(--line); }
+
+  .stack { position: absolute; right: 64px; top: 92px; width: 470px; }
+  .card {
+    background: var(--card); border: 3px solid var(--blue); box-shadow: 16px 16px 0 var(--shadow);
+    padding: 24px 26px; position: relative;
+  }
+  .card + .card { margin-top: 30px; }
+  .card .meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: Arial, "PingFang SC", sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 2px;
+  }
+  .tag { padding: 4px 10px; color: #fff; background: var(--green); letter-spacing: 1px; }
+  .tag.mid { background: #c48a1c; }
+  .tag.hard { background: var(--rust); }
+  .no { color: var(--gray); }
+  .q { margin-top: 14px; font-size: 24px; line-height: 1.45; font-weight: 700; }
+  .card .foot { margin-top: 16px; display: flex; gap: 10px; }
+  .pill { font-size: 14px; font-weight: 700; padding: 5px 10px; border: 2px solid var(--ink); }
+  .pill.video { border-color: var(--rust); color: var(--rust); }
+  .card.tilt { margin-left: 26px; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <div class="kicker">AI-BETTER · 王二讲Agent</div>
+    <h1>AI Agent 面试题<br><em>逐题</em><span class="mark">讲透</span></h1>
+    <p class="sub">每道题都有简答，高频题配<b>图文详解</b>和<b>口播视频</b>，<br>答案串到 PaiCLI、PaiFlow、派聪明三个实战项目</p>
+    <div class="chips">
+      <span class="chip on">Agent 基础</span><span class="chip">上下文与记忆</span><span class="chip">Harness</span>
+      <span class="chip">RAG</span><span class="chip">LLM</span><span class="chip">MCP</span>
+      <span class="chip">Prompt</span><span class="chip">Claude Code</span><span class="chip">Codex</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <img src="../../script/shared/assets/ergo-avatar.jpg" alt="">
+    <span>沉默王二</span><span class="dot">/</span><span class="url">javabetter.cn/ai/video</span>
+  </div>
+
+  <div class="stack">
+    <div class="card">
+      <div class="meta"><span class="tag mid">进阶</span><span class="no">AGENT 基础 #036</span></div>
+      <div class="q">Agent 执行过程中，<br>用户插话怎么处理？</div>
+      <div class="foot"><span class="pill">图文详解</span><span class="pill video">▶ 视频讲解</span></div>
+    </div>
+    <div class="card tilt">
+      <div class="meta"><span class="tag">基础</span><span class="no">LLM 基础 #153</span></div>
+      <div class="q">KV Cache 为什么只缓存 K 和 V，不缓存 Q？</div>
+      <div class="foot"><span class="pill">图文详解</span><span class="pill video">▶ 视频讲解</span></div>
+    </div>
+  </div>
+</body>
+</html>

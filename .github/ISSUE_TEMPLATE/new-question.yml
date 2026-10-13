@@ -1,0 +1,42 @@
+name: 投稿新题
+description: 面试中遇到了题库里还没有的 Agent / LLM / RAG 相关问题
+title: "[新题] "
+labels: ["新题"]
+body:
+  - type: input
+    id: question
+    attributes:
+      label: 题目
+      description: 一道题只问一件事，尽量还原面试官的原话
+    validations:
+      required: true
+  - type: input
+    id: company
+    attributes:
+      label: 出处
+      description: 哪家公司、哪个岗位、第几轮面试，不方便透露可以写“保密”
+  - type: dropdown
+    id: category
+    attributes:
+      label: 分类
+      options:
+        - Agent 基础
+        - 上下文与记忆
+        - Harness 与 Skills
+        - RAG 知识库
+        - LLM 基础与 API
+        - Claude Code 与 Codex
+        - DeepSeek 专题
+        - Prompt 工程
+        - MCP 与工具调用
+        - LangChain 与 Spring AI
+        - 模型训练与微调
+        - Agent 产品与框架演进
+        - 不确定
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充信息
+      description: 面试官的追问、你当时的回答，或者你觉得这道题的难点在哪里

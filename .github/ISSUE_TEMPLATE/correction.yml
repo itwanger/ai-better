@@ -1,0 +1,27 @@
+name: 答案勘误
+description: 某道题的答案有错误、表述不准确，或者内容已经过时
+title: "[勘误] "
+labels: ["勘误"]
+body:
+  - type: input
+    id: question
+    attributes:
+      label: 题目
+      description: 题号和题目，或者对应文章的链接
+      placeholder: 例如 153. KV Cache 是什么？为什么只缓存 K 和 V，不缓存 Q？
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 哪里有问题
+      description: 引用原文中有问题的句子，说明错在哪里
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: 依据
+      description: 官方文档、论文、源码位置或实测结果，方便核实
+    validations:
+      required: true

@@ -1,0 +1,24 @@
+name: README 目录检查
+
+on:
+  push:
+    paths: ["video/readme.md", "README.md", "scripts/gen-readme.mjs"]
+  pull_request:
+    paths: ["video/readme.md", "README.md", "scripts/gen-readme.mjs"]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      # 只需要题库和 README，跳过 mp4 等大文件
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            README.md
+            video/readme.md
+            scripts
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/gen-readme.mjs --check
