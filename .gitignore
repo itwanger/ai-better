@@ -1,0 +1,22 @@
+# 视频项目只收录 output 顶层的最终成片；shared 保留源码。
+# 放在通用忽略规则之前，避免放行 shared 下的依赖、密钥或缓存。
+/script/**
+!/script/*/
+!/script/*/output/
+!/script/*/output/*.mp4
+/script/*/output/*.tmp.mp4
+!/script/shared/**
+!/script/README.md
+!/script/package.json
+
+node_modules
+.env
+.cache
+.temp
+package-lock.json
+.DS_Store
+images
+*.log
+*-vip.md
+
+!/script/package-lock.json
