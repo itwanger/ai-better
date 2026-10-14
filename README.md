@@ -35,19 +35,19 @@
 | 分类 | 题数 | 图文详解 | 视频讲解 |
 | --- | ---: | ---: | ---: |
 | 01 Agent 基础 | 43 | 31 | 31 |
+| 热点解读 | 11 | 11 | 9 |
 | 02 上下文与记忆 | 22 | 9 | 9 |
 | 03 Harness 与 Skills | 42 | 3 | 3 |
 | 04 RAG知识库 | 43 | 2 | 1 |
 | 05 LLM 基础与 API | 82 | 8 | 7 |
 | 06 Claude Code与Codex | 17 | 6 | 6 |
 | 07 DeepSeek专题 | 5 | 5 | 5 |
-| 热点解读 | 11 | 11 | 8 |
 | 08 Prompt 工程 | 16 | 2 | 2 |
 | 09 MCP 与工具调用 | 26 | 0 | 0 |
 | 10 LangChain 与 Spring AI | 21 | 0 | 0 |
 | 11 模型训练与微调 | 32 | 1 | 1 |
 | 12 Agent 产品与框架演进 | 9 | 1 | 1 |
-| **合计** | **369** | **79** | **74** |
+| **合计** | **369** | **79** | **75** |
 <!-- AUTO-GENERATED:STATS:END -->
 
 难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。想在手机上收藏，可以用同步更新的[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)。
@@ -103,6 +103,23 @@
 - 🟢 41. 什么是 Agent 的 Headless 模式？
 - 🟡 42. Agent Framework、Runtime、Harness 有什么区别？
 - 🟡 43. Computer Use 是什么？说说它的原理
+
+</details>
+
+<details>
+<summary><b>热点解读</b>（11 题，图文详解 11 篇）</summary>
+
+- [REA 保姆级教程：DeepSeek Harness 实操](https://javabetter.cn/ai/video/rea-deepseek-harness-tutorial.html) · [抖音](https://www.douyin.com/video/7696102369058196736)
+- [最近爆火的 Personal Agent 到底是什么？](https://javabetter.cn/ai/video/what-is-personal-agent.html) · [抖音](https://www.douyin.com/video/7695348838801886499)
+- [Claude Haiku 5.5 怎么在成本和智能之间做选择？](https://javabetter.cn/ai/video/claude-haiku-5-5.html) · [抖音](https://www.douyin.com/video/7694223913370258729)
+- [CPU、GPU、NPU 到底有什么区别？](https://javabetter.cn/ai/video/cpu-gpu-npu-difference.html) · [抖音](https://www.douyin.com/video/7693854535088868643)
+- [Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？](https://javabetter.cn/ai/video/aleph-alpha-kolibri.html) · [抖音](https://www.douyin.com/video/7693484001561972019)
+- [Gemini 4 Argon 发布，100 万 Token 输出意味着什么？](https://javabetter.cn/ai/video/gemini-4-argon.html) · [抖音](https://www.douyin.com/video/7691703611381894415)
+- [MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？](https://javabetter.cn/ai/video/mimo-v3-hysparse2.html) · [抖音](https://www.douyin.com/video/7689435090677402895)
+- [推荐 5 个复刻 Jev 的开源项目](https://javabetter.cn/ai/video/open-source-jev-replicas.html) · [抖音](https://www.douyin.com/video/7688302955489021238) · [B站](https://www.bilibili.com/video/BV1zzaZ6CEbM/)
+- [不生成文本的 Jev，为什么让 14 万开发者排队？](https://javabetter.cn/ai/video/what-is-jev.html) · [抖音](https://www.douyin.com/video/7687944233659026722) · [B站](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
+- [GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？](https://javabetter.cn/ai/video/gpt-6-astra.html)
+- [Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？](https://javabetter.cn/ai/video/why-relay-still-works.html)
 
 </details>
 
@@ -350,23 +367,6 @@
 - 252. [DeepSeek V4 为什么用 CSA 和 HCA 替换 MLA？](https://javabetter.cn/ai/video/v4-why-replace-mla.html) · [抖音](https://www.douyin.com/video/7678962200215571731) · [B站](https://www.bilibili.com/video/BV1Y3tg6XEbT/)
 - 253. [Cordis 是什么？DeepSeek Harness 的插件系统如何理解？](https://javabetter.cn/ai/video/what-is-cordis.html) · [抖音](https://www.douyin.com/video/7674857729629900038) · [B站](https://www.bilibili.com/video/BV1h1bY6QEWF/)
 - 250. [为什么更小的激活参数也能获得更强 Agent 能力？](https://javabetter.cn/ai/video/why-post-training-beats-params.html) · [抖音](https://www.douyin.com/video/7670027713771621658) · [B站](https://www.bilibili.com/video/BV1K7uF6PEKD/)
-
-</details>
-
-<details>
-<summary><b>热点解读</b>（11 题，图文详解 11 篇）</summary>
-
-- [REA 保姆级教程：DeepSeek Harness 实操](https://javabetter.cn/ai/video/rea-deepseek-harness-tutorial.html)
-- [最近爆火的 Personal Agent 到底是什么？](https://javabetter.cn/ai/video/what-is-personal-agent.html) · [抖音](https://www.douyin.com/video/7695348838801886499)
-- [Claude Haiku 5.5 怎么在成本和智能之间做选择？](https://javabetter.cn/ai/video/claude-haiku-5-5.html) · [抖音](https://www.douyin.com/video/7694223913370258729)
-- [CPU、GPU、NPU 到底有什么区别？](https://javabetter.cn/ai/video/cpu-gpu-npu-difference.html) · [抖音](https://www.douyin.com/video/7693854535088868643)
-- [Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？](https://javabetter.cn/ai/video/aleph-alpha-kolibri.html) · [抖音](https://www.douyin.com/video/7693484001561972019)
-- [Gemini 4 Argon 发布，100 万 Token 输出意味着什么？](https://javabetter.cn/ai/video/gemini-4-argon.html) · [抖音](https://www.douyin.com/video/7691703611381894415)
-- [MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？](https://javabetter.cn/ai/video/mimo-v3-hysparse2.html) · [抖音](https://www.douyin.com/video/7689435090677402895)
-- [推荐 5 个复刻 Jev 的开源项目](https://javabetter.cn/ai/video/open-source-jev-replicas.html) · [抖音](https://www.douyin.com/video/7688302955489021238) · [B站](https://www.bilibili.com/video/BV1zzaZ6CEbM/)
-- [不生成文本的 Jev，为什么让 14 万开发者排队？](https://javabetter.cn/ai/video/what-is-jev.html) · [抖音](https://www.douyin.com/video/7687944233659026722) · [B站](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
-- [GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？](https://javabetter.cn/ai/video/gpt-6-astra.html)
-- [Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？](https://javabetter.cn/ai/video/why-relay-still-works.html)
 
 </details>
 

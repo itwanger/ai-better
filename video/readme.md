@@ -518,6 +518,111 @@ LangChain 在 2025 年 10 月的博客《Agent Frameworks, Runtimes, and Harness
 ### 43. Computer Use 是什么？说说它的原理
 🟡 中等 | `AI / 大模型` | → PaiAgent / PaiCLI
 
+## 热点解读（11 题）
+
+模型发布和行业事件的快速拆解，面试聊到最新动态时用得上。
+
+### REA 保姆级教程：DeepSeek Harness 实操
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，并为每条结论生成 Evidence 记录。DeepSeek Harness 没有一键接入，需要在 cordis.patch.yml 里接入 REA 的 MCP，再安装 Skill，最后跑通官方的恐龙游戏逆向案例。
+
+完整内容：[阅读全文《REA 接入 DeepSeek Harness》](./rea-deepseek-harness-tutorial.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn7fW4j9GEHSijqOJpqq4r8f)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7696102369058196736)
+
+### 最近爆火的 Personal Agent 到底是什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从 Grok Bot、Muse、Cue、dots 四款产品，理解 Personal Agent 的持续记忆、执行环境、用户身份和权限边界，以及它和聊天助手、Coding Agent 的区别。
+
+完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn3FTN6yR5TNRgnucNhfyXYf) · [阅读全文《Personal Agent》](./what-is-personal-agent.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7695348838801886499)
+
+
+### Claude Haiku 5.5 怎么在成本和智能之间做选择？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结合推理档位、上下文窗口、自适应思考和缓存，拆解 Haiku 5.5 的成本与能力取舍，以及在 Claude Code 中承担摘要、压缩、分类、路由和子 Agent 任务的用法。
+
+完整内容：[阅读全文《Claude Haiku 5.5 解读》](./claude-haiku-5-5.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnoAiq8fR9jVWeczNVjGoQie)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7694223913370258729)
+
+### CPU、GPU、NPU 到底有什么区别？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从 Codex 的本机执行、云端 LLM 推理和端侧 AI 三个场景，理解 CPU 的调度能力、GPU 的并行计算与显存带宽，以及 NPU 的低功耗推理。区分 Prefill 和 Decode，也说明 TOPS 为什么不能直接代表实际使用体验。
+
+完整内容：[阅读全文《CPU、GPU、NPU 的区别》](./cpu-gpu-npu-difference.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnEQp2HuPJVzfYbflqUpCfpg)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7693854535088868643)
+
+### Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+Kolibri 用 78B 总参数、3.46B 激活参数降低每次推理的计算量，结合混合专家和滑动窗口注意力控制开销；后训练数据由 GLM-5.3、Qwen3.8 等模型生成，文章拆解其训练方法、跑分和使用边界。
+
+完整内容：[阅读全文《Kolibri 解读》](./aleph-alpha-kolibri.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn6e2SW7YQEFrvYi1Yc8aGih)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7693484001561972019)
+
+### Gemini 4 Argon 发布，100 万 Token 输出意味着什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从 Prefill、Decode 和 KV Cache 的成本差异，理解百万 Token 输出的工程难点；结合长代码修改、安全攻防和 CodeMender 的工作方式，拆解 Gemini 4 Argon 的能力与使用边界。
+
+完整内容：[阅读全文《Gemini 4 Argon 解读》](./gemini-4-argon.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnqR0RwJxlmp9OctEP11Vuhf)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7691703611381894415)
+
+### MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？
+
+HySparse2 将模型分成 Self-Decoder 和 Cross-Decoder：前半段保留全注意力与滑动窗口，后半段结合全注意力与稀疏注意力。通过模块内部 KV Reuse 和跨段 KV Bridging，让后半段复用或从前半段计算 KV Cache，使 Prefill 提前结束，减少长输入和工具返回内容带来的计算成本。
+
+完整内容：[阅读全文《MiMo-V3 与 HySparse2》](./mimo-v3-hysparse2.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8ifqMip2ndBgZX8vEnj6pf)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7689435090677402895)
+
+### 推荐 5 个复刻 Jev 的开源项目
+
+开源社区在 48 小时内复刻出了 Jev，思路是扔掉全量语言模型头，换成轻量决策头，冻结底层参数只挂 LoRA 微调，块因果掩码让单次前向并发完成多项决策。文中盘点 Kev（Qwen3.5 基座，兼容官方 SDK，本地首选）、Nimble（对比数据构建，准确率 90.1%）、Laya（ModernBERT 双向编码器，单次 33 毫秒）、Open-Jev（截流下一个 token 的概率对数）四个项目，以及意图路由、工具护栏、历史剪枝三个落地入口。
+
+完整内容：[阅读全文《Jev 开源复刻》](./open-source-jev-replicas.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnCCyZe87o2bYZAKoURy0dPf)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1zzaZ6CEbM/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7688302955489021238)
+
+### 不生成文本的 Jev，为什么让 14 万开发者排队？
+
+Jev 是 TypeSafe AI 9 月 15 日发布的 System One 模型，不生成文本，只做判断。给它一段应用状态和一个预定义的结构化问题，它用一次前向计算直接在选项上分配概率，支持是否、单选、打分三种决策。它用 RLCD 训练校准过的置信度，比同类 LLM 快 40 到 200 倍，便宜 40 到 400 倍。Agent 里意图路由、审核、风控初筛这类高频小决策交给它，复杂推理仍然交给大模型。
+
+完整内容：[阅读全文《Jev 是什么》](./what-is-jev.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8m4NWZ9CZdeWUmjS9OOEab)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7687944233659026722)
+
+### GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？
+
+GPT-6 Astra 在 ARC-AGI-3 上拿到 99.9%，靠的是紧凑符号世界模型加有状态的 Harness。它能直接操作电脑，网络安全等级首次达到 Critical。模型越强，Harness 的设计就越关键。
+
+完整内容：[阅读全文《GPT-6 Astra 解读》](./gpt-6-astra.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnp9S8C6LB632Cn2gMicQp5d)
+
+### Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？
+
+官网和 API 共用 Cloudflare 做流量入口，入口挂了就全挂。中转还能跑，是因为 OpenAI 兼容协议让切换模型零成本，而各家模型的能力和风格已经趋同到难以分辨。文中给了三个验证中转到底在调谁的方法。
+
+完整内容：[阅读全文《官网全崩中转为什么还能用》](./why-relay-still-works.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnRxRSfq7atYGxxjXecbYBcb)
+
 ## 02、上下文与记忆（22 题）
 
 聚焦上下文窗口、Context Engineering、短期记忆、长期记忆、压缩、检索与会话隔离。
@@ -995,7 +1100,7 @@ Word2Vec（静态词向量，不考虑上下文）、BERT 类（双向编码，�
 ### 120. RAG 怎么做向量和关键词的混合检索？
 纯向量检索懂语义但会漏掉错误码、型号这类精确字面，BM25 认得准字面却不认识同义说法，所以要两路一起召回。两路分数不能直接加权相加，向量相似度最高只有 1，BM25 分数没有固定的最大值，命中关键词多的查询会让 BM25 主导排序。派聪明的 HybridSearchService 让 BM25 和 KNN 并行召回，每路 min(topK×30, 300) 条，KNN 内部用 userId、orgTag、public 做权限预过滤；再用 RRF 按名次融合，得分为 1/(60+名次) 之和；最后取 RRF 前 50 条交给 gte-rerank-v2 精排，保留 0.1 分以上的结果。阈值从 0.2 降到 0.1 后，分块级 Recall@5 从 56.5% 升到 76.1%。一路召回失败时用另一路继续融合，Rerank 失败时按 RRF 顺序加阈值返回。
 
-完整答案：[阅读全文《RAG 混合检索》](./rag-hybrid-search.md)
+完整答案：[阅读全文《RAG 混合检索》](./rag-hybrid-search.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnsTq6XmaIFH9prCANbT8Usd)
 
 🟡 进阶 | `→ 派聪明 HybridSearchService BM25 + KNN + RRF + Rerank` | 快手、字节
 
@@ -1627,109 +1732,6 @@ DeepSeek V4 Flash 正式版只有 13B 激活参数，V4 Pro 有 49B，架构没�
 完整答案：[阅读全文《后训练为何重要》](./why-post-training-beats-params.md) · [B站视频](https://www.bilibili.com/video/BV1K7uF6PEKD/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnmLUKj4aXQ2OAktp0sqIkQb)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7670027713771621658)
-
-## 热点解读（11 题）
-
-模型发布和行业事件的快速拆解，面试聊到最新动态时用得上。
-
-### REA 保姆级教程：DeepSeek Harness 实操
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，并为每条结论生成 Evidence 记录。DeepSeek Harness 没有一键接入，需要在 cordis.patch.yml 里接入 REA 的 MCP，再安装 Skill，最后跑通官方的恐龙游戏逆向案例。
-
-完整内容：[阅读全文《REA 接入 DeepSeek Harness》](./rea-deepseek-harness-tutorial.md)
-
-### 最近爆火的 Personal Agent 到底是什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-从 Grok Bot、Muse、Cue、dots 四款产品，理解 Personal Agent 的持续记忆、执行环境、用户身份和权限边界，以及它和聊天助手、Coding Agent 的区别。
-
-完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn3FTN6yR5TNRgnucNhfyXYf) · [阅读全文《Personal Agent》](./what-is-personal-agent.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7695348838801886499)
-
-
-### Claude Haiku 5.5 怎么在成本和智能之间做选择？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-结合推理档位、上下文窗口、自适应思考和缓存，拆解 Haiku 5.5 的成本与能力取舍，以及在 Claude Code 中承担摘要、压缩、分类、路由和子 Agent 任务的用法。
-
-完整内容：[阅读全文《Claude Haiku 5.5 解读》](./claude-haiku-5-5.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnoAiq8fR9jVWeczNVjGoQie)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7694223913370258729)
-
-### CPU、GPU、NPU 到底有什么区别？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-从 Codex 的本机执行、云端 LLM 推理和端侧 AI 三个场景，理解 CPU 的调度能力、GPU 的并行计算与显存带宽，以及 NPU 的低功耗推理。区分 Prefill 和 Decode，也说明 TOPS 为什么不能直接代表实际使用体验。
-
-完整内容：[阅读全文《CPU、GPU、NPU 的区别》](./cpu-gpu-npu-difference.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnEQp2HuPJVzfYbflqUpCfpg)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7693854535088868643)
-
-### Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-Kolibri 用 78B 总参数、3.46B 激活参数降低每次推理的计算量，结合混合专家和滑动窗口注意力控制开销；后训练数据由 GLM-5.3、Qwen3.8 等模型生成，文章拆解其训练方法、跑分和使用边界。
-
-完整内容：[阅读全文《Kolibri 解读》](./aleph-alpha-kolibri.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn6e2SW7YQEFrvYi1Yc8aGih)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7693484001561972019)
-
-### Gemini 4 Argon 发布，100 万 Token 输出意味着什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-从 Prefill、Decode 和 KV Cache 的成本差异，理解百万 Token 输出的工程难点；结合长代码修改、安全攻防和 CodeMender 的工作方式，拆解 Gemini 4 Argon 的能力与使用边界。
-
-完整内容：[阅读全文《Gemini 4 Argon 解读》](./gemini-4-argon.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnqR0RwJxlmp9OctEP11Vuhf)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7691703611381894415)
-
-### MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？
-
-HySparse2 将模型分成 Self-Decoder 和 Cross-Decoder：前半段保留全注意力与滑动窗口，后半段结合全注意力与稀疏注意力。通过模块内部 KV Reuse 和跨段 KV Bridging，让后半段复用或从前半段计算 KV Cache，使 Prefill 提前结束，减少长输入和工具返回内容带来的计算成本。
-
-完整内容：[阅读全文《MiMo-V3 与 HySparse2》](./mimo-v3-hysparse2.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8ifqMip2ndBgZX8vEnj6pf)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7689435090677402895)
-
-### 推荐 5 个复刻 Jev 的开源项目
-
-开源社区在 48 小时内复刻出了 Jev，思路是扔掉全量语言模型头，换成轻量决策头，冻结底层参数只挂 LoRA 微调，块因果掩码让单次前向并发完成多项决策。文中盘点 Kev（Qwen3.5 基座，兼容官方 SDK，本地首选）、Nimble（对比数据构建，准确率 90.1%）、Laya（ModernBERT 双向编码器，单次 33 毫秒）、Open-Jev（截流下一个 token 的概率对数）四个项目，以及意图路由、工具护栏、历史剪枝三个落地入口。
-
-完整内容：[阅读全文《Jev 开源复刻》](./open-source-jev-replicas.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnCCyZe87o2bYZAKoURy0dPf)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1zzaZ6CEbM/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7688302955489021238)
-
-### 不生成文本的 Jev，为什么让 14 万开发者排队？
-
-Jev 是 TypeSafe AI 9 月 15 日发布的 System One 模型，不生成文本，只做判断。给它一段应用状态和一个预定义的结构化问题，它用一次前向计算直接在选项上分配概率，支持是否、单选、打分三种决策。它用 RLCD 训练校准过的置信度，比同类 LLM 快 40 到 200 倍，便宜 40 到 400 倍。Agent 里意图路由、审核、风控初筛这类高频小决策交给它，复杂推理仍然交给大模型。
-
-完整内容：[阅读全文《Jev 是什么》](./what-is-jev.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8m4NWZ9CZdeWUmjS9OOEab)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7687944233659026722)
-
-### GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？
-
-GPT-6 Astra 在 ARC-AGI-3 上拿到 99.9%，靠的是紧凑符号世界模型加有状态的 Harness。它能直接操作电脑，网络安全等级首次达到 Critical。模型越强，Harness 的设计就越关键。
-
-完整内容：[阅读全文《GPT-6 Astra 解读》](./gpt-6-astra.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnp9S8C6LB632Cn2gMicQp5d)
-
-### Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？
-
-官网和 API 共用 Cloudflare 做流量入口，入口挂了就全挂。中转还能跑，是因为 OpenAI 兼容协议让切换模型零成本，而各家模型的能力和风格已经趋同到难以分辨。文中给了三个验证中转到底在调谁的方法。
-
-完整内容：[阅读全文《官网全崩中转为什么还能用》](./why-relay-still-works.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnRxRSfq7atYGxxjXecbYBcb)
 
 ## 08、Prompt 工程（16 题）
 
