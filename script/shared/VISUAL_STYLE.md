@@ -4,7 +4,7 @@ Claude Code（`ergo-remotion-video` Skill）和 Codex 制作二哥视频，画�
 
 ## 当前风格
 
-以 [用户偏好](../../../../.claude/skills/ergo-remotion-video/references/USER_PREFERENCES.md) 为准，要点如下：
+以 [用户偏好](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/USER_PREFERENCES.md) 为准，要点如下：
 
 - 暖米色背景、顶部完整章节导航、底部单行字幕和按章节分段的进度条，场景按段落短淡入切换。
 - 全片一套色调，颜色只从共享色板 `C` 取：蓝色主色，铁锈橙强调，绿色只表示正确，深色写正文，灰色写次要信息。

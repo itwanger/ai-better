@@ -1,4 +1,4 @@
-// 卡片与色调样张，可直接渲染，用来调参和核对各组件的色调是否一致。在 docs/src/ai/script 下运行：
+// 卡片与色调样张，可直接渲染，用来调参和核对各组件的色调是否一致。在 ai-better 的 script 目录下运行（从 toBeBetterJavaer 进入是 docs/src/ai/script）：
 //   node node_modules/@remotion/cli/remotion-cli.js still shared/remotion/examples/Cards.example.tsx CardsRank out.png --frame=100 \
 //     --public-dir=shared/assets --browser-executable='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 import React from 'react';

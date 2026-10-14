@@ -4,6 +4,17 @@
 
 员工入门请先看[图文操作手册](../README.md)，本文件用于技术配置与命令核对。
 
+## 运行位置
+
+本目录属于 [itwanger/ai-better](https://github.com/itwanger/ai-better) 仓库。`ergo-remotion-video`、`video-script`、`video-sync` 这几个 Skill 不在本仓库，它们放在 [itwanger/toBeBetterJavaer](https://github.com/itwanger/toBeBetterJavaer) 的 `.claude/skills/` 下。toBeBetterJavaer 里的 `docs/src/ai` 是指向 `../../../ai-better` 的软链接，所以两个仓库要放在同一个父目录。
+
+同一套工具有两种运行方式，效果相同。
+
+- 在 ai-better 根目录运行。本文命令都按这种方式书写，路径以 `script/`、`video/` 开头，依赖用 `npm ci --prefix script` 安装。
+- 在 toBeBetterJavaer 根目录经软链接运行。Skill 就是这样调用工具的，把本文命令里的 `script/` 换成 `docs/src/ai/script/`，`video/` 换成 `docs/src/ai/video/`。
+
+工具按自身文件位置定位共享目录，从哪条路径进入都会找到同一份 `shared/`。
+
 ## 文件归属
 
 ```text
@@ -39,7 +50,7 @@ script/
     └── output/                      交付 MP4
 ```
 
-共享目录和依赖声明入库；视频目录继续按仓库既有策略留在本地。新克隆仓库需要初始化视频项目。当前机器复用仓库已有 `remotion-project/node_modules` 安装，`script/node_modules` 为相对链接，不下载第二套依赖。新环境在 `script/` 下按锁文件安装依赖；不要在每个视频目录重复安装。
+共享目录和依赖声明入库；视频目录只有 `output/` 顶层的最终 MP4 入库，其余文件留在本地。新克隆仓库需要初始化视频项目。维护者机器上的 `script/node_modules` 是指向 `../../toBeBetterJavaer/remotion-project/node_modules` 的相对链接，复用已有安装，不下载第二套依赖。新环境在 ai-better 根目录执行 `npm ci --prefix script`，按锁文件安装；不要在每个视频目录重复安装。
 
 ## 配置约定
 
@@ -49,11 +60,11 @@ API Key 只读取 `config.volc.apiKeyEnv` 对应的环境变量。不要存进 J
 
 ## 项目选择与初始化
 
-下面示例从仓库根目录执行。工具和 `--project` 都支持绝对路径，因此也可从其他 cwd 调用。`--project` 表示项目目录，不是原文文件，也不是 `shared`。
+下面示例从 ai-better 根目录执行，在 toBeBetterJavaer 根目录运行时按[运行位置](#运行位置)换前缀。工具和 `--project` 都支持绝对路径，因此也可从其他 cwd 调用。`--project` 表示项目目录，不是原文文件，也不是 `shared`。
 
 ```bash
-python3 docs/src/ai/script/shared/tools/init_project.py --project docs/src/ai/script/what-is-prefix-caching --source docs/src/ai/video/what-is-prefix-caching.md --title 'Prefix Caching'
-python3 docs/src/ai/script/shared/tools/doctor.py --project docs/src/ai/script/what-is-prefix-caching
+python3 script/shared/tools/init_project.py --project script/what-is-prefix-caching --source video/what-is-prefix-caching.md --title 'Prefix Caching'
+python3 script/shared/tools/doctor.py --project script/what-is-prefix-caching
 ```
 
 初始化拒绝覆盖现有目录，复制原文和默认头像，生成完整项目配置及草稿骨架，不调用 TTS。草稿只有 `DraftPreview`，确认口播稿后再实现真实章节与总 Composition。
@@ -67,8 +78,8 @@ python3 docs/src/ai/script/shared/tools/doctor.py --project docs/src/ai/script/w
 新项目的 `project.json` 带 `progress` 字段，记录用户已经认可到哪一步。阶段依次为 `script`、`audio`、各章节 ID、`render`、`verified`。只在对应的用户回复或工具结果出现后标记，后续会话据此判断授权范围。
 
 ```bash
-python3 docs/src/ai/script/shared/tools/progress.py --project docs/src/ai/script/<topic>              # 查看当前阶段与下一步
-python3 docs/src/ai/script/shared/tools/progress.py --project docs/src/ai/script/<topic> --mark ch2    # 用户认可第二章后
+python3 script/shared/tools/progress.py --project script/<topic>              # 查看当前阶段与下一步
+python3 script/shared/tools/progress.py --project script/<topic> --mark ch2    # 用户认可第二章后
 ```
 
 `doctor.py` 的输出也带同样的进度摘要。
@@ -77,11 +88,11 @@ python3 docs/src/ai/script/shared/tools/progress.py --project docs/src/ai/script
 
 选择面试头像开场模式，或科普场景需要用二哥和豆包表示学习者与老师时，从 `shared/assets/interview/` 复制 `doubao-facing-right.png` 与 `ergo-facing-left.png` 到本项目 `assets/images/`，将所用素材的 `sources.json` 条目保存到项目 `assets/references/` 并在分镜记录用途。初始化工具只复制默认头像。
 
-新项目尚无这些文件时，从仓库根目录执行（将 `<topic>` 替换成当前项目目录名）：
+新项目尚无这些文件时，从 ai-better 根目录执行（将 `<topic>` 替换成当前项目目录名）：
 
 ```bash
-cp -n docs/src/ai/script/shared/assets/interview/doubao-facing-right.png docs/src/ai/script/<topic>/assets/images/doubao-facing-right.png
-cp -n docs/src/ai/script/shared/assets/interview/ergo-facing-left.png docs/src/ai/script/<topic>/assets/images/ergo-facing-left.png
+cp -n script/shared/assets/interview/doubao-facing-right.png script/<topic>/assets/images/doubao-facing-right.png
+cp -n script/shared/assets/interview/ergo-facing-left.png script/<topic>/assets/images/ergo-facing-left.png
 ```
 
 如果项目已有同名图片，先确认是否为用户指定版本，不覆盖。面试开场直接用 `Scenes.tsx` 的 `InterviewStage`，它按上面两个文件名读取项目副本；只需要头像时用 `InterviewAvatar.tsx`。
@@ -103,7 +114,7 @@ cp -n docs/src/ai/script/shared/assets/interview/ergo-facing-left.png docs/src/a
 }
 ```
 
-数组顺序就是播放顺序，ID 保持稳定且唯一，同一章节的 beat 连续排列。`ttsText` 可省略。beat 按完整句子或自然意群划分，不以字幕长度或目标段数决定合成次数；一个 beat 内可切换多组字幕和动画。讲同一画面的相邻 beat 共用 Sequence；用户反馈配音断句过多时，可合并相关意群重新合成，并在项目中保存旧短语到新配音单元的映射。短语时点必须从新音频定位，不能继续把已移除的 beat ID 当作 cues 查询。具体见 [配音单元与字幕短语分开](../../../../../.claude/skills/ergo-remotion-video/references/AV_SYNC.md#配音单元与字幕短语分开)。
+数组顺序就是播放顺序，ID 保持稳定且唯一，同一章节的 beat 连续排列。`ttsText` 可省略。beat 按完整句子或自然意群划分，不以字幕长度或目标段数决定合成次数；一个 beat 内可切换多组字幕和动画。讲同一画面的相邻 beat 共用 Sequence；用户反馈配音断句过多时，可合并相关意群重新合成，并在项目中保存旧短语到新配音单元的映射。短语时点必须从新音频定位，不能继续把已移除的 beat ID 当作 cues 查询。具体见 [配音单元与字幕短语分开](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/AV_SYNC.md#配音单元与字幕短语分开)。
 
 `OUTLINE.md` 写章节场景安排和正文配图映射（来源 URL、项目文件、场景、beat 范围、聚焦顺序），未采用的图写原因。只记计划和用户提过的调整，不写制作日志。
 
@@ -114,19 +125,19 @@ cp -n docs/src/ai/script/shared/assets/interview/ergo-facing-left.png docs/src/a
 口播稿确认后、第一次合成前，先套用读音词典 [pronunciations.json](config/pronunciations.json)。`rules` 写入 `ttsText`，字幕 `text` 不变；`watch` 只列出要复听的 beat。已有音频的 beat 默认跳过，不会被动重合成。
 
 ```bash
-python3 docs/src/ai/script/shared/tools/pronunciations.py --project docs/src/ai/script/<topic>            # 只报告
-python3 docs/src/ai/script/shared/tools/pronunciations.py --project docs/src/ai/script/<topic> --write    # 写入 ttsText
+python3 script/shared/tools/pronunciations.py --project script/<topic>            # 只报告
+python3 script/shared/tools/pronunciations.py --project script/<topic> --write    # 写入 ttsText
 ```
 
-规则按 `speakers` 限定音色，换音色后不生效，需要重新验证后再加。`status` 为 `candidate` 的规则写入后仍要复听。用户确认某个读法，或新发现一个误读，就更新词典条目，不在文档里追加案例。判断误读和局部修复的方法见 [TTS 使用约定](../../../../../.claude/skills/ergo-remotion-video/references/VOLCENGINE_TTS_GUIDE.md#判断是否读错)。
+规则按 `speakers` 限定音色，换音色后不生效，需要重新验证后再加。`status` 为 `candidate` 的规则写入后仍要复听。用户确认某个读法，或新发现一个误读，就更新词典条目，不在文档里追加案例。判断误读和局部修复的方法见 [TTS 使用约定](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/VOLCENGINE_TTS_GUIDE.md#判断是否读错)。
 
-用户指定读法时直接采用，扫描当前项目全部章节，字幕 `text` 保持不变；数字按数量、错误码或型号的实际语义处理。修正已有配音先运行 `pronunciations.py` 查看范围，再用 `--write --include-voiced` 写入并核对，仅重生成受影响的完整意群。词典的用户指定状态与新音频的复听验收分开记录；具体方法见 [局部修复](../../../../../.claude/skills/ergo-remotion-video/references/VOLCENGINE_TTS_GUIDE.md#局部修复)。
+用户指定读法时直接采用，扫描当前项目全部章节，字幕 `text` 保持不变；数字按数量、错误码或型号的实际语义处理。修正已有配音先运行 `pronunciations.py` 查看范围，再用 `--write --include-voiced` 写入并核对，仅重生成受影响的完整意群。词典的用户指定状态与新音频的复听验收分开记录；具体方法见 [局部修复](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/VOLCENGINE_TTS_GUIDE.md#局部修复)。
 
 ```bash
-python3 docs/src/ai/script/shared/tools/gen_audio.py --project docs/src/ai/script/what-is-kv-cache --dry-run
-python3 docs/src/ai/script/shared/tools/gen_audio.py --project docs/src/ai/script/what-is-kv-cache
-python3 docs/src/ai/script/shared/tools/gen_cues.py --project docs/src/ai/script/what-is-kv-cache
-python3 docs/src/ai/script/shared/tools/align_words.py --project docs/src/ai/script/what-is-kv-cache --id 69
+python3 script/shared/tools/gen_audio.py --project script/what-is-kv-cache --dry-run
+python3 script/shared/tools/gen_audio.py --project script/what-is-kv-cache
+python3 script/shared/tools/gen_cues.py --project script/what-is-kv-cache
+python3 script/shared/tools/align_words.py --project script/what-is-kv-cache --id 69
 ```
 
 密钥只在 `~/.zshrc` 里 export 时，`zsh -lc` 不会加载它；从 Agent 里调用配音要用 `zsh -ic 'python3 …/gen_audio.py …'`。
@@ -140,9 +151,9 @@ python3 docs/src/ai/script/shared/tools/align_words.py --project docs/src/ai/scr
 配音生成后，先对全部单元跑一次 ASR 与逐词强制对齐，后面每章直接用；局部重生成后用 `--only` 只更新受影响的单元。脚本依赖 mlx_audio，它装在 uv 独立环境（`~/.local/share/uv/tools/mlx-audio/bin/python`），模型在 `~/.cache/mlx-models`；脚本会自动切换到该解释器，也可用 `MLX_AUDIO_PYTHON` 指定。
 
 ```bash
-python3 docs/src/ai/script/shared/tools/review_audio.py --project docs/src/ai/script/<topic>            # 全部章节
-python3 docs/src/ai/script/shared/tools/review_audio.py --project docs/src/ai/script/<topic> --only 25 30
-python3 docs/src/ai/script/shared/tools/asr_slice.py --project docs/src/ai/script/<topic> 25:5.6:7.4    # 对可疑词做切片二次转写
+python3 script/shared/tools/review_audio.py --project script/<topic>            # 全部章节
+python3 script/shared/tools/review_audio.py --project script/<topic> --only 25 30
+python3 script/shared/tools/asr_slice.py --project script/<topic> 25:5.6:7.4    # 对可疑词做切片二次转写
 ```
 
 输出在 `preview/chapter<N>-asr.json` 和 `preview/ch<N>-forced-alignment.json`，后者是字幕和动画定时的依据。ASR 差异只处理同一位置明显多字、缺字的情况。
@@ -152,8 +163,8 @@ python3 docs/src/ai/script/shared/tools/asr_slice.py --project docs/src/ai/scrip
 修正读音后，字幕起点和事件锚点对照新 `ttsText` 改，重新对齐、生成时点并同步提示音。
 
 ```bash
-python3 docs/src/ai/script/shared/tools/build_timing.py --project docs/src/ai/script/<topic> --chapter ch2
-python3 docs/src/ai/script/shared/tools/chapter_pipeline.py --project docs/src/ai/script/<topic> --chapter ch2 --still term:60 --still figure:640
+python3 script/shared/tools/build_timing.py --project script/<topic> --chapter ch2
+python3 script/shared/tools/chapter_pipeline.py --project script/<topic> --chapter ch2 --still term:60 --still figure:640
 ```
 
 `chapter_pipeline.py` 依次执行时点生成、混音（存在 sound-plan.json 时）、类型检查、关键帧输出到 `preview/chapter<N>/<label>-<frame>.png`，最后做开口帧检查，任一步失败即停止。
@@ -165,9 +176,9 @@ python3 docs/src/ai/script/shared/tools/chapter_pipeline.py --project docs/src/a
 ## 预览与导出
 
 ```bash
-node docs/src/ai/script/shared/tools/remotion.mjs typecheck --project docs/src/ai/script/what-is-kv-cache
-node docs/src/ai/script/shared/tools/remotion.mjs studio --project docs/src/ai/script/what-is-kv-cache --port 3001
-node docs/src/ai/script/shared/tools/remotion.mjs still --project docs/src/ai/script/what-is-kv-cache --composition Chapter5Preview --frame 250
+node script/shared/tools/remotion.mjs typecheck --project script/what-is-kv-cache
+node script/shared/tools/remotion.mjs studio --project script/what-is-kv-cache --port 3001
+node script/shared/tools/remotion.mjs still --project script/what-is-kv-cache --composition Chapter5Preview --frame 250
 ```
 
 `still` 默认写到 `preview/path-check.png`，传 `--out <路径>` 可直接写到目标文件，多张关键帧不必逐张复制。
@@ -181,14 +192,14 @@ node docs/src/ai/script/shared/tools/remotion.mjs still --project docs/src/ai/sc
 只有用户明确授权「出片 / 渲染」后执行：
 
 ```bash
-node docs/src/ai/script/shared/tools/remotion.mjs render --project docs/src/ai/script/what-is-kv-cache
-python3 docs/src/ai/script/shared/tools/verify_export.py --project docs/src/ai/script/what-is-kv-cache
+node script/shared/tools/remotion.mjs render --project script/what-is-kv-cache
+python3 script/shared/tools/verify_export.py --project script/what-is-kv-cache
 ```
 
 整片渲染通常超过 10 分钟（本机约 4.5 分钟成片需 12 分钟），超过 Agent 单条命令的上限，必须加 `--detach`：入口会脱离会话启动子进程，打印 pid 与日志路径 `preview/render/render.log`，之后轮询日志或 `pgrep -f 'remotion-cli.js render'` 等待完成。macOS 没有 setsid，不要手写 nohup 组合。
 
 ```bash
-node docs/src/ai/script/shared/tools/remotion.mjs render --project docs/src/ai/script/<topic> --detach
+node script/shared/tools/remotion.mjs render --project script/<topic> --detach
 ```
 
 渲染前入口会重新读原稿：有“视频封面”区块时必须已有 `assets/images/cover-16x9.png`，且 `Root.tsx` 用了 `CoverFrame`，否则报错退出；用户明确不要首帧封面时加 `--no-cover`。`doctor.py` 输出的 `cover` 字段同样报告 `ready`、`missing`、`none`。
@@ -204,23 +215,25 @@ render 先输出 `preview/render/remotion-raw.mp4`，再复制其 H.264 视频�
 根 `.gitignore` 用固定规则放行所有项目的最终成片，新视频无需追加规则。下面规则应放在通用的依赖、密钥和缓存忽略规则之前；工作区 `package-lock.json` 的例外保留在通用 `package-lock.json` 规则之后。
 
 ```gitignore
-/docs/src/ai/script/**
-!/docs/src/ai/script/*/
-!/docs/src/ai/script/*/output/
-!/docs/src/ai/script/*/output/*.mp4
-/docs/src/ai/script/*/output/*.tmp.mp4
-!/docs/src/ai/script/shared/**
-!/docs/src/ai/script/README.md
-!/docs/src/ai/script/package.json
+/script/**
+!/script/*/
+!/script/*/output/
+!/script/*/output/*.mp4
+/script/*/output/*.tmp.mp4
+!/script/shared/**
+!/script/README.md
+!/script/package.json
 ```
 
-验收后用 `git status --short --untracked-files=all -- docs/src/ai/script/` 确认待提交 MP4 都是各项目配置指定的最终文件，并用 `git check-ignore` 抽查预览、配音、临时文件及旧版仍被忽略。规则只按目录和文件名匹配，不会判断视频是否通过验收，因此必须在提交前完成成片检查。提交前检查文件大小；遇到远端大小限制时再选择 Git LFS 或 Release 附件，不自动转换整个仓库的 MP4 存储方式。
+通用 `package-lock.json` 规则之后另有 `!/script/package-lock.json`，让工作区锁文件入库。
+
+成片和共享文件都提交到 ai-better。toBeBetterJavaer 已忽略 `docs/src/ai`，在那边执行 `git status` 看不到这些变更；从 toBeBetterJavaer 根目录操作时用 `git -C docs/src/ai`。验收后在 ai-better 根目录用 `git status --short --untracked-files=all -- script/` 确认待提交 MP4 都是各项目配置指定的最终文件，并用 `git check-ignore` 抽查预览、配音、临时文件及旧版仍被忽略。规则只按目录和文件名匹配，不会判断视频是否通过验收，因此必须在提交前完成成片检查。提交前检查文件大小；遇到远端大小限制时再选择 Git LFS 或 Release 附件，不自动转换整个仓库的 MP4 存储方式。
 
 最终成片出现在 Git 待提交列表中不代表已上传。仅在用户明确要求时执行 commit/push，成功后再报告已上传 GitHub。
 
 ## 命令执行注意
 
-- 不在 Bash 里 `cd`：工作目录会跨调用漂移，之后的相对路径全错。一律从仓库根目录用相对路径，或给工具传绝对路径。
+- 不在 Bash 里 `cd`：工作目录会跨调用漂移，之后的相对路径全错。一律从 ai-better 根目录或 toBeBetterJavaer 根目录用相对路径，或给工具传绝对路径。
 - Python heredoc 含中文时加 `# -*- coding: utf-8 -*-` 并设 `LC_ALL=en_US.UTF-8`，否则在某些工作目录下会报非 UTF-8 编码错误。
 - zsh 通配符无匹配会直接报错并中断整条命令；扫描文件用 `find` 或 bash。
 - 多步命令用 `set -o pipefail` 和 `&&` 串联，一步失败必须停下，不要让后面的步骤在坏输入上继续。
@@ -270,8 +283,8 @@ render 先输出 `preview/render/remotion-raw.mp4`，再复制其 H.264 视频�
 录制在临时目录里进行，被录的 Agent 会真的运行、真的改文件，不能指向用户的项目仓库。先写步骤文件，再录：
 
 ```bash
-python3 docs/src/ai/script/shared/tools/record_tui.py --project docs/src/ai/script/<topic> --name steer --cwd /tmp/<demo> --cmd 'claude --permission-mode acceptEdits' --steps /tmp/<demo>/steps.json
-python3 docs/src/ai/script/shared/tools/record_tui.py --project docs/src/ai/script/<topic> --name steer --extract-only
+python3 script/shared/tools/record_tui.py --project script/<topic> --name steer --cwd /tmp/<demo> --cmd 'claude --permission-mode acceptEdits' --steps /tmp/<demo>/steps.json
+python3 script/shared/tools/record_tui.py --project script/<topic> --name steer --extract-only
 ```
 
 步骤文件是 JSON 数组：`sleep`、`type`（只打字不回车）、`key`（Enter、Escape、Up 等 tmux 键名）、`waitFor`（正则在屏幕上出现 `count` 次，带 `timeout`）、`mark`。例如中途插话：
@@ -296,7 +309,7 @@ python3 docs/src/ai/script/shared/tools/record_tui.py --project docs/src/ai/scri
 新制章节按 Skill 的轻量增强规则选择效果。共享 `Enhancements.tsx` 提供短入场转场与概念图标；品牌素材来源记入 `shared/assets/brands/`。本期的事件时点保存在项目 `assets/references/sound-plan.json`，每个事件指定 `beatId`、`offsetFrames`、`sound`、`peakDbfs` 与用途。
 
 ```bash
-python3 docs/src/ai/script/shared/tools/mix_effects.py --project docs/src/ai/script/what-is-agent-reflection
+python3 script/shared/tools/mix_effects.py --project script/what-is-agent-reflection
 ```
 
 混音保持原始 `build/voiceover.wav` 和采样长度不变，生成 `build/voiceover-with-effects.wav`、`build/sound-mix.json`。`chapter_pipeline.py` 在存在 sound-plan 时自动混音。预览读取混音文件；项目设置 `deliveryAudio: "build/voiceover-with-effects.wav"` 后（新项目初始化时默认写入），导出入口也采用该音轨。音效计划、配音或混音文件发生变化时，导出入口校验哈希并拒绝过期混音；每次重新生成配音时间轴后必须重新混音。第一章认可样片提供效果参考，不固定每章数量。提示音参考峰值约 -35 至 -31 dBFS、长度约 75–160ms，按实际配音与试听调整；不是响度保证。检查音效窗外配音采样一致、长度不变且无削波。
@@ -326,8 +339,8 @@ Kolibri 横幅原图为 1920×660，蜂鸟与字标视窗为 `[660, 213, 1260, 4
 例如复用 Qwen 素材与来源：
 
 ```bash
-cp docs/src/ai/script/shared/assets/brands/qwen-logo.png docs/src/ai/script/aleph-alpha-kolibri/assets/images/
-cp docs/src/ai/script/shared/assets/brands/qwen.source.json docs/src/ai/script/aleph-alpha-kolibri/assets/references/
+cp script/shared/assets/brands/qwen-logo.png script/aleph-alpha-kolibri/assets/images/
+cp script/shared/assets/brands/qwen.source.json script/aleph-alpha-kolibri/assets/references/
 ```
 
 其他项目替换命令中的项目目录；Kolibri 复制两个素材文件和 `kolibri.source.json`。来源记录保存下载地址、官方引用页、获取日期与 SHA256，便于核对和后续更新。

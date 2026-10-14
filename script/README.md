@@ -2,7 +2,7 @@
 
 这份手册教你把一篇已经确认的文章或口播稿，做成带二哥配音、动画和字幕的 MP4。 **日常工作以“给 AI 发指令、听配音、看预览、提出修改”为主，不要求你自己写动画代码。** 首次电脑配置可交给技术同事完成。
 
-适用工作流：本仓库的 `ergo-remotion-video` Skill。主流程以 macOS 为例，截图来自 2026-09-07 实际制作的 KV Cache V2。Windows 员工先请技术同事适配路径、浏览器和软链接，不要直接照抄 macOS 安装命令。
+适用工作流：`ergo-remotion-video` Skill，它放在 [itwanger/toBeBetterJavaer](https://github.com/itwanger/toBeBetterJavaer) 仓库的 `.claude/skills/` 下；视频工具、素材和口播稿在本仓库 [itwanger/ai-better](https://github.com/itwanger/ai-better)。主流程以 macOS 为例，截图来自 2026-09-07 实际制作的 KV Cache V2。Windows 员工先请技术同事适配路径、浏览器和软链接，不要直接照抄 macOS 安装命令。
 
 **先记住：稿子确认 → 配音 → 逐章预览 → 回复“继续” → 完整预览 → 回复“出片” → 检查并交付 MP4。** 浏览器里能播放，不代表已经生成成片。
 
@@ -48,7 +48,8 @@
 | 名称 | 用大白话解释 |
 |---|---|
 | Skill | AI 的工作说明书，规定怎么制作、怎么验收 |
-| 仓库根目录 | `toBeBetterJavaer` 这个大文件夹；本文多数命令都从这里运行 |
+| ai-better 根目录 | 本仓库的根文件夹，里面有 `script/` 和 `video/`；第 9 节的命令从这里运行 |
+| toBeBetterJavaer 根目录 | Skill 所在仓库的根文件夹；用 Skill 制作时 AI 在这里工作，经 `docs/src/ai` 软链接访问 ai-better，路径前多一层 `docs/src/ai/` |
 | 视频项目 | 某一期自己的文件夹，里面放稿子、配音、图片、动画和 MP4 |
 | TTS | 把文字读成声音的服务，会使用服务额度 |
 | beat | 一段意思完整的口播单元；不等于一句字幕，也不等于一个镜头 |
@@ -60,7 +61,7 @@
 
 ### 1.4 本手册使用哪个 Skill
 
-主流程只使用 [ergo-remotion-video](../../../../.agents/skills/ergo-remotion-video/SKILL.md)。可按需要搭配：
+主流程只使用 [ergo-remotion-video](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/SKILL.md)。下表提到的 Skill 也都在 toBeBetterJavaer 的 `.claude/skills/` 下。可按需要搭配：
 
 | 需求 | 使用方式 |
 |---|---|
@@ -68,7 +69,7 @@
 | 正文缺少配图，需要新图 | 按仓库要求用 `itwanger-image`；已有正文图先保留使用 |
 | 成片后要平台封面 | 另用 `video-cover-image`，封面不是正文动画制作的前置要求 |
 
-不要同时套用 `itwanger-video`、`itwanger-voice` 的另一套目录、配音与导出方式。本手册使用的是本仓库的火山 TTS + `script/shared` 工具，不需要员工额外安装本地声音训练模型。
+不要同时套用 `itwanger-video`、`itwanger-voice` 的另一套目录、配音与导出方式。本手册使用的是火山 TTS + 本仓库 `script/shared` 工具，不需要员工额外安装本地声音训练模型。
 
 <a id="setup"></a>
 
@@ -76,12 +77,13 @@
 
 ### 2.1 最省心的办法：让技术同事或 AI 先检查
 
-在公司指定的 AI 编程助手中打开整个 `toBeBetterJavaer` 文件夹，然后发送：
+先按 [2.4](#clone) 准备好两个仓库，再在公司指定的 AI 编程助手中打开整个 `toBeBetterJavaer` 文件夹，然后发送：
 
 ```text
 我要使用这个仓库的 ergo-remotion-video Skill 制作视频。
 请先读取当前 Skill 和 docs/src/ai/script/shared/WORKFLOW.md，检查：
-1. 当前工作目录是否是正确的仓库；Skill 路径是否可读。
+1. 当前工作目录是否是 toBeBetterJavaer；Skill 路径是否可读；
+   docs/src/ai 是否是指向 ai-better 仓库的有效软链接。
 2. node、npm、python3、ffmpeg、ffprobe 和浏览器是否可用。
 3. docs/src/ai/script 的共用依赖是否能解析。
 4. 默认配置、头像、面试素材是否齐全。
@@ -136,29 +138,43 @@ npm --version
 
 Chrome 可通过 [Google Chrome 官网](https://www.google.com/chrome/) 安装到“应用程序”。本工具自动识别的 macOS 路径是 `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`；其他位置可由技术同事配置 `REMOTION_BROWSER_EXECUTABLE`。第一次安装之后，再让 AI 运行一次环境检查。
 
-### 2.4 获取完整仓库
+<a id="clone"></a>
 
-优先领取团队已准备好的项目。如果需要自行克隆，可以从团队指定位置获取；当前仓库地址示例为：
+### 2.4 获取两个仓库
+
+视频制作用到两个仓库。ai-better 放视频工具、素材和口播稿；toBeBetterJavaer 放 Skill。只想手动运行第 9 节的命令，克隆 ai-better 就够了；要让 AI 按 Skill 制作，两个都要有。
+
+优先领取团队已准备好的项目。如果需要自行克隆，把两个仓库放进同一个父目录，再在 toBeBetterJavaer 里建软链接：
 
 ```bash
+git clone https://github.com/itwanger/ai-better.git
 git clone https://github.com/itwanger/toBeBetterJavaer.git
 cd toBeBetterJavaer
+ln -s ../../../ai-better docs/src/ai
 ```
+
+软链接的目标按 `docs/src/` 所在位置计算，`../../../ai-better` 正好指向和 toBeBetterJavaer 并排的 ai-better。toBeBetterJavaer 的 `.gitignore` 已忽略 `docs/src/ai`，这个链接不会被提交。
 
 已经有仓库时不要再克隆一份。让技术同事检查当前修改，再同步负责人指定版本；不要无脑执行重置或覆盖。
 
-在 AI 应用里打开这个根目录，而不是只打开稿子文件。下面这些路径应存在：
+用 Skill 制作时，在 AI 应用里打开 toBeBetterJavaer 根目录，而不是只打开稿子文件。下面这些路径应存在：
 
 ```text
-toBeBetterJavaer/
-├── .agents/skills/ergo-remotion-video/SKILL.md
-├── .claude/skills/ergo-remotion-video/SKILL.md
-└── docs/src/ai/script/
-    ├── README.md
-    ├── package.json
-    ├── package-lock.json
-    └── shared/
+父目录/
+├── ai-better/
+│   ├── video/                     ← 口播稿
+│   └── script/
+│       ├── README.md
+│       ├── package.json
+│       ├── package-lock.json
+│       └── shared/
+└── toBeBetterJavaer/
+    ├── .agents/skills/ergo-remotion-video/SKILL.md
+    ├── .claude/skills/ergo-remotion-video/SKILL.md
+    └── docs/src/ai                ← 软链接，指向 ../../../ai-better
 ```
+
+从 toBeBetterJavaer 看，`docs/src/ai/script/` 和 `ai-better/script/` 是同一个文件夹。共享工具按自身位置查找 `shared/`，从哪边运行结果都一样。
 
 当前 `.agents/skills/ergo-remotion-video` 是指向 `.claude/skills/ergo-remotion-video` 的软链接，两者是同一套规则。压缩包转移时如果软链接损坏，请技术同事修复；不要另建两份不同内容的 Skill。
 
@@ -172,21 +188,23 @@ toBeBetterJavaer/
 
 ### 2.5 安装共用 Node 依赖
 
-**全新克隆、`docs/src/ai/script/node_modules` 尚不存在时** ，在仓库根目录执行：
+**全新克隆、`script/node_modules` 尚不存在时** ，在 ai-better 根目录执行：
 
 ```bash
-npm ci --prefix docs/src/ai/script
+npm ci --prefix script
 ```
 
 等待命令结束后，再检查：
 
 ```bash
-node -e "console.log(require.resolve('@remotion/cli/package.json', {paths: ['./docs/src/ai/script']}))"
+node -e "console.log(require.resolve('@remotion/cli/package.json', {paths: ['./script']}))"
 ```
+
+在 toBeBetterJavaer 根目录安装也可以，把两条命令里的 `script` 换成 `docs/src/ai/script`，装到的是同一个 `ai-better/script/node_modules`。只装一次即可。
 
 打印出一个真实文件路径就说明能找到 Remotion。依赖按 `package-lock.json` 安装；当前 Remotion 锁定为 `4.0.521`，不要拼成 `remotio`，不要在每期项目下各装一套。
 
-**已有制作电脑的特殊情况：** 本次机器的 `script/node_modules` 复用仓库已有的 `remotion-project/node_modules` 软链接。不要直接对这个共享安装反复执行 `npm ci`，它可能清理目标目录中的依赖。请先检查链接是否有效，能解析就复用；失效时交给技术同事处理。
+**已有制作电脑的特殊情况：** 本次机器的 `script/node_modules` 是指向 `../../toBeBetterJavaer/remotion-project/node_modules` 的软链接，复用 toBeBetterJavaer 已有的 Remotion 安装。不要直接对这个共享安装反复执行 `npm ci`，它可能清理目标目录中的依赖。请先检查链接是否有效，能解析就复用；失效时交给技术同事处理。
 
 ### 2.6 配好后，员工应拿到什么
 
@@ -285,6 +303,8 @@ python3 -c 'import os; print("已设置" if os.environ.get("VOLC_TTS_API_KEY", "
 ## 4. 每期制作：按这六步走
 
 下面用“新做 KV Cache 第三版”举例，项目名为 `what-is-kv-cache-v3`。 **这是教程示例，员工要把源稿路径和项目名换成本期的。** `v2` 是已完成的示例成片，不应拿它作为新项目输出目录。
+
+本节和后面发给 AI 的指令，路径都按 toBeBetterJavaer 根目录书写，所以带 `docs/src/ai/` 前缀。例如 `docs/src/ai/video/what-is-kv-cache.md` 就是本仓库的 `video/what-is-kv-cache.md`。
 
 ### 第一步：给 AI 发开工指令
 
@@ -541,7 +561,7 @@ KV Cache 第三版已完成。
 
 ### 7.4 同事接着编辑，需要多交一份项目
 
-本仓库默认不把每期视频目录纳入 Git；音频、图片、预览和 MP4 通常留在本地。 **同事拉取代码后，不一定能看到你的这一期项目。**
+本仓库只把每期 `output/` 顶层的最终 MP4 纳入 Git；稿子、音频、图片、动画代码和预览通常留在本地。 **同事拉取代码后，只能看到成片，看不到你这一期可继续编辑的项目。**
 
 交接时提供：
 
@@ -558,7 +578,8 @@ KV Cache 第三版已完成。
 
 | 现象 | 常见原因 | 怎么处理 |
 |---|---|---|
-| AI 说找不到 Skill | 没打开完整仓库，或软链接失效 | 提供准确 Skill 路径，让 AI 检查 `.agents` 与 `.claude`，不要另造一份规则 |
+| AI 说找不到 Skill | 打开的不是 toBeBetterJavaer 根目录，或软链接失效 | 提供准确 Skill 路径，让 AI 检查 `.agents` 与 `.claude`，不要另造一份规则 |
+| AI 找不到 `docs/src/ai/script` | toBeBetterJavaer 里缺少指向 ai-better 的软链接，或两个仓库不在同一个父目录 | 按 [2.4](#clone) 补建 `docs/src/ai` 软链接；不要把 ai-better 复制一份进去 |
 | `node` / `python3` / `ffmpeg` 找不到 | 未安装或 PATH 不正确 | 让技术同事按环境检查修复；不要盲目重装全部软件 |
 | `Cannot find module` / `@remotion/cli` 不存在 | 共用依赖没安装、安装失败或软链接断了 | 检查 `script/node_modules`；新克隆按锁文件安装 |
 | `Missing environment variable` | 配音进程看不到 Key | 在实际执行环境检查“已设置 / 未设置”；另一个终端设置不一定有效 |
@@ -596,32 +617,32 @@ KV Cache 第三版已完成。
 
 员工日常优先使用上面的自然语言指令。本节用于手动执行和排错，不要求逐条全部运行。
 
-**命令前提：** 终端位于仓库根目录；把示例 `what-is-kv-cache-v3` 换成真实项目名。带 `--project` 的命令选择的是本期项目目录。已有项目不要再次初始化。
+**命令前提：** 终端位于 ai-better 根目录。在 toBeBetterJavaer 根目录运行时，把命令里的 `script/` 换成 `docs/src/ai/script/`，`video/` 换成 `docs/src/ai/video/`，Skill 调用工具时用的就是这种写法。把示例 `what-is-kv-cache-v3` 换成真实项目名。带 `--project` 的命令选择的是本期项目目录。已有项目不要再次初始化。
 
 ### 9.1 新建空项目
 
 ```bash
-python3 docs/src/ai/script/shared/tools/init_project.py --project docs/src/ai/script/what-is-kv-cache-v3 --source docs/src/ai/video/what-is-kv-cache.md --title 'KV Cache 第三版'
-python3 docs/src/ai/script/shared/tools/doctor.py --project docs/src/ai/script/what-is-kv-cache-v3
+python3 script/shared/tools/init_project.py --project script/what-is-kv-cache-v3 --source video/what-is-kv-cache.md --title 'KV Cache 第三版'
+python3 script/shared/tools/doctor.py --project script/what-is-kv-cache-v3
 ```
 
-初始化拒绝覆盖已有目录，项目名用小写英文、数字和连字符，且必须是 `docs/src/ai/script/` 的直接子目录。成功时是 `draft`，还没有配音和动画。AI 随后要整理 `article.md`、`script.md`、`beats.json`、`OUTLINE.md`。
+初始化拒绝覆盖已有目录，项目名用小写英文、数字和连字符，且必须是 `script/` 的直接子目录。成功时是 `draft`，还没有配音和动画。AI 随后要整理 `article.md`、`script.md`、`beats.json`、`OUTLINE.md`。
 
 ### 9.2 确认稿子后的配音
 
 ```bash
 # 只看计划：不读取 Key，不调用 TTS
-python3 docs/src/ai/script/shared/tools/gen_audio.py --project docs/src/ai/script/what-is-kv-cache-v3 --dry-run
+python3 script/shared/tools/gen_audio.py --project script/what-is-kv-cache-v3 --dry-run
 
 # 首次试听示例：只有本期确实存在 ID 1 时才这样用
-python3 docs/src/ai/script/shared/tools/gen_audio.py --project docs/src/ai/script/what-is-kv-cache-v3 --only 1
+python3 script/shared/tools/gen_audio.py --project script/what-is-kv-cache-v3 --only 1
 
 # 试听与稿子通过后，生成剩余配音，符合缓存条件的声音会复用
-python3 docs/src/ai/script/shared/tools/gen_audio.py --project docs/src/ai/script/what-is-kv-cache-v3
+python3 script/shared/tools/gen_audio.py --project script/what-is-kv-cache-v3
 
 # 全部音频齐全后才生成时间轴
-python3 docs/src/ai/script/shared/tools/gen_cues.py --project docs/src/ai/script/what-is-kv-cache-v3
-python3 docs/src/ai/script/shared/tools/doctor.py --project docs/src/ai/script/what-is-kv-cache-v3
+python3 script/shared/tools/gen_cues.py --project script/what-is-kv-cache-v3
+python3 script/shared/tools/doctor.py --project script/what-is-kv-cache-v3
 ```
 
 dry-run 输出里的 `synthesize` 是需要合成的数量，`process` 是需要后期处理的数量，`reuse` 是可复用的数量。它不是收费金额，也不能用来验证服务权限。
@@ -629,8 +650,8 @@ dry-run 输出里的 `synthesize` 是需要合成的数量，`process` 是需要
 ### 9.3 预览、类型检查与静态帧
 
 ```bash
-node docs/src/ai/script/shared/tools/remotion.mjs typecheck --project docs/src/ai/script/what-is-kv-cache-v3
-node docs/src/ai/script/shared/tools/remotion.mjs studio --project docs/src/ai/script/what-is-kv-cache-v3 --port 3003
+node script/shared/tools/remotion.mjs typecheck --project script/what-is-kv-cache-v3
+node script/shared/tools/remotion.mjs studio --project script/what-is-kv-cache-v3 --port 3003
 ```
 
 Studio 是持续运行的进程，终端未返回输入提示符不代表卡住。以终端打印的地址为准；端口已占用时检查是谁在用，或选其他空闲端口。只在你负责的 Studio 终端里按 `Ctrl+C` 停止自己的服务。
@@ -638,7 +659,7 @@ Studio 是持续运行的进程，终端未返回输入提示符不代表卡住�
 AI 已实现并注册 `Chapter1Preview` 后，可以在另一终端抽帧：
 
 ```bash
-node docs/src/ai/script/shared/tools/remotion.mjs still --project docs/src/ai/script/what-is-kv-cache-v3 --composition Chapter1Preview --frame 100
+node script/shared/tools/remotion.mjs still --project script/what-is-kv-cache-v3 --composition Chapter1Preview --frame 100
 ```
 
 `--frame 100` 指这个 Composition 的第 100 帧，不是第 100 秒。帧号必须在该 Composition 的范围内。当前 still 工具固定输出到 `preview/path-check.png`；保存多张时要逐次改名归档， **不要并行运行并互相覆盖** 。
@@ -647,13 +668,13 @@ node docs/src/ai/script/shared/tools/remotion.mjs still --project docs/src/ai/sc
 
 ```bash
 # 示例 ID 1：只在确认该段需要重做时使用，--force 会重新调用 TTS
-python3 docs/src/ai/script/shared/tools/gen_audio.py --project docs/src/ai/script/what-is-kv-cache-v3 --only 1 --force
+python3 script/shared/tools/gen_audio.py --project script/what-is-kv-cache-v3 --only 1 --force
 
 # 仅改 atempo 且 raw 参数匹配时，复用原始声音重新处理
-python3 docs/src/ai/script/shared/tools/gen_audio.py --project docs/src/ai/script/what-is-kv-cache-v3 --retempo
+python3 script/shared/tools/gen_audio.py --project script/what-is-kv-cache-v3 --retempo
 
 # 配音变化后都要更新真实时间轴
-python3 docs/src/ai/script/shared/tools/gen_cues.py --project docs/src/ai/script/what-is-kv-cache-v3
+python3 script/shared/tools/gen_cues.py --project script/what-is-kv-cache-v3
 ```
 
 上面两种修改是不同情况，不是每次都连续执行。`--retempo` 遇到原始声音缺失或参数不匹配会拒绝继续；改了音色不能拿旧 raw 冒充新音色。
@@ -661,8 +682,8 @@ python3 docs/src/ai/script/shared/tools/gen_cues.py --project docs/src/ai/script
 ### 9.5 已明确“出片”后
 
 ```bash
-node docs/src/ai/script/shared/tools/remotion.mjs render --project docs/src/ai/script/what-is-kv-cache-v3
-python3 docs/src/ai/script/shared/tools/verify_export.py --project docs/src/ai/script/what-is-kv-cache-v3
+node script/shared/tools/remotion.mjs render --project script/what-is-kv-cache-v3
+python3 script/shared/tools/verify_export.py --project script/what-is-kv-cache-v3
 ```
 
 完整 Composition 的 ID 必须与本期 `project.json.compositionId` 一致，最终文件名来自 `outputName`。不要因为示例用了 `KvCacheV2`，就在其他选题中照搬这个名称。
@@ -673,8 +694,10 @@ python3 docs/src/ai/script/shared/tools/verify_export.py --project docs/src/ai/s
 
 ## 10. 文件都在哪里：遇到问题要发哪个文件
 
+下面是 ai-better 的 `script/` 目录，从 toBeBetterJavaer 进入时它是 `docs/src/ai/script/`。
+
 ```text
-docs/src/ai/script/
+script/
 ├── README.md                     ← 这份员工手册
 ├── package.json / package-lock.json
 ├── shared/                       ← 所有视频共用，不要每期复制
@@ -741,8 +764,8 @@ docs/src/ai/script/
 
 ## 12. 文档与截图说明
 
-本手册由当前仓库 Skill、共享工具源码和 KV Cache V2 实际制作记录整理。三张 Studio 截图为真实本地界面；四张成片示例来自已导出 MP4。它们用于说明操作与质量标准，不代表员工电脑已经配置完成。没有截取凭证页面，也没有把 API Key 写入文档。
+本手册由 toBeBetterJavaer 中的 Skill、本仓库共享工具源码和 KV Cache V2 实际制作记录整理。三张 Studio 截图为真实本地界面；四张成片示例来自已导出 MP4。它们用于说明操作与质量标准，不代表员工电脑已经配置完成。没有截取凭证页面，也没有把 API Key 写入文档。
 
 截图随 README 放在 `shared/guide-assets/`，转发 Markdown 时要一起携带；只发 README 文件会丢图。如果收到的是手册离线包，可双击 `阅读手册.html` 阅读，README 和图片也在包内。 **离线包是培训资料，不是完整视频工作仓库；真正制作仍需团队仓库与账号配置。**
 
-进一步阅读：[主 Skill](../../../../.agents/skills/ergo-remotion-video/SKILL.md) · [共享工作流](shared/WORKFLOW.md) · [TTS 约定](../../../../.agents/skills/ergo-remotion-video/references/VOLCENGINE_TTS_GUIDE.md) · [视觉偏好](../../../../.agents/skills/ergo-remotion-video/references/USER_PREFERENCES.md)。
+进一步阅读：[主 Skill](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/SKILL.md) · [共享工作流](shared/WORKFLOW.md) · [TTS 约定](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/VOLCENGINE_TTS_GUIDE.md) · [视觉偏好](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/USER_PREFERENCES.md)。Skill 文件在 toBeBetterJavaer 仓库，本地克隆后位于 `toBeBetterJavaer/.claude/skills/ergo-remotion-video/`。
