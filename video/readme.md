@@ -1,7 +1,5 @@
 ---
-title: AI Agent 面试题 368 道（Agent八股+视频讲解）｜王二讲Agent
-shortTitle: AI Agent 面试 368 题
-description: AI Agent 面试 368 题合集，按 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进分类整理
+# title、shortTitle、description 由 docs/src/.vuepress/agentInterview.ts 按本文件的 ### 题目数自动生成
 tag:
   - 面试
 category:
@@ -24,7 +22,7 @@ date: 2026-05-20
 
 ![跟着王二讲Agent：通过完整题目系统学习，建立Agent时代的完整知识体系](https://cdn.paicoding.com/stutymore/agent-learning-completeness-20260908231154-003540aa.png)
 
-这套题库一共 368 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
+这套题库一共 369 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
 
 每道题都不是孤立的概念解释，而是串联到三个实战项目来回答。
 
@@ -33,6 +31,8 @@ date: 2026-05-20
 - **派聪明**，[基于 ES 混合搜索的 RAG 知识库](https://javabetter.cn/zhishixingqiu/paismart.html)
 
 每一道题的回答都有项目代码可以兜底。
+
+这套题库在三个地方同步更新，内容是同一份。[网站版](https://javabetter.cn/ai/video/)有侧边栏目录、站内搜索和内嵌视频，适合系统地刷；[GitHub 仓库 itwanger/ai-better](https://github.com/itwanger/ai-better) 存着全部 Markdown 源文件和每条视频的 Remotion 工程，欢迎 Star 和提 Issue；[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)适合收藏到手机上随时翻。视频讲解在 B 站和抖音搜「王二讲Agent」。
 
 ![王二讲Agent的B站视频讲解列表](https://cdn.paicoding.com/stutymore/agent-interview-bilibili-20260908230334-6f7666d6.png)
 
@@ -992,8 +992,10 @@ Word2Vec（静态词向量，不考虑上下文）、BERT 类（双向编码，�
 
 🟡 进阶 | `→ 派聪明 ES 8.10 + dense_vector` | 字节、快手
 
-### 120. 向量检索和关键词检索的混合搜索怎么做？
-纯向量检索懂语义但会漏掉错误码、型号这类精确字面，BM25 认得准字面却不认识同义说法，所以要两路一起召回。两路分数不能直接加权相加，余弦相似度在固定区间内，BM25 分数没有上界。派聪明的 HybridSearchService 让 BM25 和 KNN 并行召回，每路 min(topK×30, 300) 条，KNN 内部用 userId、orgTag、public 做权限预过滤；再用 RRF 按名次融合，得分为 1/(60+名次) 之和；最后取 RRF 前 50 条交给 gte-rerank-v2 精排，保留 0.1 分以上的结果。阈值从 0.2 降到 0.1 后，分块级 Recall@5 从 56.5% 升到 76.1%。一路召回失败时用另一路继续融合，Rerank 失败时按 RRF 顺序加阈值返回。
+### 120. RAG 怎么做向量和关键词的混合检索？
+纯向量检索懂语义但会漏掉错误码、型号这类精确字面，BM25 认得准字面却不认识同义说法，所以要两路一起召回。两路分数不能直接加权相加，向量相似度最高只有 1，BM25 分数没有固定的最大值，命中关键词多的查询会让 BM25 主导排序。派聪明的 HybridSearchService 让 BM25 和 KNN 并行召回，每路 min(topK×30, 300) 条，KNN 内部用 userId、orgTag、public 做权限预过滤；再用 RRF 按名次融合，得分为 1/(60+名次) 之和；最后取 RRF 前 50 条交给 gte-rerank-v2 精排，保留 0.1 分以上的结果。阈值从 0.2 降到 0.1 后，分块级 Recall@5 从 56.5% 升到 76.1%。一路召回失败时用另一路继续融合，Rerank 失败时按 RRF 顺序加阈值返回。
+
+完整答案：[阅读全文《RAG 混合检索》](./rag-hybrid-search.md)
 
 🟡 进阶 | `→ 派聪明 HybridSearchService BM25 + KNN + RRF + Rerank` | 快手、字节
 
@@ -1626,9 +1628,17 @@ DeepSeek V4 Flash 正式版只有 13B 激活参数，V4 Pro 有 49B，架构没�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7670027713771621658)
 
-## 热点解读（10 题）
+## 热点解读（11 题）
 
 模型发布和行业事件的快速拆解，面试聊到最新动态时用得上。
+
+### REA 保姆级教程：DeepSeek Harness 实操
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，并为每条结论生成 Evidence 记录。DeepSeek Harness 没有一键接入，需要在 cordis.patch.yml 里接入 REA 的 MCP，再安装 Skill，最后跑通官方的恐龙游戏逆向案例。
+
+完整内容：[阅读全文《REA 接入 DeepSeek Harness》](./rea-deepseek-harness-tutorial.md)
 
 ### 最近爆火的 Personal Agent 到底是什么？
 
@@ -2228,7 +2238,7 @@ Agent 这一轮变化和以往不太一样。以前的技术迭代，学一门�
 
 Alan Kay 说过一句话，「预测未来最好的办法就是去创造它」。我觉得这话放在今天特别合适。与其等着被 Agent 浪潮推着走，不如自己先把原理搞透，把项目跑通，把面试里会被问到的每一个点都准备好。
 
-所以我们选择了最笨但最扎实的方式。368 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
+所以我们选择了最笨但最扎实的方式。369 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
 
 我始终相信一件事，技术的价值不在于它有多新，而在于你是否真正理解它、用过它、能把它讲清楚。这套题库要做的就是帮你到达这个状态。
 

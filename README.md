@@ -4,8 +4,13 @@
   </a>
 </p>
 
+<!-- AUTO-GENERATED:TITLE:START -->
+<h1 align="center">王二讲Agent：AI Agent 面试题 369 道（Agent八股+视频讲解）</h1>
+<!-- AUTO-GENERATED:TITLE:END -->
+
 <p align="center">
   <a href="https://javabetter.cn/ai/video/"><img src="https://img.shields.io/badge/在线阅读-javabetter.cn-2150b4?style=for-the-badge" alt="在线阅读"></a>
+  <a href="https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb"><img src="https://img.shields.io/badge/飞书-知识库-3370ff?style=for-the-badge" alt="飞书知识库"></a>
   <a href="https://www.douyin.com/user/MS4wLjABAAAAxdUFFflycLY13_3btQv8eE41gaifL36eotb0FLA7ASOSdwkV8CF89-Wh_L7_Rt1X"><img src="https://img.shields.io/badge/抖音-王二讲Agent-232838?style=for-the-badge" alt="抖音"></a>
   <a href="https://space.bilibili.com/402000160"><img src="https://img.shields.io/badge/B站-王二讲Agent-b8532a?style=for-the-badge" alt="B站"></a>
   <a href="#联系方式"><img src="https://img.shields.io/badge/公众号-沉默王二-2f7d4f?style=for-the-badge" alt="公众号"></a>
@@ -32,20 +37,20 @@
 | 01 Agent 基础 | 43 | 31 | 31 |
 | 02 上下文与记忆 | 22 | 9 | 9 |
 | 03 Harness 与 Skills | 42 | 3 | 3 |
-| 04 RAG知识库 | 43 | 1 | 1 |
+| 04 RAG知识库 | 43 | 2 | 1 |
 | 05 LLM 基础与 API | 82 | 8 | 7 |
 | 06 Claude Code与Codex | 17 | 6 | 6 |
 | 07 DeepSeek专题 | 5 | 5 | 5 |
-| 热点解读 | 10 | 10 | 8 |
+| 热点解读 | 11 | 11 | 8 |
 | 08 Prompt 工程 | 16 | 2 | 2 |
 | 09 MCP 与工具调用 | 26 | 0 | 0 |
 | 10 LangChain 与 Spring AI | 21 | 0 | 0 |
 | 11 模型训练与微调 | 32 | 1 | 1 |
 | 12 Agent 产品与框架演进 | 9 | 1 | 1 |
-| **合计** | **368** | **77** | **74** |
+| **合计** | **369** | **79** | **74** |
 <!-- AUTO-GENERATED:STATS:END -->
 
-难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。
+难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。想在手机上收藏，可以用同步更新的[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)。
 
 ## 题目目录
 
@@ -178,7 +183,7 @@
 </details>
 
 <details>
-<summary><b>04 RAG知识库</b>（43 题，图文详解 1 篇）</summary>
+<summary><b>04 RAG知识库</b>（43 题，图文详解 2 篇）</summary>
 
 - 108. [Agent 的 RAG 遇到 PDF 怎么办？](https://javabetter.cn/ai/video/agent-rag-pdf.html) · [抖音](https://www.douyin.com/video/7657063729804152074) · [B站](https://www.bilibili.com/video/BV1FSKZ62ETR/)
 - 🔴 109. RAPTOR 和 GraphRAG 分别擅长什么查询？
@@ -192,7 +197,7 @@
 - 🟡 117. Embedding 模型怎么选型？维度越高越好吗？
 - 🟡 118. Embedding 有哪几种算法？各自的特点是什么？
 - 🟡 119. 向量数据库怎么选型？你们项目用的哪个？
-- 🟡 120. 向量检索和关键词检索的混合搜索怎么做？
+- 🟡 120. [RAG 怎么做向量和关键词的混合检索？](https://javabetter.cn/ai/video/rag-hybrid-search.html)
 - 🟡 121. 什么是 Query Rewrite？为什么需要改写用户查询？
 - 🟡 122. 什么是多路召回？具体怎么做？
 - 🟡 123. 为什么检索之后还需要 Rerank？
@@ -349,8 +354,9 @@
 </details>
 
 <details>
-<summary><b>热点解读</b>（10 题，图文详解 10 篇）</summary>
+<summary><b>热点解读</b>（11 题，图文详解 11 篇）</summary>
 
+- [REA 保姆级教程：DeepSeek Harness 实操](https://javabetter.cn/ai/video/rea-deepseek-harness-tutorial.html)
 - [最近爆火的 Personal Agent 到底是什么？](https://javabetter.cn/ai/video/what-is-personal-agent.html) · [抖音](https://www.douyin.com/video/7695348838801886499)
 - [Claude Haiku 5.5 怎么在成本和智能之间做选择？](https://javabetter.cn/ai/video/claude-haiku-5-5.html) · [抖音](https://www.douyin.com/video/7694223913370258729)
 - [CPU、GPU、NPU 到底有什么区别？](https://javabetter.cn/ai/video/cpu-gpu-npu-difference.html) · [抖音](https://www.douyin.com/video/7693854535088868643)

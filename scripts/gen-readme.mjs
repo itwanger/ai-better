@@ -59,6 +59,12 @@ function parseCatalog(text) {
 const hasVideo = (q) => Boolean(q.douyin || q.bilibili)
 const label = (c) => (c.no ? `${c.no} ${c.name}` : c.name)
 
+// 标题和网站、飞书保持同一个公式，题数随题库自动更新
+function renderTitle(categories) {
+  const total = categories.reduce((n, c) => n + c.questions.length, 0)
+  return `<h1 align="center">王二讲Agent：AI Agent 面试题 ${total} 道（Agent八股+视频讲解）</h1>`
+}
+
 function renderStats(categories) {
   const all = categories.flatMap((c) => c.questions)
   const rows = categories.map((c) => {
@@ -109,7 +115,8 @@ function replaceBlock(readme, name, body) {
 
 const categories = parseCatalog(fs.readFileSync(CATALOG, 'utf8'))
 const current = fs.readFileSync(README, 'utf8')
-let next = replaceBlock(current, 'STATS', renderStats(categories))
+let next = replaceBlock(current, 'TITLE', renderTitle(categories))
+next = replaceBlock(next, 'STATS', renderStats(categories))
 next = replaceBlock(next, 'CATALOG', renderCatalog(categories))
 
 if (process.argv.includes('--check')) {
