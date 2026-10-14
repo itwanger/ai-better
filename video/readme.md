@@ -463,7 +463,7 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
-权限模式决定 Agent 执行动作之前要不要先问人。它和沙箱是一对，沙箱限制 Agent 能碰到什么，权限模式决定碰之前要不要审批。Claude Code 有六种模式，default 只有读操作不询问；acceptEdits 自动放行文件编辑和 mkdir、mv 这类常见文件命令；plan 只读分析、不改文件；auto 由另一个模型作为分类器在后台审查每个动作；dontAsk 只允许预先批准的工具，其余一律拒绝，适合 CI；bypassPermissions 全部放行，只应该在隔离的容器或虚拟机里使用。从 v2.1.283 开始，auto 成为终端和 VS Code 交互会话的默认模式。Codex 把这件事拆成两个独立的配置，审批策略有 untrusted、on-request、never 等，沙箱模式有 read-only、workspace-write、danger-full-access。模式只是基线，deny 规则在任何模式下都生效，包括 bypassPermissions。
+权限模式决定 Agent 执行动作之前要不要先问人。它和沙箱是一对，沙箱限制 Agent 能碰到什么，权限模式决定碰之前要不要审批。Claude Code 有六种模式，default 只有读操作不询问；acceptEdits 自动放行文件编辑和 mkdir、mv 这类常见文件命令；plan 只读分析、不改文件；auto 由另一个模型作为分类器在后台审查每个动作；dontAsk 只允许预先批准的工具，其余一律拒绝，适合 CI；bypassPermissions 全部放行，只应该在隔离的容器或虚拟机里使用。从 v2.1.284 开始，没有配置权限模式时，终端和 VS Code 交互会话在所有套餐和 provider 上都默认进入 auto。Codex 把这件事拆成两个独立的配置，审批策略常用 on-request 和 never，原来的 untrusted 已经退役，沙箱模式有 read-only、workspace-write、danger-full-access。模式只是基线，deny 规则在任何模式下都生效，包括 bypassPermissions。
 
 🟡 进阶 | `→ Claude Code / Codex / PaiCLI`
 

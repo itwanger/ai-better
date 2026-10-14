@@ -1,9 +1,9 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, spring, useVideoConfig} from 'remotion';
-// 全片色调：暖米色背景，蓝色主色，铁锈橙强调，绿色只表示正确或通过，深色写正文，灰色写次要信息。
+// 全片色调：冷白背景，蓝色主色，铁锈橙强调，绿色只表示正确或通过，深色写正文，灰色写次要信息。
 export const C = {
-  bg:'#f7f2e8', card:'#fefdf9', ink:'#232838', blue:'#2150b4', rust:'#b8532a', green:'#2f7d4f', gray:'#6b6f7d', faint:'#a9aeba',
-  line:'#d8d1c3', shadow:'#dcdee0', track:'#e6e9f0', soft:'#a7b6db', select:'#dce4f6',
+  bg:'#f3f5f7', card:'#ffffff', ink:'#232838', blue:'#2150b4', rust:'#b8532a', green:'#2f7d4f', gray:'#6b6f7d', faint:'#a9aeba',
+  line:'#d6dbe2', shadow:'#dcdee0', track:'#e6e9f0', soft:'#a7b6db', select:'#dce4f6',
 };
 export const FONT = '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif';
 export const MONO = 'ui-monospace, "SF Mono", Menlo, "PingFang SC", monospace';
@@ -20,7 +20,7 @@ export const Label: React.FC<{children:React.ReactNode;color?:string}> = ({child
 export const Stage:React.FC<{children:React.ReactNode}> = ({children}) => <AbsoluteFill style={{background:C.bg,fontFamily:FONT,color:C.ink}}>{children}</AbsoluteFill>;
 export const ChapterStrip:React.FC<{active?:number;brand:React.ReactNode;chapters:string[]}> = ({active=0,brand,chapters}) => <div style={{position:'absolute',top:48,left:96,right:96,display:'flex',gap:14,alignItems:'center'}}>
   <div style={{fontSize:27,fontWeight:900,marginRight:'auto',letterSpacing:-1}}>{brand}</div>
-  {chapters.map((name,i)=><div key={name} style={{fontSize:23,fontWeight:700,padding:'13px 25px',border:`2px solid ${i===active?C.blue:C.line}`,borderRadius:999,background:i===active?C.blue:'transparent',color:i===active?'white':i<active?C.faint:C.gray}}>{String(i+1).padStart(2,'0')}　{name}</div>)}
+  {chapters.map((name,i)=><div key={name} style={{fontSize:23,fontWeight:700,padding:'13px 25px',border:`2px solid ${i===active?C.ink:C.line}`,borderRadius:999,background:i===active?C.ink:'transparent',color:i===active?'white':i<active?C.faint:C.gray}}>{String(i+1).padStart(2,'0')}　{name}</div>)}
 </div>;
 export const widthOf = (text:string) => [...text].reduce((sum,ch)=>sum+(/[\x00-\x7F]/.test(ch)?0.58:1),0);
 export function subtitleLines(text:string):string[]{

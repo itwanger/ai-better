@@ -248,12 +248,13 @@ render 先输出 `preview/render/remotion-raw.mp4`，再复制其 H.264 视频�
 
 ## 共享场景组件
 
-从项目 `remotion/src/` 引入，路径前缀为 `../../../shared/remotion/components/`。组件只负责版式，标题、字幕、图片路径和帧数都由项目传入。新章节从 [examples/Chapter.example.tsx](remotion/examples/Chapter.example.tsx) 复制起步，画面要求见 [VISUAL_STYLE.md](VISUAL_STYLE.md)。颜色只从 `C` 取，自制卡片用 `card` 或 `Card`，不在章节里另写卡片样式。
+从项目 `remotion/src/` 引入，路径前缀为 `../../../shared/remotion/components/`。组件只负责版式，标题、字幕、图片路径和帧数都由项目传入。新章节从 [examples/Stage.example.tsx](remotion/examples/Stage.example.tsx) 复制起步（连续画面），画面要求见 [VISUAL_STYLE.md](VISUAL_STYLE.md)；[examples/Chapter.example.tsx](remotion/examples/Chapter.example.tsx) 留作配图聚焦的写法参考。颜色只从 `C` 取，自制卡片用 `card` 或 `Card`，不在章节里另写卡片样式。
 
 |组件|文件|用途|
 |---|---|---|
 |`ChapterShell`|`Scenes.tsx`|背景、章节音频、`ChapterStrip` 导航、底部单行字幕；传 `progress={CHAPTERS}` 时在字幕下方画按章节分段的进度条（`ChapterProgress`）|
-|`SceneChain`|`Scenes.tsx`|按起点列表挂载场景，每个场景持续到下一个场景开始，不再手算 `durationInFrames`|
+|`track`、`life`、`Actor`、`Spotlight`|`Stage.tsx`|连续画面：按关键帧插值、按入场和淡出帧算透明度、以中心点定位主角、背景点阵加跟随焦点的柔光|
+|`SceneChain`|`Scenes.tsx`|按起点列表挂载场景，每个场景持续到下一个场景开始；连续画面里只用于原稿配图、面试开场这类独立段落|
 |`subtitleAt`|`Scenes.tsx`|取某个章节局部帧上的字幕|
 |`FigureCard`|`Scenes.tsx`|原稿配图，`contain` 完整显示，默认不套卡片直接放在背景上；`dark` 把终端截图放进深色卡片|
 |`CoverFrame`|`Scenes.tsx`|整片第 0 帧显示原稿 16:9 封面，之后 `fadeFrames`（默认 6）帧内淡出，不平移时间轴。只放在整片 Composition 的最上层，章节预览不加|
