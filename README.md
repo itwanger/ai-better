@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://javabetter.cn/ai/video/">
-    <img src=".github/assets/banner.png" width="860" alt="王二讲Agent：AI Agent 面试题逐题讲透">
+    <img src="./.github/assets/banner.png" width="860" alt="王二讲Agent：AI Agent 面试题逐题讲透">
   </a>
 </p>
 
@@ -517,7 +517,7 @@ ai-better/
 
 每条视频都从对应的图文详解改写成口播稿，用火山引擎 TTS 配音，再用 [Remotion](https://www.remotion.dev/) 按句子逐帧对齐画面。画面风格统一为暖米色背景、蓝色细边卡片，信息量大的配图用镜头聚焦逐块讲解。
 
-完整流程、命令和视觉规范见 [script/README.md](script/README.md)、[script/shared/WORKFLOW.md](script/shared/WORKFLOW.md) 和 [script/shared/VISUAL_STYLE.md](script/shared/VISUAL_STYLE.md)。
+完整流程、命令和视觉规范见 [script/README.md](https://github.com/itwanger/ai-better/blob/main/script/README.md)、[script/shared/WORKFLOW.md](https://github.com/itwanger/ai-better/blob/main/script/shared/WORKFLOW.md) 和 [script/shared/VISUAL_STYLE.md](https://github.com/itwanger/ai-better/blob/main/script/shared/VISUAL_STYLE.md)。
 
 ## 参与贡献
 
