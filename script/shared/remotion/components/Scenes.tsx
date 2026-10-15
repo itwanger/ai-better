@@ -42,7 +42,13 @@ export interface ChapterShellProps {
   brand: React.ReactNode;
   subtitle: string;
   /** Chapter slice of the delivery audio; pass a versioned src so Studio reloads new mixes. */
-  audio: {src: string; startFrom: number; endAt: number};
+  audio: {
+    src: string;
+    startFrom: number;
+    endAt: number;
+    acceptableTimeShiftInSeconds?: number;
+    pauseWhenBuffering?: boolean;
+  };
   /** Hide the chapter strip, e.g. while an interview opening uses the top area. */
   showStrip?: boolean;
   /**
@@ -86,7 +92,7 @@ export const ChapterShell: React.FC<ChapterShellProps> = ({
   const frame = useCurrentFrame();
   return (
   <AbsoluteFill style={{background, color: C.ink, fontFamily: FONT}}>
-    <Audio src={audio.src} startFrom={audio.startFrom} endAt={audio.endAt} />
+    <Audio {...audio} />
     {children}
     {showStrip && (
       <div
