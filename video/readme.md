@@ -52,6 +52,18 @@ date: 2026-05-20
 
 聚焦 Agent 的定义、工作方式、规划、反思和多 Agent 协作。部分新增题目参考了开源书《深入理解 AI Agent：设计原理与工程实践》（[bojieli/ai-agent-book](https://github.com/bojieli/ai-agent-book)）的章节结构和各章思考题。
 
+### 35. 权限模式（Permission Mode）是什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+权限模式决定 Agent 执行动作之前要不要先问人。它和沙箱是一对，沙箱限制 Agent 能碰到什么，权限模式决定碰之前要不要审批。Claude Code 有六种模式，default 只有读操作不询问；acceptEdits 自动放行文件编辑和 mkdir、mv 这类常见文件命令；plan 只读分析、不改文件；auto 由另一个模型作为分类器在后台审查每个动作；dontAsk 只允许预先批准的工具，其余一律拒绝，适合 CI；bypassPermissions 全部放行，只应该在隔离的容器或虚拟机里使用。从 v2.1.284 开始，没有配置权限模式时，终端和 VS Code 交互会话在所有套餐和 provider 上都默认进入 auto。Codex 把这件事拆成两个独立的配置，审批策略常用 on-request 和 never，原来的 untrusted 已经退役，沙箱模式有 read-only、workspace-write、danger-full-access。模式只是基线，deny 规则在任何模式下都生效，包括 bypassPermissions。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn1KWLyrqrCjoitTaona5abf) · [查看图文解析](./what-is-permission-mode.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7696477886903110927)
+
+🟡 进阶 | `→ Claude Code / Codex / PaiCLI`
+
 ### 36. Agent 执行过程中，用户插话怎么处理？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
@@ -132,9 +144,12 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 
 完整答案：[阅读全文《多 Agent 上下文传递》](./multi-agent-context-passing.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnpancPe9ZXTRi5V5Zw1wqne)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1TCpg6PEcg/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7691235788905893158)
 
 🟡 进阶 | `→ PaiCLI / PaiAgent`
+
 
 ### 24. Plan 模式已经死了吗？
 
@@ -144,9 +159,12 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 
 完整答案：[阅读全文《Plan 模式已经死了吗》](./is-plan-mode-dead.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnFfp79IQELzGJcJBZU2AZng)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1Kypg6YEqu/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7690807740213529882)
 
 🟡 进阶 | `→ PaiCLI`
+
 
 ### 23. Pi Agent 系统里有哪些反复出现的设计模式？
 
@@ -156,9 +174,12 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 
 完整答案：[阅读全文《Pi Agent 设计模式》](./pi-agent-design-patterns.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnj2EEl0InIUEqd4iapUSvSh)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1U6pg6NExC/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7690524611271789850)
 
 🟡 进阶 | `→ PaiCLI`
+
 
 ### 22. 如何做出像Pi一样优秀的Agent？
 
@@ -168,9 +189,12 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 
 完整答案：[阅读全文《构建 Agent 的三个原则》](./building-effective-agents-principles.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8M39jcB1nMcPGFUUaXoMbf)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1Lspg6jEyu/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7690200053318749440)
 
 🟢 基础 | `→ PaiCLI`
+
 
 ### 21. 订机票客服该用工作流还是自主 Agent？
 
@@ -180,9 +204,12 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 
 完整答案：[阅读全文《订机票：工作流还是 Agent》](./workflow-vs-agent-flight-booking.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn4Xj62wttu84JOayF64XE5e)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1Rxpg6yEzs/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7689782163608194313)
 
 🟡 进阶 | `→ PaiAgent / PaiCLI`
+
 
 ### 20. 模型越来越强，Harness 会不会被模型「吃掉」？
 
@@ -192,9 +219,12 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 
 完整答案：[阅读全文《模型会吃掉 Harness 吗》](./will-model-eat-harness.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnMMPBCnz0NuDqSG09hh0rfb)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV17kaZ6kE9L/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7689042782064774415)
 
 🔴 深入 | `→ PaiCLI`
+
 
 ### 19. Agent 的沙箱（Sandbox）你了解吗？
 
@@ -459,14 +489,6 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 
 🔴 深入 | `→ PaiCLI`
 
-### 35. 权限模式（Permission Mode）是什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-权限模式决定 Agent 执行动作之前要不要先问人。它和沙箱是一对，沙箱限制 Agent 能碰到什么，权限模式决定碰之前要不要审批。Claude Code 有六种模式，default 只有读操作不询问；acceptEdits 自动放行文件编辑和 mkdir、mv 这类常见文件命令；plan 只读分析、不改文件；auto 由另一个模型作为分类器在后台审查每个动作；dontAsk 只允许预先批准的工具，其余一律拒绝，适合 CI；bypassPermissions 全部放行，只应该在隔离的容器或虚拟机里使用。从 v2.1.284 开始，没有配置权限模式时，终端和 VS Code 交互会话在所有套餐和 provider 上都默认进入 auto。Codex 把这件事拆成两个独立的配置，审批策略常用 on-request 和 never，原来的 untrusted 已经退役，沙箱模式有 read-only、workspace-write、danger-full-access。模式只是基线，deny 规则在任何模式下都生效，包括 bypassPermissions。
-
-🟡 进阶 | `→ Claude Code / Codex / PaiCLI`
-
 ### 37. Agent 的 Todo List 有什么用？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
@@ -589,7 +611,10 @@ HySparse2 将模型分成 Self-Decoder 和 Cross-Decoder：前半段保留全注
 
 完整内容：[阅读全文《MiMo-V3 与 HySparse2》](./mimo-v3-hysparse2.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8ifqMip2ndBgZX8vEnj6pf)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV19uaZ6PEi1/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7689435090677402895)
+
 
 ### 推荐 5 个复刻 Jev 的开源项目
 
