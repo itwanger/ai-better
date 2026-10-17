@@ -276,6 +276,18 @@ render 先输出 `preview/render/remotion-raw.mp4`，再复制其 H.264 视频�
 
 两期以上重复手写的场景或图标，确认不含主题数据后提升到这里，并在本表登记。
 
+## 官方证据素材
+
+官方公告、论文结论、模型训练数据来源和具体测试结果，先定位一手材料，再按叙事需要选取真实页面、PDF 页段或原始图表。证据回答“这件事从哪里来”，动画回答“这个机制如何运作”；按场景选择，不要求全片都截图，也不因已有口播确认而省略事实镜头的取证。
+
+公开来源的查阅与截图属于制作素材；真实运行 Agent、调用模型 API 或登录后的操作演示仍按下一节的授权约定执行。
+
+- 搜索摘要用于找原页，实际打开官网、原论文或官方仓库核对目标段落。保留出处上下文，不用第三方转述支持“官方说”的结论。
+- 采集时先放临时目录，确认截图不是空白或加载占位后，将需要的素材复制到项目 `assets/images/`。PDF 可保留原文件于 `assets/references/`，以原文渲染页或完整段落入镜，不重新排版成假报告。网页截图不得改写原文、补造界面或将不同页面拼成一个现场。
+- 在 `assets/references/` 记录来源 URL、标题、日期或版本、页码或章节、获取日期、素材尺寸与 SHA-256；记录能支持当前口播的具体结论及限定。原文是区间时，不把上限当成唯一结果；内部实验、第三方结果、本人实测要区分。与口播不一致及用户保留配音的选择也记录在此。
+- 在 `OUTLINE.md` 写明对应 beat、先显示出处再聚焦证据的顺序。镜头中保留可辨认的来源，用少量中文提示帮助手机用户捕捉重点；正文不改写，多栏图和对比图完整保留关系。原始证据不套共享色板重绘，新增标注与字幕沿用 `C`。
+- 用户要求回看时，检查之前的具体事实镜头是否只有标志、报告名称或自画数字；只调整有证据收益的镜头。教学示例与算式保留动画，必要时加“示意”“仅权重估算”等短标签，重新跑受影响章节的预览流程。
+
 ## 真实录制演示
 
 稿子讲到 Agent 产品的具体交互（插话、取消、审批、排队……）时，可以提议真实跑一次再还原到画面上，用户同意后再录。样板是 agent-user-interjection 第一章：Claude Code 中途插话一次、按 Esc 停掉一次，两次录制对照。
@@ -324,6 +336,7 @@ python3 script/shared/tools/mix_effects.py --project script/what-is-agent-reflec
 |---|---|---|
 |Claude Code|`shared/assets/brands/claude-code.png`|Anthropic 官方 VS Code 扩展；详情见同名 `.source.json`|
 |Claude|`shared/assets/brands/claude.png`|claude.ai 的 Claude 官方应用图标（338×338，米色底铁锈橙标志）；用于 Claude 模型系列，Claude Code 产品仍用 `claude-code.png`；见 `claude.source.json`|
+|OpenAI / GPT|`shared/assets/brands/openai.png`|已安装 OpenAI ChatGPT VS Code 扩展中的 Blossom 图标；GPT 模型系列用此厂商标识，不称为某个型号的专属图标；见 `openai.source.json`|
 |Codex|`shared/assets/brands/codex.png`|OpenAI 官方 VS Code 扩展中的 Codex 应用图标；详情见同名 `.source.json`|
 |DeepSeek|`shared/assets/brands/deepseek.png`|DeepSeek 官网 `favicon.ico` 小鲸鱼；无缩放转为 PNG，原 ICO 与同名 `.source.json` 一并保留|
 |Kolibri|`shared/assets/brands/kolibri-logo-banner.webp`、`kolibri-wordmark.svg`|Aleph Alpha 官网公告横幅的蜂鸟与字标、导航白色字标；见 `kolibri.source.json`|

@@ -252,6 +252,14 @@
       "speakers": "S_j97bqlje2",
       "status": "confirmed",
       "note": "端口号 9222 用户指定连读“九二二二”。ttsText 保留阿拉伯数字 9222 即连读四位；写成汉字“九二二二”会吞掉一个“二”，写成“九二，二二”会断开。"
+    },
+    {
+      "id": "opus-version-5-5",
+      "match": "(?i)(\\bOpus\\s+)5\\.5(?![\\d.])",
+      "replace": "\\1五点五",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-10-17 what-is-model-distillation 第二章，用户指定 Opus 5.5 的 5.5 读“五点五”。限定 Opus 型号，只改 ttsText，字幕保留数字；新音频仍待实际复听。"
     }
   ],
   "watch": [

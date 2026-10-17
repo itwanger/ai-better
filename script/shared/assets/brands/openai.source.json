@@ -1,0 +1,10 @@
+{
+  "asset": "openai.png",
+  "source": "/Users/itwanger/.vscode/extensions/openai.openai-chatgpt-adhoc-0.0.1731981761/images/oai_icon.png",
+  "publisher": "OpenAI",
+  "extensionId": "openai.openai-chatgpt-adhoc",
+  "description": "OpenAI Blossom 图标，来自已安装的 OpenAI ChatGPT VS Code 扩展；用于 GPT / OpenAI 模型系列的厂商标识，不是 Astra 专属图标，也不用 Codex 应用标志代替。",
+  "brandReference": "https://openai.com/brand/",
+  "sha256": "2b003dc9a2de3c628035c417b451593cf0acb3ef7eabdd4de86cdd3ceca303aa",
+  "addedAt": "2026-10-17"
+}
