@@ -2,6 +2,14 @@
   "_comment": "配音读法词典。rules 由 pronunciations.py 写入 beats.json 的 ttsText，字幕 text 不变；watch 只列出待复听的 beat。speakers 为 * 表示与音色无关，否则只对列出的音色生效。status: confirmed=用户明确指定读法或复听认可，具体依据见 note，重生成音频仍需单独复听；candidate=读法候选，尚无用户对该读法的明确确认。",
   "rules": [
     {
+      "id": "context-one-mega",
+      "match": "(上下文\\s*(?:长度\\s*)?(?:仍然是|仍是|是|为)?\\s*)1\\s*M(?![A-Za-z0-9])",
+      "replace": "\\1一兆",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-10-18 deepseek-v4-1-flash-1017 第四章，用户指定“上下文仍然是 1M”里的 1M 读“一兆”。限定上下文容量语境，只改 ttsText，字幕保留 1M；新配音仍待用户实听。"
+    },
+    {
       "id": "comment-222",
       "match": "(?<!\\d)222(?!\\d)",
       "replace": "二二二",
@@ -260,6 +268,22 @@
       "speakers": "*",
       "status": "confirmed",
       "note": "2026-10-17 what-is-model-distillation 第二章，用户指定 Opus 5.5 的 5.5 读“五点五”。限定 Opus 型号，只改 ttsText，字幕保留数字；新音频仍待实际复听。"
+    },
+    {
+      "id": "deepseek-1017-upgrade-question",
+      "match": "(?<!\\d)1017(?=\\s*到底升级了什么)",
+      "replace": "幺零幺七",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-10-18 deepseek-v4-1-flash-1017，用户指定“1017 到底升级了什么”中的 1017 读“幺零幺七”。限定该问句，当前项目 beat 5、6 同步修正；字幕保留 1017，其他上下文不批量重配，新音频待实听。"
+    },
+    {
+      "id": "agents-last-exam-35-4",
+      "match": "(?i)(Agents['’]?\\s+Last\\s+Exam\\s+)35\\.4(?![\\d.])",
+      "replace": "\\1三十五点四",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-10-18 deepseek-v4-1-flash-1017 第二章，用户指定 Agents Last Exam 35.4 中的 35.4 读“三十五点四”。限定基准成绩语境，只改 ttsText，字幕保留数字，新音频待实际复听。"
     }
   ],
   "watch": [

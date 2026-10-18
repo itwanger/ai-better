@@ -14,15 +14,14 @@ const INDEX = 0;
 const E = timing.events as Record<string, number>;
 
 const panel: React.CSSProperties = {...card, position: 'absolute'};
-const heading: React.CSSProperties = {position: 'absolute', left: 150, top: 178, fontSize: 57, fontWeight: 900};
 
 // 场景内的 useCurrentFrame() 是 Sequence 局部帧；加上场景起点后才能和 E 里的章节帧比较。
 const Opening: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <SceneEntrance>
-      <div style={heading}>本章标题</div>
-      <Popped frame={f} delay={E.detail} style={{...panel, left: 150, top: 330, width: 600, height: 300, padding: 36}}>
+      {/* 默认直接呈现主体，不额外加“本章标题”或来源小标题。对象标签按需要保留。 */}
+      <Popped frame={f} delay={E.detail} style={{...panel, left: 660, top: 350, width: 600, height: 300, padding: 36}}>
         <div style={{fontSize: 40, fontWeight: 850, color: C.blue}}>术语起音前约 5 帧入场</div>
       </Popped>
     </SceneEntrance>
