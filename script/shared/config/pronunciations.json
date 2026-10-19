@@ -284,6 +284,16 @@
       "speakers": "*",
       "status": "confirmed",
       "note": "2026-10-18 deepseek-v4-1-flash-1017 第二章，用户指定 Agents Last Exam 35.4 中的 35.4 读“三十五点四”。限定基准成绩语境，只改 ttsText，字幕保留数字，新音频待实际复听。"
+    },
+    {
+      "id": "jiaoyan-validation",
+      "match": "校验",
+      "replace": "较验",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "confirmed",
+      "note": "2026-10-19 tool-design-principles 第三章，用户指定“校验”读 jiao yan（jiào yàn），避免读作 xiào yàn。ttsText 用同音“较验”提示当前音色，字幕保留“校验”；用户确认的是读法，新合成音频仍待实际复听，不据 ASR 验收声调。"
     }
   ],
   "watch": [

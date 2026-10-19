@@ -187,6 +187,10 @@ node script/shared/tools/remotion.mjs still --project script/what-is-kv-cache --
 
 继续使用已经运行的 Studio，端口按实际情况选择，不关闭其他项目服务。共享 Studio 入口带 `--no-open`；Claude Code 用内置浏览器（`mcp__Claude_Browser__*`）打开实际 URL，Codex 用 `mcp__codex_app__open_in_codex`。打开后交给用户看，不用自动化播放核对音频。
 
+若需要用 `agent-browser` 做预览或检查，新建会话时使用本项目独有的 `--session <session-name>`，记录项目目录、会话名及对应进程的 PID、启动时间；复用已有会话先核实归属，不直接把 `default` 当成本项目会话。
+
+预览或检查用完后，立即执行 `agent-browser --session <session-name> close`，完成、失败、取消和用户说“不用了”都要收尾，无需再次询问。关闭后核实对应 daemon 和浏览器子进程已退出、会话 socket/PID 文件已移除；进程仍在时先复查身份与用途，报告未关闭项，不批量杀浏览器、不强杀。仅当前仍在使用或用户明确要求保留的会话可以暂留，并记录用途；等待用户审片不需要保留已完成检查的自动化浏览器，可保留用户审片所需的 Studio 和内置浏览器标签并暂停播放。关闭预览会话不影响其他项目会话、用户 Chrome 或仍在工作的渲染浏览器。
+
 `still` / `render` 的后台渲染浏览器与 Studio 预览分开：macOS 有本机 Chrome 时共享入口自动使用，其他环境设 `REMOTION_BROWSER_EXECUTABLE`。
 
 只有用户明确授权「出片 / 渲染」后执行：
