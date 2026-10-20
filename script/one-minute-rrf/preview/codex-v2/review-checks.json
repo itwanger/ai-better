@@ -1,0 +1,19 @@
+{
+  "stage": "preview",
+  "video": "/Users/itwanger/Documents/GitHub/ai-better/script/one-minute-rrf/preview/codex-v2/rrf-v2-review.mp4",
+  "frames": "1984",
+  "width": 1280,
+  "height": 720,
+  "fps": "30/1",
+  "durationSec": "66.133333",
+  "audioDurationSec": "66.130000",
+  "fullDecode": "passed",
+  "sourceAndAudioHashes": "unchanged",
+  "subtitles": "26 phrases exactly match spoken.txt",
+  "rankOrder": "B > C > A from full-precision RRF scores",
+  "studio": "http://localhost:3211/OneMinuteRrf",
+  "note": "720p review copy; final 1080p export not performed. Existing audio pronunciation review remains unchanged.",
+  "latestSourceSha256": "f60755a2c60f9ef5fe53e81470f409148f042f62f6bb1efae3598ebc5e4b4a30",
+  "latestPreviewSha256": "33c72a5d4d29f0063d9b01815cf283e03abe1e67fd8c89384a96ee646a52bf9c",
+  "sortTransition": "Final result layout switches before reorder; no formula/rank/icon text overlap at frame 1705."
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ch1",
+    "title": "两路排名怎么合并成一份",
+    "beatIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "startFrame": 0,
+    "endFrame": 1984,
+    "startSec": 0.0,
+    "durationSec": 66.13016666666667
+  }
+]

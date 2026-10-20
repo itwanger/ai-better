@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "slug": "one-minute-rrf",
+  "title": "RRF：多路检索的结果怎么合并成一份排名？",
+  "compositionId": "OneMinuteRrf",
+  "outputName": "one-minute-rrf.mp4",
+  "sourceArticle": "../../one-minute/rrf.md",
+  "config": {
+    "tts": {
+      "speakerId": "S_j97bqlje2",
+      "resourceId": "seed-icl-2.0",
+      "apiBase": "https://openspeech.bytedance.com/api/v3/tts/unidirectional/sse",
+      "speedRatio": 1.0,
+      "audio": {
+        "format": "mp3",
+        "sampleRate": 24000
+      },
+      "atempo": 1.1
+    },
+    "volc": {
+      "apiKeyEnv": "VOLC_TTS_API_KEY"
+    },
+    "video": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30
+    }
+  },
+  "audioUnitMode": "meaning-groups",
+  "progress": {},
+  "deliveryAudio": "build/voiceover-with-effects.wav"
+}

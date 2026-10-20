@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "sourcePath": "/Users/itwanger/Documents/GitHub/ai-better/one-minute/rrf.md",
+  "sourceSha256": "ad53be8a570cab36c605ab052dfdaae0e8645017ca8ae2d35c8f169fcd37ece9",
+  "spokenPath": "/Users/itwanger/Documents/GitHub/ai-better/script/one-minute-rrf/spoken.txt",
+  "spokenSha256": "25b94efee9ddb8f7b0fb8f70ac584c6bcf37824fcabf5f23b3dcc69bb472ad96",
+  "projectionSha256": "026681335c70158c026e1fce7c361f565f9a9ee1b2aa5fca1a6f9b7256d6c060",
+  "projectionRule": "remove CR and LF only; retain every other Unicode character",
+  "voiceExpected": {
+    "speakerId": "S_j97bqlje2",
+    "resourceId": "seed-icl-2.0",
+    "apiBase": "https://openspeech.bytedance.com/api/v3/tts/unidirectional/sse",
+    "speedRatio": 1.0,
+    "atempo": 1.1,
+    "audio": {
+      "format": "mp3",
+      "sampleRate": 24000
+    }
+  },
+  "targetDurationSec": 60
+}

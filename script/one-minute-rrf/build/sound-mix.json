@@ -1,0 +1,10 @@
+{
+  "planSha256": "1a46c0402c164e450fc729a327a7f36d64cf4e4425fc9fd7063a788623706f19",
+  "sourceSha256": "ec43cc17725b36405ee90929396e823e68e8fbc0c9b61bc473a4e778cad81274",
+  "outputSha256": "ec43cc17725b36405ee90929396e823e68e8fbc0c9b61bc473a4e778cad81274",
+  "source": "build/voiceover.wav",
+  "output": "build/voiceover-with-effects.wav",
+  "events": [],
+  "peakDbfs": -1.2402261974006736,
+  "sampleCount": 1587124
+}

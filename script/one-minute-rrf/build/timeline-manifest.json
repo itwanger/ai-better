@@ -1,0 +1,74 @@
+{
+  "config": {
+    "tts": {
+      "speakerId": "S_j97bqlje2",
+      "resourceId": "seed-icl-2.0",
+      "apiBase": "https://openspeech.bytedance.com/api/v3/tts/unidirectional/sse",
+      "speedRatio": 1.0,
+      "audio": {
+        "format": "mp3",
+        "sampleRate": 24000
+      },
+      "atempo": 1.1
+    },
+    "volc": {
+      "apiKeyEnv": "VOLC_TTS_API_KEY"
+    },
+    "video": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30
+    }
+  },
+  "speakerId": "S_j97bqlje2",
+  "atempo": 1.1,
+  "sampleRate": 24000,
+  "totalSamples": 1587124,
+  "durationSec": 66.13016666666667,
+  "playbackOrder": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "audioSource": "build/voiceover.wav",
+  "inputs": {
+    "1": {
+      "audioSha256": "6b76fe434afd46d4136f1f0d40f0ddaf87bc16e74c33a06e56f8f410cd9bcf76",
+      "textSha256": "90b7d81d45d2f779eb6d20e10b3cfe38487228b5f1bb8bf3f08f12c31f9ac677"
+    },
+    "2": {
+      "audioSha256": "50200d229681e0a196fc63b6cdc260c392db5bddb91f06b1e5cefe732ad02fc1",
+      "textSha256": "271cf2d43ca79bf759a974b78b2ead24023f73bb219f06428df777ef9e53bc31"
+    },
+    "3": {
+      "audioSha256": "7689404549d50e904b2171f5e02b54e437c1ed1cef45c85eaac2987473a70bd0",
+      "textSha256": "b6dbdc8e9ce0ef9df74c1da53996991011e36e3135ea7eefd2aedac5e861ea53"
+    },
+    "4": {
+      "audioSha256": "4f83cde20eacdfdf9f50cd9ed45d106217e170eefb20a6b2d06ca08d5f580c3d",
+      "textSha256": "b6876ad1720769158a76a2ef410ac3ab67ec7670598d55bb3ea43e82b60afcda"
+    },
+    "5": {
+      "audioSha256": "18842205333c90a3cd9bb852f0c0622bbd0cfee1be175378a6a679e05e207eac",
+      "textSha256": "1e238653242ab7f28f82a5152b0eb1963e9cbe5c7c97c7129fadf86f557026ab"
+    },
+    "6": {
+      "audioSha256": "50427a45bbab5b1666470dfa2a9eafd59109028d4057b54caa08ac6d40c21107",
+      "textSha256": "107c07ee49254e8a7b7b3c4344b5a6c57c4bd2025615f8f853df4f0376ff747c"
+    },
+    "7": {
+      "audioSha256": "17e01af88a1867b92309af8f84d1ca8146a8072e7698c569bbc7952d9913a046",
+      "textSha256": "5810416ceb03760c1627799283a64d28b58c351b8c36eee33538411de1f6074f"
+    },
+    "8": {
+      "audioSha256": "5f53baddb11303b95e8a3dcdfea74611fe000ce29c285bc99e8c0c9a62cd3bd9",
+      "textSha256": "4d72977c459d372571207df6ba1311c263b03d8156fb3d946bb045915e9e0c3d"
+    }
+  },
+  "note": "Hashes record current inputs, not proof of ASR or historical voice identity."
+}

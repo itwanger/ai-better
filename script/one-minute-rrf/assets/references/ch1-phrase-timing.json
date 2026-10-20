@@ -1,0 +1,201 @@
+{
+  "method": "mlx-community/Qwen3-ForcedAligner-0.6B-4bit forced alignment on current audio; subtitles switch at phrase onset; events at anchor onset plus offset",
+  "chapterStartFrame": 0,
+  "chapterEndFrame": 1984,
+  "chapterFrames": 1984,
+  "audioSha256": {
+    "1": "6b76fe434afd46d4136f1f0d40f0ddaf87bc16e74c33a06e56f8f410cd9bcf76",
+    "2": "50200d229681e0a196fc63b6cdc260c392db5bddb91f06b1e5cefe732ad02fc1",
+    "3": "7689404549d50e904b2171f5e02b54e437c1ed1cef45c85eaac2987473a70bd0",
+    "4": "4f83cde20eacdfdf9f50cd9ed45d106217e170eefb20a6b2d06ca08d5f580c3d",
+    "5": "18842205333c90a3cd9bb852f0c0622bbd0cfee1be175378a6a679e05e207eac",
+    "6": "50427a45bbab5b1666470dfa2a9eafd59109028d4057b54caa08ac6d40c21107",
+    "7": "17e01af88a1867b92309af8f84d1ca8146a8072e7698c569bbc7952d9913a046",
+    "8": "5f53baddb11303b95e8a3dcdfea74611fe000ce29c285bc99e8c0c9a62cd3bd9"
+  },
+  "subtitles": [
+    {
+      "startFrame": 0,
+      "endFrame": 91,
+      "text": "当知识库同时使用关键词检索和向量检索时，",
+      "beatId": 1
+    },
+    {
+      "startFrame": 91,
+      "endFrame": 139,
+      "text": "两路各自返回了一份排名，",
+      "beatId": 1
+    },
+    {
+      "startFrame": 139,
+      "endFrame": 192,
+      "text": "怎么把它们合并成一份最终榜单？",
+      "beatId": 1
+    },
+    {
+      "startFrame": 192,
+      "endFrame": 269,
+      "text": "直接把原始分数相加是行不通的。",
+      "beatId": 2
+    },
+    {
+      "startFrame": 269,
+      "endFrame": 336,
+      "text": "向量检索的分数通常在 0 到 1 之间，",
+      "beatId": 2
+    },
+    {
+      "startFrame": 336,
+      "endFrame": 401,
+      "text": "而关键词检索的分数没有固定上限，",
+      "beatId": 2
+    },
+    {
+      "startFrame": 401,
+      "endFrame": 477,
+      "text": "直接相加会让总分被关键词检索主导。",
+      "beatId": 2
+    },
+    {
+      "startFrame": 477,
+      "endFrame": 575,
+      "text": "解决办法是 RRF，全称 Reciprocal Rank Fusion，",
+      "beatId": 3
+    },
+    {
+      "startFrame": 575,
+      "endFrame": 620,
+      "text": "中文叫倒数排名融合。",
+      "beatId": 3
+    },
+    {
+      "startFrame": 620,
+      "endFrame": 697,
+      "text": "它不看原始分数，只看名次。",
+      "beatId": 4
+    },
+    {
+      "startFrame": 697,
+      "endFrame": 790,
+      "text": "一篇文档在某一路排第 rank 名，名次从 1 开始算，",
+      "beatId": 4
+    },
+    {
+      "startFrame": 790,
+      "endFrame": 901,
+      "text": "就拿到 1 除以 k 加 rank 的分数，常数 k 通常取 60；",
+      "beatId": 4
+    },
+    {
+      "startFrame": 901,
+      "endFrame": 970,
+      "text": "如果这一路没有命中，就记 0 分。",
+      "beatId": 4
+    },
+    {
+      "startFrame": 970,
+      "endFrame": 1023,
+      "text": "来看一组示例排名。",
+      "beatId": 5
+    },
+    {
+      "startFrame": 1023,
+      "endFrame": 1128,
+      "text": "关键词检索的前三名是文档 A、文档 B、文档 C；",
+      "beatId": 5
+    },
+    {
+      "startFrame": 1128,
+      "endFrame": 1208,
+      "text": "向量检索的前两名是文档 B、文档 C，",
+      "beatId": 5
+    },
+    {
+      "startFrame": 1208,
+      "endFrame": 1243,
+      "text": "文档 A 没有命中。",
+      "beatId": 5
+    },
+    {
+      "startFrame": 1243,
+      "endFrame": 1320,
+      "text": "文档 A 只在关键词检索排第 1 名，",
+      "beatId": 6
+    },
+    {
+      "startFrame": 1320,
+      "endFrame": 1414,
+      "text": "得分是 1 除以 61 加 0，约为 0.0164。",
+      "beatId": 6
+    },
+    {
+      "startFrame": 1414,
+      "endFrame": 1493,
+      "text": "文档 B 在两路分别排第 2 名和第 1 名，",
+      "beatId": 7
+    },
+    {
+      "startFrame": 1493,
+      "endFrame": 1589,
+      "text": "得分是 1 除以 62 加 1 除以 61，约为 0.0325。",
+      "beatId": 7
+    },
+    {
+      "startFrame": 1589,
+      "endFrame": 1672,
+      "text": "文档 C 两路相加约为 0.0320。",
+      "beatId": 7
+    },
+    {
+      "startFrame": 1672,
+      "endFrame": 1787,
+      "text": "最终，被两路共同认可的文档 B 和文档 C 升到前两名，",
+      "beatId": 8
+    },
+    {
+      "startFrame": 1787,
+      "endFrame": 1847,
+      "text": "单路第一的文档 A 退到第 3 名。",
+      "beatId": 8
+    },
+    {
+      "startFrame": 1847,
+      "endFrame": 1924,
+      "text": "不过 RRF 只看名次、不读正文内容，",
+      "beatId": 8
+    },
+    {
+      "startFrame": 1924,
+      "endFrame": 1984,
+      "text": "通常用来做多路检索的快速粗排。",
+      "beatId": 8
+    }
+  ],
+  "events": {
+    "kb": 0,
+    "splitCols": 86,
+    "qmark": 135,
+    "vecScale": 265,
+    "kwScale": 332,
+    "dominated": 397,
+    "rrfIn": 477,
+    "rrfFull": 480,
+    "rrfZh": 571,
+    "rankOnly": 623,
+    "rankBadge": 693,
+    "formula": 785,
+    "k60": 845,
+    "missZero": 897,
+    "exampleTag": 973,
+    "kwDocs": 1018,
+    "vecDocs": 1123,
+    "missA": 1204,
+    "aScore": 1315,
+    "bScore": 1488,
+    "cScore": 1584,
+    "finalList": 1673,
+    "aDrop": 1783,
+    "boundary": 1843,
+    "done": 1920
+  }
+}
