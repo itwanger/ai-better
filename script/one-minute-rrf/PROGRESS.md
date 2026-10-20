@@ -41,3 +41,10 @@
 ## 后续
 
 本轮仍为阶段④，用户查看新版后说“下一步”再正式导出。Skill已同步二哥色系与字幕去重规则，下载包为 /Users/itwanger/Downloads/one-minute-remotion.zip。Git仅提交本任务文件，其他文章、课件、共享读音词典与视频目录改动保留。
+
+## Studio 预览交付（本轮，阶段④收尾）
+
+- 应“补完第四阶段：启动 Remotion Studio，打开预览播放查看”，重读 Skill 后启动 Studio：`node script/shared/tools/remotion.mjs studio --project script/one-minute-rrf --port 3210`，日志 `preview/studio.log`，进程保持后台运行。
+- 浏览器（Chrome，bu 通道）打开 http://localhost:3210/OneMinuteRrf（完整 Composition，1984 帧）：播放 5 秒帧计数 0→146（00:05.00），画面正常推进约 30fps；字幕随旁白切换（beat1→beat2）；音轨 voiceover.wav 在时间轴就位、未静音。验证后暂停并跳回开头，标签留给用户自行播放。
+- 项目原有实例 http://localhost:3211/OneMinuteRrf 仍在运行，两实例均指向当前源码（layout-v5），不互相影响。
+- 状态：预览可播放，服务保留；仍停留阶段④，未导出 MP4。

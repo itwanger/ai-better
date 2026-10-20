@@ -43,7 +43,7 @@ def main():
             check(b['text']==c['text'] and c['startFrame']==cursor,f"cue {b['id']} text and boundary")
             cursor+=c['durationFrames']
             record=generated[str(b['id'])]
-            check(record['requestHash']==request_hash(b.get('ttsText') or b['text'],cfg['tts']) and record['atempo']==cfg['tts']['atempo'],f"cue {b['id']} configuration")
+            check(record['requestHash']==request_hash(b.get('ttsText') or b['text'],cfg['tts'],b.get('ttsSsml')) and record['atempo']==cfg['tts']['atempo'],f"cue {b['id']} configuration")
             check(manifest['inputs'][str(b['id'])]['audioSha256']==sha256(p/'audio/processed'/f"beat_{b['id']:02d}.mp3"),f"cue {b['id']} audio hash")
         chapter_cursor=0
         for ch in chapters:

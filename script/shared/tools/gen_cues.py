@@ -30,7 +30,7 @@ def main():
     generated=read_json(BUILD/'audio-generation.json')['units']
     for b in beats:
         record=generated.get(str(b['id']),{});processed=ROOT/'audio/processed'/f"beat_{b['id']:02d}.mp3"
-        if record.get('requestHash')!=request_hash(b.get('ttsText') or b['text'],cfg['tts']) or record.get('atempo')!=cfg['tts']['atempo'] or record.get('processedSha256')!=sha256(processed):
+        if record.get('requestHash')!=request_hash(b.get('ttsText') or b['text'],cfg['tts'],b.get('ttsSsml')) or record.get('atempo')!=cfg['tts']['atempo'] or record.get('processedSha256')!=sha256(processed):
             raise ValueError(f"Stale audio for unit {b['id']}; run gen_audio before rebuilding timing")
     if args.dry_run:
         print(json.dumps({'project':str(ROOT),'units':len(beats),'output':str(BUILD),'dryRun':True}));return

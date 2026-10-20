@@ -294,6 +294,16 @@
       ],
       "status": "confirmed",
       "note": "2026-10-19 tool-design-principles 第三章，用户指定“校验”读 jiao yan（jiào yàn），避免读作 xiào yàn。ttsText 用同音“较验”提示当前音色，字幕保留“校验”；用户确认的是读法，新合成音频仍待实际复听，不据 ASR 验收声调。"
+    },
+    {
+      "id": "rrf",
+      "match": "(?<![A-Za-z])RRF(?![A-Za-z])",
+      "replace": "R R F",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "candidate",
+      "note": "2026-10-20 one-minute-rrf，RRF 按字母逐个读 R R F；字幕保留 RRF，待用户实听确认。"
     }
   ],
   "watch": [
@@ -307,11 +317,33 @@
     },
     {
       "id": "git",
-      "match": "(?i)(?<![A-Za-z])git(?![A-Za-z])",
-      "speakers": [
-        "S_j97bqlje2"
+      "match": "(?i)(?<![A-Za-z])gitt?(?![A-Za-z])",
+      "speakers": "*",
+      "note": "2026-10-20 用户要求研究并标准化。Git 统一为单音节 /ɡɪt/：g 如 give，短元音如 ship，末尾 t；不读成 get /ɡet/、/dʒɪt/ 或 G I T，不以“吉特”等中文谐音作为精确标准。Git 官方 README 说明命名背景，Cambridge 与 Oxford 词条给出音标。当前 S_j97bqlje2 音色曾把 Git 读成 get；gitt 也有异常识别记录，未验证为稳定替换，故只保留 watch，所有音色按同一目标逐处复听。字幕不变，ASR 不能代替发音验收，已认可配音不批量重做。 2026-10-20 用户复听明确指出 multi-agent-file-conflict beat 22、23 的 gitt 不符合标准，禁止把该候选当成功方案重复使用。两句改试 CMU 音素 G IH1 T 的单元级 SSML，接口已返回音频，仍待用户实听；不得仅以 ASR 写出 Git 验收。 同日用户回复“这次可以了”，明确认可当前 SSML 版 beat 22、23；成功范围限当前音色与这两句，不扩展为 gitt 或全部音色的通用替换。",
+      "targetIPA": "/ɡɪt/",
+      "sources": [
+        "https://github.com/git/git/blob/master/README.md",
+        "https://dictionary.cambridge.org/pronunciation/english/git",
+        "https://www.oxfordlearnersdictionaries.com/definition/english/git"
       ],
-      "note": "目标读音 /ɡɪt/，曾被读成 get。ttsText 可试 gitt，但同一视频里 gitt 也出现过被识别成「D 操作」，每一处单独复听。"
+      "validatedExamples": [
+        {
+          "project": "multi-agent-file-conflict",
+          "beatId": 22,
+          "speakerId": "S_j97bqlje2",
+          "method": "ttsSsml / cmu G IH1 T",
+          "processedSha256": "fa0632bc385a177fa949b3ec491cc138db2f205410be14dde7d86aa24e862a6f",
+          "userAcceptedOn": "2026-10-20"
+        },
+        {
+          "project": "multi-agent-file-conflict",
+          "beatId": 23,
+          "speakerId": "S_j97bqlje2",
+          "method": "ttsSsml / cmu G IH1 T",
+          "processedSha256": "f463dd28af1216f5cb7254bb99626c6258098a0512c51cdb36e9fad6962c9096",
+          "userAcceptedOn": "2026-10-20"
+        }
+      ]
     },
     {
       "id": "letter-hyphen",

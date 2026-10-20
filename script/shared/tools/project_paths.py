@@ -45,10 +45,18 @@ def load_beats(project):
 
 def sha256(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-def request_hash(text,tts):
+def request_hash(text,tts,ssml=None):
     # atempo changes processing only; all synthesis parameters participate in cache identity.
     params={k:v for k,v in tts.items() if k!='atempo'}
-    return hashlib.sha256(json.dumps({'text':text,'tts':params},sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+    payload={'text':text,'tts':params}
+    if ssml is not None:
+        import xml.etree.ElementTree as ET
+        if not isinstance(ssml,str) or not ssml.strip():raise ValueError('ttsSsml must be a nonempty SSML string')
+        root=ET.fromstring(ssml)
+        if root.tag!='speak' or ''.join(root.itertext())!=text:
+            raise ValueError('ttsSsml must wrap the unchanged spoken text in <speak>')
+        payload['ssml']=ssml
+    return hashlib.sha256(json.dumps(payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
 def link_public(project):
     for name,destination in [('audio',project/'build'),('images',project/'assets/images')]:

@@ -4,9 +4,12 @@ from pathlib import Path
 from project_paths import project_path,load_config,load_volc_key,load_beats,read_json,write_json,request_hash,sha256
 from pronunciations import report as pronunciation_report
 
-def synth(text,out_path,tts,key):
+def synth(text,out_path,tts,key,ssml=None):
     headers={'X-Api-Key':key,'X-Api-Resource-Id':tts['resourceId'],'X-Api-Connect-Id':str(uuid.uuid4()),'Content-Type':'application/json'}
     body={'user':{'uid':'ergo-video'},'event':100,'namespace':'BidirectionalTTS','req_params':{'text':text,'speaker':tts['speakerId'],'speed_ratio':tts.get('speedRatio',1.0),'audio_params':{'format':tts['audio']['format'],'sample_rate':tts['audio']['sampleRate']}}}
+    if ssml is not None:
+        body['req_params']['ssml']=ssml
+        body['req_params']['additions']=json.dumps({'disable_markdown_filter':False})
     req=urllib.request.Request(tts['apiBase'],data=json.dumps(body).encode(),headers=headers,method='POST')
     temp=Path(out_path).with_suffix('.part');temp.parent.mkdir(parents=True,exist_ok=True)
     try:
@@ -42,7 +45,7 @@ def main():
     record=root/'build/audio-generation.json';records=read_json(record) if record.exists() else {'units':{}}
     ffmpeg=shutil.which('ffmpeg');key=None;counts={'synthesize':0,'process':0,'reuse':0}
     for b in beats:
-        raw=root/'audio/raw'/f"beat_{b['id']:02d}.mp3";out=root/'audio/processed'/raw.name;text=b.get('ttsText') or b['text'];fingerprint=request_hash(text,tts);old=records['units'].get(str(b['id']),{})
+        raw=root/'audio/raw'/f"beat_{b['id']:02d}.mp3";out=root/'audio/processed'/raw.name;text=b.get('ttsText') or b['text'];ssml=b.get('ttsSsml');fingerprint=request_hash(text,tts,ssml);old=records['units'].get(str(b['id']),{})
         valid_raw=raw.exists() and old.get('requestHash')==fingerprint and old.get('rawSha256')==sha256(raw)
         need_raw=args.force or not valid_raw
         if args.retempo and not valid_raw:raise ValueError(f"Unit {b['id']} has missing/stale raw audio; regenerate it before --retempo")
@@ -53,7 +56,7 @@ def main():
         if not ffmpeg:raise FileNotFoundError('ffmpeg is required')
         if need_raw:
             if key is None:key=load_volc_key(cfg)
-            synth(text,raw,tts,key)
+            synth(text,raw,tts,key,ssml)
         if need_process:retempo(raw,out,ffmpeg,tts['atempo'],tts['audio']['sampleRate'])
         records['units'][str(b['id'])]={'requestHash':fingerprint,'rawSha256':sha256(raw),'processedSha256':sha256(out),'atempo':tts['atempo']}
         records['speakerId']=tts['speakerId'];write_json(record,records)

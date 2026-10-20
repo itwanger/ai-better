@@ -22,7 +22,7 @@ date: 2026-05-20
 
 ![跟着王二讲Agent：通过完整题目系统学习，建立Agent时代的完整知识体系](https://cdn.paicoding.com/stutymore/agent-learning-completeness-20260908231154-003540aa.png)
 
-这套题库一共 369 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
+这套题库一共 370 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
 
 每道题都不是孤立的概念解释，而是串联到三个实战项目来回答。
 
@@ -51,6 +51,18 @@ date: 2026-05-20
 ## 01、Agent 基础（43 题）
 
 聚焦 Agent 的定义、工作方式、规划、反思和多 Agent 协作。部分新增题目参考了开源书《深入理解 AI Agent：设计原理与工程实践》（[bojieli/ai-agent-book](https://github.com/bojieli/ai-agent-book)）的章节结构和各章思考题。
+
+### 32. 用户需求模糊时 Agent 怎么澄清？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+先判断缺的信息会不会改变执行结果。缺的是关键参数，比如订机票不知道日期、改代码不知道改哪个模块，必须反问；有合理默认值，或者能用工具自己查到的，就不要打扰用户，先读代码库找到相关文件，再带着具体选项去问。反问要一次问全，并给出选项，不要一轮只问一个问题。实现上把“向用户提问”也做成一个工具，模型调用它时 Agent Loop 挂起，用户回答后作为工具结果返回，Claude Code 的 AskUserQuestion 就是这样实现的。没法反问的后台任务，就把自己做出的假设写进输出，让用户事后确认。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn1qJcx2oew7bRqCc5GHO8BP) · [查看图文解析](./agent-requirement-clarification.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7696859780668755234)
+
+🟢 基础 | `→ PaiCLI`
 
 ### 35. 权限模式（Permission Mode）是什么？
 
@@ -120,6 +132,8 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 
 完整答案：[查看图文解析](./agent-tool-failure-timeout.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnA6B9PeymaJVRbbmhqnq4rc)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1hepg6gE1T/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7692321158200331555)
 
 🟡 进阶 | `→ PaiCLI / PaiAgent`
@@ -131,6 +145,8 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 按成本分层。第一层用规则和关键词拦截确定性高的请求，比如“查订单”直接进入订单 Agent；第二层用小尺寸模型或 Embedding 分类器做意图分类，输出固定的枚举值和置信度；置信度低于阈值或者同时命中多个意图时，再交给主模型判断，主模型也判断不了就反问用户。路由的输出必须是结构化的枚举，不能让模型自由发挥。路由错了要有兜底，子 Agent 发现任务不属于自己时返回“不匹配”，由主 Agent 重新分发，同时限制重新分发的次数，避免子 Agent 之间互相推诿。效果用标注好的测试集评估，按意图分别统计准确率和召回率。
 
 完整答案：[查看图文解析](./agent-intent-routing.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn9EwvtD7jxyddtu6vp7pwG9)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1Dvpg6zE9Z/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7691947967841864960)
 
@@ -465,14 +481,6 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 
 🟢 基础 | `→ PaiCLI`
 
-### 32. 用户需求模糊时 Agent 怎么澄清？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-先判断缺的信息会不会改变执行结果。缺的是关键参数，比如订机票不知道日期、改代码不知道改哪个模块，必须反问；有合理默认值，或者能用工具自己查到的，就不要打扰用户，先读代码库找到相关文件，再带着具体选项去问。反问要一次问全，并给出选项，不要一轮只问一个问题。实现上把“向用户提问”也做成一个工具，模型调用它时 Agent Loop 挂起，用户回答后作为工具结果返回，Claude Code 的 AskUserQuestion 就是这样实现的。没法反问的后台任务，就把自己做出的假设写进输出，让用户事后确认。
-
-🟢 基础 | `→ PaiCLI`
-
 ### 33. Agent 执行跑偏怎么拉回来？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
@@ -540,9 +548,19 @@ LangChain 在 2025 年 10 月的博客《Agent Frameworks, Runtimes, and Harness
 ### 43. Computer Use 是什么？说说它的原理
 🟡 中等 | `AI / 大模型` | → PaiAgent / PaiCLI
 
-## 热点解读（11 题）
+## 热点解读（12 题）
 
 模型发布和行业事件的快速拆解，面试聊到最新动态时用得上。
+
+### DeepSeek-V4.1-Flash-1017 真来了，这次是真滴强。
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+拆解 1017 的后训练更新、基准对比、许愿式编程和三个本地案例，以及 Search & Fetch 的接入信息。
+
+完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnT0hadTTvylXP4PWRxu2RWh) · [阅读全文《DeepSeek 1017 更新》](./deepseek-v4-1-flash-1017.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7697933506416037146)
 
 ### REA 保姆级教程：DeepSeek Harness 实操
 
@@ -602,6 +620,8 @@ Kolibri 用 78B 总参数、3.46B 激活参数降低每次推理的计算量，�
 从 Prefill、Decode 和 KV Cache 的成本差异，理解百万 Token 输出的工程难点；结合长代码修改、安全攻防和 CodeMender 的工作方式，拆解 Gemini 4 Argon 的能力与使用边界。
 
 完整内容：[阅读全文《Gemini 4 Argon 解读》](./gemini-4-argon.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnqR0RwJxlmp9OctEP11Vuhf)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV18vpg6zEox/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7691703611381894415)
 
@@ -823,6 +843,15 @@ FIFO 最大的坑是把重要但不常用的记忆淘汰掉了。
 
 聚焦模型之外保障 Agent 稳定运行的工程系统，包括循环、Skills、评测、安全、权限、可观测性、成本、容错和发布。
 
+### 92. Agent 系统怎么做容错？单点故障怎么处理？
+工具调用失败要有重试和降级策略，模型 API 挂了要能自动切换到备用模型，消息队列保证异步任务不丢。PaiAgent 的节点执行失败会把 status 设为 FAILED 并记录 errorMessage，上层可以根据失败类型决定重试还是跳过。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnTfg8ll63Eha14Jn1c3B3zc) · [查看图文解析](./deepseek-outage-agent-fallback.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7697192412568980763)
+
+🟡 进阶 | `→ PaiAgent FAILED 状态 + 错误记录`
+
 ### 67. 什么是 Loop Engineering？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -988,11 +1017,6 @@ Skill 是把某个专业领域的最佳实践封装成结构化知识包，Agent
 大模型 API 按 token 计费，成本失控是真实风险。控制手段：设用户级别的 token 配额、用小模型做初筛（PaiCLI 支持多模型切换）、Prompt Cache 减少重复计算、批量请求合并。派聪明就设了聊天消息每分钟 30 次的速率限制。
 
 🟡 进阶 | `→ PaiCLI 多模型切换 / 派聪明速率限制`
-
-### 92. Agent 系统怎么做容错？单点故障怎么处理？
-工具调用失败要有重试和降级策略，模型 API 挂了要能自动切换到备用模型，消息队列保证异步任务不丢。PaiAgent 的节点执行失败会把 status 设为 FAILED 并记录 errorMessage，上层可以根据失败类型决定重试还是跳过。
-
-🟡 进阶 | `→ PaiAgent FAILED 状态 + 错误记录`
 
 ### 93. 数据标注在 Agent 项目中有多重要？怎么做？
 评测数据集需要人工标注“标准答案”，Prompt 优化需要标注“好回答 vs 坏回答”，微调需要高质量的指令-回答对。标注质量直接决定了模型效果的上限。可以用 AI 辅助标注（先让模型生成初版，人工校正），效率能提升 3-5 倍。
@@ -1768,6 +1792,8 @@ DeepSeek V4 Flash 正式版只有 13B 激活参数，V4 Pro 有 49B，架构没�
 
 完整答案：[查看图文解析《9 个提示词技巧》](./nine-prompting-techniques-for-better-llm.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnf6Xkp0w5bQ8zphEVzWesOd)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1uopu6vEPg/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7692668076902468879)
 
 🟡 进阶 | `→ PaiCLI Prompt 分层覆盖机制`
@@ -2037,6 +2063,15 @@ PaiCLI 实现了一套完整的安全机制：HITL（Human-in-the-Loop）人工�
 
 聚焦预训练、SFT、RLHF、DPO、LoRA、PEFT、量化、蒸馏、数据集与训练资源。
 
+### 337. 什么是模型蒸馏（Knowledge Distillation）？它和模型量化有什么区别？
+比较黑盒、白盒和在轨蒸馏，区分蒸馏、量化和 SFT，并说明蒸馏授权和数据来源的边界。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnUvHeHnlzDKLdM17o2acLOc) · [查看图文解析](./what-is-model-distillation.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7697583864511761698)
+
+🟢 简单 | `大模型 / 模型蒸馏 / 模型量化` | → PaiAgent / PaiCLI 模型工程面试扩展
+
 ### 318. 大模型预训练完了，为什么还要做强化学习？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
@@ -2114,9 +2149,6 @@ PPO 需要先训一个奖励模型，再用奖励模型的分数做策略梯度�
 
 ### 336. 如何构建高质量的 SFT 微调数据集？数据质量和数量哪个更重要？
 🟢 简单 | `大模型 / SFT / 数据集构建` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 337. 什么是模型蒸馏（Knowledge Distillation）？它和模型量化有什么区别？
-🟢 简单 | `大模型 / 模型蒸馏 / 模型量化` | → PaiAgent / PaiCLI 模型工程面试扩展
 
 ### 338. 大模型的训练和推理分别是什么？它们在计算资源需求上有什么区别？
 🟢 简单 | `大模型 / 训练 / 推理 / 资源评估` | → PaiAgent / PaiCLI 模型工程面试扩展
@@ -2265,7 +2297,7 @@ Agent 这一轮变化和以往不太一样。以前的技术迭代，学一门�
 
 Alan Kay 说过一句话，「预测未来最好的办法就是去创造它」。我觉得这话放在今天特别合适。与其等着被 Agent 浪潮推着走，不如自己先把原理搞透，把项目跑通，把面试里会被问到的每一个点都准备好。
 
-所以我们选择了最笨但最扎实的方式。369 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
+所以我们选择了最笨但最扎实的方式。370 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
 
 我始终相信一件事，技术的价值不在于它有多新，而在于你是否真正理解它、用过它、能把它讲清楚。这套题库要做的就是帮你到达这个状态。
 
