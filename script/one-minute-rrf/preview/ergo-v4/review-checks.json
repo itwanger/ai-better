@@ -1,0 +1,99 @@
+{
+  "video": {
+    "file": "/Users/itwanger/Documents/GitHub/ai-better/script/one-minute-rrf/preview/ergo-v4/rrf-ergo-v4-review.mp4",
+    "sizeBytes": 4365524,
+    "sha256": "85cb0a5db990ae2ecf9a0a413cc4463e9746686405ef2de3ab3a6ccecb182618",
+    "durationSec": 66.133333,
+    "frames": 1984,
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "fullDecodeErrors": false,
+    "audioSamplesCompared": [
+      {
+        "startSec": 2.645166666666667,
+        "waveformCorrelation": 0.9999967335509666
+      },
+      {
+        "startSec": 9.258208333333334,
+        "waveformCorrelation": 0.9999945902401178
+      },
+      {
+        "startSec": 22.48425,
+        "waveformCorrelation": 0.999991870509365
+      },
+      {
+        "startSec": 35.71025,
+        "waveformCorrelation": 0.9999752838057427
+      },
+      {
+        "startSec": 50.258916666666664,
+        "waveformCorrelation": 0.9999892897098794
+      },
+      {
+        "startSec": 64.14625,
+        "waveformCorrelation": 0.9999951265934678
+      }
+    ]
+  },
+  "approvedBackup": {
+    "ai-better": "e0d1ef044bf4449d743b2265c51e4e5de208481f",
+    "toBeBetterJavaer": "9d6627245ed4e01fd2dab04bc81cdf7493b463fd",
+    "zip": "/Users/itwanger/Downloads/rrf-huashu-v3-approved-before-ergo-palette-20261020.zip"
+  },
+  "preservedInputs": {
+    "baseline": "e0d1ef0",
+    "identicalToBaseline": {
+      "one-minute/rrf.md": "ad53be8a570cab36c605ab052dfdaae0e8645017ca8ae2d35c8f169fcd37ece9",
+      "script/one-minute-rrf/script.md": "25b94efee9ddb8f7b0fb8f70ac584c6bcf37824fcabf5f23b3dcc69bb472ad96",
+      "script/one-minute-rrf/spoken.txt": "25b94efee9ddb8f7b0fb8f70ac584c6bcf37824fcabf5f23b3dcc69bb472ad96",
+      "script/one-minute-rrf/beats.json": "71795195219cc7a7497847b1779ac3cc5761fae377d6b6c14f5219d9222ce857",
+      "script/one-minute-rrf/narration-lock.json": "738f76c1de01f69fcdf9e0b303b2f3abff354dcf77ad7784ad769e4945545baa",
+      "script/one-minute-rrf/project.json": "5eb986237db6ec80518fff0d11583633c0389b94bd203898b6bef46aa7b5a1a0",
+      "script/one-minute-rrf/build/voiceover.wav": "ec43cc17725b36405ee90929396e823e68e8fbc0c9b61bc473a4e778cad81274",
+      "script/one-minute-rrf/build/voiceover.mp3": "76b2bbba6f33a488979dddbca75de9e7a399ab2971dc17e070cf191d933d72a3",
+      "script/one-minute-rrf/build/voiceover-with-effects.wav": "ec43cc17725b36405ee90929396e823e68e8fbc0c9b61bc473a4e778cad81274",
+      "script/one-minute-rrf/assets/references/ch1-phrase-timing.json": "5160184cd824bd829b4c344eff844e7c04bc8b9481f78e4d02a05510598e880e"
+    }
+  },
+  "palette": {
+    "source": "script/shared/remotion/components/index.tsx::C",
+    "import": "../../../shared/remotion/components",
+    "background": "C.bg",
+    "text": "C.ink",
+    "A": "C.rust",
+    "B": "C.blue",
+    "C": "C.ink",
+    "subtitle": "C.ink background / C.card text",
+    "green": "reserved for correct/pass"
+  },
+  "paletteSourceSha256": "9a0b0a54608263308d0658d2a05acfd665fbf24373fc5d2a5a5c6b00c4b490da",
+  "sceneSha256": "95d63d196d50cd149d4e2360859b3c95c8f4cda287e54fa725c8c42e59c0d381",
+  "removedParaphrases": [
+    "怎么合成一份榜单？",
+    "分数的尺子不一样",
+    "直接相加 → 大分值主导",
+    "两路共同认可的文档，升到前面",
+    "只看名次，不读正文"
+  ],
+  "retained": [
+    "retrieval lane labels",
+    "document IDs",
+    "rank numbers",
+    "formula",
+    "reciprocal scores",
+    "all 26 original subtitle groups",
+    "approved transforms/camera and ranking movements"
+  ],
+  "studio": {
+    "url": "http://localhost:3211/OneMinuteRrf",
+    "reusedDetachedService": true,
+    "normalPlaybackObserved": true,
+    "muted": false,
+    "proof": "preview/ergo-v4/studio-proof.png"
+  },
+  "independentReview": "审片/ergo-v4-independent.md",
+  "phase": "4 preview revision; formal output remains next stage"
+}

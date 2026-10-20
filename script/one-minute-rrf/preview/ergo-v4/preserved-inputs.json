@@ -1,0 +1,15 @@
+{
+  "baseline": "e0d1ef0",
+  "identicalToBaseline": {
+    "one-minute/rrf.md": "ad53be8a570cab36c605ab052dfdaae0e8645017ca8ae2d35c8f169fcd37ece9",
+    "script/one-minute-rrf/script.md": "25b94efee9ddb8f7b0fb8f70ac584c6bcf37824fcabf5f23b3dcc69bb472ad96",
+    "script/one-minute-rrf/spoken.txt": "25b94efee9ddb8f7b0fb8f70ac584c6bcf37824fcabf5f23b3dcc69bb472ad96",
+    "script/one-minute-rrf/beats.json": "71795195219cc7a7497847b1779ac3cc5761fae377d6b6c14f5219d9222ce857",
+    "script/one-minute-rrf/narration-lock.json": "738f76c1de01f69fcdf9e0b303b2f3abff354dcf77ad7784ad769e4945545baa",
+    "script/one-minute-rrf/project.json": "5eb986237db6ec80518fff0d11583633c0389b94bd203898b6bef46aa7b5a1a0",
+    "script/one-minute-rrf/build/voiceover.wav": "ec43cc17725b36405ee90929396e823e68e8fbc0c9b61bc473a4e778cad81274",
+    "script/one-minute-rrf/build/voiceover.mp3": "76b2bbba6f33a488979dddbca75de9e7a399ab2971dc17e070cf191d933d72a3",
+    "script/one-minute-rrf/build/voiceover-with-effects.wav": "ec43cc17725b36405ee90929396e823e68e8fbc0c9b61bc473a4e778cad81274",
+    "script/one-minute-rrf/assets/references/ch1-phrase-timing.json": "5160184cd824bd829b4c344eff844e7c04bc8b9481f78e4d02a05510598e880e"
+  }
+}

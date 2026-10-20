@@ -29,5 +29,17 @@
     "sample scenes",
     "sample videos",
     "upstream voice service"
-  ]
+  ],
+  "palette": {
+    "source": "script/shared/remotion/components/index.tsx::C",
+    "import": "../../../shared/remotion/components",
+    "background": "C.bg",
+    "text": "C.ink",
+    "A": "C.rust",
+    "B": "C.blue",
+    "C": "C.ink",
+    "subtitle": "C.ink background / C.card text",
+    "green": "reserved for correct/pass"
+  },
+  "revision": "ergo-v4: preserve approved motion, use Ergo palette and remove subtitle paraphrases"
 }

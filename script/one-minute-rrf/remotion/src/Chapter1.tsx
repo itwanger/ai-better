@@ -2,9 +2,11 @@ import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {AbsoluteFill, Audio, staticFile, useCurrentFrame, delayRender, continueRender, cancelRender} from 'remotion';
 import timing from '../../assets/references/ch1-phrase-timing.json';
 import {MO, DG, CAM} from './huashu/runtime';
+import {C as ERGO} from '../../../shared/remotion/components';
 
 // The scene is new; geometry, write-on and camera algorithms come from huashu.
-const C = {ink:'#F5F4EE',muted:'#A1A19C',dim:'#454640',A:'#F6BA62',B:'#79D5A4',C:'#66BDE3',bad:'#ED8173'};
+// 二哥共享色板；文档身份固定，绿色留给正确/通过状态。
+const C = {bg:ERGO.bg,card:ERGO.card,ink:ERGO.ink,muted:ERGO.gray,dim:ERGO.faint,A:ERGO.rust,B:ERGO.blue,C:ERGO.ink,bad:ERGO.rust};
 type Id = 'A'|'B'|'C';
 const ids:Id[]=['A','B','C'];
 const F='"RrfSans"';
@@ -49,13 +51,11 @@ function drawOpening(c:CanvasRenderingContext2D,f:number){
  alpha(c,q(f,50,88),()=>text(c,'向量检索',1380,170,46));
  path(c,[[820,460],[1100,460]],q(f,130,155),C.dim,3);
  alpha(c,arrange,()=>text(c,'?',960,425,100,C.ink,'center',true));
- alpha(c,q(f,140,175),()=>DG.write(c,'怎么合成一份榜单？',960,830,55,q(f,140,175),{col:C.ink}));
  });
 }
 function drawRaw(c:CanvasRenderingContext2D,f:number){
  const enter=q(f,192,216), exit=q(f,466,492);
  alpha(c,enter*(1-exit),()=>{
- text(c,'分数的尺子不一样',960,160,61);
  const growth=q(f,216,265),vec=q(f,270,318),kw=q(f,340,390),sum=q(f,410,445);
  const x=410,y1=390,y2=660;
  text(c,'向量检索',225,y1,40,C.muted);text(c,'关键词检索',225,y2,40,C.muted);
@@ -67,7 +67,7 @@ function drawRaw(c:CanvasRenderingContext2D,f:number){
  path(c,[[xx,y2+48],[xx,y2+64]],growth,C.dim,2);
  }
  text(c,'0',x,y1+100,32,C.muted,'center',true);text(c,Number(lerp(1,18,sum).toFixed(sum>0&&sum<1?1:0)).toString(),1460,y1+100,32,C.muted,'center',true);
- text(c,'0',x,y2+100,32,C.muted,'center',true);text(c,'没有固定上限 →',1490,y2+100,32,C.muted);
+ text(c,'0',x,y2+100,32,C.muted,'center',true);text(c,'无上限 →',1490,y2+100,32,C.muted);
  // One hypothetical document B has two scores. Widths use a shared raw scale.
  const vw=1050*.92*vec/lerp(1,18,sum),kwW=1050*16/18*kw;
  DG.shape(c,DG.rectPts(x+vw/2,y1,vw,60),{fill:C.B});
@@ -76,9 +76,8 @@ function drawRaw(c:CanvasRenderingContext2D,f:number){
  alpha(c,kw,()=>{text(c,'B',x-55,y2,50,C.B,'center',true);text(c,'16',x+kwW+70,y2,48,C.B,'center',true);});
  alpha(c,sum,()=>{
  path(c,[[400,505],[1460,505]],1,C.bad,2);
- text(c,'直接相加 → 大分值主导',960,833,48,C.bad);
  });
- text(c,'示意原始分数 · 不是实测结果',960,74,25,C.muted);
+ text(c,'示意分数',960,74,25,C.muted);
  });
 }
 function drawRule(c:CanvasRenderingContext2D,f:number){
@@ -97,13 +96,13 @@ function drawRule(c:CanvasRenderingContext2D,f:number){
 
  const pts=DG.morph(DG.circlePts(300,530,60,80),DG.rectPts(1400,530,280,62,80),morph);
  alpha(c,morph*.22,()=>{DG.shape(c,DG.circlePts(300,530,60,80),{stroke:C.B,lw:2});text(c,'1',300,530,74,C.B,'center',true);});
- DG.shape(c,pts,{fill:`rgba(121,213,164,${lerp(.07,.85,morph)})`,stroke:C.B,lw:3});
+ DG.shape(c,pts,{fill:DG.rgba(C.B,lerp(.07,.85,morph)),stroke:C.B,lw:3});
  alpha(c,1-q(f,750,795),()=>text(c,'1',300,530,74,C.B,'center',true));
  text(c, 'rank',300,680,48,C.muted,'center',true);
  path(c,[[410,530],[595,530]],q(f,723,770),C.dim,3);
  alpha(c,q(f,755,790),()=>frac(c,den>.01?'60 + 1':'k + rank',850,360,68,C.ink,q(f,755,797)));
  alpha(c,den,()=>text(c,'0.0164',1690,530,55,C.B,'center',true));
- alpha(c,q(f,865,897),()=>text(c,'k 通常取 60',960,730,43,C.muted));
+ alpha(c,q(f,865,897),()=>text(c,'k = 60',960,730,43,C.muted,'center',true));
  alpha(c,missing,()=>{
  doc(c,'A',370,820,.5,.4);text(c,'没有命中',530,820,35,C.muted);
  path(c,[[650,820],[760,820]],1,C.dim,2);text(c,'0',830,820,53,C.muted,'center',true);
@@ -128,7 +127,6 @@ function drawFusion(c:CanvasRenderingContext2D,f:number){
  text(c,'关键词检索',350,160,42);text(c,'向量检索',850,160,42);text(c,'融合分',1435,160,42);
  text(c,'示例排名',960,65,27,C.muted);
  });
- alpha(c,q(f,1696,1720),()=>text(c,'两路共同认可的文档，升到前面',960,150,54));
  const sourceAlpha=1-q(f,1672,1696);
  const position=(id:Id)=>{
   if(id==='A'){
@@ -202,19 +200,18 @@ function drawFusion(c:CanvasRenderingContext2D,f:number){
  if(id==='A')alpha(c,q(f,1355,1390),()=>text(c,'单路命中',960,245,35,C.muted));
  }
  alpha(c,q(f,1805,1835)*(1-out),()=>{
- DG.brace(c,1435,305,550,{p:q(f,1805,1835),col:C.muted,lw:2,depth:16});
- text(c,'两路相加',1615,428,40,C.muted);
- text(c,'单路第一',1615,680,40,C.A);
+ DG.brace(c,1435,305,550,{p:q(f,1805,1835),col:DG.rgba(C.muted,1-out),lw:2,depth:16});
+ text(c,'2 路命中',1615,428,40,C.muted);
+ text(c,'1 路命中',1615,680,40,C.A);
  });
  alpha(c,out,()=>{
- text(c,'只看名次，不读正文',960,810,46,C.muted);
- alpha(c,q(f,1924,1956),()=>text(c,'多路检索的快速粗排',960,230,37,C.B));
+ alpha(c,q(f,1924,1956),()=>text(c,'粗排',960,230,37,C.B));
  });
  c.restore();
  });
 }
 function draw(c:CanvasRenderingContext2D,f:number){
- c.clearRect(0,0,1920,1080);c.fillStyle='#000';c.fillRect(0,0,1920,1080);
+ c.clearRect(0,0,1920,1080);c.fillStyle=C.bg;c.fillRect(0,0,1920,1080);
  c.save();c.beginPath();c.rect(0,0,1920,900);c.clip();
  if(f<216)drawOpening(c,f);
  if(f>=192&&f<492)drawRaw(c,f);
@@ -235,9 +232,11 @@ export const Chapter1:React.FC=()=>{
  },[handle]);
  useLayoutEffect(()=>{if(loaded&&canvas.current){const c=canvas.current.getContext('2d');if(c){draw(c,f);if(!released.current){released.current=true;continueRender(handle);}}}},[f,loaded,handle]);
  const subtitle=timing.subtitles.find(s=>f>=s.startFrame&&f<s.endFrame)?.text??'';
- return <AbsoluteFill style={{backgroundColor:'#000',color:C.ink}}>
+ return <AbsoluteFill style={{backgroundColor:C.bg,color:C.ink}}>
  <Audio src={staticFile('audio/voiceover.wav')}/>
  <canvas ref={canvas} width={1920} height={1080} style={{width:'100%',height:'100%'}}/>
- <div style={{position:'absolute',left:100,right:100,top:948,height:80,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:F,fontSize:38,fontWeight:500,lineHeight:1.45,textAlign:'center'}}>{subtitle}</div>
+ <div style={{position:'absolute',left:100,right:100,top:948,height:80,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:F,fontSize:38,fontWeight:500,lineHeight:1.45,textAlign:'center'}}>
+  <div style={{background:C.ink,color:C.card,padding:'14px 30px',borderRadius:18,whiteSpace:'nowrap'}}>{subtitle}</div>
+ </div>
  </AbsoluteFill>;
 };
