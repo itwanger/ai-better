@@ -1,0 +1,39 @@
+{
+  "file": "/Users/itwanger/Documents/GitHub/ai-better/script/one-minute-rrf/preview/layout-v5/rrf-layout-v5-review.mp4",
+  "sizeBytes": 4341421,
+  "sha256": "014bdf1b9397d51f7059c7dbc62f4f428e2b823d89b3d084ed8426f91fe7483f",
+  "durationSec": 66.133333,
+  "frames": 1984,
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "videoCodec": "h264",
+  "audioCodec": "aac",
+  "fullDecodeErrors": false,
+  "audioSamplesCompared": [
+    {
+      "startSec": 2.645166666666667,
+      "waveformCorrelation": 0.9999967335509666
+    },
+    {
+      "startSec": 9.258208333333334,
+      "waveformCorrelation": 0.9999945902401178
+    },
+    {
+      "startSec": 22.48425,
+      "waveformCorrelation": 0.999991870509365
+    },
+    {
+      "startSec": 35.71025,
+      "waveformCorrelation": 0.9999752838057427
+    },
+    {
+      "startSec": 50.258916666666664,
+      "waveformCorrelation": 0.9999892897098794
+    },
+    {
+      "startSec": 64.14625,
+      "waveformCorrelation": 0.9999951265934678
+    }
+  ]
+}

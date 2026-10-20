@@ -83,31 +83,45 @@ function drawRaw(c:CanvasRenderingContext2D,f:number){
 function drawRule(c:CanvasRenderingContext2D,f:number){
  const enter=q(f,477,495),end=q(f,955,982);
  alpha(c,enter*(1-end),()=>{
- const move=q(f,616,662);
- text(c,'RRF',lerp(960,375,move),lerp(370,190,move),lerp(148,76,move),C.ink,'center',true);
- alpha(c,q(f,492,530)*(1-move),()=>text(c,'Reciprocal Rank Fusion',960,520,53,C.muted,'center',true));
- alpha(c,q(f,570,614)*(1-move),()=>DG.write(c,'倒数排名融合',960,630,65,q(f,570,614),{col:C.ink}));
- alpha(c,move,()=>{
- text(c,'原始分数',1070,190,38,C.muted);path(c,[[950,188],[1190,188]],q(f,640,674),C.bad,4);
- text(c,'名次',1440,190,45,C.B);
- });
- if(f>=620){
- const morph=q(f,746,817),den=q(f,815,865),missing=q(f,905,945);
-
- const pts=DG.morph(DG.circlePts(300,530,60,80),DG.rectPts(1400,530,280,62,80),morph);
- alpha(c,morph*.22,()=>{DG.shape(c,DG.circlePts(300,530,60,80),{stroke:C.B,lw:2});text(c,'1',300,530,74,C.B,'center',true);});
- DG.shape(c,pts,{fill:DG.rgba(C.B,lerp(.07,.85,morph)),stroke:C.B,lw:3});
- alpha(c,1-q(f,750,795),()=>text(c,'1',300,530,74,C.B,'center',true));
- text(c, 'rank',300,680,48,C.muted,'center',true);
- path(c,[[410,530],[595,530]],q(f,723,770),C.dim,3);
- alpha(c,q(f,755,790),()=>frac(c,den>.01?'60 + 1':'k + rank',850,360,68,C.ink,q(f,755,797)));
- alpha(c,den,()=>text(c,'0.0164',1690,530,55,C.B,'center',true));
- alpha(c,q(f,865,897),()=>text(c,'k = 60',960,730,43,C.muted,'center',true));
- alpha(c,missing,()=>{
- doc(c,'A',370,820,.5,.4);text(c,'没有命中',530,820,35,C.muted);
- path(c,[[650,820],[760,820]],1,C.dim,2);text(c,'0',830,820,53,C.muted,'center',true);
- });
- }
+  const move=q(f,616,662);
+  text(c,'RRF',960,lerp(370,150,move),lerp(148,65,move),C.ink,'center',true);
+  alpha(c,q(f,492,530)*(1-move),()=>text(c,'Reciprocal Rank Fusion',960,520,53,C.muted,'center',true));
+  alpha(c,q(f,570,614)*(1-move),()=>DG.write(c,'倒数排名融合',960,630,65,q(f,570,614),{col:C.ink}));
+  if(f<620)return;
+  // One aligned computation, with the exception using the same input/output columns.
+  const rankX=400,formulaX=960,scoreX=1460,row=480;
+  const reveal=q(f,640,697),morph=q(f,790,865),den=q(f,840,873),missing=q(f,905,945);
+  const arrow=(x0:number,x1:number,y:number,p:number)=>{
+   path(c,[[x0,y],[x1,y]],p,C.dim,3);
+   if(p>.75)path(c,[[x1-16,y-12],[x1,y],[x1-16,y+12]],(p-.75)*4,C.dim,3);
+  };
+  alpha(c,move,()=>text(c,'名次',rankX,290,38,C.muted));
+  alpha(c,q(f,755,790),()=>text(c,'倒数计分',formulaX,290,38,C.muted));
+  alpha(c,q(f,810,850),()=>text(c,'本路贡献',scoreX,290,38,C.muted));
+  alpha(c,reveal,()=>{
+   DG.shape(c,DG.circlePts(rankX,row,62,80),{fill:DG.rgba(C.B,.07),stroke:C.B,lw:3});
+   text(c,'1',rankX,row,78,C.B,'center',true);
+  });
+  arrow(520,760,row,q(f,755,790));
+  alpha(c,q(f,790,820),()=>frac(c,den>.01?'60 + 1':'k + rank',formulaX,row-30,72,C.ink,q(f,790,825)));
+  alpha(c,q(f,865,897),()=>text(c,'k = 60',formulaX,615,36,C.muted,'center',true));
+  arrow(1160,1310,row,q(f,823,865));
+  if(morph>0){
+   const source=DG.circlePts(rankX,row,62,80);
+   const below=DG.rectPts(650,665,100,44,80),across=DG.rectPts(1190,665,180,44,80);
+   const target=DG.rectPts(scoreX,570,280,48,80);
+   const pts=morph<.3?DG.morph(source,below,MO.smooth(morph/.3)):
+    morph<.7?DG.morph(below,across,MO.smooth((morph-.3)/.4)):
+    DG.morph(across,target,MO.smooth((morph-.7)/.3));
+   DG.shape(c,pts,{fill:DG.rgba(C.B,.85),stroke:C.B,lw:3});
+  }
+  alpha(c,q(f,852,882),()=>text(c,'0.0164',scoreX,row,76,C.B,'center',true));
+  alpha(c,missing,()=>{
+   doc(c,'A',rankX,770,.65,.75);
+   text(c,'未命中',rankX+145,770,34,C.muted);
+   arrow(675,1310,770,missing);
+   text(c,'0',scoreX,770,70,C.muted,'center',true);
+  });
  });
 }
 const rowY=(id:Id)=>340+ids.indexOf(id)*170;
@@ -141,8 +155,8 @@ function drawFusion(c:CanvasRenderingContext2D,f:number){
  for(let lane=0;lane<2;lane++){
  if(lane===1&&id==='A'){
  alpha(c,q(f,1208,1234)*sourceAlpha,()=>{
- path(c,[[807,627],[893,627],[893,733],[807,733],[807,627]],1,C.dim,2);
- text(c,'未命中',850,680,29,C.muted);text(c,'0',1020,680,40,C.muted,'center',true);
+ doc(c,'A',850,680,.9,.65);
+ text(c,'未命中',850,765,29,C.muted);text(c,'0',1020,680,40,C.muted,'center',true);
  });continue;
  }
  const p=q(f,starts[id]+lane*18,ends[id]+lane*8),sx=lane===0?350:850,sy=srcY(id,lane);
@@ -200,7 +214,10 @@ function drawFusion(c:CanvasRenderingContext2D,f:number){
  if(id==='A')alpha(c,q(f,1355,1390),()=>text(c,'单路命中',960,245,35,C.muted));
  }
  alpha(c,q(f,1805,1835)*(1-out),()=>{
- DG.brace(c,1435,305,550,{p:q(f,1805,1835),col:DG.rgba(C.muted,1-out),lw:2,depth:16});
+ // Reflect the upstream left brace so it opens toward the grouped B/C rows.
+ c.save();c.translate(1435*2,0);c.scale(-1,1);
+ DG.brace(c,1435,305,550,{p:q(f,1805,1835),col:DG.rgba(C.muted,1-out),lw:3,depth:16});
+ c.restore();
  text(c,'2 路命中',1615,428,40,C.muted);
  text(c,'1 路命中',1615,680,40,C.A);
  });

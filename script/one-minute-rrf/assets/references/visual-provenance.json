@@ -41,5 +41,10 @@
     "subtitle": "C.ink background / C.card text",
     "green": "reserved for correct/pass"
   },
-  "revision": "ergo-v4: preserve approved motion, use Ergo palette and remove subtitle paraphrases"
+  "revision": "layout-v5: aligned rank-to-score flow, persistent missed document identity, right-side grouping brace",
+  "layoutFixes": {
+    "rule": "three aligned columns with arrows; k follows formula; missing case shares input/output columns",
+    "missedVectorA": "document A kept, no rank, status below, zero contribution beside it",
+    "grouping": "mirror upstream DG.brace horizontally so it opens left toward B/C; text remains upright"
+  }
 }
