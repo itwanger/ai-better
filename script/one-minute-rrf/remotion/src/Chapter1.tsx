@@ -1,226 +1,243 @@
-import React from 'react';
-import {AbsoluteFill, Audio, staticFile, useCurrentFrame, interpolate, Easing} from 'remotion';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {AbsoluteFill, Audio, staticFile, useCurrentFrame, delayRender, continueRender, cancelRender} from 'remotion';
 import timing from '../../assets/references/ch1-phrase-timing.json';
+import {MO, DG, CAM} from './huashu/runtime';
 
-// One identity per document; one visual language through the entire explanation.
-const P={bg:'#111827',paper:'#FAF7EE',muted:'#A4B2C6',line:'#344358',kw:'#69D6BA',vec:'#87AAFF',A:'#F6B96B',B:'#69D6BA',C:'#C5AEFF',red:'#FF817B'};
-const FACE='"PingFang SC", "Microsoft YaHei", sans-serif';
-const MONO='"SF Mono", "Menlo", monospace';
-const docs=['A','B','C'] as const;
-type DocId=typeof docs[number];
-const tint=(id:DocId)=>P[id];
-const clamp=(n:number)=>Math.max(0,Math.min(1,n));
-const progress=(f:number,start:number,d=22)=>interpolate(f,[start,start+d],[0,1],{extrapolateLeft:'clamp',extrapolateRight:'clamp',easing:Easing.inOut(Easing.cubic)});
-const mix=(a:number,b:number,p:number)=>a+(b-a)*p;
-const visibility=(f:number,start:number,end=2100)=>progress(f,start,14)*(1-progress(f,end-14,14));
-const Text:React.FC<{x:number;y:number;size?:number;fill?:string;weight?:number;anchor?:'start'|'middle'|'end';mono?:boolean;children:React.ReactNode;opacity?:number}> =({x,y,size=32,fill=P.paper,weight=600,anchor='start',mono=false,children,opacity=1})=><text x={x} y={y} fontSize={size} fill={fill} fontWeight={weight} fontFamily={mono?MONO:FACE} textAnchor={anchor} opacity={opacity}>{children}</text>;
-const Rule:React.FC<{x1:number;y1:number;x2:number;y2:number;color?:string;opacity?:number}> =({x1,y1,x2,y2,color=P.line,opacity=1})=><line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={2} opacity={opacity}/>;
-const DocIcon:React.FC<{x:number;y:number;id:DocId;scale?:number}> =({x,y,id,scale=1})=><g transform={`translate(${x} ${y}) scale(${scale})`}><rect width={50} height={64} rx={7} fill={tint(id)}/><path d="M32 0 L50 18 L32 18 Z" fill={P.bg} opacity={.24}/><text x={25} y={45} textAnchor="middle" fontSize={30} fill={P.bg} fontWeight={850} fontFamily={MONO}>{id}</text></g>;
-const Fraction:React.FC<{x:number;y:number;denominator:string;size?:number;fill?:string}> =({x,y,denominator,size=50,fill=P.paper})=>{
- const width=Math.max(size*1.8,denominator.length*size*.56);
- return <g><Text x={x} y={y-20} size={size} fill={fill} anchor="middle" mono>1</Text><line x1={x-width/2} x2={x+width/2} y1={y-6} y2={y-6} stroke={fill} strokeWidth={3}/><Text x={x} y={y+size*.96} size={size} fill={fill} anchor="middle" mono>{denominator}</Text></g>;
+// The scene is new; geometry, write-on and camera algorithms come from huashu.
+const C = {ink:'#F5F4EE',muted:'#A1A19C',dim:'#454640',A:'#F6BA62',B:'#79D5A4',C:'#66BDE3',bad:'#ED8173'};
+type Id = 'A'|'B'|'C';
+const ids:Id[]=['A','B','C'];
+const F='"RrfSans"';
+const M='"CMU-rm"';
+const lerp=(a:number,b:number,p:number)=>a+(b-a)*p;
+const q=(f:number,a:number,b:number)=>MO.smooth(MO.seg(f,a,b));
+const alpha=(c:CanvasRenderingContext2D,a:number,draw:()=>void)=>{c.save();c.globalAlpha*=a;draw();c.restore();};
+const text=(c:CanvasRenderingContext2D,s:string,x:number,y:number,size=42,col=C.ink,align:CanvasTextAlign='center',math=false)=>{
+ c.font=`${size}px ${math?M:F}`;c.fillStyle=col;c.textAlign=align;c.textBaseline='middle';c.fillText(s,x,y);
 };
-const Scene:React.FC<{f:number;start:number;end:number;children:React.ReactNode}>=({f,start,end,children})=>{
- const o=(start===0?1:progress(f,start-12,12))*(1-progress(f,end-12,12));return o>0?<g opacity={o} transform={`translate(0 ${mix(16,0,progress(f,start,18))})`}>{children}</g>:null;
-};
-const RankRow:React.FC<{x:number;y:number;id:DocId;rank:number;opacity?:number;width?:number;focus?:boolean}>=({x,y,id,rank,opacity=1,width=420,focus=false})=><g opacity={opacity} transform={`translate(${x} ${y})`}>
- <rect width={width} height={116} rx={16} fill={focus?tint(id):'#1B2638'} fillOpacity={focus?.11:1} stroke={focus?tint(id):P.line} strokeWidth={focus?2.5:1.5}/>
- <Text x={25} y={73} size={44} mono fill={focus?P.paper:P.muted}>{rank.toString().padStart(2,'0')}</Text>
- <DocIcon x={98} y={25} id={id}/><Text x={171} y={73} size={35}>文档 {id}</Text>
- <circle cx={width-32} cy={58} r={5} fill={tint(id)}/>
- </g>;
+function path(c:CanvasRenderingContext2D,points:number[][],p=1,col=C.dim,lw=3){
+ c.save();c.strokeStyle=col;c.lineWidth=lw;c.lineCap='round';
+ const lengths=DG.cum(points);DG.drawPartial(c,points,lengths,lengths.at(-1)*p);c.restore();
+}
+function doc(c:CanvasRenderingContext2D,id:Id,x:number,y:number,s=1,a=1){
+ alpha(c,a,()=>{c.save();c.translate(x,y);c.scale(s,s);
+ const pts=[[-40,-53],[17,-53],[40,-30],[40,53],[-40,53],[-40,-53]];
+ path(c,pts,1,C[id],3);path(c,[[17,-53],[17,-30],[40,-30]],1,C[id],2);
+ text(c,id,0,9,52,C[id], 'center',true);c.restore();});
+}
+function frac(c:CanvasRenderingContext2D,den:string,x:number,y:number,size=76,col=C.ink,p=1){
+ if(p<=0)return;alpha(c,Math.min(1,p*3),()=>{
+ DG.math(c,[{s:'1'}],x,y-size*.35,size,{p, col});
+ const w=Math.max(size*1.6,den.length*size*.48);
+ path(c,[[x-w/2,y],[x+w/2,y]],MO.smooth(Math.min(1,p*2)),col,3);
+ DG.math(c,[{s:den}],x,y+size*.92,size,{p,col});
+ });
+}
+function drawOpening(c:CanvasRenderingContext2D,f:number){
+ const split=q(f,0,85), arrange=q(f,88,132), leave=q(f,185,210);
+ alpha(c,1-leave,()=>{
+ ids.forEach((id,i)=>{
+ const x=lerp(960+(i-1)*300,540,split),y=lerp(470,330+i*175,split);
+ doc(c,id,x,y,lerp(2.7,1.1,split));
+ alpha(c,split,()=>text(c,String(i+1),x-105,y,50,C.muted,'center',true));
+ const vy=id==='A'?680:id==='B'?330:505;
+ doc(c,id,lerp(960+(i-1)*300,1380,split),lerp(470,vy,split),1.1,split*(id==='A'?.22:1));
+ if(id==='A')alpha(c,arrange,()=>text(c,'未命中',1540,vy,30,C.muted));
+ if(id!=='A')alpha(c,arrange,()=>text(c,String(i),1275,vy,50,C.muted,'center',true));
+ });
+ alpha(c,q(f,12,50),()=>text(c,'关键词检索',540,170,46));
+ alpha(c,q(f,50,88),()=>text(c,'向量检索',1380,170,46));
+ path(c,[[820,460],[1100,460]],q(f,130,155),C.dim,3);
+ alpha(c,arrange,()=>text(c,'?',960,425,100,C.ink,'center',true));
+ alpha(c,q(f,140,175),()=>DG.write(c,'怎么合成一份榜单？',960,830,55,q(f,140,175),{col:C.ink}));
+ });
+}
+function drawRaw(c:CanvasRenderingContext2D,f:number){
+ const enter=q(f,192,216), exit=q(f,466,492);
+ alpha(c,enter*(1-exit),()=>{
+ text(c,'分数的尺子不一样',960,160,61);
+ const growth=q(f,216,265),vec=q(f,270,318),kw=q(f,340,390),sum=q(f,410,445);
+ const x=410,y1=390,y2=660;
+ text(c,'向量检索',225,y1,40,C.muted);text(c,'关键词检索',225,y2,40,C.muted);
+ path(c,[[x,y1+55],[1510,y1+55]],growth,C.dim,2);
+ path(c,[[x,y2+55],[1510,y2+55]],growth,C.dim,2);
+ for(let i=0;i<6;i++){
+ const xx=x+i*210;
+ path(c,[[xx,y1+48],[xx,y1+64]],growth,C.dim,2);
+ path(c,[[xx,y2+48],[xx,y2+64]],growth,C.dim,2);
+ }
+ text(c,'0',x,y1+100,32,C.muted,'center',true);text(c,Number(lerp(1,18,sum).toFixed(sum>0&&sum<1?1:0)).toString(),1460,y1+100,32,C.muted,'center',true);
+ text(c,'0',x,y2+100,32,C.muted,'center',true);text(c,'没有固定上限 →',1490,y2+100,32,C.muted);
+ // One hypothetical document B has two scores. Widths use a shared raw scale.
+ const vw=1050*.92*vec/lerp(1,18,sum),kwW=1050*16/18*kw;
+ DG.shape(c,DG.rectPts(x+vw/2,y1,vw,60),{fill:C.B});
+ DG.shape(c,DG.rectPts(x+kwW/2,y2,kwW,60),{fill:C.B});
+ alpha(c,vec,()=>{text(c,'B',x-55,y1,50,C.B,'center',true);text(c,'0.92',x+vw+85,y1,48,C.B,'center',true);});
+ alpha(c,kw,()=>{text(c,'B',x-55,y2,50,C.B,'center',true);text(c,'16',x+kwW+70,y2,48,C.B,'center',true);});
+ alpha(c,sum,()=>{
+ path(c,[[400,505],[1460,505]],1,C.bad,2);
+ text(c,'直接相加 → 大分值主导',960,833,48,C.bad);
+ });
+ text(c,'示意原始分数 · 不是实测结果',960,74,25,C.muted);
+ });
+}
+function drawRule(c:CanvasRenderingContext2D,f:number){
+ const enter=q(f,477,495),end=q(f,955,982);
+ alpha(c,enter*(1-end),()=>{
+ const move=q(f,616,662);
+ text(c,'RRF',lerp(960,375,move),lerp(370,190,move),lerp(148,76,move),C.ink,'center',true);
+ alpha(c,q(f,492,530)*(1-move),()=>text(c,'Reciprocal Rank Fusion',960,520,53,C.muted,'center',true));
+ alpha(c,q(f,570,614)*(1-move),()=>DG.write(c,'倒数排名融合',960,630,65,q(f,570,614),{col:C.ink}));
+ alpha(c,move,()=>{
+ text(c,'原始分数',1070,190,38,C.muted);path(c,[[950,188],[1190,188]],q(f,640,674),C.bad,4);
+ text(c,'名次',1440,190,45,C.B);
+ });
+ if(f>=620){
+ const morph=q(f,746,817),den=q(f,815,865),missing=q(f,905,945);
 
-const Hook:React.FC<{f:number}>=({f})=>{
- const split=progress(f,75,28);const question=progress(f,132,20);
- return <>
- <Text x={96} y={167} size={66} weight={800}>两路检索，<tspan fill={P.kw}>一份排名？</tspan></Text>
- <Text x={98} y={224} size={27} fill={P.muted}>同一个问题，得到两份不同的答案顺序</Text>
- <g transform={`translate(${mix(500,96,split)} 356)`}>
-  <rect width={330} height={304} rx={22} fill="#1B2638" stroke={P.line} strokeWidth={2}/>
-  <g stroke={P.paper} strokeWidth={4} fill="none"><rect x={36} y={38} width={54} height={64} rx={6}/><path d="M49 59h28M49 73h28M49 87h17"/></g>
-  <Text x={36} y={154} size={41}>知识库</Text><Text x={36} y={217} size={25} fill={P.muted}>问题 → 检索</Text>
-  <path d="M36 254H290" stroke={P.kw} strokeWidth={3}/>
- </g>
- <g opacity={split}>
-  <path d="M452 500C510 500 485 340 550 340M452 500C510 500 485 652 550 652" fill="none" stroke={P.line} strokeWidth={3}/>
-  {['关键词检索','向量检索'].map((label,i)=><g key={label} transform={`translate(575 ${310+i*310})`}>
-   <Text x={0} y={-28} size={28} fill={i?P.vec:P.kw}>{label}</Text>
-   {(i?['B','C']:['A','B','C']).map((id,j)=><g key={id} transform={`translate(${j*101} 0)`}><DocIcon x={0} y={0} id={id as DocId} scale={1.1}/><Text x={27} y={112} anchor="middle" size={27} fill={P.muted}>#{j+1}</Text></g>)}
-  </g>)}
-  <path d="M940 345 C1060 345 1040 492 1150 492M840 655 C1060 655 1040 492 1150 492" fill="none" stroke={P.line} strokeWidth={3}/>
- </g>
- <g opacity={question}>
-  <rect x={1200} y={323} width={615} height={375} rx={28} fill={P.kw} fillOpacity={.06} stroke={P.kw} strokeWidth={2} strokeDasharray="10 10"/>
-  <Text x={1507} y={477} anchor="middle" size={110} fill={P.kw} weight={800}>合并</Text>
-  <Text x={1507} y={568} anchor="middle" size={34} fill={P.muted}>谁应该排在前面？</Text>
- </g>
- </>;
-};
-
-const Scores:React.FC<{f:number}>=({f})=>{
- const vec=progress(f,269,28),kw=progress(f,336,30),dominance=progress(f,401,28);
- return <>
- <Text x={96} y={167} size={66} weight={800}>原始分数，<tspan fill={P.red}>不能直接相加</tspan></Text>
- <Text x={98} y={226} size={27} fill={P.muted}>两把尺子，刻度不同</Text>
- <Text x={145} y={350} size={36} fill={P.vec}>向量检索</Text>
- <Text x={145} y={406} size={25} fill={P.muted}>通常 0–1</Text>
- <rect x={510} y={325} width={1070} height={73} rx={10} fill="#1D2B43"/>
- <rect x={510} y={325} width={Math.max(1,1070*.82*vec)} height={73} rx={10} fill={P.vec}/>
- <Text x={1650} y={378} size={45} fill={P.vec} mono opacity={vec}>0.82</Text>
- <g opacity={kw}>
-  <Text x={145} y={547} size={36} fill={P.kw}>关键词检索</Text>
-  <Text x={145} y={603} size={25} fill={P.muted}>没有固定上限</Text>
-  <rect x={510} y={522} width={1070} height={73} rx={10} fill="#1D2B43"/>
-  <rect x={510} y={522} width={Math.max(1,1070*kw)} height={73} rx={10} fill={P.kw}/>
-  <Text x={1650} y={575} size={45} fill={P.kw} mono>27.0</Text>
- </g>
- <Text x={510} y={660} size={23} fill={P.muted}>示意分数 · 两条刻度各自归一展示</Text>
- <g opacity={dominance}>
-  <Text x={145} y={805} size={30} fill={P.paper}>直接相加</Text>
-  <rect x={510} y={736} width={1070} height={84} rx={10} fill={P.kw}/>
-  <rect x={1548} y={736} width={32} height={84} rx={5} fill={P.vec}/>
-  <Text x={1045} y={792} size={34} fill={P.bg} anchor="middle" weight={800}>关键词分数主导总分</Text>
- </g>
- </>;
-};
-
-const Definition:React.FC<{f:number}>=({f})=>{
- const full=progress(f,485,30),zh=progress(f,575,18);
- return <>
- <Text x={96} y={167} size={34} fill={P.kw}>换一个共同标准</Text>
- <Text x={92} y={497} size={330} weight={850} mono>RRF<tspan fill={P.kw}>.</tspan></Text>
- <g opacity={full}><Text x={110} y={597} size={48} fill={P.muted} weight={400}>Reciprocal Rank Fusion</Text></g>
- <g opacity={zh}>
- <Rule x1={112} y1={667} x2={1810} y2={667}/>
- <Text x={110} y={770} size={68} weight={750}>倒数排名融合</Text>
- <Text x={1810} y={765} size={33} anchor="end" fill={P.kw}>把名次变成贡献</Text>
- </g>
- <g transform={`translate(${mix(1570,1410,full)} 310)`} opacity={full}>
- {[1,2,3].map((rank,i)=><g key={rank} transform={`translate(0 ${i*85})`}><Text x={0} y={0} size={53} mono fill={[P.A,P.B,P.C][i]}>#{rank}</Text><path d="M100 -18h150" stroke={P.line} strokeWidth={4}/></g>)}
- </g>
- </>;
-};
-
-const FormulaScene:React.FC<{f:number}>=({f})=>{
- const rank=progress(f,697,22),formula=progress(f,790,26),k=progress(f,845,18),miss=progress(f,901,18);
- return <>
- <Text x={96} y={167} size={66} weight={800}>只看名次，<tspan fill={P.kw}>不比原始分数</tspan></Text>
- <Text x={98} y={226} size={27} fill={P.muted}>每一路，各算一份贡献</Text>
- <g transform={`translate(110 340)`}>
- <Text x={0} y={0} size={27} fill={P.muted}>排名</Text>
- {[1,2,3].map((n,i)=><g key={n} transform={`translate(0 ${i*130+42})`} opacity={mix(.3,1,rank)}>
- <rect width={420} height={108} rx={15} fill={i===0?'#28383F':'#1B2638'} stroke={i===0?P.kw:P.line} strokeWidth={2}/>
- <Text x={32} y={73} size={46} mono fill={i===0?P.kw:P.muted}>#{n}</Text><DocIcon x={140} y={22} id={docs[i]} scale={.95}/><Text x={222} y={70} size={30}>文档 {docs[i]}</Text>
- </g>)}
- </g>
- <g opacity={rank}><path d="M600 464H730" stroke={P.kw} strokeWidth={4}/><path d="M708 445l22 19-22 19" stroke={P.kw} strokeWidth={4} fill="none"/><Text x={660} y={535} size={27} anchor="middle" fill={P.muted}>从 1 开始</Text></g>
- <g opacity={formula}>
- <Text x={883} y={327} size={28} fill={P.kw}>单路贡献</Text>
- <Fraction x={1080} y={497} denominator={k>.5?'60 + rank':'k + rank'} size={78}/>
- <Text x={1450} y={496} size={64} fill={P.kw} mono>≈</Text>
- <Text x={1660} y={496} size={65} mono anchor="middle" fill={P.kw}>0.0164</Text>
- <Text x={1658} y={563} size={25} fill={P.muted} anchor="middle">rank = 1 时，约值</Text>
- </g>
- <g opacity={k}>
- <rect x={871} y={653} width={375} height={87} rx={13} fill={P.kw} fillOpacity={.1}/>
- <Text x={1058} y={710} size={33} anchor="middle" fill={P.kw}>常数 k 通常取 60</Text>
- </g>
- <g opacity={miss}><Text x={1460} y={710} size={36} fill={P.muted}>未命中</Text><Text x={1750} y={710} anchor="middle" size={60} fill={P.paper} mono>0</Text></g>
- </>;
-};
-
-// Contributions travel along a visible curve from each ranking into the score row.
-const Contribution:React.FC<{f:number;at:number;from:[number,number];to:[number,number];color:string;label:string}>=({f,at,from,to,color,label})=>{
- const t=progress(f,at,33);if(t<=0||t>=1)return null;
- const cx=(from[0]+to[0])/2,cy=Math.min(from[1],to[1])-80;
- const x=(1-t)**2*from[0]+2*(1-t)*t*cx+t*t*to[0];const y=(1-t)**2*from[1]+2*(1-t)*t*cy+t*t*to[1];
- return <g><path d={`M${from[0]},${from[1]} Q${cx},${cy} ${to[0]},${to[1]}`} fill="none" stroke={color} strokeWidth={3} opacity={.4}/><rect x={x-63} y={y-26} width={126} height={52} rx={26} fill={color}/><Text x={x} y={y+10} size={27} anchor="middle" fill={P.bg} mono>{label}</Text></g>;
-};
-
-const Fusion:React.FC<{f:number}>=({f})=>{
- const final=progress(f,1672,66);const focus:DocId|undefined=f>=1672?undefined:f>=1589?'C':f>=1414?'B':f>=1243?'A':undefined;
- const scoreAt={A:1320,B:1493,C:1589};const score={A:1/61,B:1/62+1/61,C:1/63+1/62};
- const baseY=344;const gap=153;
- const target=(id:DocId)=>baseY+(id==='B'?0:id==='C'?1:2)*gap;
- const yFor=(id:DocId)=>mix(baseY+docs.indexOf(id)*gap,target(id),progress(f,1686,38));
- const aLeave=progress(f,1672,12),aReturn=progress(f,1724,14);const aFlight=aLeave*(1-aReturn);
- const kw=progress(f,1023,26),vec=progress(f,1128,26),missing=progress(f,1208,20);
- return <>
- <Text x={96} y={163} size={61} weight={800}>{f>=1672?'共同认可的文档，升到前面':'同一篇文档，把两路贡献加起来'}</Text>
- <Text x={98} y={218} size={25} fill={P.muted}>示例排名 · k = 60 · 缺失项贡献为 0</Text>
- <Text x={110} y={299} size={31} fill={P.kw}>关键词检索</Text><Text x={595} y={299} size={31} fill={P.vec}>向量检索</Text>
- <Text x={1200} y={299} size={31} fill={P.paper}>{f>=1672?'融合排名':'RRF 总分'}</Text>
- <Rule x1={110} y1={319} x2={520} y2={319}/><Rule x1={595} y1={319} x2={1005} y2={319}/><Rule x1={1200} y1={319} x2={1810} y2={319}/>
- {docs.map((id,i)=><RankRow key={'k'+id} x={110} y={baseY+i*gap} id={id} rank={i+1} width={410} focus={focus===id} opacity={kw*(focus&&focus!==id?.35:1)}/>)}
- {(['B','C'] as DocId[]).map((id,i)=><RankRow key={'v'+id} x={595} y={baseY+i*gap} id={id} rank={i+1} width={410} focus={focus===id} opacity={vec*(focus&&focus!==id?.35:1)}/>)}
- <g opacity={missing} transform={`translate(595 ${baseY+2*gap})`}><rect width={410} height={116} rx={16} fill="none" stroke={P.line} strokeWidth={2} strokeDasharray="6 8"/><DocIcon x={29} y={25} id="A"/><Text x={108} y={72} size={30} fill={P.muted}>未命中</Text><Text x={367} y={73} size={37} mono anchor="end" fill={P.muted}>0</Text></g>
- <path d="M1050 550H1134M1117 532l18 18-18 18" fill="none" stroke={P.muted} strokeWidth={3}/>
- {docs.map(id=>{
- const p=progress(f,scoreAt[id]+36,16),y=yFor(id),dim=(focus&&focus!==id?.4:1)*(id==='A'?1-aFlight:1);
- const formula=id==='A'?'1/61 + 0':id==='B'?'1/62 + 1/61':'1/63 + 1/62';
- const place=id==='B'?1:id==='C'?2:3;
- return <g key={id} opacity={dim} transform={`translate(1200 ${y})`}>
- <rect width={610} height={116} rx={16} fill="#1B2638" stroke={focus===id?tint(id):P.line} strokeWidth={focus===id?2.5:1.5}/>
- <rect x={0} y={104} width={Math.max(0,610*(score[id]/(2/61))*p)} height={12} rx={5} fill={tint(id)}/>
- <g opacity={progress(f,1672,12)}><Text x={28} y={71} size={37} mono fill={tint(id)}>#{place}</Text></g>
- <DocIcon x={f>=1672?112:28} y={21} id={id}/>
- <g opacity={f<1672?1:0}><Text x={103} y={47} size={25} fill={P.muted}>{p>0?formula:'等待融合'}</Text></g>
- <Text x={f>=1672?190:103} y={f>=1672?73:87} size={f>=1672?31:29}>文档 {id}</Text>
- <Text x={581} y={74} size={44} anchor="end" mono fill={p>0?tint(id):P.line}>{p>0?score[id].toFixed(4):'—'}</Text>
- </g>;
- })}
- <g opacity={aFlight} transform={`translate(1842 ${mix(baseY+24,target('A')+24,progress(f,1684,40))})`}><DocIcon x={0} y={0} id="A"/><Text x={25} y={96} size={22} anchor="middle" fill={P.A}>#3</Text></g>
- <Contribution f={f} at={1320} from={[490,baseY+58]} to={[1220,baseY+58]} color={P.kw} label="1/61"/>
- <Contribution f={f} at={1493} from={[490,baseY+gap+58]} to={[1220,baseY+gap+58]} color={P.kw} label="1/62"/>
- <Contribution f={f} at={1502} from={[975,baseY+58]} to={[1220,baseY+gap+58]} color={P.vec} label="1/61"/>
- <Contribution f={f} at={1589} from={[490,baseY+2*gap+58]} to={[1220,baseY+2*gap+58]} color={P.kw} label="1/63"/>
- <Contribution f={f} at={1598} from={[975,baseY+gap+58]} to={[1220,baseY+2*gap+58]} color={P.vec} label="1/62"/>
- <g opacity={f<1672?progress(f,1243,18):0}>
- <Text x={110} y={875} size={30} fill={focus?tint(focus):P.muted}>{focus==='A'?'A：单路第一，只拿到一份贡献':focus==='B'?'B：第二名 + 第一名，两份贡献汇合':'C：第三名 + 第二名，同样获得两路支持'}</Text>
- </g>
- <g opacity={progress(f,1672,16)}><Text x={110} y={875} size={32} fill={P.kw}>两路支持的 B、C 上升</Text><Text x={1810} y={875} anchor="end" size={32} fill={P.A}>单路第一 A → 第三名</Text></g>
- </>;
-};
-
-const Ending:React.FC<{f:number}>=({f})=>{
- const rough=progress(f,1924,22);
- return <>
- <Text x={96} y={168} size={62} weight={800}>RRF 的边界</Text>
- <g transform="translate(112 310)">
- <Text x={0} y={126} size={105} weight={800} fill={P.kw}>融合名次</Text>
- <Text x={0} y={218} size={44} fill={P.muted}>不阅读正文内容</Text>
- <Rule x1={0} y1={289} x2={1700} y2={289}/>
- <g opacity={rough}><Text x={0} y={430} size={84} weight={800}>多路检索的<tspan fill={P.kw}>快速粗排</tspan></Text></g>
- </g>
- <g transform="translate(1370 280)">
- {(['B','C','A'] as DocId[]).map((id,i)=><g key={id} transform={`translate(${i*110} ${i*45})`}><DocIcon x={0} y={0} id={id} scale={1.65}/><Text x={42} y={152} size={27} anchor="middle" mono fill={tint(id)}>#{i+1}</Text></g>)}
- </g>
- </>;
-};
-
-const Chapter1:React.FC=()=>{
- const f=useCurrentFrame();const subtitle=timing.subtitles.find(s=>f>=s.startFrame&&f<s.endFrame)?.text??'';
- const stages=['问题','分数困境','RRF','共同尺度','融合演示','适用边界'];
- const index=f<192?0:f<477?1:f<620?2:f<970?3:f<1847?4:5;
- return <AbsoluteFill style={{background:P.bg,fontFamily:FACE}}>
- <Audio src={staticFile('audio/voiceover.wav')} acceptableTimeShiftInSeconds={.3} pauseWhenBuffering/>
- <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={{position:'absolute',inset:0}}>
- <defs><pattern id="dot-grid" width={36} height={36} patternUnits="userSpaceOnUse"><circle cx={1} cy={1} r={1} fill="#71839E" opacity={.14}/></pattern></defs>
- <rect width={1920} height={920} fill="url(#dot-grid)"/>
- <Text x={96} y={58} size={25} fill={P.muted} weight={700}>一分钟科普 <tspan fill={P.kw}>/</tspan> RRF</Text>
- <Text x={1815} y={58} size={23} anchor="end" fill={P.muted} mono>{String(index+1).padStart(2,'0')} / 06</Text>
- <Scene f={f} start={0} end={192}><Hook f={f}/></Scene>
- <Scene f={f} start={192} end={477}><Scores f={f}/></Scene>
- <Scene f={f} start={477} end={620}><Definition f={f}/></Scene>
- <Scene f={f} start={620} end={970}><FormulaScene f={f}/></Scene>
- <Scene f={f} start={970} end={1847}><Fusion f={f}/></Scene>
- <Scene f={f} start={1847} end={2100}><Ending f={f}/></Scene>
- <Rule x1={96} y1={930} x2={1824} y2={930}/>
- <rect x={96} y={930} width={1728*clamp(f/1983)} height={3} fill={P.kw}/>
- <Text x={96} y={1040} size={21} fill={P.muted}>{stages[index]}</Text>
- <Text x={1824} y={1040} size={20} anchor="end" mono fill={P.muted}>RANK → SCORE → FUSION</Text>
- </svg>
- <div style={{position:'absolute',left:180,right:180,top:958,height:60,display:'flex',alignItems:'center',justifyContent:'center',color:P.paper,fontSize:38,fontWeight:550,lineHeight:1.45,textAlign:'center',letterSpacing:1}}>{subtitle}</div>
+ const pts=DG.morph(DG.circlePts(300,530,60,80),DG.rectPts(1400,530,280,62,80),morph);
+ alpha(c,morph*.22,()=>{DG.shape(c,DG.circlePts(300,530,60,80),{stroke:C.B,lw:2});text(c,'1',300,530,74,C.B,'center',true);});
+ DG.shape(c,pts,{fill:`rgba(121,213,164,${lerp(.07,.85,morph)})`,stroke:C.B,lw:3});
+ alpha(c,1-q(f,750,795),()=>text(c,'1',300,530,74,C.B,'center',true));
+ text(c, 'rank',300,680,48,C.muted,'center',true);
+ path(c,[[410,530],[595,530]],q(f,723,770),C.dim,3);
+ alpha(c,q(f,755,790),()=>frac(c,den>.01?'60 + 1':'k + rank',850,360,68,C.ink,q(f,755,797)));
+ alpha(c,den,()=>text(c,'0.0164',1690,530,55,C.B,'center',true));
+ alpha(c,q(f,865,897),()=>text(c,'k 通常取 60',960,730,43,C.muted));
+ alpha(c,missing,()=>{
+ doc(c,'A',370,820,.5,.4);text(c,'没有命中',530,820,35,C.muted);
+ path(c,[[650,820],[760,820]],1,C.dim,2);text(c,'0',830,820,53,C.muted,'center',true);
+ });
+ }
+ });
+}
+const rowY=(id:Id)=>340+ids.indexOf(id)*170;
+const srcY=(id:Id,lane:number)=>lane===0?rowY(id):id==='B'?340:id==='C'?510:680;
+const contrib=(id:Id,lane:number)=>lane===0?1/(61+ids.indexOf(id)):id==='A'?0:1/(id==='B'?61:62);
+const starts={A:1285,B:1493,C:1600};
+const ends={A:1385,B:1565,C:1660};
+function drawFusion(c:CanvasRenderingContext2D,f:number){
+ const enter=q(f,970,991),reorder=q(f,1700,1770),out=q(f,1845,1880);
+ alpha(c,enter,()=>{
+ const cam=CAM.track({x:960,y:540,z:1},[
+ {at:41.5,kind:'to',x:960,y:505,z:1.025,dur:.65},
+ {at:55.73,kind:'pull',x:960,y:540,z:1,dur:.9},
+ ],f/30);
+ c.save();CAM.apply(c,cam);
+ alpha(c,1-q(f,1672,1696),()=>{
+ text(c,'关键词检索',350,160,42);text(c,'向量检索',850,160,42);text(c,'融合分',1435,160,42);
+ text(c,'示例排名',960,65,27,C.muted);
+ });
+ alpha(c,q(f,1696,1720),()=>text(c,'两路共同认可的文档，升到前面',960,150,54));
+ const sourceAlpha=1-q(f,1672,1696);
+ const position=(id:Id)=>{
+  if(id==='A'){
+   const left=q(f,1700,1730),down=q(f,1730,1770),back=q(f,1770,1810);
+   return {dx:lerp(-860*left,-440,back),dy:340*down};
+  }
+  const r=q(f,1715,1770);return {dx:-440*r,dy:-170*r};
+ };
+ const routeY=(id:Id)=>id==='A'?220:id==='B'?425:595;
+ ids.forEach((id,i)=>{
+ const showK=q(f,1024+i*26,1045+i*26),showV=q(f,1128+(i===1?0:28),1150+(i===1?0:28));
+ for(let lane=0;lane<2;lane++){
+ if(lane===1&&id==='A'){
+ alpha(c,q(f,1208,1234)*sourceAlpha,()=>{
+ path(c,[[807,627],[893,627],[893,733],[807,733],[807,627]],1,C.dim,2);
+ text(c,'未命中',850,680,29,C.muted);text(c,'0',1020,680,40,C.muted,'center',true);
+ });continue;
+ }
+ const p=q(f,starts[id]+lane*18,ends[id]+lane*8),sx=lane===0?350:850,sy=srcY(id,lane);
+ const w=contrib(id,lane)*13500,previous=lane===1?contrib(id,0)*13500:0;
+ const tx=1200+previous+w/2,ty=rowY(id);
+ const sourcePts=DG.rectPts(sx,sy,80,106,80),targetPts=DG.rectPts(tx,ty,w,62,80);
+ const appear=lane===0?showK:showV;
+ alpha(c,appear*sourceAlpha,()=>{
+ doc(c,id,sx,sy,.9,lerp(1,.25,p));
+ text(c,String(lane===0?i+1:id==='B'?1:2),sx-110,sy,52,C.muted,'center',true);
+ });
+ if(p>0){
+ // Draw both original location and transformed contribution; identity stays fixed.
+ const {dx:shiftX,dy:shiftY}=position(id);
+ c.save();c.translate(shiftX,shiftY);
+ let pts;
+ if(lane===0){
+  const lift=DG.rectPts(520,routeY(id),80,40,80),across=DG.rectPts(1080,routeY(id),140,40,80);
+  pts=p<.25?DG.morph(sourcePts,lift,MO.smooth(p/.25)):p<.65?DG.morph(lift,across,MO.smooth((p-.25)/.4)):DG.morph(across,targetPts,MO.smooth((p-.65)/.35));
+ }else{
+  const side=DG.rectPts(1040,sy,80,50,80);
+  pts=p<.4?DG.morph(sourcePts,side,MO.smooth(p/.4)):DG.morph(side,targetPts,MO.smooth((p-.4)/.6));
+ }
+ alpha(c,appear,()=>DG.shape(c,pts,{fill:lane===0?C[id]:`${C[id]}77`,stroke:C[id],lw:2.5}));
+ c.restore();
+ }
+ }
+ // Label is attached to the fused document, not to the previous row number.
+ const done=q(f,ends[id]-8,ends[id]+15),total=contrib(id,0)+contrib(id,1),width=total*13500;
+ const pos=position(id),yy=rowY(id)+pos.dy;
+ alpha(c,done,()=>{
+ text(c,id,1120+pos.dx,yy,54,C[id],'center',true);
+ text(c,total.toFixed(4),1200+width+100+pos.dx,yy,47,C[id],'center',true);
+ alpha(c,q(f,id==='A'?1810:1780,id==='A'?1830:1800),()=>text(c,id==='B'?'1':id==='C'?'2':'3',535,yy,53,C.muted,'center',true));
+ });
+ });
+ // Route motion explains which contribution is being added; never arbitrary drift.
+ if(f>=1243&&f<1672){
+ const id:Id=f<1414?'A':f<1589?'B':'C';
+ const t=q(f,starts[id]-8,ends[id]+20),trace=DG.flash(t,.22);
+ for(let lane=0;lane<2;lane++){
+ if(id==='A'&&lane===1)continue;
+ const y=srcY(id,lane),sx=lane===0?400:900,ey=rowY(id),ex=1200;
+ const pts=lane===0?[[sx,y],[520,routeY(id)],[1080,routeY(id)],[ex,ey]]:[[sx,y],[1040,y],[1100,ey],[ex,ey]];
+ alpha(c,.35,()=>path(c,pts,1,C[id],2));
+ const cum=DG.cum(pts),len=cum.at(-1);
+ if(trace[1]>trace[0]){const segment=Array.from({length:32},(_,i)=>DG.pointAt(pts,cum,len*lerp(trace[0],trace[1],i/31)));path(c,segment,1,C[id],6);}
+ }
+ const count=q(f,id==='A'?1320:id==='B'?1493:1589,id==='A'?1345:id==='B'?1520:1615);
+ alpha(c,count,()=>{
+ doc(c,id,260,825,.48);
+ const expression=id==='A'?'1 / 61 + 0  ≈  0.0164':id==='B'?'1 / 62 + 1 / 61  ≈  0.0325':'1 / 63 + 1 / 62  ≈  0.0320';
+ DG.math(c,[{s:expression,col:C[id]}],1050,845,52,{p:count});
+ });
+ if(id==='A')alpha(c,q(f,1355,1390),()=>text(c,'单路命中',960,245,35,C.muted));
+ }
+ alpha(c,q(f,1805,1835)*(1-out),()=>{
+ DG.brace(c,1435,305,550,{p:q(f,1805,1835),col:C.muted,lw:2,depth:16});
+ text(c,'两路相加',1615,428,40,C.muted);
+ text(c,'单路第一',1615,680,40,C.A);
+ });
+ alpha(c,out,()=>{
+ text(c,'只看名次，不读正文',960,810,46,C.muted);
+ alpha(c,q(f,1924,1956),()=>text(c,'多路检索的快速粗排',960,230,37,C.B));
+ });
+ c.restore();
+ });
+}
+function draw(c:CanvasRenderingContext2D,f:number){
+ c.clearRect(0,0,1920,1080);c.fillStyle='#000';c.fillRect(0,0,1920,1080);
+ c.save();c.beginPath();c.rect(0,0,1920,900);c.clip();
+ if(f<216)drawOpening(c,f);
+ if(f>=192&&f<492)drawRaw(c,f);
+ if(f>=477&&f<982)drawRule(c,f);
+ if(f>=970)drawFusion(c,f);
+ c.restore();
+}
+export const Chapter1:React.FC=()=>{
+ const f=useCurrentFrame(),canvas=useRef<HTMLCanvasElement>(null);
+ const [handle]=useState(()=>delayRender('Load pinned huashu fonts'));
+ const [loaded,setLoaded]=useState(false);const released=useRef(false);
+ useEffect(()=>{
+ let live=true;
+ Promise.all([['CMU-rm','cmunrm.woff'],['CMU-it','cmunti.woff'],['RrfSans','NotoSansSC-500.woff']].map(async([family,file])=>{
+ const face=new FontFace(family,`url(${staticFile('huashu-fonts/'+file)})`);await face.load();document.fonts.add(face);
+ })).then(()=>{if(live){DG.FONT.zh='RrfSans';setLoaded(true);}}).catch(cancelRender);
+ return()=>{live=false;};
+ },[handle]);
+ useLayoutEffect(()=>{if(loaded&&canvas.current){const c=canvas.current.getContext('2d');if(c){draw(c,f);if(!released.current){released.current=true;continueRender(handle);}}}},[f,loaded,handle]);
+ const subtitle=timing.subtitles.find(s=>f>=s.startFrame&&f<s.endFrame)?.text??'';
+ return <AbsoluteFill style={{backgroundColor:'#000',color:C.ink}}>
+ <Audio src={staticFile('audio/voiceover.wav')}/>
+ <canvas ref={canvas} width={1920} height={1080} style={{width:'100%',height:'100%'}}/>
+ <div style={{position:'absolute',left:100,right:100,top:948,height:80,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:F,fontSize:38,fontWeight:500,lineHeight:1.45,textAlign:'center'}}>{subtitle}</div>
  </AbsoluteFill>;
 };
-export {Chapter1};

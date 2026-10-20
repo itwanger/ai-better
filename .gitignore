@@ -9,6 +9,19 @@
 !/script/README.md
 !/script/package.json
 
+# RRF 可复用工程：保留画面源码、上游许可与字体，不收录依赖和逐帧缓存。
+!/script/one-minute-rrf/remotion/
+!/script/one-minute-rrf/remotion/src/
+!/script/one-minute-rrf/remotion/src/**
+!/script/one-minute-rrf/remotion/public/
+!/script/one-minute-rrf/remotion/public/huashu-fonts/
+!/script/one-minute-rrf/remotion/public/huashu-fonts/**
+!/script/one-minute-rrf/assets/
+!/script/one-minute-rrf/assets/references/
+!/script/one-minute-rrf/assets/references/visual-provenance.json
+!/script/one-minute-rrf/审片/
+!/script/one-minute-rrf/审片/*.md
+
 node_modules
 .env
 .cache

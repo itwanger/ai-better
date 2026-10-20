@@ -1,0 +1,33 @@
+{
+  "repository": "https://github.com/alchaincyf/huashu-art-motion",
+  "commit": "8a0d7d72ca65fcce6f8ba82c4a6c8dfe35b8422c",
+  "grammar": "t1_3b1b",
+  "scene": "remotion/src/Chapter1.tsx (original RRF composition)",
+  "runtime": "remotion/src/huashu/runtime.ts (upstream algorithms with scoped ESM adapter)",
+  "calls": {
+    "MO.smooth/seg": "all deterministic time progress",
+    "DG.rectPts/circlePts/morph/shape": "rank token and document contours become proportional reciprocal-contribution bars",
+    "DG.cum/drawPartial/pointAt/flash": "draw contribution paths and route highlight",
+    "DG.math/write": "write name and reciprocal formulas",
+    "DG.brace": "group two jointly retrieved top documents",
+    "CAM.track/apply": "purposeful computation close-up and return to full ranking"
+  },
+  "preserved": [
+    "one-minute/rrf.md",
+    "spoken.txt",
+    "build/voiceover.wav",
+    "full 1984-frame duration",
+    "existing voice speed and identity"
+  ],
+  "fonts": [
+    "cmunrm.woff",
+    "cmunti.woff",
+    "NotoSansSC-500.woff"
+  ],
+  "not_used": [
+    "author persona",
+    "sample scenes",
+    "sample videos",
+    "upstream voice service"
+  ]
+}
