@@ -173,9 +173,13 @@ python3 script/shared/tools/chapter_pipeline.py --project script/<topic> --chapt
 
 镜头有推近、平移或前后状态切换时，另抽全貌、运动中段、稳定后及状态变化前后的帧检查。尤其检查中文对照、侧栏标签和原文在运动中是否重叠；原图内的划线和框选放进 `FigureFocus` 的 children，随图移动，图外说明优先等镜头稳定再入场。不能只检查终点无遮挡，就认定转场也正确。只改视觉时保留确认稿和配音，修正后重出受影响帧，将实际检查结果写入项目的 `preview/chapter<N>/review.json`。
 
+审片同时核对因果和状态：匹配失败后不得画成已写入；覆盖必须让旧值与新值的关系可辨认；交接后的修改应保留前一个人的结果；目录清理只在对应口播与条件成立后发生。按本章实际机制选择检查项，并正常播放相关片段，确认观众能看到原因、过程和结果，结果有稳定阅读时间；不只以静帧无遮挡判断通过。
+
 顺序约定：**先生成 `ch<N>-phrase-timing.json`，再写或改 `Chapter<N>.tsx`**。反过来会让 Studio 热更新记下“找不到模块”的错误，也可能让关键帧从旧包渲染。
 
 ## 预览与导出
+
+逐章制作、修改与审片只提供 Remotion Studio 预览，按需渲染静帧检查。不要导出章节 MP4，也不要为了备用或验证而额外导出；只有用户明确要求“出片”或“导出视频”时才生成 MP4，导出后的完整解码、波形与抽帧检查也留在出片阶段。
 
 ```bash
 node script/shared/tools/remotion.mjs typecheck --project script/what-is-kv-cache
@@ -195,7 +199,7 @@ node script/shared/tools/remotion.mjs still --project script/what-is-kv-cache --
 
 `still` / `render` 的后台渲染浏览器与 Studio 预览分开：macOS 有本机 Chrome 时共享入口自动使用，其他环境设 `REMOTION_BROWSER_EXECUTABLE`。
 
-只有用户明确授权「出片 / 渲染」后执行：
+只有用户明确授权「出片 / 导出视频」后执行：
 
 ```bash
 node script/shared/tools/remotion.mjs render --project script/what-is-kv-cache
@@ -213,6 +217,8 @@ node script/shared/tools/remotion.mjs render --project script/<topic> --detach
 render 先输出 `preview/render/remotion-raw.mp4`，再复制其 H.264 视频流，用项目 `deliveryAudio` 指定的混音（未设置时使用 `build/voiceover.wav`）重新编码 AAC、按总帧数截定时长，写到 `output/<project.outputName>`。这样处理已有导出中观察到的统一音频延迟；仍需实际验证。失败时不替换已有最终 MP4。
 
 `verify_export.py` 完整解码、核对尺寸帧率帧数、比较原配音与导出声音的同位置波形，生成每章截图与 `preview/export-check/report.json`。类型检查和截图通过不等于用户已验收，也不等于已发布。
+
+交付前查看最终 MP4 抽出的各章截图，并补查封面、章节衔接前后、关键状态变化与片尾；确认合成后没有空帧、旧画面、错误的状态结果或未完成的镜头动作。章节预览中的检查不能代替最终 MP4 检查；抽帧与检查结论留在项目 `preview/export-check/`。
 
 ## 成片版本管理
 
@@ -270,7 +276,7 @@ render 先输出 `preview/render/remotion-raw.mp4`，再复制其 H.264 视频�
 |`CheckpointIcon` 等 12 个|`Icons.tsx`|检查点、对话、依赖包、分块、发出邮件、回滚、齿轮、法槌、概率、哨子、点赞、关注|
 |`LevelStairs`、`QuizBoard`|`Quest.tsx`|闯关段位台阶、按配音入场的选项卡与答案揭晓；题目示意图、选项图标和时点由项目传入|
 |`AgentBot`、`UserIcon`、`UserBubble`|`Figures.tsx`|Agent 机器人头、用户头像、用户消息气泡；从 agent-intent-routing 提升，标签和颜色由项目传入|
-|`FigureFocus`、`focusAt`、`FocusNote`、`FocusRing`、`FigureRings`|`FigureFocus.tsx`|原稿配图镜头聚焦：按关键帧在原图上平移放大、拉回全图；`FocusRing` 在整图上用直角框框出当前栏，可带小标签（多栏信息图用它，不放大）；`fitBox` 取和原图同宽高比的取景框，带边框的配图必须用；children 叠加的标记随镜头移动；`FOCUS_BOX` + `FOCUS_GUIDE` 为左图右说明列布局，`FOCUS_BOX_WIDE` 为居中取景；`FigureRings` 是整图加按时点依次框选的常用组合（可选 `keys` 推近、`until` 让多个框同时保留）|
+|`FigureFocus`、`focusAt`、`FocusNote`、`FocusRing`、`FigureRings`|`FigureFocus.tsx`|原稿配图镜头聚焦：按关键帧在原图上平移放大、拉回全图；`FocusRing` 在整图上用直角框框出当前栏，可带小标签（需同时对照的多栏图优先整图圈选，局部聚焦须包住完整关系）；`fitBox` 取和原图同宽高比的取景框，带边框的配图必须用；children 叠加的标记随镜头移动；`FOCUS_BOX` + `FOCUS_GUIDE` 为左图右说明列布局，`FOCUS_BOX_WIDE` 为居中取景；`FigureRings` 是整图加按时点依次框选的常用组合（可选 `keys` 推近、`until` 让多个框同时保留）|
 |`ClaudeCodeWindow`、`CodexWindow`|`ProductWindows.tsx`|产品界面示意，稿子在演示产品操作时使用|
 |`ClaudeCodeTerminal`、`RecordingBadge`、`StatusRow`|`TuiRecording.tsx`|真实终端录制的还原：按 `record_tui.py` 录到的文字逐行出现，排队插话、输入框打字、Interrupted、完成行；录制标签（真实录制蓝色、对照录制铁锈橙）；终端旁状态栏的文件行。首用 agent-user-interjection 第一章|
 |`C`、`card`、`MONO`、`SERIF`、`Popped`、`Arrow`|`index.tsx`|全片色板、卡片样式（直角、3px 蓝色细边、无模糊灰色偏移阴影）、等宽和衬线字体、入场、箭头|
@@ -289,6 +295,7 @@ render 先输出 `preview/render/remotion-raw.mp4`，再复制其 H.264 视频�
 公开来源的查阅与截图属于制作素材；真实运行 Agent、调用模型 API 或登录后的操作演示仍按下一节的授权约定执行。
 
 - 搜索摘要用于找原页，实际打开官网、原论文或官方仓库核对目标段落。保留出处上下文，不用第三方转述支持“官方说”的结论。
+- 知乎页面直接用 Codex 内置浏览器（IAB）打开和截图，已有对应标签页时优先复用。遇到登录拦截时告知用户，等用户导入 session 后继续；不要求用户把 cookie 或 token 发到聊天里，也不将登录凭据写入项目或记忆。
 - 采集时先放临时目录，确认截图不是空白或加载占位后，将需要的素材复制到项目 `assets/images/`。PDF 可保留原文件于 `assets/references/`，以原文渲染页或完整段落入镜，不重新排版成假报告。网页截图不得改写原文、补造界面或将不同页面拼成一个现场。
 - 在 `assets/references/` 记录来源 URL、标题、日期或版本、页码或章节、获取日期、素材尺寸与 SHA-256；记录能支持当前口播的具体结论及限定。原文是区间时，不把上限当成唯一结果；内部实验、第三方结果、本人实测要区分。与口播不一致及用户保留配音的选择也记录在此。
 - 在 `OUTLINE.md` 写明对应 beat、先显示出处再聚焦证据的顺序。来源由可辨认的真实页面上下文和项目来源记录交代，不增加底部出处小字，也不额外叠加“官方指南／官方搜索语法”这类画外小标题；正文不改写，多栏图和对比图完整保留关系。原始证据不套共享色板重绘，新增标注与字幕沿用 `C`。

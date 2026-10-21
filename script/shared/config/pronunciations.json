@@ -317,9 +317,9 @@
     },
     {
       "id": "git",
-      "match": "(?i)(?<![A-Za-z])gitt?(?![A-Za-z])",
+      "match": "(?i)(?<![A-Za-z])git(?![A-Za-z])",
       "speakers": "*",
-      "note": "2026-10-20 用户要求研究并标准化。Git 统一为单音节 /ɡɪt/：g 如 give，短元音如 ship，末尾 t；不读成 get /ɡet/、/dʒɪt/ 或 G I T，不以“吉特”等中文谐音作为精确标准。Git 官方 README 说明命名背景，Cambridge 与 Oxford 词条给出音标。当前 S_j97bqlje2 音色曾把 Git 读成 get；gitt 也有异常识别记录，未验证为稳定替换，故只保留 watch，所有音色按同一目标逐处复听。字幕不变，ASR 不能代替发音验收，已认可配音不批量重做。 2026-10-20 用户复听明确指出 multi-agent-file-conflict beat 22、23 的 gitt 不符合标准，禁止把该候选当成功方案重复使用。两句改试 CMU 音素 G IH1 T 的单元级 SSML，接口已返回音频，仍待用户实听；不得仅以 ASR 写出 Git 验收。 同日用户回复“这次可以了”，明确认可当前 SSML 版 beat 22、23；成功范围限当前音色与这两句，不扩展为 gitt 或全部音色的通用替换。",
+      "note": "2026-10-20 Git 统一为单音节 /ɡɪt/：硬 g、短元音 /ɪ/、尾音 t。字幕和源稿保留 Git / git。已失败的近似拼写和中文谐音已从共享候选移除，不设全局替换。用户实际试听认可 S_j97bqlje2 音色在 multi-agent-file-conflict 第 22、23 段使用 CMU G IH1 T 的单元级 SSML；成功范围限下列完整句子与音色。新句子或音色先验证短样本，ASR 不能代替发音验收，已认可配音不批量重做。",
       "targetIPA": "/ɡɪt/",
       "sources": [
         "https://github.com/git/git/blob/master/README.md",
@@ -333,7 +333,10 @@
           "speakerId": "S_j97bqlje2",
           "method": "ttsSsml / cmu G IH1 T",
           "processedSha256": "fa0632bc385a177fa949b3ec491cc138db2f205410be14dde7d86aa24e862a6f",
-          "userAcceptedOn": "2026-10-20"
+          "userAcceptedOn": "2026-10-20",
+          "ttsText": "Claude Code 的 worktree，把冲突延迟到了合并那一步，Git 该报冲突还是会报，只不过需要人来处理。",
+          "ttsSsml": "<speak>Claude Code <phoneme alphabet=\"py\" ph=\"de5\">的</phoneme> worktree，把冲突延迟到了合并那一步，<phoneme alphabet=\"cmu\" ph=\"G IH1 T\">Git</phoneme> 该报冲突还是会报，只不过需要人来处理。</speak>",
+          "review": "script/multi-agent-file-conflict/preview/git-pronunciation/phoneme/review.json"
         },
         {
           "project": "multi-agent-file-conflict",
@@ -341,7 +344,10 @@
           "speakerId": "S_j97bqlje2",
           "method": "ttsSsml / cmu G IH1 T",
           "processedSha256": "f463dd28af1216f5cb7254bb99626c6258098a0512c51cdb36e9fad6962c9096",
-          "userAcceptedOn": "2026-10-20"
+          "userAcceptedOn": "2026-10-20",
+          "ttsText": "更麻烦的是语义冲突。Agent 张三把一个函数的返回值从字符串改成了对象。Agent 李四在另一个 worktree 里，没看到这个改动，照着旧的返回值类型写了一段函数调用代码。合并的时候，这两处改动在不同的文件里，Git 一个冲突都不报。可 merge 到一起之后，运行起来就有问题了。",
+          "ttsSsml": "<speak>更麻烦的是语义冲突。Agent 张三把一个函数的返回值从字符串改成了对象。Agent 李四在另一个 worktree 里，没看到这个改动，照着旧的返回值类型写了一段函数调用代码。合并的时候，这两处改动在不同的文件里，<phoneme alphabet=\"cmu\" ph=\"G IH1 T\">Git</phoneme> 一个冲突都不报。可 merge 到一起之后，运行起来就有问题了。</speak>",
+          "review": "script/multi-agent-file-conflict/preview/git-pronunciation/phoneme/review.json"
         }
       ]
     },
