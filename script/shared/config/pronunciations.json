@@ -390,6 +390,26 @@
         "S_j97bqlje2"
       ],
       "note": "2026-10-15 agent-requirement-clarification beat 3，用户指出独立短句“为什么？”读音有问题；ASR 原本仍转写为“为什么”。保持原句单独重合成，字幕不变；新音频须实际复听，不能据 ASR 判定声调或语气正确。"
+    },
+    {
+      "id": "changcheng-long-horizon",
+      "match": "长程",
+      "speakers": "*",
+      "targetPinyin": "cháng chéng",
+      "status": "user-specified",
+      "note": "2026-10-22 agent-todo-list 第一章，用户指定“执行长程任务”的“长”读 cháng（chang2），并在重配后回复“可以了，出片”。字幕保留长程；本期 beat 3 的单元级 SSML py chang2 已获实际试听认可。成功范围限该音色和完整句子，新句子仍需复听，不设全局替换。",
+      "validatedExamples": [
+        {
+          "project": "agent-todo-list",
+          "beatId": 3,
+          "speakerId": "S_j97bqlje2",
+          "method": "ttsSsml / py chang2",
+          "ttsText": "大模型执行长程任务时，工具返回的结果越来越多，最开始的目标很容易被淹没在后来的上下文当中。Todo List 主要解决两个问题，一是让模型把大的目标拆分成具体的步骤，通过不断重写清单，把目标和进度重新带到近期上下文，减少执行跑偏；二是把推理进度展示给用户看，让用户能在 Agent 跑偏之前及时纠正。",
+          "ttsSsml": "<speak>大模型执行<phoneme alphabet=\"py\" ph=\"chang2\">长</phoneme>程任务时，工具返回的结果越来越多，最开始的目标很容易被淹没在后来的上下文当中。Todo List 主要解决两个问题，一是让模型把大的目标拆分成具体的步骤，通过不断重写清单，把目标和进度重新带到近期上下文，减少执行跑偏；二是把推理进度展示给用户看，让用户能在 Agent 跑偏之前及时纠正。</speak>",
+          "processedSha256": "725383d0d1867a8160362ee77f407006ceef6732e9d1fa7a9b0bb35716394f4d",
+          "userAcceptedOn": "2026-10-22"
+        }
+      ]
     }
   ]
 }
