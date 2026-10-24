@@ -304,6 +304,14 @@
       ],
       "status": "candidate",
       "note": "2026-10-20 one-minute-rrf，RRF 按字母逐个读 R R F；字幕保留 RRF，待用户实听确认。"
+    },
+    {
+      "id": "freecad-spelled-cad",
+      "match": "(?i)(?<![A-Za-z])FreeCAD(?![A-Za-z])",
+      "replace": "free C A D",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-10-24 kimi-k3-1-pro 第一章，用户指定 FreeCAD 读 free C A D；free 读单词，CAD 逐字母读。只修改 ttsText，原稿和字幕保留 FreeCAD。本期全部两处同步修正；确认的是目标读法，新合成配音仍待实际试听。"
     }
   ],
   "watch": [

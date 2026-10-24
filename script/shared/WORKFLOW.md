@@ -28,6 +28,7 @@ script/
 │   ├── assets/interview/             面试头像及来源记录
 │   ├── assets/brands/                已核实来源的产品图标
 │   ├── assets/harness/               Harness 马具比喻的马匹图
+│   ├── assets/library/               王二讲 Agent 知识库真实录屏与来源
 │   ├── assets/sfx/                   提示音
 │   ├── tools/                       通用 Python / Node 命令
 │   └── remotion/
@@ -102,6 +103,16 @@ cp -n script/shared/assets/interview/ergo-facing-left.png script/<topic>/assets/
 用户认可的两张马匹图在 [assets/harness](assets/harness/)。`horse-bare.png` 是无马具版，`horse-with-tack.png` 是同一匹马、同一姿势的带马具版，均为朝右侧视的 1536×1024 透明 PNG，来源、生成提示词和哈希在同目录 `sources.json`。
 
 讲 Harness 的“野马套上缰绳和马鞍”比喻时，把两张 PNG 复制到本项目 `assets/images/`，`sources.json` 复制为 `assets/references/harness-horse-sources.json`。两张图保持相同位置和缩放，先显示无马具版，配音讲到缰绳、马鞍时短淡入带马具版，可小幅右移一次后稳定展示。时点按本项目真实音频定位，不重新生成，也不用手写几何 SVG 马替代。只提到 Harness、没有马具比喻时不插入马匹。
+
+## 开源知识库录屏复用
+
+已认可的知识库介绍布局为左侧本期主题名称加二哥头像，右侧真实飞书页面；自介接资料介绍共用连续场景。详细取舍见 Skill 的用户偏好「开源知识库展示」，实现样板是 `kimi-k3-1-pro/remotion/src/Chapter1.tsx` 中的 `Introduction`。
+
+共享素材在 [assets/library](assets/library/)：`feishu-agent-library.webm` 为用户指定的[王二讲 Agent 知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)单次连续原生录屏，`sources.json` 保存采集日期、来源、裁切范围与 SHA256。文件为 2420×1392、30fps、10.6 秒无音轨 WebM；已裁去账号与分享控制区，网页正文和目录未改写。首次约 5.6 秒保持全貌，随后真实缓慢滚动，末尾停留。
+
+使用时把 WebM 复制到本项目 `assets/videos/`，将来源记录复制为 `assets/references/feishu-library-source.json`，并确保 `remotion/public/videos` 能访问项目素材。用 `OffthreadVideo` 静音播放，按原始比例通过 `fitBox` 放入共享卡片，来源哈希可用于缓存更新。左侧主题按本期替换，二哥形象用共享 `HostCard`。
+
+动作对齐本期口播中介绍知识库的时点；可延长真实静止帧的停留，或裁短静止等待，不打乱录制顺序、不加速滚动。既有录屏可直接复用；若题数或页面内容已不适配本期确认稿，核对后按适用授权规则更新录屏，不能修改网页文字冒充实录或擅改原稿。只做 Studio 预览时无需导出章节 MP4。
 
 ## 内容和 beat 拆分
 

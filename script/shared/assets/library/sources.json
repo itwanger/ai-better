@@ -1,0 +1,38 @@
+{
+  "sourceUrl": "https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb",
+  "recordingMethod": "Native Chrome Page.startScreencast pixel frames from one uninterrupted page session",
+  "rawFrameCount": 35,
+  "recordingDurationSec": 10.615,
+  "sourcePixelSize": [
+    2420,
+    1520
+  ],
+  "contentCrop": [
+    0,
+    128,
+    2420,
+    1392
+  ],
+  "cropReason": "Exclude account/avatar/share controls in native document top bar; preserve document and catalog pixels",
+  "sha256": "de5814889cb664becfa1aa25c3d0add1c9e537fe729e49f9d2df606ee3ece7d6",
+  "manipulation": "No page DOM/content edits; only native mouse-wheel scrolling. Encoded in original frame sequence with measured timestamps; static intervals held. No concatenation of multiple sessions.",
+  "userAuthorization": "User explicitly requested recording this Feishu knowledge base for the self-introduction scene.",
+  "staticIntervals": "Source screencast emits on change; unchanged intervals, including final1.8 seconds, retain last observed frame at real recorded duration.",
+  "capturedDate": "2026-10-24",
+  "pageTitle": "AI Agent 面试题 363 道（Agent八股+视频讲解）｜王二讲Agent",
+  "file": "feishu-agent-library.webm",
+  "encodedDurationSec": 10.6,
+  "streams": [
+    {
+      "codec_name": "vp9",
+      "codec_type": "video",
+      "width": 2420,
+      "height": 1392,
+      "r_frame_rate": "30/1"
+    }
+  ],
+  "scrollOnsetApproxSec": 5.6,
+  "firstUseProject": "kimi-k3-1-pro",
+  "reuseAuthorization": "User requested this approved knowledge-library layout and recording be reused for future knowledge-library introductions.",
+  "snapshotNote": "The visible question count is the captured page content, not a permanent script value."
+}
