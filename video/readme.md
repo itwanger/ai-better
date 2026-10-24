@@ -22,7 +22,7 @@ date: 2026-05-20
 
 ![跟着王二讲Agent：通过完整题目系统学习，建立Agent时代的完整知识体系](https://cdn.paicoding.com/stutymore/agent-learning-completeness-20260908231154-003540aa.png)
 
-这套题库一共 370 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
+这套题库一共 363 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
 
 每道题都不是孤立的概念解释，而是串联到三个实战项目来回答。
 
@@ -40,7 +40,7 @@ date: 2026-05-20
 
 [飞书题库入口](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)：按分类浏览题目和详细答案，展开左上角目录即可切换阅读。
 
-> 分类与排序说明：题目按知识主题分类，网站侧边栏收录已完成的脚本；「热点解读」用于拆解模型发布和行业事件。每类已发布视频的题目按发布顺序倒序排列，新视频优先；尚未发布视频的题目保留在后面。原题号作为固定编号保留，不随展示顺序改变；疑似重复题仍保留，确认前暂不删除。
+> 分类与排序说明：题目按知识主题分类，网站侧边栏收录已完成的脚本；「热点解读」用于拆解模型发布和行业事件。每类已发布视频的题目按发布顺序倒序排列，新视频优先；尚未发布视频的题目保留在后面。普通题号作为固定编号保留，不随展示顺序改变；热点使用独立的 HOT-001 至 HOT-100 编号，当前收录 13 篇，预留容量不计入实际题数；疑似重复题仍保留，确认前暂不删除。
 
 你也可以加我的微信【备注AI】，小助理会拉你进AI交流群的。
 
@@ -48,9 +48,46 @@ date: 2026-05-20
   <img src="https://cdn.paicoding.com/stutymore/readme-cf1692c0ddb54b132f268f783c92c0f1.jpg" width="300px" alt="二哥狗腿子">
 </p>
 
-## 01、Agent 基础（43 题）
+## 01、Agent 基础（37 题）
 
 聚焦 Agent 的定义、工作方式、规划、反思和多 Agent 协作。部分新增题目参考了开源书《深入理解 AI Agent：设计原理与工程实践》（[bojieli/ai-agent-book](https://github.com/bojieli/ai-agent-book)）的章节结构和各章思考题。
+
+### 37. Agent 的 Todo List 有什么用？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+让模型把任务拆成一张清单，边做边更新状态。它解决两个问题。一是长任务里目标容易被越来越长的上下文稀释，Manus 在 2025 年 7 月的《Context Engineering for AI Agents》里提到，他们让 Agent 不断重写 todo.md，把目标复述到上下文的末尾，模型的注意力就不容易偏离。二是让人看得到进度，能在跑偏之前纠正。Claude Code 早期用 TodoWrite 一次覆写整张清单，现在默认换成了 TaskCreate、TaskUpdate、TaskList 这组工具，可以单独更新某一项的状态和依赖。Codex 用 update_plan，并在提示词里说明它只是进度清单，不代表进入 Plan 模式。Pi 则选择不内置，作者认为内置的 todo 会让模型困惑，建议直接写一个 TODO.md 文件。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnZNJSpenZU3RiLUfUtkkfxh) · [查看图文解析](./agent-todo-list.md)
+
+🟢 基础 | `→ Claude Code / Codex / PaiCLI`
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7699452593226960137)
+
+
+### 34. 多个 Agent 同时改一个文件怎么办？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+最好从设计上避免。拆分任务时按文件或模块划分边界，让每个 Agent 负责不同的文件。必须并行开发同一个仓库时，用 Git Worktree 给每个 Agent 一个独立的工作目录和分支，互不干扰，最后像合并人写的代码一样合并，冲突交给主 Agent 或人来解决，Claude Code 和 Codex 的并行任务都采用了这种隔离方式。同一个进程里并发写同一个文件，就按文件加锁串行执行，Pi 的 file-mutation-queue 按文件的真实路径排队，不同文件之间仍然并行。写入前还要检查文件在上次读取之后有没有被改过，被改过就重新读取，Claude Code 的 Edit 工具遇到这种情况会直接拒绝写入。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnF9VocGwj5gWO3RyFbsh3Td) · [查看图文解析](./multi-agent-file-conflict.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7698743831088467241)
+
+🔴 深入 | `→ PaiCLI`
+
+### 30. Tool 的设计原则是什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+按 Agent 要完成的任务来设计工具，而不是把后端接口一对一暴露出去。Anthropic 在 2025 年 9 月的《Writing effective tools for agents》里举过例子，与其提供 list_users、list_events、create_event 三个工具，不如提供一个 schedule_event。参数尽量少且类型明确，能用枚举就不用自由文本。描述写清什么时候用、什么时候不用，以及和相似工具的区别。返回结果只给高信息量的字段，过长就分页或截断，Claude Code 默认把工具返回限制在 25000 个 Token 以内。错误信息要告诉模型下一步怎么改，而不是只给一个错误码。权限不能交给模型判断，参数合法但业务非法的请求，比如查询别人的订单，由工具根据当前登录用户在内部校验。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn2zEUv80SYvpjrTO69YHUWf) · [查看图文解析](./tool-design-principles.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7698329222099520768)
+
+🟢 基础 | `→ PaiCLI`
 
 ### 32. 用户需求模糊时 Agent 怎么澄清？
 
@@ -119,6 +156,8 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 取消分两层。第一层是 Agent Loop，每一轮调用模型和执行工具之前都检查取消信号，收到就不再发起新的一步。第二层是正在执行的操作，模型的流式请求要中断连接，工具要能响应取消，比如 Java 里用 Future.cancel 配合线程中断，命令行进程要结束整个进程组。取消之后要给进行中的工具调用补一条“已被用户取消”的结果再写回会话，否则下一轮请求里会出现没有结果的工具调用，Anthropic 这类 API 会直接报错。前端断开 SSE 连接时，后端也要感知到并真正停止推理，不然 Token 还在继续消耗。如果用户只是补充要求而不是取消，更好的做法是把新消息排队，在当前这一步结束后注入上下文，Pi 的 steer 就是这样设计的。
 
 完整答案：[查看图文解析](./agent-task-cancellation.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnPfoDMGpArCPZ2fpjkFdqnb)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1Twpg6wEG2/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7693089537089604874)
 
@@ -473,86 +512,25 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7654443885439094042)
 
-### 30. Tool 的设计原则是什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-按 Agent 要完成的任务来设计工具，而不是把后端接口一对一暴露出去。Anthropic 在 2025 年 9 月的《Writing effective tools for agents》里举过例子，与其提供 list_users、list_events、create_event 三个工具，不如提供一个 schedule_event。参数尽量少且类型明确，能用枚举就不用自由文本。描述写清什么时候用、什么时候不用，以及和相似工具的区别。返回结果只给高信息量的字段，过长就分页或截断，Claude Code 默认把工具返回限制在 25000 个 Token 以内。错误信息要告诉模型下一步怎么改，而不是只给一个错误码。权限不能交给模型判断，参数合法但业务非法的请求，比如查询别人的订单，由工具根据当前登录用户在内部校验。
-
-🟢 基础 | `→ PaiCLI`
-
-### 33. Agent 执行跑偏怎么拉回来？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-跑偏通常有三个原因，目标在长上下文里被稀释，工具结果误导了判断，以及反复尝试同一种失败的方法。拉回来靠三件事。一是让目标一直可见，把任务目标和计划写成 todo list 或计划文件，每一步都能看到，上下文压缩时也保留。二是检测偏离，比如连续多次用相同参数调用同一个工具，或者多轮没有产生新进展，就判定为路径震荡，强制模型停下来反思或换一种方法。三是分阶段验证，长任务按阶段拆分，每个阶段用测试或检查结果确认后再进入下一阶段，出了问题从最近的 Checkpoint 回滚，而不是从头重跑。跑一整天的任务，还要设置总步数和 Token 预算的上限。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 34. 多个 Agent 同时改一个文件怎么办？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-最好从设计上避免。拆分任务时按文件或模块划分边界，让每个 Agent 负责不同的文件。必须并行开发同一个仓库时，用 Git Worktree 给每个 Agent 一个独立的工作目录和分支，互不干扰，最后像合并人写的代码一样合并，冲突交给主 Agent 或人来解决，Claude Code 和 Codex 的并行任务都采用了这种隔离方式。同一个进程里并发写同一个文件，就按文件加锁串行执行，Pi 的 file-mutation-queue 按文件的真实路径排队，不同文件之间仍然并行。写入前还要检查文件在上次读取之后有没有被改过，被改过就重新读取，Claude Code 的 Edit 工具遇到这种情况会直接拒绝写入。
-
-🔴 深入 | `→ PaiCLI`
-
-### 37. Agent 的 Todo List 有什么用？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-让模型把任务拆成一张清单，边做边更新状态。它解决两个问题。一是长任务里目标容易被越来越长的上下文稀释，Manus 在 2025 年 7 月的《Context Engineering for AI Agents》里提到，他们让 Agent 不断重写 todo.md，把目标复述到上下文的末尾，模型的注意力就不容易偏离。二是让人看得到进度，能在跑偏之前纠正。Claude Code 早期用 TodoWrite 一次覆写整张清单，现在默认换成了 TaskCreate、TaskUpdate、TaskList 这组工具，可以单独更新某一项的状态和依赖。Codex 用 update_plan，并在提示词里说明它只是进度清单，不代表进入 Plan 模式。Pi 则选择不内置，作者认为内置的 todo 会让模型困惑，建议直接写一个 TODO.md 文件。
-
-🟢 基础 | `→ Claude Code / Codex / PaiCLI`
-
-### 38. Durable Execution 和 Checkpoint 有什么区别？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-Checkpoint 是存档，Durable Execution（持久化执行）是一种执行语义，保证任务在进程崩溃、机器重启之后从中断的地方继续，已经完成的步骤不再重复执行。实现上通常记录每一步的输入和输出，恢复时按记录重放，遇到已完成的步骤直接取记录里的结果。LangGraph 的恢复不是从中断的那一行代码继续，而是从最近的检查点开始重放后面的步骤，所以官方要求把 API 调用、写文件这类有副作用的操作包进 task，重放时直接读取持久化的结果。Temporal、Inngest 走的是同一条路，Temporal 要求工作流代码是确定性的，副作用全部放进 Activity。对 Agent 来说，最危险的是重放时重复扣款、重复发消息，所以 Durable Execution 不能替代幂等设计。
-
-🔴 深入 | `→ PaiAgent`
-
-### 39. Handoff 和把 Agent 当作工具调用有什么区别？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-这是两种多 Agent 协作方式。Handoff 是移交控制权，当前 Agent 把对话整个交给另一个 Agent，由它直接和用户继续交互；Agent as Tool 是调用，主 Agent 把另一个 Agent 当成一个函数，传入结构化参数，拿回结果后自己继续。OpenAI Agents SDK 把 Handoff 也暴露成工具，移交给退款 Agent 就对应一个叫 transfer_to_refund_agent 的工具，由模型决定什么时候调用；还可以用 input_filter 过滤接收方能看到的历史，比如去掉之前所有的工具调用记录。客服场景里，前台把用户分流给退款、改签这类专员，适合 Handoff；需要汇总多个专家的意见再统一回答，适合 Agent as Tool，因为控制权始终在主 Agent 手里。
-
-🟡 进阶 | `→ PaiAgent`
-
-### 40. Agent 的凭证怎么管理？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-原则是密钥不进上下文，也不进 Agent 能读到的环境。放进提示词的密钥可能被提示词注入套出来，放进环境变量的密钥，Agent 执行一句 env 或者读一下 .env 文件就拿到了。常见做法是凭证代理，Agent 在沙箱里发出的请求不带真实凭证，请求离开沙箱时，由宿主机上的代理注入真实凭证，Agent 自始至终拿不到真正的 Key。Pi 的容器化文档里，Docker Sandboxes 方案就是这样，真实的 Provider 凭证留在宿主机，由代理替换，文档还特意提醒不要在沙箱里执行登录，因为那会把真实凭证写进沙箱。代表用户访问第三方服务时，用 OAuth 换取短期、最小权限的令牌，而不是使用用户的密码或长期 Key，所有使用记录都要进审计日志。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 41. 什么是 Agent 的 Headless 模式？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-不开交互界面，把 Agent 当成一个命令或一个库来调用，用在 CI、定时任务和自己的业务系统里。Claude Code 用 claude -p 执行一次任务后退出，配合 --output-format json 或 stream-json 输出结构化结果；Codex 对应的是 codex exec；Pi 除了交互模式，还有 print、JSON 和 RPC 三种模式，并提供 TypeScript SDK，官方文档强调所有界面共用同一套 Agent 和会话机制。Headless 的难点在于没有人可以审批，所以要提前把权限定死，比如 Claude Code 的 dontAsk 模式只放行预先批准的工具，其余一律拒绝；还要给任务设置步数、时间和成本的上限。需要嵌入得更深，就用 Claude Agent SDK 这类 SDK，在代码里直接拿到每一步的事件。
-
-🟢 基础 | `→ Claude Code / Codex / PaiCLI`
-
-### 42. Agent Framework、Runtime、Harness 有什么区别？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-LangChain 在 2025 年 10 月的博客《Agent Frameworks, Runtimes, and Harnesses- oh my!》里给过一个划分，LangChain 是 Framework，LangGraph 是 Runtime，DeepAgents 是 Harness。Framework 提供抽象，帮你更快地写出一个 Agent，比如 OpenAI Agents SDK、Vercel AI SDK、CrewAI。Runtime 在更底层，负责让 Agent 可靠地运行，提供 Durable Execution、流式输出、人工介入这些基础设施，Temporal、Inngest 也在这一层。Harness 在最上层，开箱即用，自带默认提示词、工具调用处理、规划工具和文件系统访问，Claude Code 就是典型。三者的边界并不绝对，LangGraph 既是 Runtime，也能当 Framework 用。一句话区分，Framework 管怎么写，Runtime 管怎么跑，Harness 管模型跑起来之后能看到什么、能做什么。
-
-🟡 进阶 | `→ PaiAgent / PaiCLI`
 
 ### 43. Computer Use 是什么？说说它的原理
 🟡 中等 | `AI / 大模型` | → PaiAgent / PaiCLI
 
-## 热点解读（12 题）
+## 02、热点解读（预留 100 篇，已收录 13 篇）
 
 模型发布和行业事件的快速拆解，面试聊到最新动态时用得上。
 
-### DeepSeek-V4.1-Flash-1017 真来了，这次是真滴强。
+### HOT-013. 真正的 OpenAI！DeepSeek 开源内部推理框架 DeepInfer
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+拆解 DeepInfer 的分离部署、KV Cache 存储、投机解码与异步调度，以及 deepseek-recipe 的协议转换和流式工具解析。
+
+完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnvfbHomZEVAFlg3uoUF3MRe) · [阅读全文《DeepInfer 开源》](./deepseek-open-source-deepinfer.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7699074728060816667)
+
+### HOT-012. DeepSeek-V4.1-Flash-1017 真来了，这次是真滴强。
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -562,7 +540,7 @@ LangChain 在 2025 年 10 月的博客《Agent Frameworks, Runtimes, and Harness
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7697933506416037146)
 
-### REA 保姆级教程：DeepSeek Harness 实操
+### HOT-011. REA 保姆级教程：DeepSeek Harness 实操
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -572,7 +550,7 @@ REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7696102369058196736)
 
-### 最近爆火的 Personal Agent 到底是什么？
+### HOT-010. 最近爆火的 Personal Agent 到底是什么？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -583,7 +561,7 @@ REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，�
 抖音视频：[观看本集视频](https://www.douyin.com/video/7695348838801886499)
 
 
-### Claude Haiku 5.5 怎么在成本和智能之间做选择？
+### HOT-009. Claude Haiku 5.5 怎么在成本和智能之间做选择？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -591,9 +569,11 @@ REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，�
 
 完整内容：[阅读全文《Claude Haiku 5.5 解读》](./claude-haiku-5-5.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnoAiq8fR9jVWeczNVjGoQie)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1YBn16iEuN/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7694223913370258729)
 
-### CPU、GPU、NPU 到底有什么区别？
+### HOT-008. CPU、GPU、NPU 到底有什么区别？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -601,9 +581,11 @@ REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，�
 
 完整内容：[阅读全文《CPU、GPU、NPU 的区别》](./cpu-gpu-npu-difference.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnEQp2HuPJVzfYbflqUpCfpg)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1YWnz6QEr9/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7693854535088868643)
 
-### Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？
+### HOT-007. Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -611,9 +593,11 @@ Kolibri 用 78B 总参数、3.46B 激活参数降低每次推理的计算量，�
 
 完整内容：[阅读全文《Kolibri 解读》](./aleph-alpha-kolibri.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn6e2SW7YQEFrvYi1Yc8aGih)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1TFpg6YEz3/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7693484001561972019)
 
-### Gemini 4 Argon 发布，100 万 Token 输出意味着什么？
+### HOT-006. Gemini 4 Argon 发布，100 万 Token 输出意味着什么？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -625,7 +609,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV18vpg6zEox/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7691703611381894415)
 
-### MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？
+### HOT-005. MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？
 
 HySparse2 将模型分成 Self-Decoder 和 Cross-Decoder：前半段保留全注意力与滑动窗口，后半段结合全注意力与稀疏注意力。通过模块内部 KV Reuse 和跨段 KV Bridging，让后半段复用或从前半段计算 KV Cache，使 Prefill 提前结束，减少长输入和工具返回内容带来的计算成本。
 
@@ -636,7 +620,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV19uaZ6PEi1/)
 抖音视频：[观看本集视频](https://www.douyin.com/video/7689435090677402895)
 
 
-### 推荐 5 个复刻 Jev 的开源项目
+### HOT-004. 推荐 5 个复刻 Jev 的开源项目
 
 开源社区在 48 小时内复刻出了 Jev，思路是扔掉全量语言模型头，换成轻量决策头，冻结底层参数只挂 LoRA 微调，块因果掩码让单次前向并发完成多项决策。文中盘点 Kev（Qwen3.5 基座，兼容官方 SDK，本地首选）、Nimble（对比数据构建，准确率 90.1%）、Laya（ModernBERT 双向编码器，单次 33 毫秒）、Open-Jev（截流下一个 token 的概率对数）四个项目，以及意图路由、工具护栏、历史剪枝三个落地入口。
 
@@ -646,7 +630,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1zzaZ6CEbM/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7688302955489021238)
 
-### 不生成文本的 Jev，为什么让 14 万开发者排队？
+### HOT-003. 不生成文本的 Jev，为什么让 14 万开发者排队？
 
 Jev 是 TypeSafe AI 9 月 15 日发布的 System One 模型，不生成文本，只做判断。给它一段应用状态和一个预定义的结构化问题，它用一次前向计算直接在选项上分配概率，支持是否、单选、打分三种决策。它用 RLCD 训练校准过的置信度，比同类 LLM 快 40 到 200 倍，便宜 40 到 400 倍。Agent 里意图路由、审核、风控初筛这类高频小决策交给它，复杂推理仍然交给大模型。
 
@@ -656,21 +640,22 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7687944233659026722)
 
-### GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？
+### HOT-002. GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？
 
 GPT-6 Astra 在 ARC-AGI-3 上拿到 99.9%，靠的是紧凑符号世界模型加有状态的 Harness。它能直接操作电脑，网络安全等级首次达到 Critical。模型越强，Harness 的设计就越关键。
 
 完整内容：[阅读全文《GPT-6 Astra 解读》](./gpt-6-astra.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnp9S8C6LB632Cn2gMicQp5d)
 
-### Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？
+### HOT-001. Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？
 
 官网和 API 共用 Cloudflare 做流量入口，入口挂了就全挂。中转还能跑，是因为 OpenAI 兼容协议让切换模型零成本，而各家模型的能力和风格已经趋同到难以分辨。文中给了三个验证中转到底在调谁的方法。
 
 完整内容：[阅读全文《官网全崩中转为什么还能用》](./why-relay-still-works.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnRxRSfq7atYGxxjXecbYBcb)
 
-## 02、上下文与记忆（22 题）
+## 03、上下文与记忆（20 题）
 
 聚焦上下文窗口、Context Engineering、短期记忆、长期记忆、压缩、检索与会话隔离。
+
 
 ### 52. Agent 的长期记忆怎么实现？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
@@ -827,447 +812,7 @@ FIFO 最大的坑是把重要但不常用的记忆淘汰掉了。
 ### 63. 同一个用户在私聊和群组里和 Agent 对话，应该共享会话还是隔离？OpenClaw 是怎么设计会话隔离粒度的？
 🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
 
-### 64. Agent 的短期记忆和长期记忆分别怎么实现？
-
-<p class="agent-duplicate-question"><span>REVIEW</span> 疑似重复 · 待确认：与「怎么让 Agent 拥有记忆？」等 3 道已更新记忆题内容重合</p>
-短期记忆就是当前对话上下文，长期记忆需要持久化存储跨会话的事实。
-
-🟡 进阶 | `→ PaiCLI` | 淘天、快手
-
-### 65. LLaMA 模型中，输入句子的长度理论上是否可以无限长？
-
-<p class="agent-duplicate-question"><span>REVIEW</span> 疑似重复 · 待确认：与「为什么 LLM 的上下文窗口不能无限大？」内容重合</p>
-🔴 困难 | `自然语言处理（NLP） / 大语言模型` | → PaiCLI / PaiAgent 大模型应用基础
-
-## 03、Harness 与 Skills（42 题）
-
-聚焦模型之外保障 Agent 稳定运行的工程系统，包括循环、Skills、评测、安全、权限、可观测性、成本、容错和发布。
-
-### 92. Agent 系统怎么做容错？单点故障怎么处理？
-工具调用失败要有重试和降级策略，模型 API 挂了要能自动切换到备用模型，消息队列保证异步任务不丢。PaiAgent 的节点执行失败会把 status 设为 FAILED 并记录 errorMessage，上层可以根据失败类型决定重试还是跳过。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnTfg8ll63Eha14Jn1c3B3zc) · [查看图文解析](./deepseek-outage-agent-fallback.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7697192412568980763)
-
-🟡 进阶 | `→ PaiAgent FAILED 状态 + 错误记录`
-
-### 67. 什么是 Loop Engineering？
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-ReAct 是 Agent 的内循环，推理、行动、观察、重复。Loop Engineering 是外循环，像 crontab 一样调度，让 Agent 按预设节奏无人值守工作。Claude Code 有两种实现，/goal 设定完成条件，独立评估器每轮检查，满足就停，适合一次性任务；/loop 设定时间间隔重复执行，不自动停，适合持续巡检，但很烧 Token。Harness 管单条指令执行安全，Loop 管你睡觉后 Agent 还在跑。
-
-完整答案：[阅读全文《Loop Engineering》](./what-is-loop-engineering.md) · [B站视频](https://www.bilibili.com/video/BV1q5NQ6pEPg/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnWfRMnCDmT5qTzs5SHqN6Mb)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7662238546815634729)
-
-### 66. 什么是 Harness Engineering？
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-提示词工程管“怎么说”，上下文工程管“知道什么”，Harness Engineering 管“能做什么、不能做什么”，即 Agent 的运行时环境和安全边界。Harness 有四个核心组件，验证循环让 Agent 写完代码先跑测试再修复，错误恢复处理调错工具和死循环，权限控制让危险操作经人工确认，状态管理让 Agent 挂了能从断点恢复。Agent = 模型 + Harness，模型只管思考和生成，Harness 管剩下的所有事。
-
-完整答案：[阅读全文《Harness Engineering》](./what-is-harness-engineering.md) · [B站视频](https://www.bilibili.com/video/BV185NC6nEho/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcngtGwUyQUg7o2wi3kMo0ISc)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7661856429820661007)
-
-### 68. Agent 挂了几十个 Skill，怎么保证命中率？
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-Skill 的选择不走路由，走 LLM 语义匹配。Agent 启动时把所有 description 注入 system prompt，LLM 自己判断触发哪个，命中率全看 description 怎么写。所以要写具体场景和触发关键词，一个 Skill 只干一件事，语义重叠的 Skill 要么合并要么划清边界，只该由斜杠命令触发的设 disable-model-invocation 防误触。数量膨胀就分组做两阶段匹配，别盲目堆。
-
-完整答案：[阅读全文《Skill 命中率》](./agent-skill-hit-rate.md) · [B站视频](https://www.bilibili.com/video/BV1Lfjy6bEKY/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnaDBJAyXHsrp5vuODpWY3RS)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7654468095473356070)
-
-### 69. Skill 正文是怎么进入上下文的？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-规范只规定加载时序，目录先于正文可见，正文被选中后按需加载，消息角色由 Harness 决定。Claude Code 里两条路径落点相同，正文都作为 user message 追加在调用位置。用户输入斜杠命令时客户端在本地展开，轨迹里没有工具调用；模型读目录后自己判断需要，则调用 Skill 工具，多一次 ReAct 往返，返回的 tool result 只是一句占位符。Codex 每轮重新渲染 Skills 目录作为 developer 片段，正文以带 skill 标记的 user 片段注入。
-
-🔴 深入 | `→ PaiCLI`
-
-### 70. 一份可用的 Skill 应该包含哪几部分？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-参考宝玉《图解 Skill》的四部分。角色与读者，说明服务谁、面向什么任务、输出标准。核心原则，只留三到五条最重要的判断，配正例和反例。禁止清单，记录高频错误、越权动作和容易误解的表达，同时写清合法例外。参考资料，放术语表、模板、范文和子文档。规则尽量写成「作用域 + 动作 + 例外 + 验证方式」，不要堆成越来越长的禁用词表。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 71. 工具的风险等级怎么按参数动态判断？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-风险等级不能只绑在工具名上，要落到参数上。把判定写成确定性规则而不是交给模型，路径是否在项目目录内、是否命中系统路径或受保护文件、操作是否可逆、影响范围多大，命中高风险条件就升级到人工确认。判定必须由上下文之外的代码完成，否则会和被注入的 Agent 一起沦陷。
-
-🔴 深入 | `→ PaiCLI`
-
-### 72. 需要人工确认但用户不在线，Agent 该怎么办？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-先区分触发原因，超过失败阈值和遇到高风险操作是两类。等待期间不能空转烧 token，应该把状态持久化后挂起，并把已完成的、待确认的和被阻塞的部分写清楚，用户回来能接上。可以先做不依赖答案的部分，涉及不可逆操作的一律不猜。指令模糊时给出自己的假设和选项，而不是反复追问。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 73. Pass@k 和 Pass^k 有什么区别？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-Pass@k 是同一任务跑 k 次至少一次通过，看的是能力上限，适合科研探索、漏洞挖掘、开放式创作这类挑一条最好轨迹就有价值的场景。Pass^k 是连续 k 次每次都通过，且不能触发安全、合规、幻觉的一票否决，看的是可靠性。单次成功率 0.6 时，Pass@5 约 99%，Pass^5 只有约 7.8%。支付、退款、权限变更、生产部署这类场景要看后者。评估报告必须写清 k 次的口径。
-
-🔴 深入 | `→ PaiCLI`
-
-### 74. LLM-as-a-Judge 有什么已知偏差？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-最典型是长度偏差，倾向给更长更详尽的回复打高分，哪怕内容并不更正确。三种防范手段，在 Rubric 里显式惩罚冗长并规定长度上限，配对比较时先把两个候选的长度控制到相近，定期审计评分与长度的相关性。Rubric 本身要满足四条准则，基于专家指导、全面覆盖并写明陷阱、按重要性加权并支持一票否决、评价标准自包含可验证。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 75. Agent 的失败轨迹怎么做归因？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-归因对象是轨迹里首个导致任务偏离的错误，后续错误往往只是连锁反应。edit_file 匹配失败后连续三次重试，主因是工具调用错误，三次重试是后果而不是三个根因。归因记录要结构化，引用步骤号、工具名和观察证据。很多失败并不报错，比如 Agent 在第 8 步的思考里已经承认没拿到数据却继续推进，之后所有输入都基于编造的数据。根因还要分清是模型问题还是 Harness 问题，纯文本 Agent 读不了图片，该补的是观察通道，不是换模型。
-
-🔴 深入 | `→ PaiCLI`
-
-### 76. 评估分差 3 个点，能据此切换模型吗？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-不能。100 个用例、成功率 70% 时，95% 置信区间约正负 9 个百分点，3 个点的差异在噪声之内。正确做法是配对分析，两个配置共享同一批任务和随机种子，逐题记录谁胜出，用 McNemar 检验或配对 bootstrap 判断。每个配置跑 3 到 5 个种子，报告均值和波动。预期收益只有两三个点而评估集只有几十题时，先扩大样本。
-
-🔴 深入 | `→ PaiCLI`
-
-### 77. 多轮工具调用，怎么判断该继续调用还是该停？
-两种策略：一是模型自己判断（返回的 finish_reason 不含 tool_calls 时停止），二是工程侧兜底（设最大迭代次数）。
-
-🟡 进阶 | `→ PaiCLI` | 淘天
-
-### 78. Token 预算管理怎么做？
-在模型调用前估算本次请求的 token 用量，如果超预算就先压缩上下文。PaiCLI 支持 Prompt Cache 可视化，让用户能看到每次请求的 token 消耗分布（系统提示词占了多少、历史对话占了多少、工具描述占了多少），方便针对性优化。
-
-🟡 进阶 | `→ PaiCLI 动态预算 + Prompt Cache 可视化`
-
-### 79. 大模型部署有哪些主流方案？vLLM、TGI、llama.cpp 怎么选？
-vLLM（PagedAttention，显存利用率高，适合高并发在线服务）、TGI（HuggingFace 出品，和 HF 生态集成好）、llama.cpp（C++ 实现，CPU/低端 GPU 也能跑）、SGLang（RadixAttention，适合复杂 Prompt 复用场景）。生产环境高并发首选 vLLM。
-
-🟡 进阶
-
-### 80. 有没有用过大模型网关框架？网关层解决了什么问题？
-大模型网关（如 LiteLLM、OneAPI）统一管理多个模型提供商的 API 密钥、请求路由、限流、重试、负载均衡。PaiAgent 的 ChatClientFactory 其实就承担了部分网关职责，根据节点配置动态路由到不同的模型服务。生产环境建议上专门的网关。
-
-🟡 进阶 | `→ PaiAgent ChatClientFactory 路由功能`
-
-### 81. Agent 系统从 demo 到生产级落地要走哪些流程？
-需求定义 → 技术选型 → 原型验证 → 工具集成 → 评测体系搭建 → 安全审计 → 灰度发布 → 监控告警。PaiAgent 的完整落地历程就经历了这些阶段，从单节点 DAG 到 LangGraph4j 双引擎的演进过程本身就是很好的面试素材。
-
-🟡 进阶 | `→ PaiAgent 从 DAG 到 LangGraph4j 的演进` | 万类智生、蚂蚁、字节、腾讯
-
-### 82. Agent 的执行效果怎么评估？
-三个维度：任务完成率（Agent 能不能把事干完）、回答质量（输出是否准确有用）、用户满意度（人工评分或隐式反馈）。PaiAgent 的执行记录会以成功/失败状态写入数据库，方便后续统计分析。量化指标能拿出来说的候选人凤毛麟角。
-
-🔴 深入 | `→ PaiAgent 执行记录 + 状态追踪` | 数坤科技、字节
-
-### 83. 大模型能力评测指标有哪些？
-通用能力看 MMLU（多学科知识）、HumanEval（代码生成）、GSM8K（数学推理）。中文场景看 C-Eval、CMMLU。对话能力看 MT-Bench、Chatbot Arena ELO 排名。RAG 场景看 RAGAS。选型时不能只看一个榜，要结合自己场景做私有评测。
-
-🟡 进阶
-
-### 84. Agent 响应太慢怎么优化？
-工程侧：工具调用并行化、缓存高频查询结果、流式输出减少用户等待感。基座侧：用更快的模型做初筛（比如 Haiku），复杂任务再调大模型。PaiAgent 的 TTS 模块就用了 CompletableFuture 做并行处理，多个音频片段同时生成。
-
-🟡 进阶 | `→ PaiAgent CompletableFuture 并行 / PaiCLI 多模型切换`
-
-### 85. Agent 系统有哪些安全风险？怎么防范？
-三大风险：Prompt Injection（恶意指令注入）、沙箱逃逸（Agent 执行了不该执行的系统命令）、越权操作（Agent 访问了不该访问的数据）。PaiCLI 的防范体系包括 HITL 人工审批、路径围栏、命令黑名单、结构化审计日志四道防线。
-
-🔴 深入 | `→ PaiCLI 四道安全防线`
-
-### 86. Skill 预置知识包机制是什么？怎么设计的？
-Skill 是把某个专业领域的最佳实践封装成结构化知识包，Agent 执行任务时自动加载对应 Skill 的指南和参考文档。PaiAgent 的 SkillRegistry 在应用启动时一次性加载所有 Skill 到 ConcurrentHashMap，支持全量注入和渐进式加载两种模式。PaiCLI 也有独立的 Skill 系统，还多了站点经验库的积累能力。
-
-🟡 进阶 | `→ PaiAgent SkillRegistry / PaiCLI Skill + 站点经验`
-
-### 87. 多工具调度引擎怎么设计？工具之间有依赖怎么处理？
-核心是拓扑排序。先分析工具之间的输入输出依赖关系，构建 DAG，然后按拓扑序执行。PaiAgent 的 GraphBuilder 就是干这事的，通过边的 source/target 关系构建执行图，没有入边的节点先执行。
-
-🔴 深入 | `→ PaiAgent GraphBuilder 拓扑构建` | 字节、阿里云
-
-### 88. Agent 流式输出怎么设计？怎么提升用户体验？
-模型还在“想”的时候就开始给用户展示中间结果。PaiCLI 在 ReAct 循环中实时展示 Thought（“我在想...”）、Action（“正在调用 xxx 工具”）、Observation（“工具返回了...”），让用户看到 Agent 的思考过程而不是干等一个最终结果。
-
-🟡 进阶 | `→ PaiCLI ReAct 过程可视化`
-
-### 89. Agent 系统的可观测性怎么做？需要监控哪些指标？
-核心指标：请求成功率、平均响应时间、token 消耗量、工具调用成功率、模型 API 错误率。PaiAgent 的每次工作流执行都记录完整的执行日志（每个节点的输入输出、耗时、状态），出了问题能快速定位是哪个节点挂了。
-
-🟡 进阶 | `→ PaiAgent 执行日志 + 节点级追踪`
-
-### 90. Agent 灰度发布怎么做？
-不能一次性把新版 Agent 推给所有用户。常见做法是按用户 ID 或流量比例分桶，先让 5% 的用户用新版，观察一段时间（错误率、满意度）没问题再逐步扩大。PaiAgent 可以通过工作流配置实现 A/B 测试，同一个任务走两套不同的节点编排。
-
-🟡 进阶 | `→ PaiAgent 工作流 A/B 配置`
-
-### 91. Agent 系统的成本怎么控制？
-大模型 API 按 token 计费，成本失控是真实风险。控制手段：设用户级别的 token 配额、用小模型做初筛（PaiCLI 支持多模型切换）、Prompt Cache 减少重复计算、批量请求合并。派聪明就设了聊天消息每分钟 30 次的速率限制。
-
-🟡 进阶 | `→ PaiCLI 多模型切换 / 派聪明速率限制`
-
-### 93. 数据标注在 Agent 项目中有多重要？怎么做？
-评测数据集需要人工标注“标准答案”，Prompt 优化需要标注“好回答 vs 坏回答”，微调需要高质量的指令-回答对。标注质量直接决定了模型效果的上限。可以用 AI 辅助标注（先让模型生成初版，人工校正），效率能提升 3-5 倍。
-
-🟡 进阶
-
-### 94. Agent 项目如何处理合规与用户隐私？
-用户输入可能包含敏感信息（个人信息、商业机密），不能直接存储或发送给第三方模型。处理方式：输入脱敏、审计日志加密、模型 API 选择数据不出境的国内厂商、用户明确授权后才开启数据收集。派聪明的多租户隔离也是合规要求之一。
-
-🟡 进阶 | `→ 派聪明多租户隔离`
-
-### 95. 你在 Agent 项目中遇到的最大技术挑战是什么？
-开放题，但最能看出候选人的真实水平。建议准备 2-3 个真实案例：一个架构层面的（比如 PaiAgent 从 DAG 引擎迁移到 LangGraph4j 双引擎的决策过程），一个工程层面的（比如 PaiCLI 上下文爆炸的优化方案），一个业务层面的（比如派聪明多租户权限隔离的需求变更）。
-
-🔴 深入 | `→ 三个项目各准备一个案例`
-
-### 96. 什么是护栏技术？
-护栏是保障 Agent 行为安全可控的分层防线，按被绕过的难度分三层。上下文层管模型能看到什么，在内容进入上下文前拦截，相关性分类器、安全分类器、内容审核、基于规则的过滤都在这一层，但同一上下文里的 Agent 很难判断自己是否已被注入，所以这层只能降低攻击成功率。执行层管模型能做什么，核心是工具风险评级，高风险操作由上下文之外的机制复核，独立审查进程、最小权限凭证、沙盒、人在回路。数据层管世界最终能被改成什么样，行级安全策略、约束校验器、受控视图，即使注入得手，越权操作也在这层被拒绝。护栏还有误拒绝这类失败，评估时也要测明确允许的请求能否正常完成。
-🟢 简单 | `AI / 大模型` | → PaiAgent / PaiCLI
-
-### 97. OpenClaw 的核心组件有哪些？请描述它们之间的关系
-🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
-
-### 98. 如果一个 Agent 系统要同时接入 Web、飞书、钉钉等渠道，你会怎么设计渠道抽象层？OpenClaw 的 Channel Plugin 接口是怎么设计的？
-🟢 简单 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
-
-### 99. 如何设计和管理 AI Agent 的 Skills 体系？在实际项目中有哪些挑战？
-🟡 中等 | `AI / 大模型 / Agent / Skills` | → PaiAgent / PaiCLI
-
-### 100. 同一个系统里可能有多个 Agent，不同渠道用户群组的消息需要路由到不同的 Agent。你会怎么设计这个路由？OpenClaw 的路由匹配优先级是怎样的？
-🟡 中等 | `AI / OpenClaw / 大模型应用开发 / Agent开发 / AI应用开发` | → PaiAgent / PaiCLI
-
-### 101. 同一个工具（比如「执行命令」）在不同场景下应该有不同的权限。你会怎么设计工具的权限控制？OpenClaw 的工具策略管道是怎么分层的？
-🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
-
-### 102. Agent 系统中 Hook 中间件模式有什么用？能举几个典型场景吗？OpenClaw 的 Hook 系统是怎么设计的？
-🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
-
-### 103. 父 Agent spawn 子 Agent 时，有哪些边界问题需要考虑？OpenClaw 做了哪些限制和保护？
-🟡 中等 | `AI / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
-
-### 104. OpenClaw 采用插件架构，第三方可以注册新渠道、工具、Hook。设计一个插件系统需要考虑哪些关键问题？OpenClaw 的插件 API 长什么样？
-🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
-
-### 105. OpenClaw 的 Gateway 对 Agent 请求做了幂等性处理。为什么 Agent 系统特别需要幂等性？工具已经产生副作用时怎么办？
-🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
-
-### 106. 如果一个GPU集群的LLM处理能力为1000tokenss，那1000个用户同时并发访问，响应给每个用户的性能只有1 tokens吗？怎么分析性能瓶颈
-🟡 中等 | `后端 / 场景题 / 大模型` | → PaiCLI / PaiAgent
-
-### 107. 什么是 AI 编程中的自动修复循环（Auto-fix Loop）？它的工作流程和退出策略怎么设计？
-🟢 简单 | `AI Coding / 自动修复循环 / 退出策略` | → PaiCLI / PaiAgent
-
-## 04、RAG知识库（43 题）
-
-聚焦文档解析、分块、向量检索、混合搜索、Rerank、Agentic RAG、权限隔离与生产优化。
-
-### 108. Agent 的 RAG 遇到 PDF 怎么办？
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-PDF 是排版格式不是数据格式，纯文本抽取碰到扫描件、表格、图表就失效。解析先判断类型，电子 PDF 用 PyMuPDF、pdfplumber 拿文字和坐标，扫描件和复杂表格上 OCR 或多模态模型，表格转成 Markdown Table 或 JSON 单独存。分块按标题层级、段落、表格来分。Agent 场景把读上一页、查原始表格封装成 Tool，让 LLM 自己判断证据够不够。延迟靠入库时缓存解析结果，证据不足才让多模态模型精读。
-
-完整答案：[阅读全文《RAG 处理 PDF》](./agent-rag-pdf.md) · [B站视频](https://www.bilibili.com/video/BV1FSKZ62ETR/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn34x2K9IbUl7Mu67r9YXLkg)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7657063729804152074)
-
-### 109. RAPTOR 和 GraphRAG 分别擅长什么查询？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-RAPTOR 自底向上递归聚类摘要，形成从细节到概括的树，适合「从概念逐步钻进细节」的查询。GraphRAG 把知识建模为实体关系图，强在多跳关系推理和实体消歧，适合「A 和 B 是什么关系」的查询。判断标准很简单，查询主要是「找到包含某信息的片段」，混合检索就够了；经常需要跨文档综合或多层次导航，才值得付出索引和查询时多次 LLM 调用的代价。
-
-🔴 深入 | `→ 派聪明`
-
-### 110. 什么是知识库的文件系统范式？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-以火山引擎开源的 OpenViking 为代表，把记忆、资源、技能都映射成虚拟文件系统里的目录和文件，每个目录自动生成 L0 一句话摘要、L1 概览、L2 全文三层，大部分查询到 L1 就能决策。底层用 Markdown 纯文本，用户可以直接读和改，可以 Git 版本控制和回滚，Agent 也能自主写入。前提是文件之间必须建立链接和索引，像 Wikipedia 那样互相引用，否则知识越多越难检索。
-
-🟡 进阶 | `→ 派聪明`
-
-### 111. 什么是上下文感知检索（Contextual Retrieval）？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-Anthropic 提出的做法，在向量化之前先用 LLM 给每个分块生成一段包含来源和背景的前缀，比如「本段节选自 ACME 公司 2025 年 Q2 财报的关键业绩指标章节」，再拼接索引。它同时增强稀疏检索和稠密检索，前缀给 BM25 补了可精确匹配的关键词，给向量补了语义背景。Anthropic 的数据是结合 BM25 可将检索失败率降低 49%，再结合重排序降幅达 67%。区别在于，上下文感知检索发生在索引期，对知识库分块做加法；上下文感知压缩发生在运行期，对对话历史做减法。
-
-🟡 进阶 | `→ 派聪明`
-
-### 112. 为什么需要 RAG？直接把文档塞给大模型不行吗？
-上下文窗口有限、塞太多 token 费钱又慢、模型对长文档的“注意力”分配不均匀（中间内容容易被忽略）。RAG 的核心价值是“先检索再生成”，只把最相关的片段喂给模型。
-
-🟢 基础 | `→ 派聪明整体架构` | 字节、淘天
-
-### 113. RAG 和微调怎么选？各自适合什么场景？
-RAG 适合知识频繁更新、需要溯源的场景（客服、文档问答）；微调适合需要改变模型行为风格、固定领域的场景（医疗、法律术语）。可以先微调让模型熟悉领域术语，再用 RAG 补充最新知识。
-
-🟢 基础 | `→ 派聪明（RAG 路线）`
-
-### 114. 描述一下完整的 RAG 系统工作流程？
-文档索引（解析→分块→向量化→入库）→ 查询处理（查询向量化→KNN 召回→关键词匹配与权限过滤→BM25 rescore）→ 生成（拼接检索结果 + 用户问题→LLM 生成→引用标注）。
-
-🟢 基础 | `→ 派聪明完整实现` | 字节、快手
-
-### 115. 文档分块策略怎么设计？chunk 大小怎么定？
-
-🟡 进阶 | `→ 派聪明 ParseService` | 快手、字节、Moka、阿里
-
-### 116. 怎么规避语义被切割掉的问题？
-三个手段：重叠切分（相邻 chunk 留重叠区）、按自然语义边界切分（段落、句号、标题）、递归切分（先按大结构切，不够再细分）。
-
-🟡 进阶 | `→ 派聪明`
-
-### 117. Embedding 模型怎么选型？维度越高越好吗？
-不是。维度高意味着存储成本高、检索速度慢。
-
-🟡 进阶 | `→ 派聪明 Embedding 2048 维` | 快手、阿里
-
-### 118. Embedding 有哪几种算法？各自的特点是什么？
-Word2Vec（静态词向量，不考虑上下文）、BERT 类（双向编码，适合短文本语义匹配）、Sentence Transformers（专门做句子级别嵌入）、BGE/GTE 系列（中文优化，MTEB 榜单前列）。派聪明默认走阿里 text-embedding-v4，维度 2048，也预留了智谱 embedding-3 这类 OpenAI 兼容 Embedding Provider 的切换路径。
-
-🟡 进阶 | `→ 派聪明选型依据`
-
-### 119. 向量数据库怎么选型？你们项目用的哪个？
-主流选择：Milvus（大规模分布式）、Qdrant（Rust 高性能）、Weaviate（GraphQL 友好）、Elasticsearch（已有 ES 集群就直接用）、Chroma/FAISS（轻量原型验证）。派聪明选了 ES，因为团队本身就熟悉 ES 生态，不需要额外引入新组件。
-
-🟡 进阶 | `→ 派聪明 ES 8.10 + dense_vector` | 字节、快手
-
-### 120. RAG 怎么做向量和关键词的混合检索？
-纯向量检索懂语义但会漏掉错误码、型号这类精确字面，BM25 认得准字面却不认识同义说法，所以要两路一起召回。两路分数不能直接加权相加，向量相似度最高只有 1，BM25 分数没有固定的最大值，命中关键词多的查询会让 BM25 主导排序。派聪明的 HybridSearchService 让 BM25 和 KNN 并行召回，每路 min(topK×30, 300) 条，KNN 内部用 userId、orgTag、public 做权限预过滤；再用 RRF 按名次融合，得分为 1/(60+名次) 之和；最后取 RRF 前 50 条交给 gte-rerank-v2 精排，保留 0.1 分以上的结果。阈值从 0.2 降到 0.1 后，分块级 Recall@5 从 56.5% 升到 76.1%。一路召回失败时用另一路继续融合，Rerank 失败时按 RRF 顺序加阈值返回。
-
-完整答案：[阅读全文《RAG 混合检索》](./rag-hybrid-search.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnsTq6XmaIFH9prCANbT8Usd)
-
-🟡 进阶 | `→ 派聪明 HybridSearchService BM25 + KNN + RRF + Rerank` | 快手、字节
-
-### 121. 什么是 Query Rewrite？为什么需要改写用户查询？
-用户提问偏口语化、模糊、有歧义。Query Rewrite 把用户原始问题改写成更适合检索的形式，比如补全指令、拆分意图、扩展同义词等。派聪明当前是查询向量化 + KNN/BM25 混合检索，Query Rewrite 可以作为检索增强点继续接入。
-
-🟡 进阶 | `→ 派聪明可扩展` | 快手、阿里
-
-### 122. 什么是多路召回？具体怎么做？
-同一个查询走多条检索通道（向量召回、关键词召回、知识图谱召回），每条通道返回一批候选，最后合并去重排序。派聪明当前更准确地说是 KNN 召回叠加关键词约束和 BM25 rescore，不是完全独立的多路召回；后续可以扩展成向量、关键词、知识图谱等多路候选合并。多路召回的核心价值是降低单一路径漏召回的风险。
-
-🟡 进阶 | `→ 派聪明 KNN + BM25 rescore，可扩展多路召回` | 快手、字节
-
-### 123. 为什么检索之后还需要 Rerank？
-向量检索是“粗筛”，召回量大但排序不够精准。Rerank 可以用交叉编码器对 query 和每个候选文档做精细打分，把最相关的排到前面。派聪明当前采用的是 KNN 召回后再用 BM25 rescore 做第二阶段排序，独立 Rerank 可以作为后续增强。
-
-🟡 进阶 | `→ 派聪明 KNN 召回 + BM25 rescore` | 快手
-
-### 124. Rerank 的 Top-K 怎么确定？
-没有银弹。一般先设一个较大的召回窗口，然后在测试集上逐步缩小，找到精度和延迟的平衡点。K 太大增加排序和上下文拼接成本，K 太小可能漏掉相关文档。派聪明现在的思路是 topK 放大召回窗口，再用 BM25 rescore 精确结果。
-
-🟡 进阶 | `→ 派聪明召回窗口与 rescore 权重` | 快手
-
-### 125. RAG 系统怎么评测？核心指标有哪些？
-检索阶段看召回率（Recall）、精准率（Precision）、MRR（平均倒数排名）。生成阶段看忠实度（Faithfulness，答案是否基于检索到的内容）、相关性（Relevancy）。RAGAS 框架把这套评测体系标准化了。
-
-🟡 进阶 | `→ 派聪明 RAG 评测指标` | 快手、Moka
-
-### 126. 向量数据库里的历史文档怎么做时间衰减？
-老文档的信息可能过时了，但向量相似度不会因为时间变化而降低。解决方案：给检索分数乘以一个时间衰减因子（比如指数衰减），或者在索引里加时间字段做过滤。
-
-🟡 进阶 | `→ 派聪明 ES 元数据过滤可扩展` | 快手
-
-### 127. 在什么场景下会用图数据库来增强向量检索？
-当知识之间有复杂的关联关系时（比如“A 公司收购了 B 公司，B 公司的 CEO 是 C”），纯向量检索很难捕捉这种关系。图数据库（Neo4j、NebulaGraph）擅长处理实体关系查询，和向量检索配合可以回答“C 现在在哪家公司任职”这类需要推理的问题。
-
-🔴 深入 | `→ 派聪明未来可扩展方向`
-
-### 128. Agentic RAG 和传统 RAG 的核心区别？
-传统 RAG 是“检索→生成”的单次流水线。Agentic RAG 给 RAG 加了 Agent 能力，模型可以判断“这次检索结果不够好，换个关键词再搜一次”，或者“这个问题需要先查 A 再查 B 最后综合”。派聪明的 ReAct 循环和 AgentToolRegistry 里的 search_knowledge 工具，就是把知识库检索变成 Agent 可调用工具的实现。
-
-🟡 进阶 | `→ 派聪明 ReAct + search_knowledge 工具`
-
-### 129. 处理长文档时怎么避免 OOM？
-派聪明在 ParseService 里做了两个关键设计：一是流式分块处理，避免一次性把整个文档加载进内存；二是内存阈值保护，运行时内存占用超过 80% 会先触发 GC，复查后仍超阈值才拒绝继续处理。大文件场景下，这比单纯扩大 JVM 堆更稳。
-
-🟡 进阶 | `→ 派聪明流式处理 + 内存阈值保护`
-
-### 130. RAG 知识库怎么实现动态更新？
-文档更新后要同步更新向量索引。派聪明通过 Kafka 异步处理文件上传队列（默认 topic 为 file-processing-topic1），新文档上传后自动触发“解析→分块→向量化→入库”的完整流程，不需要手动重建索引。删除文档时同步清理对应的向量记录。
-
-🟡 进阶 | `→ 派聪明 Kafka 异步更新`
-
-### 131. 多租户场景下 RAG 的权限隔离怎么做？
-派聪明用了三层权限过滤：userId（用户私有文档）、orgTag（组织级隔离）、isPublic（公开标志）。检索时在 ES 查询里加 filter 条件，确保 A 公司的人搜不到 B 公司的文档。这道题在 ToB 方向的公司面试里高频出现。
-
-🟡 进阶 | `→ 派聪明 userId + orgTag + isPublic 三层过滤`
-
-### 132. 在 RAG 应用中为了优化检索精度，其中的数据清洗和预处理怎么做？
-🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
-
-### 133. 什么自查询？为什么在 RAG 中需要自查询？
-🟢 简单 | `AI / 大模型 / RAG` | → 派聪明
-
-### 134. 什么提示压缩？为什么在 RAG 中需要提示压缩？
-🟢 简单 | `AI / 大模型 / RAG` | → 派聪明
-
-### 135. 在 RAG 中，索引流程中的文档解析你们怎么做的？
-🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
-
-### 136. 向量数据库中的 HNSW、LSH、PQ 分别是什么意思？
-🟡 中等 | `AI / 大模型 / RAG / 向量数据库` | → 派聪明
-
-### 137. 向量数据库中的 ANN 是什么？为什么需要用它？
-🟡 中等 | `AI / 大模型 / RAG / 向量数据库` | → 派聪明
-
-### 138. 向量数据库中，常见的向量搜索方法：余弦相似度、欧几里得距离和曼哈顿距离分别是什么？有什么区别？
-🟡 中等 | `AI / 大模型 / RAG / 向量数据库` | → 派聪明
-
-### 139. 什么是 Advanced RAG？
-🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
-
-### 140. 什么是 Modular RAG？
-🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
-
-### 141. 什么是上下文查询增强？它有什么作用？如何基于 Spring AI 实现上下文查询增强来处理无关问题？
-🟡 中等 | `后端` | → 派聪明
-
-### 142. 什么是 Spring AI 提出的模块化 RAG 架构？预检索、检索和后检索阶段各自负责什么？
-🟡 中等 | `后端` | → 派聪明
-
-### 143. 你有多个知识库，做 RAG 的时候，怎么保证查询效率和准确性兼容，并尽可能减少幻觉？
-🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
-
-### 144. 如何构建和使用向量索引？HNSW 和 IVF 有什么区别？
-🟡 中等 | `RAG / 向量索引` | → 派聪明
-
-### 145. RAG 检索时相似度阈值如何设置？设置不当有什么影响？
-🟡 中等 | `RAG / 相似度阈值` | → 派聪明
-
-### 146. RAG 系统如何利用元数据过滤提升检索精度？
-🟡 中等 | `RAG / 元数据过滤` | → 派聪明
-
-### 147. 如何处理 RAG 检索不到相关文档的情况？
-🟡 中等 | `RAG / 检索失败处理` | → 派聪明
-
-### 148. RAG 系统如何标注信息来源和提供引用？
-🟡 中等 | `RAG / 引用标注` | → 派聪明
-
-### 149. RAG 系统在生产环境中如何优化性能和降低成本？
-🔴 困难 | `RAG / 性能优化` | → 派聪明
-
-### 150. RAG 系统如何处理 PDF、Word、Markdown 等不同格式文档？
-
-<p class="agent-duplicate-question"><span>REVIEW</span> 疑似重复 · 待确认：与「Agent 的 RAG 遇到 PDF 怎么办？」内容重合</p>
-🟡 中等 | `RAG / 文档处理` | → 派聪明
-
-## 05、LLM 基础与 API（82 题）
+## 04、LLM 基础与 API（82 题）
 
 聚焦 NLP、Transformer、模型结构、推理机制、API、缓存、Token、结构化输出和模型服务。
 
@@ -1626,6 +1171,180 @@ KV Cache 缓存已计算的 Key/Value 矩阵，避免每生成一个新 token �
 
 🟡 进阶 | `→ PaiCLI Prompt Cache 可视化`
 
+## 05、模型训练与微调（32 题）
+
+聚焦预训练、SFT、RLHF、DPO、LoRA、PEFT、量化、蒸馏、数据集与训练资源。
+
+### 337. 什么是模型蒸馏（Knowledge Distillation）？它和模型量化有什么区别？
+比较黑盒、白盒和在轨蒸馏，区分蒸馏、量化和 SFT，并说明蒸馏授权和数据来源的边界。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnUvHeHnlzDKLdM17o2acLOc) · [查看图文解析](./what-is-model-distillation.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7697583864511761698)
+
+🟢 简单 | `大模型 / 模型蒸馏 / 模型量化` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 318. 大模型预训练完了，为什么还要做强化学习？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+预训练是自监督学习，模型靠遮住词自己猜来刷题，学到的是知识。强化学习没有老师也没有教材，模型直接和环境互动，答对给奖励，答错给惩罚，靠试错调整策略。DeepSeek-R1-Zero 没用任何标注数据，纯靠 RL 让模型自己学会了推理，训练中涌现出「等一下，让我重新想想」这样的反思。各家往 RL 砸钱，是因为高质量预训练数据快用完了，RL 只需要一个能判断对错的奖励信号。小米 MiMo-V2.6 的 RL 训练每步约 20 亿 token，4 万多个沙箱并行。
+
+完整答案：[阅读全文《什么是强化学习》](./what-is-reinforcement-learning.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnOs8QKsBv0mgLOfyzmILLse)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1A8aZ6DERC/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7686739151072365839)
+
+🟢 基础 | `→ DeepSeek R1 / MiMo`
+
+### 319. 大模型是怎么训练出来的？预训练→SFT→RLHF 三阶段讲一下？
+预训练（在海量无标注文本上学语言能力）→ SFT（用人工标注的指令-回答对微调，学会“听话”）→ RLHF（用人类偏好反馈做价值观校准，学会“说人话”）。三阶段花费依次降低但重要性递增。
+
+🟡 进阶 | 字节、腾讯
+
+### 320. 大模型微调有哪些方案？LoRA 的原理是什么？
+全量微调（改所有参数，贵）、LoRA（冻结原始权重，只训练低秩分解矩阵，参数量减少 99%+）、QLoRA（量化 + LoRA，更省显存）、Adapter（在层间插入小模块）、Prefix Tuning（只调前缀向量）。LoRA 是目前性价比最高的方案。
+
+🟡 进阶 | 字节、阿里
+
+### 321. SFT 之后还有哪些 Post-Training？RLHF、DPO、GRPO 什么关系？
+SFT 让模型学会格式和基本能力，Post-Training 让模型学会“什么样的回答更好”。RLHF 用奖励模型 + PPO 训练，DPO 去掉奖励模型直接用偏好对训练，GRPO 去掉 Critic 网络用组内相对比较。进化路径是越来越简化训练流程。
+
+🔴 深入 | 作业帮、腾讯
+
+### 322. DPO 和 PPO 的区别是什么？
+PPO 需要先训一个奖励模型，再用奖励模型的分数做策略梯度优化，流程复杂。DPO 直接用偏好数据对（好回答 vs 坏回答）优化策略，把奖励模型隐式地融入到损失函数里，训练更简单稳定。
+
+🔴 深入 | 腾讯、三七互娱
+
+### 323. 大模型量化是什么？INT8/INT4/AWQ/GPTQ 怎么选？
+把模型参数从 FP16 压缩到 INT8/INT4，显存占用直接减半或减四分之三。GPTQ 是训后量化（快但精度损失稍大），AWQ（Activation-aware）考虑激活值分布做量化（精度更好），INT4 省显存最多但精度损失最大。实际选型看你的显卡显存和精度要求。
+
+🟡 进阶
+
+### 324. 微调中常用的优化器有哪些？
+🟡 中等 | `大模型 / AI / 微调 / 优化器` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 325. 微调的过拟合风险如何通过正则化缓解？
+🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 326. 在多模态微调（如图文生成）中，如何确保文本和图像数据的对齐质量？
+🔴 困难 | `大模型 / AI / 微调 / 多模` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 327. 参数高效微调（PEFT）如何减少计算成本？
+🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 328. 冻结层在微调中的作用是什么？
+🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 329. 为什么需要混合精度训练？
+🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 330. 模型输出重复和幻觉如何微调解决？
+🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 331. 微调大模型需要什么样的硬件？7B 和 70B 模型分别需要多少显存？
+🟢 简单 | `大模型 / 微调 / 显存评估` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 332. 2026 年主流的微调工具有哪些？Unsloth、Axolotl、TRL 各有什么特点？
+🟢 简单 | `大模型 / 微调工具 / Unsloth / Axolotl / TRL` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 333. LoRA 的超参数应该怎么设置？有什么经验法则？
+🟢 简单 | `大模型 / LoRA / 超参数` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 334. 对比 LoRA、QLoRA、DoRA 和全量微调，在不同场景下应该如何选择？
+🟢 简单 | `大模型 / LoRA / QLoRA / DoRA / 全量微调` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 335. ORPO 是什么？它如何将指令微调和偏好对齐合二为一？
+🟢 简单 | `大模型 / ORPO / 偏好对齐` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 336. 如何构建高质量的 SFT 微调数据集？数据质量和数量哪个更重要？
+🟢 简单 | `大模型 / SFT / 数据集构建` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 338. 大模型的训练和推理分别是什么？它们在计算资源需求上有什么区别？
+🟢 简单 | `大模型 / 训练 / 推理 / 资源评估` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 339. 什么是大模型的参数量？参数量和模型能力之间是什么关系？
+🟢 简单 | `大模型 / 参数量 / 模型能力` | → PaiAgent / PaiCLI 模型工程面试扩展
+
+### 340. Mid-training 是什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+Mid-training 沿用预训练的下一个词目标，把数据分布收窄到目标领域，混入通用保留数据控制遗忘，对整段文档的全部 token 算损失。它回答的是模型有没有完成任务所需的知识和基本能力，SFT 回答的是回答长什么样。判断方法是在留出任务上测 pass@1 和 pass@k，pass@k 仍接近 0 说明正确策略根本不在模型分布里，RL 和 SFT 都没东西可放大，先做 Mid-training。用少量问答 SFT 硬塞事实，只会记住问法。
+
+🔴 深入 | `→ PaiCLI`
+
+### 341. SFT 和 RL 的本质区别是什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+SFT 在数学上和预训练是同一个任务，都是预测下一个词，区别只有数据换成输入输出示范对，以及损失只算在回答部分。它最大化标注回答的概率，样本效率极高，擅长固化格式、风格、流程这类协议性知识，但示范不够多样时容易对表面模式过拟合。RL 最大化期望奖励，模型探索多条路径并提高高奖励路径的概率，能发现示范里没有的策略，代价是样本效率低几十到上百倍、训练不稳定。一句话，SFT 细致学习已有地图，RL 拿着奖励这枚指南针探索地图外的路线。
+
+🟡 进阶 | `→ PaiCLI`
+
+### 342. 怎么判断该做 Mid-training、SFT 还是 RL？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+先排除不需要改权重的方案，Prompt、工具、代码约束、上下文管理能解决就不训练，事实需要频繁更新优先 RAG。再在留出集上测能力支持，不只看 pass@1，还看 pass@k、部分进展率、格式解析率，并人工审计失败原因。pass@k 近零且失败集中在知识和基础能力，先 Mid-training；会做但不按要求做，用 SFT 立协议；已有非零成功率和可靠奖励、只是好策略概率低，才上 RL。全零 rollout 上直接加 PPO 或 GRPO 只会消耗采样预算。
+
+🔴 深入 | `→ PaiCLI`
+
+### 343. 结果奖励和过程奖励怎么选？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结果奖励只在结束时判成败，最简单，探索自由度最大，但反馈稀疏，长轨迹难归因；「是否完成」的判定要交给模型写不了的隐藏测试，不能只看模型自己声称完成。过程奖励在中间步骤给反馈，缓解信用分配，但可能把模型限制在设计者预设的路径上，标注成本也高。工程上先用结果奖励建基线，再只为真正可验证的中间事件加过程信号。
+
+🔴 深入 | `→ PaiCLI`
+
+### 344. 什么是 RLVP？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+RLVP（Reinforcement Learning with Verified Penalty）的原则是奖励结果、惩罚路径。结果奖励只能说明事情有没有办成，说明不了是否按规定办成，Agent 可能靠改测试文件、跳过身份验证拿到表面成功。RLVP 对可机器判定的违规动作逐动作扣分，结果奖励始终保留，避免模型学会什么都不做。它只针对结果中性的路径约束，不能替代对交付完整性和早停行为的独立检查。
+
+🔴 深入 | `→ PaiCLI`
+
+### 345. 什么是在轨蒸馏（On-Policy Distillation）？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+区别在于谁生成学生要学习的状态前缀。SFT 的轨迹由人类或教师采样，监督密集但只覆盖教师会走到的状态，学生一旦犯了教师不会犯的错就进入陌生前缀。RL 在学生自己的状态上训练，但通常只有轨迹结束时一个成败信号。在轨蒸馏把两者组合，学生决定走到哪里，教师在学生已经走到的位置给出下一步的完整 token 分布，一条长度 T 的轨迹产生约 T 组逐 token 监督。数学任务上达到同等性能的训练步数约为纯 RL 的十分之一。没有更强的教师时可以用在轨自蒸馏，让同一个模型看到标准答案的版本当教师。
+
+🔴 深入 | `→ PaiCLI`
+
+### 346. 编辑文件经常失败，该改 Harness 还是后训练？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+先归因再决定。沿「文件字节、工具返回、Harness 序列化、模型上下文、模型输出、解析、工具匹配」这条链路逐层对比，工具或 Harness 改变了字节就归因给它们，改代码就行。只有模型收到的上下文和原始字符串完全一致，而模型输出是链路上首个出现差异的位置，才算模型的精确复制问题，才进后训练候选。书里用 LoRA SFT 把随机字符串的逐字节抄写准确率从 37.5% 提到 78.9%。
+
+🔴 深入 | `→ PaiCLI`
+
+### 347. Coding Agent 过早结束，怎么用后训练修？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+先用 Harness 兜底，模型宣称完成时在隔离工作区跑它看不到的验收测试。要训练的话，把首个错误定位在「准备宣称完成」这个决策边界，构造偏好对做 DPO，被拒绝的是过早结束，被选中的是先跑测试再下结论。评估时边界集和保留集缺一不可，保留集确认任务真完成时模型还敢收尾，否则会训成永远不敢结束的过度矫正。
+
+🔴 深入 | `→ PaiCLI`
+
+### 348. 微调时怎么缓解灾难性遗忘？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+优先 LoRA，原权重冻结，对基座已有能力的扰动更小，但不是免疫。数据上按小配比混入通用任务数据，Mid-training 也要混通用保留语料。评估上边界集和保留集缺一不可，训练后抽查通用能力，确认补丁没有破坏其他能力。只盯着目标任务的指标，会把过拟合当成进步。
+
+🟡 进阶 | `→ PaiCLI`
+
+### 349. 在多模态微调中，如何确保文本和图像数据的对齐质量？有哪些技术挑战？
+
+<p class="agent-duplicate-question"><span>REVIEW</span> 疑似重复 · 待确认：与同分类的「如何确保文本和图像数据的对齐质量？」内容重合</p>
+🟢 简单 | `大模型 / 多模态微调 / 数据对齐` | → PaiAgent / PaiCLI 模型工程面试扩展
+
 ## 06、Claude Code与Codex（17 题）
 
 聚焦 Claude Code、Codex 及其背后的代码理解、上下文管理、诊断、审查、回滚和自动修复能力。
@@ -1859,7 +1578,238 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1uopu6vEPg/)
 ### 269. 什么是思维树 Tree of Thoughts？它相比 CoT 有什么优势？
 🔴 困难 | `Prompt / 思维树` | → PaiCLI / PaiAgent
 
-## 09、MCP 与工具调用（26 题）
+## 09、Harness 与 Skills（42 题）
+
+聚焦模型之外保障 Agent 稳定运行的工程系统，包括循环、Skills、评测、安全、权限、可观测性、成本、容错和发布。
+
+### 92. Agent 系统怎么做容错？单点故障怎么处理？
+工具调用失败要有重试和降级策略，模型 API 挂了要能自动切换到备用模型，消息队列保证异步任务不丢。PaiAgent 的节点执行失败会把 status 设为 FAILED 并记录 errorMessage，上层可以根据失败类型决定重试还是跳过。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnTfg8ll63Eha14Jn1c3B3zc) · [查看图文解析](./deepseek-outage-agent-fallback.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7697192412568980763)
+
+🟡 进阶 | `→ PaiAgent FAILED 状态 + 错误记录`
+
+### 67. 什么是 Loop Engineering？
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+ReAct 是 Agent 的内循环，推理、行动、观察、重复。Loop Engineering 是外循环，像 crontab 一样调度，让 Agent 按预设节奏无人值守工作。Claude Code 有两种实现，/goal 设定完成条件，独立评估器每轮检查，满足就停，适合一次性任务；/loop 设定时间间隔重复执行，不自动停，适合持续巡检，但很烧 Token。Harness 管单条指令执行安全，Loop 管你睡觉后 Agent 还在跑。
+
+完整答案：[阅读全文《Loop Engineering》](./what-is-loop-engineering.md) · [B站视频](https://www.bilibili.com/video/BV1q5NQ6pEPg/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnWfRMnCDmT5qTzs5SHqN6Mb)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7662238546815634729)
+
+### 66. 什么是 Harness Engineering？
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+提示词工程管“怎么说”，上下文工程管“知道什么”，Harness Engineering 管“能做什么、不能做什么”，即 Agent 的运行时环境和安全边界。Harness 有四个核心组件，验证循环让 Agent 写完代码先跑测试再修复，错误恢复处理调错工具和死循环，权限控制让危险操作经人工确认，状态管理让 Agent 挂了能从断点恢复。Agent = 模型 + Harness，模型只管思考和生成，Harness 管剩下的所有事。
+
+完整答案：[阅读全文《Harness Engineering》](./what-is-harness-engineering.md) · [B站视频](https://www.bilibili.com/video/BV185NC6nEho/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcngtGwUyQUg7o2wi3kMo0ISc)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7661856429820661007)
+
+### 68. Agent 挂了几十个 Skill，怎么保证命中率？
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+Skill 的选择不走路由，走 LLM 语义匹配。Agent 启动时把所有 description 注入 system prompt，LLM 自己判断触发哪个，命中率全看 description 怎么写。所以要写具体场景和触发关键词，一个 Skill 只干一件事，语义重叠的 Skill 要么合并要么划清边界，只该由斜杠命令触发的设 disable-model-invocation 防误触。数量膨胀就分组做两阶段匹配，别盲目堆。
+
+完整答案：[阅读全文《Skill 命中率》](./agent-skill-hit-rate.md) · [B站视频](https://www.bilibili.com/video/BV1Lfjy6bEKY/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnaDBJAyXHsrp5vuODpWY3RS)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7654468095473356070)
+
+### 69. Skill 正文是怎么进入上下文的？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+规范只规定加载时序，目录先于正文可见，正文被选中后按需加载，消息角色由 Harness 决定。Claude Code 里两条路径落点相同，正文都作为 user message 追加在调用位置。用户输入斜杠命令时客户端在本地展开，轨迹里没有工具调用；模型读目录后自己判断需要，则调用 Skill 工具，多一次 ReAct 往返，返回的 tool result 只是一句占位符。Codex 每轮重新渲染 Skills 目录作为 developer 片段，正文以带 skill 标记的 user 片段注入。
+
+🔴 深入 | `→ PaiCLI`
+
+### 70. 一份可用的 Skill 应该包含哪几部分？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+参考宝玉《图解 Skill》的四部分。角色与读者，说明服务谁、面向什么任务、输出标准。核心原则，只留三到五条最重要的判断，配正例和反例。禁止清单，记录高频错误、越权动作和容易误解的表达，同时写清合法例外。参考资料，放术语表、模板、范文和子文档。规则尽量写成「作用域 + 动作 + 例外 + 验证方式」，不要堆成越来越长的禁用词表。
+
+🟡 进阶 | `→ PaiCLI`
+
+### 71. 工具的风险等级怎么按参数动态判断？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+风险等级不能只绑在工具名上，要落到参数上。把判定写成确定性规则而不是交给模型，路径是否在项目目录内、是否命中系统路径或受保护文件、操作是否可逆、影响范围多大，命中高风险条件就升级到人工确认。判定必须由上下文之外的代码完成，否则会和被注入的 Agent 一起沦陷。
+
+🔴 深入 | `→ PaiCLI`
+
+### 72. 需要人工确认但用户不在线，Agent 该怎么办？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+先区分触发原因，超过失败阈值和遇到高风险操作是两类。等待期间不能空转烧 token，应该把状态持久化后挂起，并把已完成的、待确认的和被阻塞的部分写清楚，用户回来能接上。可以先做不依赖答案的部分，涉及不可逆操作的一律不猜。指令模糊时给出自己的假设和选项，而不是反复追问。
+
+🟡 进阶 | `→ PaiCLI`
+
+### 73. Pass@k 和 Pass^k 有什么区别？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+Pass@k 是同一任务跑 k 次至少一次通过，看的是能力上限，适合科研探索、漏洞挖掘、开放式创作这类挑一条最好轨迹就有价值的场景。Pass^k 是连续 k 次每次都通过，且不能触发安全、合规、幻觉的一票否决，看的是可靠性。单次成功率 0.6 时，Pass@5 约 99%，Pass^5 只有约 7.8%。支付、退款、权限变更、生产部署这类场景要看后者。评估报告必须写清 k 次的口径。
+
+🔴 深入 | `→ PaiCLI`
+
+### 74. LLM-as-a-Judge 有什么已知偏差？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+最典型是长度偏差，倾向给更长更详尽的回复打高分，哪怕内容并不更正确。三种防范手段，在 Rubric 里显式惩罚冗长并规定长度上限，配对比较时先把两个候选的长度控制到相近，定期审计评分与长度的相关性。Rubric 本身要满足四条准则，基于专家指导、全面覆盖并写明陷阱、按重要性加权并支持一票否决、评价标准自包含可验证。
+
+🟡 进阶 | `→ PaiCLI`
+
+### 75. Agent 的失败轨迹怎么做归因？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+归因对象是轨迹里首个导致任务偏离的错误，后续错误往往只是连锁反应。edit_file 匹配失败后连续三次重试，主因是工具调用错误，三次重试是后果而不是三个根因。归因记录要结构化，引用步骤号、工具名和观察证据。很多失败并不报错，比如 Agent 在第 8 步的思考里已经承认没拿到数据却继续推进，之后所有输入都基于编造的数据。根因还要分清是模型问题还是 Harness 问题，纯文本 Agent 读不了图片，该补的是观察通道，不是换模型。
+
+🔴 深入 | `→ PaiCLI`
+
+### 76. 评估分差 3 个点，能据此切换模型吗？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+不能。100 个用例、成功率 70% 时，95% 置信区间约正负 9 个百分点，3 个点的差异在噪声之内。正确做法是配对分析，两个配置共享同一批任务和随机种子，逐题记录谁胜出，用 McNemar 检验或配对 bootstrap 判断。每个配置跑 3 到 5 个种子，报告均值和波动。预期收益只有两三个点而评估集只有几十题时，先扩大样本。
+
+🔴 深入 | `→ PaiCLI`
+
+### 77. 多轮工具调用，怎么判断该继续调用还是该停？
+两种策略：一是模型自己判断（返回的 finish_reason 不含 tool_calls 时停止），二是工程侧兜底（设最大迭代次数）。
+
+🟡 进阶 | `→ PaiCLI` | 淘天
+
+### 78. Token 预算管理怎么做？
+在模型调用前估算本次请求的 token 用量，如果超预算就先压缩上下文。PaiCLI 支持 Prompt Cache 可视化，让用户能看到每次请求的 token 消耗分布（系统提示词占了多少、历史对话占了多少、工具描述占了多少），方便针对性优化。
+
+🟡 进阶 | `→ PaiCLI 动态预算 + Prompt Cache 可视化`
+
+### 79. 大模型部署有哪些主流方案？vLLM、TGI、llama.cpp 怎么选？
+vLLM（PagedAttention，显存利用率高，适合高并发在线服务）、TGI（HuggingFace 出品，和 HF 生态集成好）、llama.cpp（C++ 实现，CPU/低端 GPU 也能跑）、SGLang（RadixAttention，适合复杂 Prompt 复用场景）。生产环境高并发首选 vLLM。
+
+🟡 进阶
+
+### 80. 有没有用过大模型网关框架？网关层解决了什么问题？
+大模型网关（如 LiteLLM、OneAPI）统一管理多个模型提供商的 API 密钥、请求路由、限流、重试、负载均衡。PaiAgent 的 ChatClientFactory 其实就承担了部分网关职责，根据节点配置动态路由到不同的模型服务。生产环境建议上专门的网关。
+
+🟡 进阶 | `→ PaiAgent ChatClientFactory 路由功能`
+
+### 81. Agent 系统从 demo 到生产级落地要走哪些流程？
+需求定义 → 技术选型 → 原型验证 → 工具集成 → 评测体系搭建 → 安全审计 → 灰度发布 → 监控告警。PaiAgent 的完整落地历程就经历了这些阶段，从单节点 DAG 到 LangGraph4j 双引擎的演进过程本身就是很好的面试素材。
+
+🟡 进阶 | `→ PaiAgent 从 DAG 到 LangGraph4j 的演进` | 万类智生、蚂蚁、字节、腾讯
+
+### 82. Agent 的执行效果怎么评估？
+三个维度：任务完成率（Agent 能不能把事干完）、回答质量（输出是否准确有用）、用户满意度（人工评分或隐式反馈）。PaiAgent 的执行记录会以成功/失败状态写入数据库，方便后续统计分析。量化指标能拿出来说的候选人凤毛麟角。
+
+🔴 深入 | `→ PaiAgent 执行记录 + 状态追踪` | 数坤科技、字节
+
+### 83. 大模型能力评测指标有哪些？
+通用能力看 MMLU（多学科知识）、HumanEval（代码生成）、GSM8K（数学推理）。中文场景看 C-Eval、CMMLU。对话能力看 MT-Bench、Chatbot Arena ELO 排名。RAG 场景看 RAGAS。选型时不能只看一个榜，要结合自己场景做私有评测。
+
+🟡 进阶
+
+### 84. Agent 响应太慢怎么优化？
+工程侧：工具调用并行化、缓存高频查询结果、流式输出减少用户等待感。基座侧：用更快的模型做初筛（比如 Haiku），复杂任务再调大模型。PaiAgent 的 TTS 模块就用了 CompletableFuture 做并行处理，多个音频片段同时生成。
+
+🟡 进阶 | `→ PaiAgent CompletableFuture 并行 / PaiCLI 多模型切换`
+
+### 85. Agent 系统有哪些安全风险？怎么防范？
+三大风险：Prompt Injection（恶意指令注入）、沙箱逃逸（Agent 执行了不该执行的系统命令）、越权操作（Agent 访问了不该访问的数据）。PaiCLI 的防范体系包括 HITL 人工审批、路径围栏、命令黑名单、结构化审计日志四道防线。
+
+🔴 深入 | `→ PaiCLI 四道安全防线`
+
+### 86. Skill 预置知识包机制是什么？怎么设计的？
+Skill 是把某个专业领域的最佳实践封装成结构化知识包，Agent 执行任务时自动加载对应 Skill 的指南和参考文档。PaiAgent 的 SkillRegistry 在应用启动时一次性加载所有 Skill 到 ConcurrentHashMap，支持全量注入和渐进式加载两种模式。PaiCLI 也有独立的 Skill 系统，还多了站点经验库的积累能力。
+
+🟡 进阶 | `→ PaiAgent SkillRegistry / PaiCLI Skill + 站点经验`
+
+### 87. 多工具调度引擎怎么设计？工具之间有依赖怎么处理？
+核心是拓扑排序。先分析工具之间的输入输出依赖关系，构建 DAG，然后按拓扑序执行。PaiAgent 的 GraphBuilder 就是干这事的，通过边的 source/target 关系构建执行图，没有入边的节点先执行。
+
+🔴 深入 | `→ PaiAgent GraphBuilder 拓扑构建` | 字节、阿里云
+
+### 88. Agent 流式输出怎么设计？怎么提升用户体验？
+模型还在“想”的时候就开始给用户展示中间结果。PaiCLI 在 ReAct 循环中实时展示 Thought（“我在想...”）、Action（“正在调用 xxx 工具”）、Observation（“工具返回了...”），让用户看到 Agent 的思考过程而不是干等一个最终结果。
+
+🟡 进阶 | `→ PaiCLI ReAct 过程可视化`
+
+### 89. Agent 系统的可观测性怎么做？需要监控哪些指标？
+核心指标：请求成功率、平均响应时间、token 消耗量、工具调用成功率、模型 API 错误率。PaiAgent 的每次工作流执行都记录完整的执行日志（每个节点的输入输出、耗时、状态），出了问题能快速定位是哪个节点挂了。
+
+🟡 进阶 | `→ PaiAgent 执行日志 + 节点级追踪`
+
+### 90. Agent 灰度发布怎么做？
+不能一次性把新版 Agent 推给所有用户。常见做法是按用户 ID 或流量比例分桶，先让 5% 的用户用新版，观察一段时间（错误率、满意度）没问题再逐步扩大。PaiAgent 可以通过工作流配置实现 A/B 测试，同一个任务走两套不同的节点编排。
+
+🟡 进阶 | `→ PaiAgent 工作流 A/B 配置`
+
+### 91. Agent 系统的成本怎么控制？
+大模型 API 按 token 计费，成本失控是真实风险。控制手段：设用户级别的 token 配额、用小模型做初筛（PaiCLI 支持多模型切换）、Prompt Cache 减少重复计算、批量请求合并。派聪明就设了聊天消息每分钟 30 次的速率限制。
+
+🟡 进阶 | `→ PaiCLI 多模型切换 / 派聪明速率限制`
+
+### 93. 数据标注在 Agent 项目中有多重要？怎么做？
+评测数据集需要人工标注“标准答案”，Prompt 优化需要标注“好回答 vs 坏回答”，微调需要高质量的指令-回答对。标注质量直接决定了模型效果的上限。可以用 AI 辅助标注（先让模型生成初版，人工校正），效率能提升 3-5 倍。
+
+🟡 进阶
+
+### 94. Agent 项目如何处理合规与用户隐私？
+用户输入可能包含敏感信息（个人信息、商业机密），不能直接存储或发送给第三方模型。处理方式：输入脱敏、审计日志加密、模型 API 选择数据不出境的国内厂商、用户明确授权后才开启数据收集。派聪明的多租户隔离也是合规要求之一。
+
+🟡 进阶 | `→ 派聪明多租户隔离`
+
+### 95. 你在 Agent 项目中遇到的最大技术挑战是什么？
+开放题，但最能看出候选人的真实水平。建议准备 2-3 个真实案例：一个架构层面的（比如 PaiAgent 从 DAG 引擎迁移到 LangGraph4j 双引擎的决策过程），一个工程层面的（比如 PaiCLI 上下文爆炸的优化方案），一个业务层面的（比如派聪明多租户权限隔离的需求变更）。
+
+🔴 深入 | `→ 三个项目各准备一个案例`
+
+### 96. 什么是护栏技术？
+护栏是保障 Agent 行为安全可控的分层防线，按被绕过的难度分三层。上下文层管模型能看到什么，在内容进入上下文前拦截，相关性分类器、安全分类器、内容审核、基于规则的过滤都在这一层，但同一上下文里的 Agent 很难判断自己是否已被注入，所以这层只能降低攻击成功率。执行层管模型能做什么，核心是工具风险评级，高风险操作由上下文之外的机制复核，独立审查进程、最小权限凭证、沙盒、人在回路。数据层管世界最终能被改成什么样，行级安全策略、约束校验器、受控视图，即使注入得手，越权操作也在这层被拒绝。护栏还有误拒绝这类失败，评估时也要测明确允许的请求能否正常完成。
+🟢 简单 | `AI / 大模型` | → PaiAgent / PaiCLI
+
+### 97. OpenClaw 的核心组件有哪些？请描述它们之间的关系
+🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
+
+### 98. 如果一个 Agent 系统要同时接入 Web、飞书、钉钉等渠道，你会怎么设计渠道抽象层？OpenClaw 的 Channel Plugin 接口是怎么设计的？
+🟢 简单 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
+
+### 99. 如何设计和管理 AI Agent 的 Skills 体系？在实际项目中有哪些挑战？
+🟡 中等 | `AI / 大模型 / Agent / Skills` | → PaiAgent / PaiCLI
+
+### 100. 同一个系统里可能有多个 Agent，不同渠道用户群组的消息需要路由到不同的 Agent。你会怎么设计这个路由？OpenClaw 的路由匹配优先级是怎样的？
+🟡 中等 | `AI / OpenClaw / 大模型应用开发 / Agent开发 / AI应用开发` | → PaiAgent / PaiCLI
+
+### 101. 同一个工具（比如「执行命令」）在不同场景下应该有不同的权限。你会怎么设计工具的权限控制？OpenClaw 的工具策略管道是怎么分层的？
+🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
+
+### 102. Agent 系统中 Hook 中间件模式有什么用？能举几个典型场景吗？OpenClaw 的 Hook 系统是怎么设计的？
+🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
+
+### 103. 父 Agent spawn 子 Agent 时，有哪些边界问题需要考虑？OpenClaw 做了哪些限制和保护？
+🟡 中等 | `AI / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
+
+### 104. OpenClaw 采用插件架构，第三方可以注册新渠道、工具、Hook。设计一个插件系统需要考虑哪些关键问题？OpenClaw 的插件 API 长什么样？
+🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
+
+### 105. OpenClaw 的 Gateway 对 Agent 请求做了幂等性处理。为什么 Agent 系统特别需要幂等性？工具已经产生副作用时怎么办？
+🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
+
+### 106. 如果一个GPU集群的LLM处理能力为1000tokenss，那1000个用户同时并发访问，响应给每个用户的性能只有1 tokens吗？怎么分析性能瓶颈
+🟡 中等 | `后端 / 场景题 / 大模型` | → PaiCLI / PaiAgent
+
+### 107. 什么是 AI 编程中的自动修复循环（Auto-fix Loop）？它的工作流程和退出策略怎么设计？
+🟢 简单 | `AI Coding / 自动修复循环 / 退出策略` | → PaiCLI / PaiAgent
+
+## 10、MCP 与工具调用（26 题）
 
 聚焦 Function Calling、Tool Calling、MCP、A2A、ACP、工具 Schema、权限与协议适配。
 
@@ -1992,7 +1942,204 @@ PaiCLI 实现了一套完整的安全机制：HITL（Human-in-the-Loop）人工�
 
 🟡 进阶 | `→ PaiCLI`
 
-## 10、LangChain 与 Spring AI（21 题）
+## 11、RAG知识库（43 题）
+
+聚焦文档解析、分块、向量检索、混合搜索、Rerank、Agentic RAG、权限隔离与生产优化。
+
+### 108. Agent 的 RAG 遇到 PDF 怎么办？
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+PDF 是排版格式不是数据格式，纯文本抽取碰到扫描件、表格、图表就失效。解析先判断类型，电子 PDF 用 PyMuPDF、pdfplumber 拿文字和坐标，扫描件和复杂表格上 OCR 或多模态模型，表格转成 Markdown Table 或 JSON 单独存。分块按标题层级、段落、表格来分。Agent 场景把读上一页、查原始表格封装成 Tool，让 LLM 自己判断证据够不够。延迟靠入库时缓存解析结果，证据不足才让多模态模型精读。
+
+完整答案：[阅读全文《RAG 处理 PDF》](./agent-rag-pdf.md) · [B站视频](https://www.bilibili.com/video/BV1FSKZ62ETR/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn34x2K9IbUl7Mu67r9YXLkg)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7657063729804152074)
+
+### 109. RAPTOR 和 GraphRAG 分别擅长什么查询？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+RAPTOR 自底向上递归聚类摘要，形成从细节到概括的树，适合「从概念逐步钻进细节」的查询。GraphRAG 把知识建模为实体关系图，强在多跳关系推理和实体消歧，适合「A 和 B 是什么关系」的查询。判断标准很简单，查询主要是「找到包含某信息的片段」，混合检索就够了；经常需要跨文档综合或多层次导航，才值得付出索引和查询时多次 LLM 调用的代价。
+
+🔴 深入 | `→ 派聪明`
+
+### 110. 什么是知识库的文件系统范式？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+以火山引擎开源的 OpenViking 为代表，把记忆、资源、技能都映射成虚拟文件系统里的目录和文件，每个目录自动生成 L0 一句话摘要、L1 概览、L2 全文三层，大部分查询到 L1 就能决策。底层用 Markdown 纯文本，用户可以直接读和改，可以 Git 版本控制和回滚，Agent 也能自主写入。前提是文件之间必须建立链接和索引，像 Wikipedia 那样互相引用，否则知识越多越难检索。
+
+🟡 进阶 | `→ 派聪明`
+
+### 111. 什么是上下文感知检索（Contextual Retrieval）？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+Anthropic 提出的做法，在向量化之前先用 LLM 给每个分块生成一段包含来源和背景的前缀，比如「本段节选自 ACME 公司 2025 年 Q2 财报的关键业绩指标章节」，再拼接索引。它同时增强稀疏检索和稠密检索，前缀给 BM25 补了可精确匹配的关键词，给向量补了语义背景。Anthropic 的数据是结合 BM25 可将检索失败率降低 49%，再结合重排序降幅达 67%。区别在于，上下文感知检索发生在索引期，对知识库分块做加法；上下文感知压缩发生在运行期，对对话历史做减法。
+
+🟡 进阶 | `→ 派聪明`
+
+### 112. 为什么需要 RAG？直接把文档塞给大模型不行吗？
+上下文窗口有限、塞太多 token 费钱又慢、模型对长文档的“注意力”分配不均匀（中间内容容易被忽略）。RAG 的核心价值是“先检索再生成”，只把最相关的片段喂给模型。
+
+🟢 基础 | `→ 派聪明整体架构` | 字节、淘天
+
+### 113. RAG 和微调怎么选？各自适合什么场景？
+RAG 适合知识频繁更新、需要溯源的场景（客服、文档问答）；微调适合需要改变模型行为风格、固定领域的场景（医疗、法律术语）。可以先微调让模型熟悉领域术语，再用 RAG 补充最新知识。
+
+🟢 基础 | `→ 派聪明（RAG 路线）`
+
+### 114. 描述一下完整的 RAG 系统工作流程？
+文档索引（解析→分块→向量化→入库）→ 查询处理（查询向量化→KNN 召回→关键词匹配与权限过滤→BM25 rescore）→ 生成（拼接检索结果 + 用户问题→LLM 生成→引用标注）。
+
+🟢 基础 | `→ 派聪明完整实现` | 字节、快手
+
+### 115. 文档分块策略怎么设计？chunk 大小怎么定？
+
+🟡 进阶 | `→ 派聪明 ParseService` | 快手、字节、Moka、阿里
+
+### 116. 怎么规避语义被切割掉的问题？
+三个手段：重叠切分（相邻 chunk 留重叠区）、按自然语义边界切分（段落、句号、标题）、递归切分（先按大结构切，不够再细分）。
+
+🟡 进阶 | `→ 派聪明`
+
+### 117. Embedding 模型怎么选型？维度越高越好吗？
+不是。维度高意味着存储成本高、检索速度慢。
+
+🟡 进阶 | `→ 派聪明 Embedding 2048 维` | 快手、阿里
+
+### 118. Embedding 有哪几种算法？各自的特点是什么？
+Word2Vec（静态词向量，不考虑上下文）、BERT 类（双向编码，适合短文本语义匹配）、Sentence Transformers（专门做句子级别嵌入）、BGE/GTE 系列（中文优化，MTEB 榜单前列）。派聪明默认走阿里 text-embedding-v4，维度 2048，也预留了智谱 embedding-3 这类 OpenAI 兼容 Embedding Provider 的切换路径。
+
+🟡 进阶 | `→ 派聪明选型依据`
+
+### 119. 向量数据库怎么选型？你们项目用的哪个？
+主流选择：Milvus（大规模分布式）、Qdrant（Rust 高性能）、Weaviate（GraphQL 友好）、Elasticsearch（已有 ES 集群就直接用）、Chroma/FAISS（轻量原型验证）。派聪明选了 ES，因为团队本身就熟悉 ES 生态，不需要额外引入新组件。
+
+🟡 进阶 | `→ 派聪明 ES 8.10 + dense_vector` | 字节、快手
+
+### 120. RAG 怎么做向量和关键词的混合检索？
+纯向量检索懂语义但会漏掉错误码、型号这类精确字面，BM25 认得准字面却不认识同义说法，所以要两路一起召回。两路分数不能直接加权相加，向量相似度最高只有 1，BM25 分数没有固定的最大值，命中关键词多的查询会让 BM25 主导排序。派聪明的 HybridSearchService 让 BM25 和 KNN 并行召回，每路 min(topK×30, 300) 条，KNN 内部用 userId、orgTag、public 做权限预过滤；再用 RRF 按名次融合，得分为 1/(60+名次) 之和；最后取 RRF 前 50 条交给 gte-rerank-v2 精排，保留 0.1 分以上的结果。阈值从 0.2 降到 0.1 后，分块级 Recall@5 从 56.5% 升到 76.1%。一路召回失败时用另一路继续融合，Rerank 失败时按 RRF 顺序加阈值返回。
+
+完整答案：[阅读全文《RAG 混合检索》](./rag-hybrid-search.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnsTq6XmaIFH9prCANbT8Usd)
+
+🟡 进阶 | `→ 派聪明 HybridSearchService BM25 + KNN + RRF + Rerank` | 快手、字节
+
+### 121. 什么是 Query Rewrite？为什么需要改写用户查询？
+用户提问偏口语化、模糊、有歧义。Query Rewrite 把用户原始问题改写成更适合检索的形式，比如补全指令、拆分意图、扩展同义词等。派聪明当前是查询向量化 + KNN/BM25 混合检索，Query Rewrite 可以作为检索增强点继续接入。
+
+🟡 进阶 | `→ 派聪明可扩展` | 快手、阿里
+
+### 122. 什么是多路召回？具体怎么做？
+同一个查询走多条检索通道（向量召回、关键词召回、知识图谱召回），每条通道返回一批候选，最后合并去重排序。派聪明当前更准确地说是 KNN 召回叠加关键词约束和 BM25 rescore，不是完全独立的多路召回；后续可以扩展成向量、关键词、知识图谱等多路候选合并。多路召回的核心价值是降低单一路径漏召回的风险。
+
+🟡 进阶 | `→ 派聪明 KNN + BM25 rescore，可扩展多路召回` | 快手、字节
+
+### 123. 为什么检索之后还需要 Rerank？
+向量检索是“粗筛”，召回量大但排序不够精准。Rerank 可以用交叉编码器对 query 和每个候选文档做精细打分，把最相关的排到前面。派聪明当前采用的是 KNN 召回后再用 BM25 rescore 做第二阶段排序，独立 Rerank 可以作为后续增强。
+
+🟡 进阶 | `→ 派聪明 KNN 召回 + BM25 rescore` | 快手
+
+### 124. Rerank 的 Top-K 怎么确定？
+没有银弹。一般先设一个较大的召回窗口，然后在测试集上逐步缩小，找到精度和延迟的平衡点。K 太大增加排序和上下文拼接成本，K 太小可能漏掉相关文档。派聪明现在的思路是 topK 放大召回窗口，再用 BM25 rescore 精确结果。
+
+🟡 进阶 | `→ 派聪明召回窗口与 rescore 权重` | 快手
+
+### 125. RAG 系统怎么评测？核心指标有哪些？
+检索阶段看召回率（Recall）、精准率（Precision）、MRR（平均倒数排名）。生成阶段看忠实度（Faithfulness，答案是否基于检索到的内容）、相关性（Relevancy）。RAGAS 框架把这套评测体系标准化了。
+
+🟡 进阶 | `→ 派聪明 RAG 评测指标` | 快手、Moka
+
+### 126. 向量数据库里的历史文档怎么做时间衰减？
+老文档的信息可能过时了，但向量相似度不会因为时间变化而降低。解决方案：给检索分数乘以一个时间衰减因子（比如指数衰减），或者在索引里加时间字段做过滤。
+
+🟡 进阶 | `→ 派聪明 ES 元数据过滤可扩展` | 快手
+
+### 127. 在什么场景下会用图数据库来增强向量检索？
+当知识之间有复杂的关联关系时（比如“A 公司收购了 B 公司，B 公司的 CEO 是 C”），纯向量检索很难捕捉这种关系。图数据库（Neo4j、NebulaGraph）擅长处理实体关系查询，和向量检索配合可以回答“C 现在在哪家公司任职”这类需要推理的问题。
+
+🔴 深入 | `→ 派聪明未来可扩展方向`
+
+### 128. Agentic RAG 和传统 RAG 的核心区别？
+传统 RAG 是“检索→生成”的单次流水线。Agentic RAG 给 RAG 加了 Agent 能力，模型可以判断“这次检索结果不够好，换个关键词再搜一次”，或者“这个问题需要先查 A 再查 B 最后综合”。派聪明的 ReAct 循环和 AgentToolRegistry 里的 search_knowledge 工具，就是把知识库检索变成 Agent 可调用工具的实现。
+
+🟡 进阶 | `→ 派聪明 ReAct + search_knowledge 工具`
+
+### 129. 处理长文档时怎么避免 OOM？
+派聪明在 ParseService 里做了两个关键设计：一是流式分块处理，避免一次性把整个文档加载进内存；二是内存阈值保护，运行时内存占用超过 80% 会先触发 GC，复查后仍超阈值才拒绝继续处理。大文件场景下，这比单纯扩大 JVM 堆更稳。
+
+🟡 进阶 | `→ 派聪明流式处理 + 内存阈值保护`
+
+### 130. RAG 知识库怎么实现动态更新？
+文档更新后要同步更新向量索引。派聪明通过 Kafka 异步处理文件上传队列（默认 topic 为 file-processing-topic1），新文档上传后自动触发“解析→分块→向量化→入库”的完整流程，不需要手动重建索引。删除文档时同步清理对应的向量记录。
+
+🟡 进阶 | `→ 派聪明 Kafka 异步更新`
+
+### 131. 多租户场景下 RAG 的权限隔离怎么做？
+派聪明用了三层权限过滤：userId（用户私有文档）、orgTag（组织级隔离）、isPublic（公开标志）。检索时在 ES 查询里加 filter 条件，确保 A 公司的人搜不到 B 公司的文档。这道题在 ToB 方向的公司面试里高频出现。
+
+🟡 进阶 | `→ 派聪明 userId + orgTag + isPublic 三层过滤`
+
+### 132. 在 RAG 应用中为了优化检索精度，其中的数据清洗和预处理怎么做？
+🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
+
+### 133. 什么自查询？为什么在 RAG 中需要自查询？
+🟢 简单 | `AI / 大模型 / RAG` | → 派聪明
+
+### 134. 什么提示压缩？为什么在 RAG 中需要提示压缩？
+🟢 简单 | `AI / 大模型 / RAG` | → 派聪明
+
+### 135. 在 RAG 中，索引流程中的文档解析你们怎么做的？
+🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
+
+### 136. 向量数据库中的 HNSW、LSH、PQ 分别是什么意思？
+🟡 中等 | `AI / 大模型 / RAG / 向量数据库` | → 派聪明
+
+### 137. 向量数据库中的 ANN 是什么？为什么需要用它？
+🟡 中等 | `AI / 大模型 / RAG / 向量数据库` | → 派聪明
+
+### 138. 向量数据库中，常见的向量搜索方法：余弦相似度、欧几里得距离和曼哈顿距离分别是什么？有什么区别？
+🟡 中等 | `AI / 大模型 / RAG / 向量数据库` | → 派聪明
+
+### 139. 什么是 Advanced RAG？
+🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
+
+### 140. 什么是 Modular RAG？
+🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
+
+### 141. 什么是上下文查询增强？它有什么作用？如何基于 Spring AI 实现上下文查询增强来处理无关问题？
+🟡 中等 | `后端` | → 派聪明
+
+### 142. 什么是 Spring AI 提出的模块化 RAG 架构？预检索、检索和后检索阶段各自负责什么？
+🟡 中等 | `后端` | → 派聪明
+
+### 143. 你有多个知识库，做 RAG 的时候，怎么保证查询效率和准确性兼容，并尽可能减少幻觉？
+🟡 中等 | `AI / 大模型 / RAG` | → 派聪明
+
+### 144. 如何构建和使用向量索引？HNSW 和 IVF 有什么区别？
+🟡 中等 | `RAG / 向量索引` | → 派聪明
+
+### 145. RAG 检索时相似度阈值如何设置？设置不当有什么影响？
+🟡 中等 | `RAG / 相似度阈值` | → 派聪明
+
+### 146. RAG 系统如何利用元数据过滤提升检索精度？
+🟡 中等 | `RAG / 元数据过滤` | → 派聪明
+
+### 147. 如何处理 RAG 检索不到相关文档的情况？
+🟡 中等 | `RAG / 检索失败处理` | → 派聪明
+
+### 148. RAG 系统如何标注信息来源和提供引用？
+🟡 中等 | `RAG / 引用标注` | → 派聪明
+
+### 149. RAG 系统在生产环境中如何优化性能和降低成本？
+🔴 困难 | `RAG / 性能优化` | → 派聪明
+
+### 150. RAG 系统如何处理 PDF、Word、Markdown 等不同格式文档？
+
+<p class="agent-duplicate-question"><span>REVIEW</span> 疑似重复 · 待确认：与「Agent 的 RAG 遇到 PDF 怎么办？」内容重合</p>
+🟡 中等 | `RAG / 文档处理` | → 派聪明
+
+## 12、LangChain 与 Spring AI（21 题）
 
 聚焦 LangChain、LangGraph、LlamaIndex、Spring AI 的编排、记忆、检索、工具与结构化输出能力。
 
@@ -2059,181 +2206,7 @@ PaiCLI 实现了一套完整的安全机制：HITL（Human-in-the-Loop）人工�
 ### 317. 如何保证 LangChain 应用的输出质量和一致性？
 🔴 困难 | `LangChain / 质量保证` | → PaiAgent 框架选型对比
 
-## 11、模型训练与微调（32 题）
-
-聚焦预训练、SFT、RLHF、DPO、LoRA、PEFT、量化、蒸馏、数据集与训练资源。
-
-### 337. 什么是模型蒸馏（Knowledge Distillation）？它和模型量化有什么区别？
-比较黑盒、白盒和在轨蒸馏，区分蒸馏、量化和 SFT，并说明蒸馏授权和数据来源的边界。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnUvHeHnlzDKLdM17o2acLOc) · [查看图文解析](./what-is-model-distillation.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7697583864511761698)
-
-🟢 简单 | `大模型 / 模型蒸馏 / 模型量化` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 318. 大模型预训练完了，为什么还要做强化学习？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-预训练是自监督学习，模型靠遮住词自己猜来刷题，学到的是知识。强化学习没有老师也没有教材，模型直接和环境互动，答对给奖励，答错给惩罚，靠试错调整策略。DeepSeek-R1-Zero 没用任何标注数据，纯靠 RL 让模型自己学会了推理，训练中涌现出「等一下，让我重新想想」这样的反思。各家往 RL 砸钱，是因为高质量预训练数据快用完了，RL 只需要一个能判断对错的奖励信号。小米 MiMo-V2.6 的 RL 训练每步约 20 亿 token，4 万多个沙箱并行。
-
-完整答案：[阅读全文《什么是强化学习》](./what-is-reinforcement-learning.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnOs8QKsBv0mgLOfyzmILLse)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1A8aZ6DERC/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7686739151072365839)
-
-🟢 基础 | `→ DeepSeek R1 / MiMo`
-
-### 319. 大模型是怎么训练出来的？预训练→SFT→RLHF 三阶段讲一下？
-预训练（在海量无标注文本上学语言能力）→ SFT（用人工标注的指令-回答对微调，学会“听话”）→ RLHF（用人类偏好反馈做价值观校准，学会“说人话”）。三阶段花费依次降低但重要性递增。
-
-🟡 进阶 | 字节、腾讯
-
-### 320. 大模型微调有哪些方案？LoRA 的原理是什么？
-全量微调（改所有参数，贵）、LoRA（冻结原始权重，只训练低秩分解矩阵，参数量减少 99%+）、QLoRA（量化 + LoRA，更省显存）、Adapter（在层间插入小模块）、Prefix Tuning（只调前缀向量）。LoRA 是目前性价比最高的方案。
-
-🟡 进阶 | 字节、阿里
-
-### 321. SFT 之后还有哪些 Post-Training？RLHF、DPO、GRPO 什么关系？
-SFT 让模型学会格式和基本能力，Post-Training 让模型学会“什么样的回答更好”。RLHF 用奖励模型 + PPO 训练，DPO 去掉奖励模型直接用偏好对训练，GRPO 去掉 Critic 网络用组内相对比较。进化路径是越来越简化训练流程。
-
-🔴 深入 | 作业帮、腾讯
-
-### 322. DPO 和 PPO 的区别是什么？
-PPO 需要先训一个奖励模型，再用奖励模型的分数做策略梯度优化，流程复杂。DPO 直接用偏好数据对（好回答 vs 坏回答）优化策略，把奖励模型隐式地融入到损失函数里，训练更简单稳定。
-
-🔴 深入 | 腾讯、三七互娱
-
-### 323. 大模型量化是什么？INT8/INT4/AWQ/GPTQ 怎么选？
-把模型参数从 FP16 压缩到 INT8/INT4，显存占用直接减半或减四分之三。GPTQ 是训后量化（快但精度损失稍大），AWQ（Activation-aware）考虑激活值分布做量化（精度更好），INT4 省显存最多但精度损失最大。实际选型看你的显卡显存和精度要求。
-
-🟡 进阶
-
-### 324. 微调中常用的优化器有哪些？
-🟡 中等 | `大模型 / AI / 微调 / 优化器` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 325. 微调的过拟合风险如何通过正则化缓解？
-🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 326. 在多模态微调（如图文生成）中，如何确保文本和图像数据的对齐质量？
-🔴 困难 | `大模型 / AI / 微调 / 多模` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 327. 参数高效微调（PEFT）如何减少计算成本？
-🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 328. 冻结层在微调中的作用是什么？
-🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 329. 为什么需要混合精度训练？
-🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 330. 模型输出重复和幻觉如何微调解决？
-🔴 困难 | `大模型 / AI / 微调` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 331. 微调大模型需要什么样的硬件？7B 和 70B 模型分别需要多少显存？
-🟢 简单 | `大模型 / 微调 / 显存评估` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 332. 2026 年主流的微调工具有哪些？Unsloth、Axolotl、TRL 各有什么特点？
-🟢 简单 | `大模型 / 微调工具 / Unsloth / Axolotl / TRL` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 333. LoRA 的超参数应该怎么设置？有什么经验法则？
-🟢 简单 | `大模型 / LoRA / 超参数` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 334. 对比 LoRA、QLoRA、DoRA 和全量微调，在不同场景下应该如何选择？
-🟢 简单 | `大模型 / LoRA / QLoRA / DoRA / 全量微调` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 335. ORPO 是什么？它如何将指令微调和偏好对齐合二为一？
-🟢 简单 | `大模型 / ORPO / 偏好对齐` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 336. 如何构建高质量的 SFT 微调数据集？数据质量和数量哪个更重要？
-🟢 简单 | `大模型 / SFT / 数据集构建` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 338. 大模型的训练和推理分别是什么？它们在计算资源需求上有什么区别？
-🟢 简单 | `大模型 / 训练 / 推理 / 资源评估` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 339. 什么是大模型的参数量？参数量和模型能力之间是什么关系？
-🟢 简单 | `大模型 / 参数量 / 模型能力` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-### 340. Mid-training 是什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-Mid-training 沿用预训练的下一个词目标，把数据分布收窄到目标领域，混入通用保留数据控制遗忘，对整段文档的全部 token 算损失。它回答的是模型有没有完成任务所需的知识和基本能力，SFT 回答的是回答长什么样。判断方法是在留出任务上测 pass@1 和 pass@k，pass@k 仍接近 0 说明正确策略根本不在模型分布里，RL 和 SFT 都没东西可放大，先做 Mid-training。用少量问答 SFT 硬塞事实，只会记住问法。
-
-🔴 深入 | `→ PaiCLI`
-
-### 341. SFT 和 RL 的本质区别是什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-SFT 在数学上和预训练是同一个任务，都是预测下一个词，区别只有数据换成输入输出示范对，以及损失只算在回答部分。它最大化标注回答的概率，样本效率极高，擅长固化格式、风格、流程这类协议性知识，但示范不够多样时容易对表面模式过拟合。RL 最大化期望奖励，模型探索多条路径并提高高奖励路径的概率，能发现示范里没有的策略，代价是样本效率低几十到上百倍、训练不稳定。一句话，SFT 细致学习已有地图，RL 拿着奖励这枚指南针探索地图外的路线。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 342. 怎么判断该做 Mid-training、SFT 还是 RL？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-先排除不需要改权重的方案，Prompt、工具、代码约束、上下文管理能解决就不训练，事实需要频繁更新优先 RAG。再在留出集上测能力支持，不只看 pass@1，还看 pass@k、部分进展率、格式解析率，并人工审计失败原因。pass@k 近零且失败集中在知识和基础能力，先 Mid-training；会做但不按要求做，用 SFT 立协议；已有非零成功率和可靠奖励、只是好策略概率低，才上 RL。全零 rollout 上直接加 PPO 或 GRPO 只会消耗采样预算。
-
-🔴 深入 | `→ PaiCLI`
-
-### 343. 结果奖励和过程奖励怎么选？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-结果奖励只在结束时判成败，最简单，探索自由度最大，但反馈稀疏，长轨迹难归因；「是否完成」的判定要交给模型写不了的隐藏测试，不能只看模型自己声称完成。过程奖励在中间步骤给反馈，缓解信用分配，但可能把模型限制在设计者预设的路径上，标注成本也高。工程上先用结果奖励建基线，再只为真正可验证的中间事件加过程信号。
-
-🔴 深入 | `→ PaiCLI`
-
-### 344. 什么是 RLVP？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-RLVP（Reinforcement Learning with Verified Penalty）的原则是奖励结果、惩罚路径。结果奖励只能说明事情有没有办成，说明不了是否按规定办成，Agent 可能靠改测试文件、跳过身份验证拿到表面成功。RLVP 对可机器判定的违规动作逐动作扣分，结果奖励始终保留，避免模型学会什么都不做。它只针对结果中性的路径约束，不能替代对交付完整性和早停行为的独立检查。
-
-🔴 深入 | `→ PaiCLI`
-
-### 345. 什么是在轨蒸馏（On-Policy Distillation）？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-区别在于谁生成学生要学习的状态前缀。SFT 的轨迹由人类或教师采样，监督密集但只覆盖教师会走到的状态，学生一旦犯了教师不会犯的错就进入陌生前缀。RL 在学生自己的状态上训练，但通常只有轨迹结束时一个成败信号。在轨蒸馏把两者组合，学生决定走到哪里，教师在学生已经走到的位置给出下一步的完整 token 分布，一条长度 T 的轨迹产生约 T 组逐 token 监督。数学任务上达到同等性能的训练步数约为纯 RL 的十分之一。没有更强的教师时可以用在轨自蒸馏，让同一个模型看到标准答案的版本当教师。
-
-🔴 深入 | `→ PaiCLI`
-
-### 346. 编辑文件经常失败，该改 Harness 还是后训练？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-先归因再决定。沿「文件字节、工具返回、Harness 序列化、模型上下文、模型输出、解析、工具匹配」这条链路逐层对比，工具或 Harness 改变了字节就归因给它们，改代码就行。只有模型收到的上下文和原始字符串完全一致，而模型输出是链路上首个出现差异的位置，才算模型的精确复制问题，才进后训练候选。书里用 LoRA SFT 把随机字符串的逐字节抄写准确率从 37.5% 提到 78.9%。
-
-🔴 深入 | `→ PaiCLI`
-
-### 347. Coding Agent 过早结束，怎么用后训练修？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-先用 Harness 兜底，模型宣称完成时在隔离工作区跑它看不到的验收测试。要训练的话，把首个错误定位在「准备宣称完成」这个决策边界，构造偏好对做 DPO，被拒绝的是过早结束，被选中的是先跑测试再下结论。评估时边界集和保留集缺一不可，保留集确认任务真完成时模型还敢收尾，否则会训成永远不敢结束的过度矫正。
-
-🔴 深入 | `→ PaiCLI`
-
-### 348. 微调时怎么缓解灾难性遗忘？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-优先 LoRA，原权重冻结，对基座已有能力的扰动更小，但不是免疫。数据上按小配比混入通用任务数据，Mid-training 也要混通用保留语料。评估上边界集和保留集缺一不可，训练后抽查通用能力，确认补丁没有破坏其他能力。只盯着目标任务的指标，会把过拟合当成进步。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 349. 在多模态微调中，如何确保文本和图像数据的对齐质量？有哪些技术挑战？
-
-<p class="agent-duplicate-question"><span>REVIEW</span> 疑似重复 · 待确认：与同分类的「如何确保文本和图像数据的对齐质量？」内容重合</p>
-🟢 简单 | `大模型 / 多模态微调 / 数据对齐` | → PaiAgent / PaiCLI 模型工程面试扩展
-
-## 12、Agent 产品与框架演进（9 题）
+## 13、Agent 产品演进（9 题）
 
 从 AutoGPT 到 Manus、OpenManus，再到 OpenClaw，这些产品和框架本身已经不是热点，但每一个都代表 Agent 发展的一个阶段。这一类题不考「它是什么」，考的是它当时解决了什么问题、为什么后来被替代、留下了哪些至今还在用的设计。一条主线可以贯穿全部，产品能力的演进就是观察空间和动作空间的演进。拿 OpenClaw 当 Harness 案例的设计题仍然放在「03、Harness 与 Skills」。
 
@@ -2297,7 +2270,7 @@ Agent 这一轮变化和以往不太一样。以前的技术迭代，学一门�
 
 Alan Kay 说过一句话，「预测未来最好的办法就是去创造它」。我觉得这话放在今天特别合适。与其等着被 Agent 浪潮推着走，不如自己先把原理搞透，把项目跑通，把面试里会被问到的每一个点都准备好。
 
-所以我们选择了最笨但最扎实的方式。370 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
+所以我们选择了最笨但最扎实的方式。363 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
 
 我始终相信一件事，技术的价值不在于它有多新，而在于你是否真正理解它、用过它、能把它讲清楚。这套题库要做的就是帮你到达这个状态。
 
