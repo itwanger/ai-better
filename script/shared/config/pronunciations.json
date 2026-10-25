@@ -312,6 +312,14 @@
       "speakers": "*",
       "status": "confirmed",
       "note": "2026-10-24 kimi-k3-1-pro 第一章，用户指定 FreeCAD 读 free C A D；free 读单词，CAD 逐字母读。只修改 ttsText，原稿和字幕保留 FreeCAD。本期全部两处同步修正；确认的是目标读法，新合成配音仍待实际试听。"
+    },
+    {
+      "id": "resolution-1280x720",
+      "match": "(?<!\\d)1280\\s*[xX×]\\s*720(?!\\d)",
+      "replace": "一二八零乘七二零",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-10-25 what-is-browser-use 第二章，用户指定分辨率 1280x720 读“一二八零乘七二零”。只改ttsText，字幕和原稿保留数字；确认的是目标读法，新合成配音待用户实际试听。限定该分辨率，不泛化其他尺寸。"
     }
   ],
   "watch": [
@@ -418,6 +426,16 @@
           "userAcceptedOn": "2026-10-22"
         }
       ]
+    },
+    {
+      "id": "quiz-option-a",
+      "match": "(?<![A-Za-z])A[，,、.．]",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "targetIPA": "/eɪ/",
+      "status": "needs-listening",
+      "note": "2026-10-25 what-is-browser-use 第二章，用户指出选项 A 发音有问题。本段已把问句与 A/B/C 合为一个音频单元，合并本身仍不能保证字母发音。当前项目 beat 7 只对 A 使用单元级 SSML CMU EY1，整段重合成；字幕及原稿不变。尚未获用户复听认可，不设全局替换，也不当作已验证成功的通用写法。"
     }
   ]
 }
