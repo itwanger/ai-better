@@ -2,6 +2,14 @@
   "_comment": "配音读法词典。rules 由 pronunciations.py 写入 beats.json 的 ttsText，字幕 text 不变；watch 只列出待复听的 beat。speakers 为 * 表示与音色无关，否则只对列出的音色生效。status: confirmed=用户明确指定读法或复听认可，具体依据见 note，重生成音频仍需单独复听；candidate=读法候选，尚无用户对该读法的明确确认。",
   "rules": [
     {
+      "id": "evidence-buffer-eight-mega",
+      "match": "((?:上限为|容量为)\\s*)(?:8|八)\\s*M(?=\\s*的证据缓冲区)",
+      "replace": "\\1八兆",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-10-26 what-is-computer-use 第五章，用户指定证据缓冲区的 8M / 8 M 读八兆。延续上下文容量 M 读兆的约定，限定本条证据缓冲区语境，不替换其他英文 M。只改 ttsText；存在旧的单元级 M 字母 SSML 时须同步移除，不能让 SSML 覆盖新读法。原稿与字幕不变，新配音待实际试听。"
+    },
+    {
       "id": "context-one-mega",
       "match": "(上下文\\s*(?:长度\\s*)?(?:仍然是|仍是|是|为)?\\s*)1\\s*M(?![A-Za-z0-9])",
       "replace": "\\1一兆",
@@ -320,6 +328,14 @@
       "speakers": "*",
       "status": "confirmed",
       "note": "2026-10-25 what-is-browser-use 第二章，用户指定分辨率 1280x720 读“一二八零乘七二零”。只改ttsText，字幕和原稿保留数字；确认的是目标读法，新合成配音待用户实际试听。限定该分辨率，不泛化其他尺寸。"
+    },
+    {
+      "id": "empty-method-call-no-parentheses",
+      "match": "(?<=[A-Za-z0-9_])\\(\\s*\\)",
+      "replace": "",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-10-26 what-is-computer-use 第二章，用户指定方法名不用读括号。仅在ttsText删除紧接方法标识符的空调用括号，原稿、字幕和画面保留getState()；不删除普通括号中的正文，有参调用另按语义处理。确认的是读法，新配音仍待实际试听。"
     }
   ],
   "watch": [
@@ -436,6 +452,25 @@
       "targetIPA": "/eɪ/",
       "status": "needs-listening",
       "note": "2026-10-25 what-is-browser-use 第二章，用户指出选项 A 发音有问题。本段已把问句与 A/B/C 合为一个音频单元，合并本身仍不能保证字母发音。当前项目 beat 7 只对 A 使用单元级 SSML CMU EY1，整段重合成；字幕及原稿不变。尚未获用户复听认可，不设全局替换，也不当作已验证成功的通用写法。"
+    },
+    {
+      "id": "chongchuan-retransmit",
+      "match": "重传",
+      "speakers": "*",
+      "targetPinyin": "chóng chuán",
+      "status": "user-specified",
+      "note": "2026-10-26 what-is-computer-use 第二章，用户指定“重传”读chongchuan（chóng chuán）。字幕和原稿不变；本期完整意群用单元级SSML py chong2指定“重”，不添加中文谐音替换。新音频待实际试听。"
+    },
+    {
+      "id": "terminal-us",
+      "match": "(?i)(?<![A-Za-z])Terminal(?![A-Za-z])",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "targetIPA": "/ˈtɝː.mə.nəl/",
+      "status": "needs-listening",
+      "source": "https://dictionary.cambridge.org/pronunciation/english/terminal",
+      "note": "2026-10-26 what-is-computer-use 第三章，用户指出 Terminal 当前发音有误。按美式三音节、首音节重读，当前完整意群 beat17 用单元级 SSML CMU T ER1 M AH0 N AH0 L 指定；字幕、路径拼写和 ttsText 原样保留，不用中文谐音自动替换。此句新配音仍待用户实际试听，尚非验证成功的通用样本。"
     }
   ]
 }
