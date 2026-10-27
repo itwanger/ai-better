@@ -22,7 +22,7 @@ date: 2026-05-20
 
 ![跟着王二讲Agent：通过完整题目系统学习，建立Agent时代的完整知识体系](https://cdn.paicoding.com/stutymore/agent-learning-completeness-20260908231154-003540aa.png)
 
-这套题库一共 363 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
+这套题库一共 366 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
 
 每道题都不是孤立的概念解释，而是串联到三个实战项目来回答。
 
@@ -40,7 +40,7 @@ date: 2026-05-20
 
 [飞书题库入口](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)：按分类浏览题目和详细答案，展开左上角目录即可切换阅读。
 
-> 分类与排序说明：题目按知识主题分类，网站侧边栏收录已完成的脚本；「热点解读」用于拆解模型发布和行业事件。每类已发布视频的题目按发布顺序倒序排列，新视频优先；尚未发布视频的题目保留在后面。普通题号作为固定编号保留，不随展示顺序改变；热点使用独立的 HOT-001 至 HOT-100 编号，当前收录 13 篇，预留容量不计入实际题数；疑似重复题仍保留，确认前暂不删除。
+> 分类与排序说明：题目按知识主题分类，网站侧边栏收录已完成的脚本；「热点解读」用于拆解模型发布和行业事件。每类已发布视频的题目按发布顺序倒序排列，新视频优先；尚未发布视频的题目保留在后面。普通题号作为固定编号保留，不随展示顺序改变；热点使用独立的 HOT-001 至 HOT-100 编号，当前收录 15 篇，预留容量不计入实际题数；疑似重复题仍保留，确认前暂不删除。
 
 你也可以加我的微信【备注AI】，小助理会拉你进AI交流群的。
 
@@ -48,9 +48,19 @@ date: 2026-05-20
   <img src="https://cdn.paicoding.com/stutymore/readme-cf1692c0ddb54b132f268f783c92c0f1.jpg" width="300px" alt="二哥狗腿子">
 </p>
 
-## 01、Agent 基础（37 题）
+## 01、Agent 基础（38 题）
 
 聚焦 Agent 的定义、工作方式、规划、反思和多 Agent 协作。部分新增题目参考了开源书《深入理解 AI Agent：设计原理与工程实践》（[bojieli/ai-agent-book](https://github.com/bojieli/ai-agent-book)）的章节结构和各章思考题。
+
+### 359. 说说 Browser Use 的原理
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结合 DeepSeek Harness 的实现，理解无障碍树快照、短引用编号、Browser Use 插件，以及 launch/attach 模式下的会话隔离与页面验收。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnPkuevM7FPXB9gq3GpUVInv) · [阅读全文《Browser Use 原理》](./what-is-browser-use.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7700568507443842367)
 
 ### 37. Agent 的 Todo List 有什么用？
 
@@ -133,6 +143,8 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 
 完整答案：[阅读全文《Agent 幻觉治理》](./agent-hallucination-governance.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnTP43YR0y4aIucI80vkLDVe)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1GDHA6HE1D/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7694985391278984486)
 
 🟡 进阶 | `→ PaiCLI / PaiAgent`
@@ -144,6 +156,8 @@ Agent 的幻觉比模型的幻觉危害更大，因为它会依据幻觉去执�
 按操作的风险和可逆性决定在哪里设审批点。只读操作自动执行，可回滚的写操作事后通知，不可逆或者涉及资金、权限、对外发送的操作必须事前审批。审批不能只问一句“是否继续”，要展示将要执行的具体参数和影响范围，比如完整的命令、要修改的文件 diff、订单金额。降低人工成本靠两点，一是记住授权，同一类操作在会话内批准过就不再重复询问；二是把规则前置，能用规则判定安全的就不打扰人。实现上 Agent 在审批点挂起并保存 Checkpoint，等人的决定回来再恢复执行，人也要能随时中断。要求全流程自动化的场景，就用沙箱、权限白名单和事后审计代替事前审批。
 
 完整答案：[阅读全文《Human-in-the-loop》](./agent-human-in-the-loop.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn5gtHLcuCCzcoQkKP8NOZ0b)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1uDn461Emv/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7694555091273010495)
 
@@ -516,9 +530,29 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 ### 43. Computer Use 是什么？说说它的原理
 🟡 中等 | `AI / 大模型` | → PaiAgent / PaiCLI
 
-## 02、热点解读（预留 100 篇，已收录 13 篇）
+## 02、热点解读（预留 100 篇，已收录 15 篇）
 
 模型发布和行业事件的快速拆解，面试聊到最新动态时用得上。
+
+### HOT-015. Kimi K3.1 Pro 正式发布，国产模型的审美新巅峰。
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+拆解大规模联合强化学习、动态工具加载与保留式思考，以及模型定价和前缀缓存的工程用法。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnnZfeMnKC9MGyxixim0xhef) · [阅读全文《Kimi K3.1 Pro》](./kimi-k3-1-pro.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7700177876540230975)
+
+### HOT-014. 太惊艳了吧？Kimi K3.1 真要来了？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从官方预告、Arena 匿名盲测和推理框架适配线索，梳理 Kimi K3.1 的发布前信息与开发者关注点。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnDdvWNewjj3PinSkcEpFjPd) · [阅读全文《Kimi K3.1 预告》](./kimi-k3-1-preview.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7699856703231151410)
 
 ### HOT-013. 真正的 OpenAI！DeepSeek 开源内部推理框架 DeepInfer
 
@@ -557,6 +591,8 @@ REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，�
 从 Grok Bot、Muse、Cue、dots 四款产品，理解 Personal Agent 的持续记忆、执行环境、用户身份和权限边界，以及它和聊天助手、Coding Agent 的区别。
 
 完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn3FTN6yR5TNRgnucNhfyXYf) · [阅读全文《Personal Agent》](./what-is-personal-agent.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1SdH562Eip/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7695348838801886499)
 
@@ -2270,7 +2306,7 @@ Agent 这一轮变化和以往不太一样。以前的技术迭代，学一门�
 
 Alan Kay 说过一句话，「预测未来最好的办法就是去创造它」。我觉得这话放在今天特别合适。与其等着被 Agent 浪潮推着走，不如自己先把原理搞透，把项目跑通，把面试里会被问到的每一个点都准备好。
 
-所以我们选择了最笨但最扎实的方式。363 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
+所以我们选择了最笨但最扎实的方式。366 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
 
 我始终相信一件事，技术的价值不在于它有多新，而在于你是否真正理解它、用过它、能把它讲清楚。这套题库要做的就是帮你到达这个状态。
 

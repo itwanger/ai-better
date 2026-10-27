@@ -2,6 +2,26 @@
   "_comment": "配音读法词典。rules 由 pronunciations.py 写入 beats.json 的 ttsText，字幕 text 不变；watch 只列出待复听的 beat。speakers 为 * 表示与音色无关，否则只对列出的音色生效。status: confirmed=用户明确指定读法或复听认可，具体依据见 note，重生成音频仍需单独复听；candidate=读法候选，尚无用户对该读法的明确确认。",
   "rules": [
     {
+      "id": "gpt-6-1-sol-spoken",
+      "match": "(?i)(?<![A-Za-z0-9])gpt[- ]?6\\.1[- ]+sol(?![A-Za-z0-9])",
+      "replace": "GPT 六点一 索尔",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "confirmed",
+      "note": "2026-10-27 gpt-6-1-terra，用户同意 gpt-6.1-sol 读“GPT 六点一，索尔”，连字符不念。此为本频道选用的读法，不声称官方发音。只改 ttsText，原稿和字幕保留原拼写；新配音待用户实际复听。"
+    },
+    {
+      "id": "model-sol-spoken",
+      "match": "(?i)(?<![A-Za-z])Sol(?![A-Za-z])",
+      "replace": "索尔",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "confirmed",
+      "note": "2026-10-27 gpt-6-1-terra，用户同意模型名 Sol 连读“索尔”，不逐字母拼读。当前项目全部同词统一，只修改朗读提示；新完整句子的配音仍需复听。"
+    },
+    {
       "id": "evidence-buffer-eight-mega",
       "match": "((?:上限为|容量为)\\s*)(?:8|八)\\s*M(?=\\s*的证据缓冲区)",
       "replace": "\\1八兆",
