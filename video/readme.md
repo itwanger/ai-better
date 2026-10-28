@@ -22,7 +22,7 @@ date: 2026-05-20
 
 ![跟着王二讲Agent：通过完整题目系统学习，建立Agent时代的完整知识体系](https://cdn.paicoding.com/stutymore/agent-learning-completeness-20260908231154-003540aa.png)
 
-这套题库一共 366 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
+这套题库一共 369 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
 
 每道题都不是孤立的概念解释，而是串联到三个实战项目来回答。
 
@@ -40,7 +40,7 @@ date: 2026-05-20
 
 [飞书题库入口](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)：按分类浏览题目和详细答案，展开左上角目录即可切换阅读。
 
-> 分类与排序说明：题目按知识主题分类，网站侧边栏收录已完成的脚本；「热点解读」用于拆解模型发布和行业事件。每类已发布视频的题目按发布顺序倒序排列，新视频优先；尚未发布视频的题目保留在后面。普通题号作为固定编号保留，不随展示顺序改变；热点使用独立的 HOT-001 至 HOT-100 编号，当前收录 15 篇，预留容量不计入实际题数；疑似重复题仍保留，确认前暂不删除。
+> 分类与排序说明：题目按知识主题分类，网站侧边栏收录已完成的脚本；「热点解读」用于拆解模型发布和行业事件。每类已发布视频的题目按发布顺序倒序排列，新视频优先；尚未发布视频的题目保留在后面。「Agent 基础」按视频发布时间从新到旧展示，题号按 38→1 连续排列；其他分类的普通题号保留，不随展示顺序改变；热点使用独立的 HOT-001 至 HOT-100 编号，当前收录 17 篇，预留容量不计入实际题数；疑似重复题仍保留，确认前暂不删除。
 
 你也可以加我的微信【备注AI】，小助理会拉你进AI交流群的。
 
@@ -52,7 +52,19 @@ date: 2026-05-20
 
 聚焦 Agent 的定义、工作方式、规划、反思和多 Agent 协作。部分新增题目参考了开源书《深入理解 AI Agent：设计原理与工程实践》（[bojieli/ai-agent-book](https://github.com/bojieli/ai-agent-book)）的章节结构和各章思考题。
 
-### 359. 说说 Browser Use 的原理
+### 38. Computer Use 是什么？说说它的原理
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结合 Codex 的 cua_repl，讲清 JavaScript 批量编排桌面操作、应用访问权限、敏感动作审批和截图中的提示词注入防护。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnCZBIgE4fFSyi3ACb031Z8k) · [查看图文解析](./what-is-computer-use.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7700961195594976575)
+
+🟡 中等 | `AI / 大模型` | → PaiAgent / PaiCLI
+
+### 37. 说说 Browser Use 的原理
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -62,7 +74,7 @@ date: 2026-05-20
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7700568507443842367)
 
-### 37. Agent 的 Todo List 有什么用？
+### 36. Agent 的 Todo List 有什么用？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -75,7 +87,7 @@ date: 2026-05-20
 抖音视频：[观看本集视频](https://www.douyin.com/video/7699452593226960137)
 
 
-### 34. 多个 Agent 同时改一个文件怎么办？
+### 35. 多个 Agent 同时改一个文件怎么办？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -87,7 +99,7 @@ date: 2026-05-20
 
 🔴 深入 | `→ PaiCLI`
 
-### 30. Tool 的设计原则是什么？
+### 34. Tool 的设计原则是什么？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -99,7 +111,7 @@ date: 2026-05-20
 
 🟢 基础 | `→ PaiCLI`
 
-### 32. 用户需求模糊时 Agent 怎么澄清？
+### 33. 用户需求模糊时 Agent 怎么澄清？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -111,7 +123,7 @@ date: 2026-05-20
 
 🟢 基础 | `→ PaiCLI`
 
-### 35. 权限模式（Permission Mode）是什么？
+### 32. 权限模式（Permission Mode）是什么？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -119,11 +131,13 @@ date: 2026-05-20
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn1KWLyrqrCjoitTaona5abf) · [查看图文解析](./what-is-permission-mode.md)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1yNxK6WEMQ/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7696477886903110927)
 
 🟡 进阶 | `→ Claude Code / Codex / PaiCLI`
 
-### 36. Agent 执行过程中，用户插话怎么处理？
+### 31. Agent 执行过程中，用户插话怎么处理？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -131,11 +145,13 @@ date: 2026-05-20
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnERGiklXSowgevZpUxIIkcb) · [查看图文解析](./agent-user-interjection.md)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV17An96YEHq/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7695711462815223083)
 
 🟡 进阶 | `→ PaiCLI`
 
-### 29. Agent 的幻觉怎么治理？
+### 30. Agent 的幻觉怎么治理？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -149,7 +165,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1GDHA6HE1D/)
 
 🟡 进阶 | `→ PaiCLI / PaiAgent`
 
-### 28. Human-in-the-loop 怎么设计？
+### 29. Human-in-the-loop 怎么设计？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -163,7 +179,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1uDn461Emv/)
 
 🟡 进阶 | `→ PaiCLI / PaiAgent`
 
-### 31. 用户中途取消，Agent 任务怎么停下来？
+### 28. 用户中途取消，Agent 任务怎么停下来？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
@@ -409,7 +425,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1Qkhe6hE2U/)
 
 🟡 进阶 | `→ PaiCLI` | 字节、阿里、腾讯
 
-### 4. 说说 Agent 是如何工作的？
+### 10. 说说 Agent 是如何工作的？
 
 Agent 处理一次请求分四步。先组装上下文，把系统提示词、工具定义列表、CLAUDE.md 项目规范、对话历史和用户消息拼在一起，这才是模型真正看到的输入。然后调用模型，关键信号是 stop_reason，返回 tool_use 就调工具、循环继续，返回 end_turn 则任务完成。接着执行工具，先检查权限再执行。最后把结果包装成 tool_result 追加到对话历史。不同 Agent 核心逻辑相同，差异在 Harness 层。
 
@@ -421,7 +437,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1C6TX63EQK/)
 
 🟡 进阶 | `→ PaiCLI` | 字节、淘天、阿里云
 
-### 5. 一个 Agent 有哪些核心组件？
+### 9. 一个 Agent 有哪些核心组件？
 
 一个能跑的 Agent 至少需要五大核心组件协作。模型负责推理、决策、选工具、填参数，但只会想不会动手。工具带名称、描述和参数的 JSON Schema 注册到工具表，模型返回 tool_calls 后由 Harness 找到函数执行。记忆分短期和长期，规划有 ReAct 和 Plan-and-Execute 两种。Harness 是把前四者串起来的躯干，管循环、权限、上下文压缩和错误恢复，它不做思考，但没有它其余组件只是散装零件。
 
@@ -433,7 +449,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1PmMM6QEhe/)
 
 🟢 基础 | `→ PaiCLI` | 字节、阿里
 
-### 7. 到底什么是 ReAct？和 CoT 有什么区别？
+### 8. 到底什么是 ReAct？和 CoT 有什么区别？
 
 CoT 是让 LLM 一步步推理再给答案，全程在脑子里完成，不查任何外部数据，所以它记得的数据可能过时或编造，自己不知道。ReAct 全称 Reasoning + Acting，由姚顺雨作为第一作者和 Google 联合提出，核心是 Thought、Action、Observation 三步循环，每一步推理都有真实数据兜底。CoT 是闭卷考试，ReAct 是开卷考试。ReAct 里每个 Thought 本身就是 CoT，两者是组合关系。
 
@@ -445,7 +461,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1BFTx69EBT/)
 
 🟡 进阶 | `→ PaiCLI` | 淘天、腾讯、字节、百度
 
-### 3. Workflow 和 Agent 有什么区别？
+### 7. Workflow 和 Agent 有什么区别？
 
 Workflow 和 Agent 的核心区别只有一个问题，谁控制流程。Workflow 由开发者提前定好流程，LLM 在节点里干活但不决定下一步往哪走，Agent 则由 LLM 自己决定下一步干什么、调什么工具、什么时候停。判断方法是任务开始前能不能画出完整流程图，能画出来就用 Workflow。Dify 的可视化画布和 Claude Code 里编排多个 Sub-agent，控制权都在开发者手里。步骤无法提前确定的才交给 Agent。
 
@@ -457,7 +473,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1cHT76qEtr/)
 
 🟢 基础 | `→ PaiCLI（Agent）`
 
-### 2. Agent 和 ChatBot 最大的区别是什么？
+### 6. Agent 和 ChatBot 最大的区别是什么？
 
 可以按一次任务闭环来回答：先理解用户目标并做规划（Planning），再维护上下文和长期记忆（Memory），按需选择外部工具（Tool Use），执行行动并根据观察结果继续迭代（Action/Observation）。
 
@@ -471,7 +487,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1qqTY6rEPc/)
 
 🟢 基础 | `→ PaiCLI` | 字节、阿里云
 
-### 1. 什么是 Agent？和直接调大模型 API 有什么本质区别？
+### 5. 什么是 Agent？和直接调大模型 API 有什么本质区别？
 
 Agent 不是加了 system prompt 的大模型调用，而是 Model 加 Harness。直接调 API 是一问一答，下一步由业务代码写死，每次调用相互独立。Agent 的核心是一个 ReAct 循环，LLM 决定下一步做什么并返回 tool_calls，Harness 执行工具、把真实结果喂回模型，并维护任务状态。所以本质区别不在有没有 prompt，而在有没有这个决策循环，RAG 每一步都写死，因此不算 Agent。
 
@@ -483,7 +499,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV13dT562Eqr/)
 
 🟢 基础 | `→ PaiCLI` | 字节、腾讯、阿里
 
-### 10. Multi-Agent 协作是怎么实现的？
+### 4. Multi-Agent 协作是怎么实现的？
 
 没有协调机制的 Multi-Agent 只会互相打架。生产环境最主流的是编排器（Orchestrator）模式，一个主 Agent 拆任务、派活、收结果。编排器先调 LLM 把需求拆成子任务，再按子 Agent 的角色描述做语义匹配分配，每个子 Agent 在独立的上下文窗口里执行，彼此不直接通信，全部通过编排器中转，最后返回结构化 JSON 由编排器综合。跨领域知识单个 context 装不下才上 Multi-Agent。
 
@@ -495,7 +511,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1AjTK6GE6z/)
 
 🟡 进阶 | `→ PaiCLI` | 字节、阿里云、蚂蚁、小红书
 
-### 9. 什么是 Plan-and-Execute？
+### 3. 什么是 Plan-and-Execute？
 
 Plan-and-Execute 的核心是把规划和执行分开。Planner 先生成任务清单；Executor 逐项执行，每个任务仍可能多轮调用模型和工具；需要调整计划时，规划器还会再次请求模型。规划器和执行器可以使用不同模型来控制费用，但这不保证总 Token 或调用次数少于 ReAct。PaiCLI 当前的规划器和执行器使用同一个 `LlmClient`。
 
@@ -507,7 +523,7 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1xy7a65EA1/)
 
 🟡 进阶 | `→ PaiCLI` | 淘天、腾讯
 
-### 8. ReAct 会死循环吗？
+### 2. ReAct 会死循环吗？
 
 ReAct 真的会死循环，因为 Thought、Action、Observation 循环什么时候停，取决于 LLM 的判断。有三种情况，一是重复调用，ReAct 没有原生的去重机制。二是上下文混乱，LLM 对长上下文的注意力分布是 U 型的，中间的内容会被遗忘。三是错误重试，工具报错后用同样的方式重试，直到耗尽 Token。生产环境靠三道防线兜底，硬性迭代上限，LangChain 默认最多跑 15 轮。循环检测，同样的调用指纹连续出现 3 次就判定卡死。还有上下文压缩。
 
@@ -517,7 +533,7 @@ ReAct 真的会死循环，因为 Thought、Action、Observation 循环什么时
 
 B站视频：[观看本集视频](https://www.bilibili.com/video/BV1g8jZ6dEWV/)
 
-### 6. Agent 怎么知道该调用哪个工具？
+### 1. Agent 怎么知道该调用哪个工具？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所有工具注册成一张列表，每个工具带名称、描述和参数的 JSON Schema。Agent 把对话历史和全量工具定义塞进 LLM 接口的 tools 字段，模型自己读描述判断调哪个、参数填什么，并返回 tool_calls 数组，这就是 Function Calling 协议。LLM 返回不存在的工具名时，ToolRegistry 兜底报错让模型修正。
@@ -527,12 +543,19 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 抖音视频：[观看本集视频](https://www.douyin.com/video/7654443885439094042)
 
 
-### 43. Computer Use 是什么？说说它的原理
-🟡 中等 | `AI / 大模型` | → PaiAgent / PaiCLI
-
-## 02、热点解读（预留 100 篇，已收录 15 篇）
+## 02、热点解读（预留 100 篇，已收录 17 篇）
 
 模型发布和行业事件的快速拆解，面试聊到最新动态时用得上。
+
+### HOT-017. GPT-6.1 Terra 发布，Codex 藏了哪三个大招？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结合 Codex 源码，拆解 V8 沙箱中的工具并发编排、原图上下文与跨窗口接力，以及推理档位和长期记忆整理。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn38OgFNR0NxU8hHlcvlvdle) · [查看图文解析](./gpt-6-1-terra.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7701366090923904282)
 
 ### HOT-015. Kimi K3.1 Pro 正式发布，国产模型的审美新巅峰。
 
@@ -581,6 +604,8 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，并为每条结论生成 Evidence 记录。DeepSeek Harness 没有一键接入，需要在 cordis.patch.yml 里接入 REA 的 MCP，再安装 Skill，最后跑通官方的恐龙游戏逆向案例。
 
 完整内容：[阅读全文《REA 接入 DeepSeek Harness》](./rea-deepseek-harness-tutorial.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn7fW4j9GEHSijqOJpqq4r8f)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1F5xK6EEMz/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7696102369058196736)
 
@@ -675,6 +700,18 @@ Jev 是 TypeSafe AI 9 月 15 日发布的 System One 模型，不生成文本，
 B站视频：[观看本集视频](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7687944233659026722)
+
+### HOT-016. GPT Images 2.5 实测，图像生成升级了什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从生成速度、局部编辑、多轮一致性和 Sketch 草图功能，理解 GPT Images 2.5 的使用方式。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnsJT6oJ0xXRadGj1s0qutrf) · [查看图文解析](./chatgpt-images-2-5.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1Vzhe6YEeC/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7683756814344703266)
 
 ### HOT-002. GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？
 
@@ -782,22 +819,6 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 
 🟡 进阶 | `→ PaiCLI`
 
-### 54. 滑动窗口对话历史有什么问题？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-两个问题。一是每次丢掉最早的消息都会改变前缀，KV Cache 失效。二是会丢关键的工具调用结果，第 2 轮读到的文件内容到第 15 轮已经滑出窗口，模型只能靠猜，实验里的 Agent 经常因此陷入循环，反复执行同一个工具调用。正确做法是压缩工具结果而不是截断历史，或者把大体积任务交给子 Agent 隔离。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 55. 什么是 Agent 状态栏？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-状态栏是 Harness 在上下文末尾持续注入的结构化状态摘要，比如已经调了几次工具、TODO 还剩几项、当前工作目录。它有效的原因是上下文学习更像检索而不是推理，模型擅长从上下文里查东西，不擅长把散落的记录归纳成结论，让它数自己打了几次电话很容易数错。把算好的结论直接写在末尾，模型瞥一眼就能用。注意状态栏要用代码维护，模型几乎无条件相信状态栏的内容。
-
-🔴 深入 | `→ PaiCLI`
-
 ### 56. 上下文压缩会不会和 KV Cache 冲突？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
@@ -848,7 +869,7 @@ FIFO 最大的坑是把重要但不常用的记忆淘汰掉了。
 ### 63. 同一个用户在私聊和群组里和 Agent 对话，应该共享会话还是隔离？OpenClaw 是怎么设计会话隔离粒度的？
 🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
 
-## 04、LLM 基础与 API（82 题）
+## 04、LLM 基础与 API（83 题）
 
 聚焦 NLP、Transformer、模型结构、推理机制、API、缓存、Token、结构化输出和模型服务。
 
@@ -1206,6 +1227,16 @@ MoE 把一个大模型拆成多个“专家”子网络，每次推理只激活�
 KV Cache 缓存已计算的 Key/Value 矩阵，避免每生成一个新 token 都重新算前面所有 token 的注意力。Prompt Caching 更上一层，缓存相同前缀 Prompt 的计算结果，多次请求共享同一份缓存。PaiCLI 支持 Prompt Cache 可视化，让用户看到缓存命中率。
 
 🟡 进阶 | `→ PaiCLI Prompt Cache 可视化`
+
+### 360. 什么是语义缓存？和 KV Cache、Prompt Caching 有什么区别？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+语义缓存存储完整问答对，通过 Embedding 和相似度检索复用答案；结合 GPTCache，理解命中阈值、时效性、用户隔离和适用场景。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnd4Y1d4ALBcMZ1S5Ot7hntb) · [查看图文解析](./what-is-semantic-caching.md)
+
+🟡 进阶 | `→ 派聪明 / PaiAgent`
 
 ## 05、模型训练与微调（32 题）
 
@@ -2306,7 +2337,7 @@ Agent 这一轮变化和以往不太一样。以前的技术迭代，学一门�
 
 Alan Kay 说过一句话，「预测未来最好的办法就是去创造它」。我觉得这话放在今天特别合适。与其等着被 Agent 浪潮推着走，不如自己先把原理搞透，把项目跑通，把面试里会被问到的每一个点都准备好。
 
-所以我们选择了最笨但最扎实的方式。366 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
+所以我们选择了最笨但最扎实的方式。369 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
 
 我始终相信一件事，技术的价值不在于它有多新，而在于你是否真正理解它、用过它、能把它讲清楚。这套题库要做的就是帮你到达这个状态。
 

@@ -7,6 +7,10 @@ from pronunciations import report as pronunciation_report
 def synth(text,out_path,tts,key,ssml=None):
     headers={'X-Api-Key':key,'X-Api-Resource-Id':tts['resourceId'],'X-Api-Connect-Id':str(uuid.uuid4()),'Content-Type':'application/json'}
     body={'user':{'uid':'ergo-video'},'event':100,'namespace':'BidirectionalTTS','req_params':{'text':text,'speaker':tts['speakerId'],'speed_ratio':tts.get('speedRatio',1.0),'audio_params':{'format':tts['audio']['format'],'sample_rate':tts['audio']['sampleRate']}}}
+    if tts.get('model'):
+        body['req_params']['model']=tts['model']
+    if 'speechRate' in tts:
+        body['req_params']['audio_params']['speech_rate']=tts['speechRate']
     if ssml is not None:
         body['req_params']['ssml']=ssml
         body['req_params']['additions']=json.dumps({'disable_markdown_filter':False})

@@ -3,13 +3,15 @@
   "tts": {
     "speakerId": "S_j97bqlje2",
     "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
     "apiBase": "https://openspeech.bytedance.com/api/v3/tts/unidirectional/sse",
     "speedRatio": 1.0,
+    "speechRate": 0,
     "audio": {
       "format": "mp3",
       "sampleRate": 24000
     },
-    "atempo": 1.10
+    "atempo": 1.0
   },
   "volc": {
     "apiKeyEnv": "VOLC_TTS_API_KEY"
