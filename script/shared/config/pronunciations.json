@@ -356,6 +356,74 @@
       "speakers": "*",
       "status": "confirmed",
       "note": "2026-10-26 what-is-computer-use 第二章，用户指定方法名不用读括号。仅在ttsText删除紧接方法标识符的空调用括号，原稿、字幕和画面保留getState()；不删除普通括号中的正文，有参调用另按语义处理。确认的是读法，新配音仍待实际试听。"
+    },
+    {
+      "id": "xiaomi-ocr-repo-path",
+      "match": "SeerRay-Lab/Xiaomi-OCR-0",
+      "replace": "SeerRay Lab 斜杠 小米 OCR 零",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "candidate",
+      "note": "2026-10-31 xiaomi-ocr-0 beat 36：整条安装地址被读成 Siri Dash Labs Slash X I A O M I Dash O C R 零。按“SeerRay Lab 斜杠 小米 OCR 零”读，连字符不念；字幕保留原拼写。新配音待复听。 2026-10-31 复听转写为“C Ray Lab”，把 SeerRay 拆成 Seer Ray 两个词。"
+    },
+    {
+      "id": "ollama-bf16-tag",
+      "match": "longwayxu/xiaomi-ocr-0:bf16",
+      "replace": "long way xu 斜杠 小米 OCR 零 冒号 bf16",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "candidate",
+      "note": "2026-10-31 xiaomi-ocr-0 beat 8：Ollama 标签里的连字符读成 dash、冒号读成 colon。路径分隔按斜杠、标签冒号按“冒号”读，字幕保留原标签。新配音待复听。 2026-10-31 复听里 ollama pull 与 longwayxu 连成一串，把用户名拆成 long way xu。"
+    },
+    {
+      "id": "xiaomi-ocr-brand",
+      "match": "Xiaomi-OCR-0",
+      "replace": "小米 OCR 零",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "candidate",
+      "note": "2026-10-31 xiaomi-ocr-0：同一模型名在不同句子被读成 Shelmi / Gemini / Shellmi，不稳定。按中文习惯统一读“小米 OCR 零”，字幕保留官方拼写。这是本频道读法，不声称官方发音；新配音待用户复听，若要读英文 Xiaomi 另行指定。"
+    },
+    {
+      "id": "qwen-version-hyphen",
+      "match": "千问\\s*3\\.5-",
+      "replace": "千问 3.5 ",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "candidate",
+      "note": "2026-10-31 xiaomi-ocr-0 beats 21/26/45：千问 3.5-0.8B 与 3.5-122B 的连字符被读成“到/杠”。版本号后的连字符改为空格，读成“千问 三点五 零点八B”。字幕不变。"
+    },
+    {
+      "id": "one-b-parameter",
+      "match": "(?<![\\d.])1B(?![A-Za-z0-9])",
+      "replace": "一 B",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "candidate",
+      "note": "2026-10-31 xiaomi-ocr-0 beat 20：1B 以下的 1B 被转写成 E B，按参数规模读“一 B”。仅在独立 1B 出现时生效，字幕保留 1B。"
+    },
+    {
+      "id": "skill-md-file",
+      "match": "SKILL\\.md",
+      "replace": "skill 点 md",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "candidate",
+      "note": "2026-10-31 xiaomi-ocr-0 beat 35：SKILL.md 被逐字母读成 S K I L L。文件名按“skill 点 md”读，字幕保留原文件名。"
+    },
+    {
+      "id": "server-py-file",
+      "match": "(?i)(?<![A-Za-z0-9_])server\\.py(?![A-Za-z0-9_])",
+      "replace": "server 点 py",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-10-31 xiaomi-ocr-0，用户明确指定server.py读“server 点 py”。只改ttsText，字幕和命令保留server.py。新完整句子仍待用户实听。"
     }
   ],
   "watch": [
