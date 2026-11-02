@@ -83,7 +83,7 @@ function renderStats(categories) {
 }
 
 function renderQuestion(q) {
-  const no = q.no ? `${q.no}. ` : ''
+  const no = q.no ? `${q.no}\\. ` : ''
   const url = LOCAL_ARTICLE_LINKS.has(q.article) ? `./video/${q.article}.md` : `${SITE}/${q.article}.html`
   const title = q.article ? `[${q.title}](${url})` : q.title
   const links = [q.douyin && `[抖音](${q.douyin})`, q.bilibili && `[B站](${q.bilibili})`].filter(Boolean)
