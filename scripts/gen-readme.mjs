@@ -11,8 +11,8 @@ const CATALOG = path.join(ROOT, 'video/readme.md')
 const README = path.join(ROOT, 'README.md')
 const SITE = 'https://javabetter.cn/ai/video'
 
-const CATEGORY_RE = /^## (?:(\d+)、)?(.+?)（(\d+) 题）\s*$/
-const QUESTION_RE = /^### (?:(\d+)\.\s*)?(.+?)\s*$/
+const CATEGORY_RE = /^## (?:(\d+)、)?(.+?)（(?:(\d+) 题|预留 \d+ 篇，已收录 (\d+) 篇)）\s*$/
+const QUESTION_RE = /^### (?:(HOT-\d+|\d+)\.\s*)?(.+?)\s*$/
 const ARTICLE_RE = /\]\(\.\/([a-z0-9-]+)\.md\)/
 const BILIBILI_RE = /https:\/\/www\.bilibili\.com\/video\/[A-Za-z0-9]+\/?/
 const DOUYIN_RE = /https:\/\/www\.douyin\.com\/video\/\d+/
@@ -27,7 +27,7 @@ function parseCatalog(text) {
     if (line.startsWith('## ')) {
       const m = line.match(CATEGORY_RE)
       // 「## ending」等不带题数的二级标题是正文，不是分类，后面不再有题目
-      category = m ? { no: m[1] ?? '', name: m[2].trim(), declared: Number(m[3]), questions: [] } : null
+      category = m ? { no: m[1] ?? '', name: m[2].trim(), declared: Number(m[3] ?? m[4]), questions: [] } : null
       if (category) categories.push(category)
       question = null
       continue
