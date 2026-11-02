@@ -123,7 +123,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 <details>
 <summary><b>02 热点解读</b>（19 题，图文详解 19 篇）</summary>
 
-- HOT-019. [DeepSeek Super-agent 是什么？](https://javabetter.cn/ai/video/what-is-super-agent.html) · [抖音](https://www.douyin.com/video/7703197849411996970)
+- HOT-019. [DeepSeek Super-agent 是什么？](./video/what-is-super-agent.md) · [抖音](https://www.douyin.com/video/7703197849411996970)
 - HOT-018. [Xiaomi-OCR-0 开源：本地 OCR 怎么用？](https://javabetter.cn/ai/video/xiaomi-ocr-0.html) · [抖音](https://www.douyin.com/video/7702772455210896674)
 - HOT-017. [GPT-6.1 Terra 发布，Codex 藏了哪三个大招？](https://javabetter.cn/ai/video/gpt-6-1-terra.html) · [抖音](https://www.douyin.com/video/7701366090923904282)
 - HOT-015. [Kimi K3.1 Pro 正式发布，国产模型的审美新巅峰。](https://javabetter.cn/ai/video/kimi-k3-1-pro.html) · [抖音](https://www.douyin.com/video/7700177876540230975)

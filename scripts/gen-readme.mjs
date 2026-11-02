@@ -10,6 +10,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CATALOG = path.join(ROOT, 'video/readme.md')
 const README = path.join(ROOT, 'README.md')
 const SITE = 'https://javabetter.cn/ai/video'
+// 新稿在网站部署前先链接到仓库内的原稿，避免目录出现 404。
+const LOCAL_ARTICLE_LINKS = new Set(['what-is-super-agent'])
 
 const CATEGORY_RE = /^## (?:(\d+)、)?(.+?)（(?:(\d+) 题|预留 \d+ 篇，已收录 (\d+) 篇)）\s*$/
 const QUESTION_RE = /^### (?:(HOT-\d+|\d+)\.\s*)?(.+?)\s*$/
@@ -82,7 +84,8 @@ function renderStats(categories) {
 
 function renderQuestion(q) {
   const no = q.no ? `${q.no}. ` : ''
-  const title = q.article ? `[${q.title}](${SITE}/${q.article}.html)` : q.title
+  const url = LOCAL_ARTICLE_LINKS.has(q.article) ? `./video/${q.article}.md` : `${SITE}/${q.article}.html`
+  const title = q.article ? `[${q.title}](${url})` : q.title
   const links = [q.douyin && `[抖音](${q.douyin})`, q.bilibili && `[B站](${q.bilibili})`].filter(Boolean)
   const level = q.level ? `${q.level} ` : ''
   return `- ${level}${no}${title}${links.length ? ` · ${links.join(' · ')}` : ''}`
