@@ -8,49 +8,46 @@ author: 沉默王二
 date: 2026-05-20
 ---
 
-从 2025 年开始，到现在的 2026年，大厂面试出现了一个明显的转向。传统的八股文比重在降，取而代之的是 Agent 相关的问题。字节、阿里、腾讯、蚂蚁、快手、小红书，几乎每一家都在问「你做过 Agent 项目吗」「RAG 检索怎么做的」「MCP 协议了解吗」。不光是面试，整个行业的技术栈也在往 Agent 方向迁移。Claude Code、Codex 这些产品已经不是概念验证了，它们在真实的生产环境里跑着，每天帮我们写代码、改 bug、做 Code Review。
+不知道从什么时候开始，AI Agent 开始渗入到我们所有人的生活当中，哪怕不是计算机专业的，开口闭口都能给你聊几句 AI。
 
-甚至今年下半年涌现了一大批桌面Agent，包括WorkBuddy、豆包工作、千问办公等的。
+- Claude Code、Codex、DeepSeek Harness、WorkBuddy
+- Opus 5.5、GPT-6.1 Sol、DeepSeek-V4.1-Flash-1017、GLM-5.3、Kimi K3.1、混元 Hy4 preview
+- MCP、RAG、Prompt、Memory、Skill、Context、Tool、Harness、Token
+- Multi-Agent、Sandbox、Checkpoint、Personal Agent
+- 甚至 KV Cache、Transformer、MoE、蒸馏等等都开始出现在我们的日常讨论当中。
 
-模型也在不断升级，DeepSeek V4、Kimi K3、GLM-5.3、Fable 5、GPT-6 Astra 等等。
+AI 正在成为我们生活中不可或缺的一部分，那为了让全天下的人（我真的这么想），都能在最短的时间内掌握最有用的 Agent 知识，我在 2026 年 8 月份开始撰写这份《王二讲 Agent》开源知识库，附带视频，目前在抖音上已经累计有 500 多万播放了。
 
-这意味着两件事。
+![](https://cdn.paicoding.com/stutymore/readme-20261101082435.png)
 
-第一，Agent 不再是「了解即可」的加分项，而是后端和 AI 方向求职的必答题。你不需要成为 Agent 框架的贡献者，但你得说清楚 ReAct 怎么控制迭代、上下文窗口爆了怎么压缩、RAG 的混合检索怎么设计、Prompt Caching 的命中条件是什么。这些问题，已经是面试中的常客了。
+每道题都不是孤立的概念解释，而是串联到三个真实的实战项目，而这些项目，帮助过 13000+ 小伙伴拿到满意的 offer，感兴趣的可以了解一下。
 
-第二，理解 Agent 的工作原理也会直接提升你使用 AI 工具的效率。知道 Context Engineering 的人，写 Prompt 的质量和不知道的人完全是两个水平。
-
-![跟着王二讲Agent：通过完整题目系统学习，建立Agent时代的完整知识体系](https://cdn.paicoding.com/stutymore/agent-learning-completeness-20260908231154-003540aa.png)
-
-这套题库一共 369 道（还会持续追加），覆盖 Agent 基础、上下文与记忆、Harness、RAG、LLM、Claude Code、Codex、DeepSeek、Prompt、MCP、LangChain、Spring AI、模型微调和 Agent 产品演进。题目来源是牛客、星球、各大厂真实面经，按出现频次和难度权重筛选，随着视频更新持续补充。
-
-每道题都不是孤立的概念解释，而是串联到三个实战项目来回答。
-
-- **PaiAgent/PaiFlow**，[LangGraph4j + Spring AI 的工作流编排平台](https://javabetter.cn/zhishixingqiu/paicli.html)
 - **PaiCLI**，[对标 Claude Code 的 终端 Agent](https://javabetter.cn/zhishixingqiu/paicli.html)
 - **派聪明**，[基于 ES 混合搜索的 RAG 知识库](https://javabetter.cn/zhishixingqiu/paismart.html)
+- **PaiAgent/PaiFlow**，[LangGraph4j + Spring AI 的工作流编排平台](https://javabetter.cn/zhishixingqiu/paicli.html)
 
-每一道题的回答都有项目代码可以兜底。
+目前，这套题库会在多个地方同步更新，包括抖音、视频号、飞书、网站、GitHub、小红书、B 站等等。
 
-这套题库在三个地方同步更新，内容是同一份。[网站版](https://javabetter.cn/ai/video/)有侧边栏目录、站内搜索和内嵌视频，适合系统地刷；[GitHub 仓库 itwanger/ai-better](https://github.com/itwanger/ai-better) 存着全部 Markdown 源文件和每条视频的 Remotion 工程，欢迎 Star 和提 Issue；[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)适合收藏到手机上随时翻。视频讲解在 B 站和抖音搜「王二讲Agent」。
+- [王二讲 Agent 飞书知识库（附视频地址）](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)
+- [二哥的 Java 进阶之路](https://javabetter.cn/ai/video/)
+- [GitHub 仓库 ai-better](https://github.com/itwanger/ai-better) 
+- 视频讲解可以在抖音、微信、B 站搜「王二讲Agent」，同时【二哥狗腿子】公众号也会第一时间发布文字稿。
 
-![王二讲Agent的B站视频讲解列表](https://cdn.paicoding.com/stutymore/agent-interview-bilibili-20260908230334-6f7666d6.png)
+![](https://cdn.paicoding.com/stutymore/readme-20261101085154.png)
 
-题目难度分三级：🟢 基础、🟡 进阶、🔴 深入。已完成图文解析和视频讲解的题目会标注链接，方便按图索骥。
-
-[飞书题库入口](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)：按分类浏览题目和详细答案，展开左上角目录即可切换阅读。
-
-> 分类与排序说明：题目按知识主题分类，网站侧边栏收录已完成的脚本；「热点解读」用于拆解模型发布和行业事件。每类已发布视频的题目按发布顺序倒序排列，新视频优先；尚未发布视频的题目保留在后面。「Agent 基础」按视频发布时间从新到旧展示，题号按 38→1 连续排列；其他分类的普通题号保留，不随展示顺序改变；热点使用独立的 HOT-001 至 HOT-100 编号，当前收录 17 篇，预留容量不计入实际题数；疑似重复题仍保留，确认前暂不删除。
-
-你也可以加我的微信【备注AI】，小助理会拉你进AI交流群的。
+你也可以加我的微信【二哥狗腿子】，小助理会拉你进 AI 交流群的，里面高手云集。
 
 <p align="center">
-  <img src="https://cdn.paicoding.com/stutymore/readme-cf1692c0ddb54b132f268f783c92c0f1.jpg" width="300px" alt="二哥狗腿子">
+  <img src="https://cdn.paicoding.com/stutymore/readme-20261101075407.png" alt="二哥狗腿子">
 </p>
 
-## 01、Agent 基础（38 题）
+《王二讲 Agent》飞书知识库已经有 4000+ 人阅读了，如果你觉得这份资料非常不错，也可以分享给身边的朋友、同学、同事，相信他们也会感谢你的，记住这个地址：`https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb`
 
-聚焦 Agent 的定义、工作方式、规划、反思和多 Agent 协作。部分新增题目参考了开源书《深入理解 AI Agent：设计原理与工程实践》（[bojieli/ai-agent-book](https://github.com/bojieli/ai-agent-book)）的章节结构和各章思考题。
+![](https://cdn.paicoding.com/stutymore/readme-20261101080643.png)
+
+Google 搜【王二讲 Agent】也能看到我了。
+
+## 01、Agent 基础（38 题）
 
 ### 38. Computer Use 是什么？说说它的原理
 
@@ -95,6 +92,8 @@ date: 2026-05-20
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnF9VocGwj5gWO3RyFbsh3Td) · [查看图文解析](./multi-agent-file-conflict.md)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1zHxk6EEVC/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7698743831088467241)
 
 🔴 深入 | `→ PaiCLI`
@@ -107,6 +106,8 @@ date: 2026-05-20
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn2zEUv80SYvpjrTO69YHUWf) · [查看图文解析](./tool-design-principles.md)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV15hsf6WEkA/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7698329222099520768)
 
 🟢 基础 | `→ PaiCLI`
@@ -118,6 +119,8 @@ date: 2026-05-20
 先判断缺的信息会不会改变执行结果。缺的是关键参数，比如订机票不知道日期、改代码不知道改哪个模块，必须反问；有合理默认值，或者能用工具自己查到的，就不要打扰用户，先读代码库找到相关文件，再带着具体选项去问。反问要一次问全，并给出选项，不要一轮只问一个问题。实现上把“向用户提问”也做成一个工具，模型调用它时 Agent Loop 挂起，用户回答后作为工具结果返回，Claude Code 的 AskUserQuestion 就是这样实现的。没法反问的后台任务，就把自己做出的假设写进输出，让用户事后确认。
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn1qJcx2oew7bRqCc5GHO8BP) · [查看图文解析](./agent-requirement-clarification.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV11cx76dERX/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7696859780668755234)
 
@@ -543,9 +546,17 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 抖音视频：[观看本集视频](https://www.douyin.com/video/7654443885439094042)
 
 
-## 02、热点解读（预留 100 篇，已收录 17 篇）
+## 02、热点解读（预留 100 篇，已收录 18 篇）
 
-模型发布和行业事件的快速拆解，面试聊到最新动态时用得上。
+### HOT-018. Xiaomi-OCR-0 开源：本地 OCR 怎么用？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从本地部署、区域识别、模型训练和 MCP 接入，了解 Xiaomi-OCR-0 的能力与使用方式。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnqqYO96YgPHGfS9OUWfEmoe) · [查看图文解析](./xiaomi-ocr-0.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7702772455210896674)
 
 ### HOT-017. GPT-6.1 Terra 发布，Codex 藏了哪三个大招？
 
@@ -585,6 +596,8 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 
 完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnvfbHomZEVAFlg3uoUF3MRe) · [阅读全文《DeepInfer 开源》](./deepseek-open-source-deepinfer.md)
 
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1qsxk6jECM/)
+
 抖音视频：[观看本集视频](https://www.douyin.com/video/7699074728060816667)
 
 ### HOT-012. DeepSeek-V4.1-Flash-1017 真来了，这次是真滴强。
@@ -594,6 +607,8 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 拆解 1017 的后训练更新、基准对比、许愿式编程和三个本地案例，以及 Search & Fetch 的接入信息。
 
 完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnT0hadTTvylXP4PWRxu2RWh) · [阅读全文《DeepSeek 1017 更新》](./deepseek-v4-1-flash-1017.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1jtsf6xEmR/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7697933506416037146)
 
@@ -725,12 +740,46 @@ GPT-6 Astra 在 ARC-AGI-3 上拿到 99.9%，靠的是紧凑符号世界模型加
 
 完整内容：[阅读全文《官网全崩中转为什么还能用》](./why-relay-still-works.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnRxRSfq7atYGxxjXecbYBcb)
 
-## 03、上下文与记忆（20 题）
+## 03、上下文与记忆（12 题）
 
 聚焦上下文窗口、Context Engineering、短期记忆、长期记忆、压缩、检索与会话隔离。
 
 
-### 52. Agent 的长期记忆怎么实现？
+### 50. 说说 DeepSeek Harness 的上下文压缩原理
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结合 DeepSeek Harness，理解工具结果裁剪、磁盘回读、结构化摘要和最近对话保留。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnHpkGO706ddPGpNYrxzuwEb) · [查看图文解析](./agent-memory-compaction-methods.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7702426892510448931)
+
+### 49. 上下文压缩会不会和 KV Cache 冲突？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+看似冲突，其实互补。压缩不在单次调用里改上下文，而是在两次 API 调用之间由 Harness 预处理消息列表。系统提示词和工具定义永远不动，压缩的对象是历史里的工具结果，替换点之后的缓存会失效，之前的仍然有效。所以压缩频次要权衡，最好在接近阈值时批量压，不要每轮都压。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnGXHYb0pN8j5mQUCIvm0yhe) · [查看图文解析](./context-compaction-vs-kv-cache.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7702055929176526090)
+
+🔴 深入 | `→ PaiCLI`
+
+### 48. 为什么不能在系统提示词里放时间戳？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+因为 Prompt Cache 只认 token 前缀。时间戳让每次请求从那个位置开始都不一样，之后的 KV 状态全部要重算，而系统提示词在最前面，等于几乎整段前缀都失效。书里的案例是首 token 延迟从 0.5 秒涨到 3 到 5 秒，月账单接近翻倍。三条铁律，系统提示词和工具定义定下来就不改，动态信息追加到末尾，使用标准 API 消息格式不要自己拼字符串。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnNDD9a3qXCmLTvf5EJ1FSzg) · [查看图文解析](./why-not-timestamp-in-system-prompt.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7701937297377332480)
+
+🟡 进阶 | `→ PaiCLI`
+
+### 47. Agent 的长期记忆怎么实现？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 短期记忆是内存，退出 Codex 或 Claude Code 就清空。长期记忆是磁盘，存成文件，下次打开 Agent 会自动加载进上下文。实现分四步，提取是从对话里识别关键信息，存储是写到磁盘，Claude Code 存成 Markdown 文件，检索是新开对话时找出相关记忆，这一步最难，注入是把记忆塞进系统指令。记忆存多了靠记忆反思更新过时、合并重复、修正矛盾。项目规则建议主动写进 CLAUDE.md 或 AGENTS.md。
@@ -739,7 +788,7 @@ GPT-6 Astra 在 ARC-AGI-3 上拿到 99.9%，靠的是紧凑符号世界模型加
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7667739270735514930)
 
-### 48. 为什么聊着聊着 Agent 就变笨了？
+### 46. 为什么聊着聊着 Agent 就变笨了？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 Agent 变傻不是 bug，是压缩带来的信息损耗。短期记忆靠重发聊天记录实现，记录越长注意力越分散，这叫 Context Rot。窗口快满时会自动把旧记录压成摘要，但压缩有损，Claude Code 会丢掉工具返回的长结果，Codex 连文件内容都可能丢，压得越多丢得越多。少忘事有三条办法，一个线程只干一件事，用 /compact 主动压缩并说明保留什么，重要规则写进 CLAUDE.md 或 AGENTS.md，系统指令不会被压缩。
@@ -748,7 +797,7 @@ Agent 变傻不是 bug，是压缩带来的信息损耗。短期记忆靠重发�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7666746723645148442)
 
-### 51. Agent 的短期记忆怎么实现？
+### 45. Agent 的短期记忆怎么实现？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 Agent 的短期记忆就是 messages 数组。LLM 无状态，Agent 按顺序存下 system、user、assistant、tool 四种角色的消息，每次调 API 全量发给模型，模型才“知道”前面说过什么。上下文窗口有上限，而且模型对中间内容关注度低。窗口不够用有三种策略，滑动窗口只保留最近 N 轮，摘要压缩用 LLM 把早期对话压成摘要，混合策略旧消息压缩、近期留原文，生产环境最常用。短对话选滑动窗口，长对话选混合策略。
@@ -757,7 +806,7 @@ Agent 的短期记忆就是 messages 数组。LLM 无状态，Agent 按顺序存
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7663725283039563044)
 
-### 50. 怎么让 Agent 拥有记忆？
+### 44. 怎么让 Agent 拥有记忆？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 LLM 无状态，把上下文窗口开大只能得到临时的短期记忆，新开窗口就消失，Agent 的记忆要在工程层面维护短期记忆和长期记忆。短期记忆解决一次对话内的问题，靠滑动窗口只保留最近 N 轮，或者用 LLM 把早期对话压缩成摘要塞回窗口。长期记忆解决跨对话的问题，分提取、存储、检索、注入四步，把关键信息写进外部文件或数据库，下次新开对话检索出来注入 system prompt。记忆存多了过时了，靠记忆反思更新过时信息、合并重复、修正矛盾。
@@ -766,7 +815,7 @@ LLM 无状态，把上下文窗口开大只能得到临时的短期记忆，新�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7663380317411003690)
 
-### 45. Agent 的上下文窗口是什么？
+### 43. Agent 的上下文窗口是什么？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 上下文窗口是 LLM 一次能看到的全部文本容量，计量单位是 token 而不是字数。窗口装的不只是聊天记录，system prompt、工具定义、历史对话、当前输入和模型回复五样东西共用一个窗口。就像考试的草稿纸，写满了只能擦掉最早的内容腾地方，所以 Agent 聊到后面会忘事，不是不聪明，是内容被挤出了窗口。窗口也不是越大越好，越大越慢越贵，加上 Lost in the Middle 的 U 型记忆，关键信息要放在开头或结尾。
@@ -775,7 +824,7 @@ LLM 无状态，把上下文窗口开大只能得到临时的短期记忆，新�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7663057047717547283)
 
-### 49. 为什么说 LLM 本身没有记忆？
+### 42. 为什么说 LLM 本身没有记忆？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 LLM 是无状态的，每一次请求都是独立的，前后两次对话之间模型不保留任何信息。模型“知道”的东西来自两处。参数记忆是训练阶段压缩进权重的知识，训练结束权重冻结，知识停在训练截止日期。上下文记忆是系统每次把之前所有聊天记录全部打包发给模型，让模型从头读一遍。所以 ChatGPT 记得上一轮的话，不是模型记住了，是系统帮它复习了一遍。记忆功能也只是把关键信息存进外部数据库再注入 system prompt，记忆在模型外面。
@@ -784,7 +833,7 @@ LLM 是无状态的，每一次请求都是独立的，前后两次对话之间�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7662685584615427371)
 
-### 44. 什么是上下文工程（Context Engineering）？
+### 41. 什么是上下文工程（Context Engineering）？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在正确的时间以正确的格式拿到正确的信息和工具。按卡帕西的类比，LLM 是 CPU，上下文窗口是内存，开发者是决定加载什么数据的操作系统。上下文包含 System Prompt、用户输入、历史记录、长期记忆、RAG、工具定义和结构化输出七大组件，每次请求动态组装。Agent 的差距不在模型能力而在信息供给，但上下文并非越多越好，否则会中毒、干扰、混淆、冲突。
@@ -793,7 +842,7 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7660389232246050083)
 
-### 46. 为什么 LLM 的上下文窗口不能无限大？
+### 40. 为什么 LLM 的上下文窗口不能无限大？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 窗口不能无限大，限制远不止显存。Self-Attention 要每个 token 和所有 token 做点积，复杂度 O(n²)，128K 扩到 1M 计算量暴增 61 倍。推理时还要缓存 KV Cache，70B 模型在 1M tokens 下就要 310GB。Lost in the Middle 更证明文档放中间准确率暴跌。百万 token 靠压缩存储、稀疏注意力、多卡分工和 RAG 做到，核心是让每个 token 都值得。
@@ -802,7 +851,7 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7660013204101254406)
 
-### 47. Agent 怎么避免上下文爆炸？
+### 39. Agent 怎么避免上下文爆炸？
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
 
 避免上下文爆炸的核心不是删旧对话，而是在不丢关键信息的前提下控制长度。窗口大小固定且 LLM 注意力呈 U 型分布，Agent 每一轮 ReAct 循环都往窗口里追加内容，读日志、读源码、跑测试几轮就撑爆。解法四招，工具输出只留摘要和指向原始数据的指针，旧对话做语义摘要，复杂任务交给 Sub-agent 在全新窗口干完只返回结论，工具和 Skill 按需加载。压缩太狠会丢关键信息，上下文占到 60% 到 75% 时就该手动压缩。
@@ -810,64 +859,6 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 完整答案：[阅读全文《避免上下文爆炸》](./agent-context-explosion.md) · [B站视频](https://www.bilibili.com/video/BV1oqMt6FEEH/) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcny08ajrgNV50S35f7VvB9Fc)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7659664856261348642)
-
-### 53. 为什么不能在系统提示词里放时间戳？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-因为 Prompt Cache 只认 token 前缀。时间戳让每次请求从那个位置开始都不一样，之后的 KV 状态全部要重算，而系统提示词在最前面，等于几乎整段前缀都失效。书里的案例是首 token 延迟从 0.5 秒涨到 3 到 5 秒，月账单接近翻倍。三条铁律，系统提示词和工具定义定下来就不改，动态信息追加到末尾，使用标准 API 消息格式不要自己拼字符串。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 56. 上下文压缩会不会和 KV Cache 冲突？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-看似冲突，其实互补。压缩不在单次调用里改上下文，而是在两次 API 调用之间由 Harness 预处理消息列表。系统提示词和工具定义永远不动，压缩的对象是历史里的工具结果，替换点之后的缓存会失效，之前的仍然有效。所以压缩频次要权衡，最好在接近阈值时批量压，不要每轮都压。
-
-🔴 深入 | `→ PaiCLI`
-
-### 57. 为什么说隔离优于压缩？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-压缩是信息进了上下文之后做减法，有损，还要额外一次 LLM 调用。隔离是让大体积的中间信息根本不进主上下文，把「在代码库里大范围搜索」这类任务交给子 Agent，它在自己的上下文里探索，只把几百 token 的结论回传。主 Agent 的 KV Cache 前缀完全不受影响。代价是子 Agent 看不到主 Agent 的完整上下文，任务描述必须自包含。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 58. 用户记忆有哪几种存储格式？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-四种，粒度和结构递进。Simple Notes 每条一个最小事实，开销最低但信息关联丢失。Enhanced Notes 保存带上下文的完整段落，语义完整但冗余、难更新。JSON Cards 三层嵌套分类，支持局部更新，但多维信息被迫归入单一类别。Advanced JSON Cards 再加上来源背景、主体身份、关系和时间戳，能区分「我的张医生」和「我父亲的张医生」。实践里关键且少量的信息用 Advanced JSON Cards，大量非关键的对话事实用 Simple Notes。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 59. 用户前后给了矛盾的信息，记忆系统怎么处理？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-不要简单地以后来的为准。先看两条信息是不是同一个主体，「家庭住址」可能一条是自己的一条是父母的，靠记忆卡片里的主体和关系字段区分。确实是同一主体的更新，则按时间戳判断新旧，旧值保留来源以便回溯。对话块索引时带上时间、人物和意图的前缀，Agent 才有依据判断哪条指令最终有效。
-
-🔴 深入 | `→ PaiCLI`
-
-### 60. Agent 记忆压缩通常有哪些方法？
-主流三种：摘要压缩（把 10 轮对话压成一段摘要）、实体提取（只保留关键实体和关系）、向量化存储（记忆转向量，按相似度召回）。
-
-🟡 进阶 | `→ PaiCLI` | 腾讯
-
-### 61. 长期记忆的 FIFO 淘汰有什么问题？怎么优化？
-FIFO 最大的坑是把重要但不常用的记忆淘汰掉了。
-
-🔴 深入 | `→ PaiCLI` | 腾讯
-
-### 62. 长上下文压缩有哪些方案？
-主流方案有三种：对话摘要（把历史对话压缩成一段摘要）、关键信息提取（只保留重要的事实和决策）、滑动窗口（只保留最近 N 轮）。PaiCLI 支持 1M token 窗口的模型，同时配合动态压缩策略，在窗口快满时自动触发压缩。
-
-🟡 进阶 | `→ PaiCLI 动态压缩 + 1M token 窗口` | 快手、淘天、拼多多、腾讯
-
-### 63. 同一个用户在私聊和群组里和 Agent 对话，应该共享会话还是隔离？OpenClaw 是怎么设计会话隔离粒度的？
-🟡 中等 | `AI / OpenClaw / 大模型应用开发 / AI应用开发 / Agent开发` | → PaiAgent / PaiCLI
 
 ## 04、LLM 基础与 API（83 题）
 
@@ -1246,6 +1237,8 @@ KV Cache 缓存已计算的 Key/Value 矩阵，避免每生成一个新 token �
 比较黑盒、白盒和在轨蒸馏，区分蒸馏、量化和 SFT，并说明蒸馏授权和数据来源的边界。
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnUvHeHnlzDKLdM17o2acLOc) · [查看图文解析](./what-is-model-distillation.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1bdxj6FEe8/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7697583864511761698)
 
@@ -1653,6 +1646,8 @@ B站视频：[观看本集视频](https://www.bilibili.com/video/BV1uopu6vEPg/)
 工具调用失败要有重试和降级策略，模型 API 挂了要能自动切换到备用模型，消息队列保证异步任务不丢。PaiAgent 的节点执行失败会把 status 设为 FAILED 并记录 errorMessage，上层可以根据失败类型决定重试还是跳过。
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnTfg8ll63Eha14Jn1c3B3zc) · [查看图文解析](./deepseek-outage-agent-fallback.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1toxj6bEpR/)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7697192412568980763)
 
@@ -2337,7 +2332,7 @@ Agent 这一轮变化和以往不太一样。以前的技术迭代，学一门�
 
 Alan Kay 说过一句话，「预测未来最好的办法就是去创造它」。我觉得这话放在今天特别合适。与其等着被 Agent 浪潮推着走，不如自己先把原理搞透，把项目跑通，把面试里会被问到的每一个点都准备好。
 
-所以我们选择了最笨但最扎实的方式。369 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
+所以我们选择了最笨但最扎实的方式。362 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
 
 我始终相信一件事，技术的价值不在于它有多新，而在于你是否真正理解它、用过它、能把它讲清楚。这套题库要做的就是帮你到达这个状态。
 
