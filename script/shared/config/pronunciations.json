@@ -581,6 +581,16 @@
           "review": "script/one-minute-what-is-pythagorean-theorem/preview/pronunciation-c/sample.json"
         }
       ]
+    },
+    {
+      "id": "yinghe-hardcore",
+      "match": "硬核",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "targetPinyin": "yìng hé",
+      "status": "user-specified",
+      "note": "2026-11-02 what-is-llm 第五章，用户指定硬核读 yinghe。当前beat44完整意群使用单元级SSML，硬指定py ying4、核指定py he2，原稿字幕及朗读纯文本均保留硬核，不使用中文谐音。用户确认的是目标读法，新配音待实际试听，不作为已验证成功样本，也不自动重做其他项目。"
     }
   ]
 }
