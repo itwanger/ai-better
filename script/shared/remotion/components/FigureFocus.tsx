@@ -86,12 +86,14 @@ export const FigureFocus: React.FC<FigureFocusProps> = ({
  * 原图上的框选：按原图归一化坐标 [左, 上, 右, 下] 画直角框，放进 FigureFocus 的 children。
  * 并列多栏的信息图不放大，整图展示，讲到哪一栏就框哪一栏。`label` 是贴在框左上角的小标签。
  */
-export const FocusRing: React.FC<{ area: Focus; color?: string; opacity: number; label?: string }> = ({ area, color = C.rust, opacity, label }) => {
+export const FocusRing: React.FC<{
+  area: Focus; color?: string; opacity: number; label?: string; singleColor?: boolean;
+}> = ({ area, color = C.rust, opacity, label, singleColor = false }) => {
   const [u0, v0, u1, v1] = area;
   return (
     <div style={{
       position: 'absolute', left: `${u0 * 100}%`, top: `${v0 * 100}%`, width: `${(u1 - u0) * 100}%`, height: `${(v1 - v0) * 100}%`,
-      border: `5px solid ${color}`, boxShadow: '0 0 0 3px white', boxSizing: 'border-box',
+      border: `5px solid ${color}`, boxShadow: singleColor ? 'none' : '0 0 0 3px white', boxSizing: 'border-box',
       opacity, transform: `scale(${1.04 - 0.04 * opacity})`, pointerEvents: 'none',
     }}>
       {label && (

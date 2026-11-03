@@ -31,11 +31,11 @@
     },
     {
       "id": "context-one-mega",
-      "match": "(上下文\\s*(?:长度\\s*)?(?:仍然是|仍是|是|为)?\\s*)1\\s*M(?![A-Za-z0-9])",
+      "match": "(上下文\\s*(?:长度\\s*)?(?:仍然是|仍是|是|为)?\\s*|(?<![A-Za-z0-9.])(?=1\\s*M\\s*(?:上下文|的长序列)))1\\s*M(?![A-Za-z0-9])",
       "replace": "\\1一兆",
       "speakers": "*",
       "status": "confirmed",
-      "note": "2026-10-18 deepseek-v4-1-flash-1017 第四章，用户指定“上下文仍然是 1M”里的 1M 读“一兆”。限定上下文容量语境，只改 ttsText，字幕保留 1M；新配音仍待用户实听。"
+      "note": "2026-10-18 deepseek-v4-1-flash-1017 第四章，用户指定“上下文仍然是 1M”里的 1M 读“一兆”。涵盖「1M 上下文窗口」和「1M 的长序列」等容量语境，只改 ttsText，字幕保留 1M；新配音仍待用户实听。"
     },
     {
       "id": "comment-222",
@@ -590,7 +590,8 @@
       ],
       "targetPinyin": "yìng hé",
       "status": "user-specified",
-      "note": "2026-11-02 what-is-llm 第五章，用户指定硬核读 yinghe。当前beat44完整意群使用单元级SSML，硬指定py ying4、核指定py he2，原稿字幕及朗读纯文本均保留硬核，不使用中文谐音。用户确认的是目标读法，新配音待实际试听，不作为已验证成功样本，也不自动重做其他项目。"
+      "note": "2026-11-02 what-is-llm 第五章，用户指定硬核读 yinghe。当前beat44完整意群使用单元级SSML，硬指定py ying4、核指定py he2，原稿字幕及朗读纯文本均保留硬核，不使用中文谐音。用户确认的是目标读法，新配音待实际试听，不作为已验证成功样本，也不自动重做其他项目。 2026-11-03 LongCat-2.5 结尾再次被用户指出误读：同音色的新配音或复用缓存前必须把此音素片段落实到完整意群的 ttsSsml；watch 仅报告，不会自动套用。目标读法已明确，无需再次确认；新音频仍单独复听验收。",
+      "ssmlFragment": "<phoneme alphabet=\"py\" ph=\"ying4\">硬</phoneme><phoneme alphabet=\"py\" ph=\"he2\">核</phoneme>"
     }
   ]
 }

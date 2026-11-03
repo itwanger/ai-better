@@ -1,6 +1,7 @@
 """Mix opt-in, beat-relative effects without changing narration samples or timing."""
 import argparse,array,hashlib,json,math,random,wave
 from pathlib import Path
+from sfx_designs import make_cues
 p=argparse.ArgumentParser();p.add_argument('--project',required=True,type=Path);args=p.parse_args();root=args.project.resolve();shared=Path(__file__).resolve().parents[1]
 plan=json.loads((root/'assets/references/sound-plan.json').read_text());cues={x['id']:x for x in json.loads((root/'build/cues.json').read_text())};fps=json.loads((root/'project.json').read_text())['config']['video']['fps'];src=root/'build/voiceover.wav'
 with wave.open(str(src)) as w:
@@ -20,6 +21,13 @@ for name,duration in [('error',.16),('tick',.075),('page',.16)]:
  dest=shared/f'assets/sfx/{name}.wav';dest.parent.mkdir(exist_ok=True,parents=True)
  if not dest.exists():
   with wave.open(str(dest),'wb') as w:w.setnchannels(1);w.setsampwidth(2);w.setframerate(rate);w.writeframes(array.array('h',(round(x*32767*.25) for x in out)).tobytes())
+# Keep the legacy synthesis and its random sequence above unchanged.
+for name,sound in make_cues(rate).items():
+ library[name]=sound
+ dest=shared/f'assets/sfx/{name}.wav'
+ with wave.open(str(dest),'wb') as w:
+  w.setnchannels(1);w.setsampwidth(2);w.setframerate(rate)
+  w.writeframes(array.array('h',(round(x*32767*.25) for x in sound)).tobytes())
 mix=[float(x) for x in voice];events=[]
 for event in plan['events']:
  frame=cues[event['beatId']]['startFrame']+event.get('offsetFrames',0);offset=round(frame/fps*rate);gain=10**(event['peakDbfs']/20)*32767

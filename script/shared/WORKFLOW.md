@@ -349,11 +349,25 @@ python3 script/shared/tools/record_tui.py --project script/<topic> --name steer 
 
 新制章节按 Skill 的轻量增强规则选择效果。共享 `Enhancements.tsx` 提供短入场转场与概念图标；品牌素材来源记入 `shared/assets/brands/`。本期的事件时点保存在项目 `assets/references/sound-plan.json`，每个事件指定 `beatId`、`offsetFrames`、`sound`、`peakDbfs` 与用途。
 
+音色库见 `shared/assets/sfx/SOURCES.md`：除原有 `tick`、`page`、`error`，可选 `soft_click`（轻扣）、`soft_pop`（气泡）、`data_pluck`（拨弦）、`soft_whoosh`（转场掠过）、`focus_air`（聚焦气声）、`success_pair`（双音完成）。根据动作选用，不为展示音色而每次移动都加声；较长转场与完成音允许 180–460ms，按配音混音试听。
+
 ```bash
 python3 script/shared/tools/mix_effects.py --project script/what-is-agent-reflection
 ```
 
 混音保持原始 `build/voiceover.wav` 和采样长度不变，生成 `build/voiceover-with-effects.wav`、`build/sound-mix.json`。`chapter_pipeline.py` 在存在 sound-plan 时自动混音。预览读取混音文件；项目设置 `deliveryAudio: "build/voiceover-with-effects.wav"` 后（新项目初始化时默认写入），导出入口也采用该音轨。音效计划、配音或混音文件发生变化时，导出入口校验哈希并拒绝过期混音；每次重新生成配音时间轴后必须重新混音。第一章认可样片提供效果参考，不固定每章数量。提示音参考峰值约 -35 至 -31 dBFS、长度约 75–160ms，按实际配音与试听调整；不是响度保证。检查音效窗外配音采样一致、长度不变且无削波。
+
+### 连续场景转场
+
+`shared/remotion/components/MotionSceneChain.tsx` 提供 `MotionSceneChain` 与底层 `MotionPlane`，以当前帧驱动相邻平面交接。沿用 `SceneChain` 的 `scenes` / `totalFrames`，另传 `transitions`，键是章内场景起点，值是 `{kind: 'rise' | 'turn' | 'push', duration: 帧数}`。只给需要衔接的边界配置；`enabled={false}` 回到原切换，便于同入口保留对照。
+
+```tsx
+<MotionSceneChain enabled={motion} totalFrames={timing.chapterFrames}
+  transitions={{[E.platform]: {kind: 'rise', duration: 24}, [E.settings]: {kind: 'turn', duration: 24}}}
+  scenes={[[0, Models], [E.platform, KeyGuide], [E.settings, Settings]]} />
+```
+
+场景仍从原起点挂载，旧场景只延长退场窗口，字幕与配音由外层 `ChapterShell` 持有。当前主体裁切和透视中心适配 1920×1080；`push` 默认使用 LongCat 作品窗口的起点，其他画幅或素材位置需适配底层 `MotionPlane`，不当作通用坐标。动作取舍与验收见二哥视频 Skill 的 `references/APPROVED_MOTION_TRANSITIONS.md`。现有 `SceneChain` 行为不变，旧项目不自动启用。
 
 ### 品牌素材复用
 
