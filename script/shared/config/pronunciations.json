@@ -2,6 +2,14 @@
   "_comment": "配音读法词典。rules 由 pronunciations.py 写入 beats.json 的 ttsText，字幕 text 不变；watch 只列出待复听的 beat。speakers 为 * 表示与音色无关，否则只对列出的音色生效。status: confirmed=用户明确指定读法或复听认可，具体依据见 note，重生成音频仍需单独复听；candidate=读法候选，尚无用户对该读法的明确确认。",
   "rules": [
     {
+      "id": "hunyuan-hy4-spoken",
+      "match": "(?i)(?:混元\\s*)?(?<![A-Za-z0-9])Hy4(?![A-Za-z0-9])",
+      "replace": "混元四",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-11-04 用户指定腾讯 Hy4 读作混元4。混元 Hy4 合并读混元四，避免重复品牌名；仅改 ttsText，字幕保留原文。新合成音频仍待实际试听。"
+    },
+    {
       "id": "gpt-6-1-sol-spoken",
       "match": "(?i)(?<![A-Za-z0-9])gpt[- ]?6\\.1[- ]+sol(?![A-Za-z0-9])",
       "replace": "GPT 六点一 索尔",
@@ -589,9 +597,29 @@
         "S_j97bqlje2"
       ],
       "targetPinyin": "yìng hé",
-      "status": "user-specified",
-      "note": "2026-11-02 what-is-llm 第五章，用户指定硬核读 yinghe。当前beat44完整意群使用单元级SSML，硬指定py ying4、核指定py he2，原稿字幕及朗读纯文本均保留硬核，不使用中文谐音。用户确认的是目标读法，新配音待实际试听，不作为已验证成功样本，也不自动重做其他项目。 2026-11-03 LongCat-2.5 结尾再次被用户指出误读：同音色的新配音或复用缓存前必须把此音素片段落实到完整意群的 ttsSsml；watch 仅报告，不会自动套用。目标读法已明确，无需再次确认；新音频仍单独复听验收。",
-      "ssmlFragment": "<phoneme alphabet=\"py\" ph=\"ying4\">硬</phoneme><phoneme alphabet=\"py\" ph=\"he2\">核</phoneme>"
+      "status": "confirmed-in-complete-outro",
+      "note": "目标为 yìng hé，整个短语硬核知识须连贯。Hy4 的逐字及仅包裹硬核的词级 SSML 均被用户否定，不再作为推荐。固定片尾先核对并复用已交付、文本及合成配置完全相同的完整音频单元；无合适样本再整句自然合成。不得用音素标签存在或 ASR 正确代替听感验收，不拼接单词或机械剪除语音停顿。Hy4 本次复用 Xiaomi-OCR-0 beat47，记录在项目 outro-reuse.json，用户于 2026-11-04 回复“这次正常了”，确认该完整固定片尾连贯；仅适用于下列同文同配置样本。",
+      "validatedExamples": [
+        {
+          "project": "hunyuan-hy4",
+          "beatId": 35,
+          "sourceProject": "xiaomi-ocr-0",
+          "sourceBeatId": 47,
+          "speakerId": "S_j97bqlje2",
+          "model": "seed-tts-2.0-expressive",
+          "speedRatio": 1.0,
+          "speechRate": 0,
+          "atempo": 1.0,
+          "ttsText": "想解锁更多 Agent 硬核知识，点赞关注，我是二哥，咱们下期见！",
+          "method": "Reuse complete existing audio; plain text, no SSML, no splicing",
+          "requestHash": "c0d88b948ef6c9d90c3ff250c12cdceeead66fb9a01b9f150feb903ad6f270fc",
+          "processedSha256": "224fff088fa5e674077a62601e0035645757cc690a2f7299247c7362452f9ef6",
+          "userAcceptedOn": "2026-11-04",
+          "userReply": "这次正常了",
+          "audio": "script/hunyuan-hy4/audio/processed/beat_35.mp3",
+          "review": "script/hunyuan-hy4/preview/chapter5/outro-reuse.json"
+        }
+      ]
     }
   ]
 }
