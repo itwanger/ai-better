@@ -2,6 +2,16 @@
   "_comment": "配音读法词典。rules 由 pronunciations.py 写入 beats.json 的 ttsText，字幕 text 不变；watch 只列出待复听的 beat。speakers 为 * 表示与音色无关，否则只对列出的音色生效。status: confirmed=用户明确指定读法或复听认可，具体依据见 note，重生成音频仍需单独复听；candidate=读法候选，尚无用户对该读法的明确确认。",
   "rules": [
     {
+      "id": "token-by-token-de-generation",
+      "match": "(一个\\s*Token\\s*一个\\s*Token\\s*)地(?=生成)",
+      "replace": "\\1的",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "confirmed",
+      "note": "2026-11-05 用户指定“一个 Token 一个 Token 地生成”中的“地”读轻声 de。仅此短语在 ttsText 用同音“的”引导，字幕和原稿仍保留“地”；不全局替换地，不加词级 SSML。confirmed 指用户指定目标读法，新配音仍待实际复听。"
+    },
+    {
       "id": "hunyuan-hy4-spoken",
       "match": "(?i)(?:混元\\s*)?(?<![A-Za-z0-9])Hy4(?![A-Za-z0-9])",
       "replace": "混元四",
@@ -620,6 +630,14 @@
           "review": "script/hunyuan-hy4/preview/chapter5/outro-reuse.json"
         }
       ]
+    },
+    {
+      "id": "token-suan-chu-added-word",
+      "match": "每个\\s*Token\\s*算出的",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "note": "2026-11-05 what-is-transformer 第21段长意群在 Token 后多读重，用户两次确认；词级 SSML suan4 chu1 de5 无效，不作为自动替换。仅加入逗号的候选又重复算。保留全文措辞，改为完整句子/自然意群独立合成后第25单元 ASR 无差异，仍等待用户听感验收。记录 script/what-is-transformer/assets/references/ch8-kv-sentence-repair.json。无全局读音替换，不据此批量拆分旧配音。"
     }
   ]
 }
