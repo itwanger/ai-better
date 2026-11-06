@@ -291,6 +291,7 @@ render 先输出 `preview/render/remotion-raw.mp4`，再复制其 H.264 视频�
 |`AgentBot`、`UserIcon`、`UserBubble`|`Figures.tsx`|Agent 机器人头、用户头像、用户消息气泡；从 agent-intent-routing 提升，标签和颜色由项目传入|
 |`FigureFocus`、`focusAt`、`FocusNote`、`FocusRing`、`FigureRings`|`FigureFocus.tsx`|原稿配图镜头聚焦：按关键帧在原图上平移放大、拉回全图；`FocusRing` 在整图上用直角框框出当前栏，可带小标签（需同时对照的多栏图优先整图圈选，局部聚焦须包住完整关系）；`fitBox` 取和原图同宽高比的取景框，带边框的配图必须用；children 叠加的标记随镜头移动；`FOCUS_BOX` + `FOCUS_GUIDE` 为左图右说明列布局，`FOCUS_BOX_WIDE` 为居中取景；`FigureRings` 是整图加按时点依次框选的常用组合（可选 `keys` 推近、`until` 让多个框同时保留）|
 |`ClaudeCodeWindow`、`CodexWindow`|`ProductWindows.tsx`|产品界面示意，稿子在演示产品操作时使用|
+|`MediaWindow`|`MediaWindow.tsx`|复用 Hy4 已认可的 Mac 播放器外框：窄顶栏、三色点、圆角、闭合边框与浅灰阴影；录屏需要窗口承载时使用，不加标题及底部播放条。原图默认保留素材自身边界，不自动套用。调用方按素材比例和字幕安全区安排内容尺寸。首次共享用于 DeepSeek 1M 开场实录。|
 |`ClaudeCodeTerminal`、`RecordingBadge`、`StatusRow`|`TuiRecording.tsx`|真实终端录制的还原：按 `record_tui.py` 录到的文字逐行出现，排队插话、输入框打字、Interrupted、完成行；录制标签（真实录制蓝色、对照录制铁锈橙）；终端旁状态栏的文件行。首用 agent-user-interjection 第一章|
 |`C`、`card`、`MONO`、`SERIF`、`Popped`、`Arrow`|`index.tsx`|全片色板、卡片样式（直角、3px 蓝色细边、无模糊灰色偏移阴影）、等宽和衬线字体、入场、箭头|
 |`Card`、`Kicker`、`SYNTAX`、`typed`、`Caret`、`Selected`|`Cards.tsx`|可倾斜的卡片、等宽小标签、卡内代码配色、打字机与光标、选中态|

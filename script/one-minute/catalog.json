@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "layout": "<topic>/<tool>/<variant>",
+  "topics": [
+    "pythagorean-theorem",
+    "newton-first-law",
+    "archimedes-principle",
+    "ohms-law"
+  ],
+  "projects": [
+    {
+      "path": "pythagorean-theorem/codex/warm-geometry",
+      "title": "勾股定理",
+      "previousDirectory": "one-minute-what-is-pythagorean-theorem",
+      "attribution": "Codex 接手返修的暖米版；保留原版与 V2 Composition。",
+      "evidence": "PROGRESS.md",
+      "archived": false
+    },
+    {
+      "path": "pythagorean-theorem/codex/memphis",
+      "title": "勾股定理",
+      "previousDirectory": "one-minute-pythagorean-memphis",
+      "attribution": "Codex 复审、配色与开场修订版。",
+      "evidence": "PROGRESS.md",
+      "archived": false
+    },
+    {
+      "path": "newton-first-law/codex/three-preview",
+      "title": "牛顿第一定律",
+      "previousDirectory": "one-minute-newton-first-law",
+      "attribution": "Codex 接手的 Three.js 预览；历史稿件含 Qoder 修改，不能视作单工具独立创作。",
+      "evidence": "PROGRESS.md",
+      "archived": false
+    },
+    {
+      "path": "newton-first-law/deepseek-harness/3d-book",
+      "title": "牛顿第一定律",
+      "previousDirectory": "one-minute-newton-first-law-3d-book",
+      "attribution": "保留早期 3D 书籍工程及 DeepSeek Harness V3，未拆分已有 Composition。",
+      "evidence": "../../unattributed/memphis/PROGRESS.md",
+      "archived": false
+    },
+    {
+      "path": "newton-first-law/unattributed/memphis",
+      "title": "牛顿第一定律",
+      "previousDirectory": "one-minute-newton-first-law-memphis",
+      "attribution": "孟菲斯版；项目进度未明确标注制作工具，暂存 unattributed，避免凭画风推断。 用户于 2026-11-06 表示不记得，继续保留待确认。",
+      "evidence": "PROGRESS.md",
+      "archived": false
+    },
+    {
+      "path": "archimedes-principle/namiwork/codex-revised",
+      "title": "阿基米德原理",
+      "previousDirectory": "one-minute-archimedes-principle",
+      "attribution": "纳米 Work 原交付，Codex 接手优化第 1 章；原交付快照保留在 preview。",
+      "evidence": "PROGRESS.md",
+      "archived": false
+    },
+    {
+      "path": "archimedes-principle/namiwork/kimi-original-export",
+      "title": "阿基米德原理",
+      "previousDirectory": "one-minute-archimedes-principle-kimi-original-export",
+      "attribution": "沿用旧目录所标识的 Kimi 原版导出工程；其中来源记录继承自返修版，不据此认定独立作者。",
+      "evidence": "原目录名称；assets/references/visual-provenance.json",
+      "archived": false
+    },
+    {
+      "path": "archimedes-principle/namiwork/memphis",
+      "title": "阿基米德原理",
+      "previousDirectory": "one-minute-archimedes-principle-memphis",
+      "attribution": "纳米 Work + Kimi 实测案例的孟菲斯版；以项目最新进度核对交付状态。",
+      "evidence": "toBeBetterJavaer/.claude/skills/ai-article/knowledge/namiwork-kimi-k3-1-pro.md",
+      "archived": false
+    },
+    {
+      "path": "ohms-law/workbuddy/codex-reviewed",
+      "title": "欧姆定律",
+      "previousDirectory": "one-minute-ohms-law",
+      "attribution": "WorkBuddy 制作、Codex 返修、DeepSeek Harness 导出；保留一份接力工程，原版快照在 preview。",
+      "evidence": "PROGRESS.md；OUTLINE.md",
+      "archived": false
+    },
+    {
+      "path": "_archive/rrf/codex/legacy",
+      "title": "RRF 历史实验",
+      "previousDirectory": "one-minute-rrf",
+      "attribution": "历史 RRF 试作与多轮 Codex 预览，不计入本次四期主题。",
+      "evidence": "PROGRESS.md；preview/",
+      "archived": true
+    },
+    {
+      "path": "ohms-law/codex/super-mario-v1",
+      "title": "欧姆定律",
+      "attribution": "Codex制作超级玛丽新画面；复用WorkBuddy/Codex接力版配音与对齐。",
+      "evidence": "PROGRESS.md",
+      "archived": false
+    }
+  ]
+}

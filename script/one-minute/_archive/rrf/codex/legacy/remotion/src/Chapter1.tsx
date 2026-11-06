@@ -2,7 +2,7 @@ import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {AbsoluteFill, Audio, staticFile, useCurrentFrame, delayRender, continueRender, cancelRender} from 'remotion';
 import timing from '../../assets/references/ch1-phrase-timing.json';
 import {MO, DG, CAM} from './huashu/runtime';
-import {C as ERGO} from '../../../shared/remotion/components';
+import {C as ERGO} from '../../../../../../../shared/remotion/components';
 
 // The scene is new; geometry, write-on and camera algorithms come from huashu.
 // 二哥共享色板；文档身份固定，绿色留给正确/通过状态。

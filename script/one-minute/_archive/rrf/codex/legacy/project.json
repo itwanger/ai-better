@@ -4,7 +4,7 @@
   "title": "RRF：多路检索的结果怎么合并成一份排名？",
   "compositionId": "OneMinuteRrf",
   "outputName": "one-minute-rrf.mp4",
-  "sourceArticle": "../../one-minute/rrf.md",
+  "sourceArticle": "../../../../../../one-minute/rrf.md",
   "config": {
     "tts": {
       "speakerId": "S_j97bqlje2",

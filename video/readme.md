@@ -982,8 +982,9 @@ MoE 把 Transformer 每层的前馈网络拆成 256 个路由专家和 1 个共�
 
 完整答案：[阅读全文《大模型评测集在测什么》](./what-benchmarks-test.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnLkdAVAplpILlAVtk2NdJdJ)
 
-### 161. 多头注意力（MHA）有哪些局限？MQA、GQA、Flash Attention 怎么解决？
-MHA 每个头都有独立的 KV 矩阵，显存占用大。MQA（Multi-Query Attention）所有头共享一组 KV，省显存但效果有损。GQA（Grouped-Query Attention）折中方案，几个头共享一组 KV。Flash Attention 从计算层面优化，减少 HBM 访问次数，不改注意力机制本身。
+### 161. DeepSeek 是怎么撑起 1M 上下文的？
+
+撑起 1M 上下文要同时解决 KV Cache 显存占用过大和注意力计算开销过高两个问题。标准多头注意力（MHA）每个头都单独存一份 K 和 V，到 1M 上下文时显存根本装不下。第一步是压缩每个 Token 的 KV 体积，GQA 让多个头共享一组 KV，DeepSeek V2/V3 的 MLA 用低秩矩阵把每个 Token 的 K 和 V 压缩成低维向量，撑起 128K 窗口。第二步是 DeepSeek V4 升级到 1M 时用 CSA 和 HCA 减少 KV 的存储份数，CSA 每 4 个 Token 合并成 1 份并只挑最相关的 512 条计算，HCA 每 128 个 Token 合并成 1 份保留全局信息，把 KV Cache 压到 V3 的 7%。第三步在算子层用 Flash Attention 在 GPU 片上高速缓存里分块计算，减少显存读写次数。
 
 🟡 进阶 | 字节、腾讯
 

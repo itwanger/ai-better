@@ -595,8 +595,8 @@
           "ttsText": "斜边记作 C，就是诶平方加必平方等于 C 平方。",
           "ttsSsml": "<speak>斜边记作 <phoneme alphabet=\"cmu\" ph=\"S IY1\">C</phoneme>，就是诶平方加必平方等于 <phoneme alphabet=\"cmu\" ph=\"S IY1\">C</phoneme> 平方。</speak>",
           "audioSha256": "e8f4a36e67d31852ce2a689a196513d95bde853a37050ccf6356ee858c29dfe0",
-          "audio": "script/one-minute-what-is-pythagorean-theorem/preview/pronunciation-c/english-c-phoneme-sample.mp3",
-          "review": "script/one-minute-what-is-pythagorean-theorem/preview/pronunciation-c/sample.json"
+          "audio": "script/one-minute/pythagorean-theorem/codex/warm-geometry/preview/pronunciation-c/english-c-phoneme-sample.mp3",
+          "review": "script/one-minute/pythagorean-theorem/codex/warm-geometry/preview/pronunciation-c/sample.json"
         }
       ]
     },
