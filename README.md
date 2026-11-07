@@ -5,7 +5,7 @@
 </p>
 
 <!-- AUTO-GENERATED:TITLE:START -->
-<h1 align="center">王二讲Agent：AI Agent 面试题 365 道（Agent八股+视频讲解）</h1>
+<h1 align="center">王二讲Agent：AI Agent 面试题 364 道（Agent八股+视频讲解）</h1>
 <!-- AUTO-GENERATED:TITLE:END -->
 
 <p align="center">
@@ -56,7 +56,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 01 Agent 基础 | 38 | 38 | 38 |
 | 02 热点解读 | 21 | 21 | 19 |
 | 03 上下文与记忆 | 12 | 12 | 12 |
-| 04 LLM 基础与 API | 83 | 11 | 9 |
+| 04 LLM 基础与 API | 82 | 13 | 11 |
 | 05 模型训练与微调 | 32 | 2 | 2 |
 | 06 Claude Code与Codex | 17 | 6 | 6 |
 | 07 DeepSeek专题 | 5 | 5 | 5 |
@@ -66,7 +66,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 11 RAG知识库 | 43 | 2 | 1 |
 | 12 LangChain 与 Spring AI | 21 | 0 | 0 |
 | 13 Agent 产品演进 | 9 | 1 | 1 |
-| **合计** | **365** | **104** | **99** |
+| **合计** | **364** | **106** | **101** |
 <!-- AUTO-GENERATED:STATS:END -->
 
 难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。想在手机上收藏，可以用同步更新的[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)。
@@ -166,8 +166,10 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 </details>
 
 <details>
-<summary><b>04 LLM 基础与 API</b>（83 题，图文详解 11 篇）</summary>
+<summary><b>04 LLM 基础与 API</b>（82 题，图文详解 13 篇）</summary>
 
+- 🟡 163\. [分词器是什么？](./video/what-is-tokenizer.md) · [抖音](https://www.douyin.com/video/7705453048864328975)
+- 🟡 161\. [DeepSeek 是怎么撑起 1M 上下文的？](./video/how-deepseek-supports-1m-context.md) · [抖音](https://www.douyin.com/video/7705036086988393738)
 - 🟢 160\. [讲讲 Transformer 的基本架构？Encoder 和 Decoder 分别干什么？](./video/what-is-transformer.md) · [抖音](https://www.douyin.com/video/7704649100112710912)
 - 🟢 159\. [什么是大语言模型？和传统 NLP 模型有什么区别？](https://javabetter.cn/ai/video/what-is-llm.html) · [抖音](https://www.douyin.com/video/7703584792914267419)
 - 155\. [DeepSeek 的 Prompt Caching 为什么能全自动生效，Claude 为什么要手动加 cache_control？](https://javabetter.cn/ai/video/what-is-prompt-caching.html) · [抖音](https://www.douyin.com/video/7683417600369397033) · [B站](https://www.bilibili.com/video/BV1dYeE6wEAE/)
@@ -178,9 +180,6 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 - 152\. [大模型 API 缓存命中和未命中为什么差价巨大？](https://javabetter.cn/ai/video/api-cache-hit-miss.html) · [抖音](https://www.douyin.com/video/7672403032797154601) · [B站](https://www.bilibili.com/video/BV1WAuZ6fEXP/)
 - 156\. [MoE 是什么？DeepSeek 模型为什么采用混合专家架构？](https://javabetter.cn/ai/video/what-is-moe.html) · [抖音](https://www.douyin.com/video/7670768776341753122) · [B站](https://www.bilibili.com/video/BV1EKuJ6VEkc/)
 - 158\. [SWE-bench、Terminal-Bench、GPQA Diamond 这些大模型评测集到底在测什么？](https://javabetter.cn/ai/video/what-benchmarks-test.html)
-- 🟡 161\. 多头注意力（MHA）有哪些局限？MQA、GQA、Flash Attention 怎么解决？
-- 🟡 162\. 位置编码是干什么用的？RoPE 和 ALiBi 有什么区别？
-- 🟡 163\. 分词器是什么？BPE、WordPiece、SentencePiece 有什么区别？
 - 🟡 164\. 什么是 Scaling Law？大模型的涌现能力是怎么回事？
 - 🟡 165\. 大模型生成文本时有哪些解码策略？
 - 🟡 166\. Temperature、Top-P、Top-K 分别是什么？怎么调？

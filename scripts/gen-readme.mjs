@@ -11,7 +11,7 @@ const CATALOG = path.join(ROOT, 'video/readme.md')
 const README = path.join(ROOT, 'README.md')
 const SITE = 'https://javabetter.cn/ai/video'
 // 新稿在网站部署前先链接到仓库内的原稿，避免目录出现 404。
-const LOCAL_ARTICLE_LINKS = new Set(['hunyuan-hy4', 'what-is-transformer'])
+const LOCAL_ARTICLE_LINKS = new Set(['hunyuan-hy4', 'what-is-transformer', 'how-deepseek-supports-1m-context', 'what-is-tokenizer'])
 
 const CATEGORY_RE = /^## (?:(\d+)、)?(.+?)（(?:(\d+) 题|预留 \d+ 篇，已收录 (\d+) 篇)）\s*$/
 const QUESTION_RE = /^### (?:(HOT-\d+|\d+)\.\s*)?(.+?)\s*$/

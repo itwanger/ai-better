@@ -890,9 +890,28 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7659664856261348642)
 
-## 04、LLM 基础与 API（83 题）
+## 04、LLM 基础与 API（82 题）
 
 聚焦 NLP、Transformer、模型结构、推理机制、API、缓存、Token、结构化输出和模型服务。
+
+### 163. 分词器是什么？
+分词器把文本拆成 token（模型能理解的最小单位）。BPE（字节对编码）从字符出发逐步合并高频对，GPT 系列在用。WordPiece 类似 BPE 但用似然概率选合并对，BERT 在用。SentencePiece 直接在原始文本上训练，不依赖预分词，多语言友好。
+
+🟡 进阶
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnB98dh94Bkq8L8aMAGOeNAh) · [查看图文解析](./what-is-tokenizer.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7705453048864328975)
+
+### 161. DeepSeek 是怎么撑起 1M 上下文的？
+
+撑起 1M 上下文要同时解决 KV Cache 显存占用过大和注意力计算开销过高两个问题。标准多头注意力（MHA）每个头都单独存一份 K 和 V，到 1M 上下文时显存根本装不下。第一步是压缩每个 Token 的 KV 体积，GQA 让多个头共享一组 KV，DeepSeek V2/V3 的 MLA 用低秩矩阵把每个 Token 的 K 和 V 压缩成低维向量，撑起 128K 窗口。第二步是 DeepSeek V4 升级到 1M 时用 CSA 和 HCA 减少 KV 的存储份数，CSA 每 4 个 Token 合并成 1 份并只挑最相关的 512 条计算，HCA 每 128 个 Token 合并成 1 份保留全局信息，把 KV Cache 压到 V3 的 7%。第三步在算子层用 Flash Attention 在 GPU 片上高速缓存里分块计算，减少显存读写次数。
+
+🟡 进阶 | 字节、腾讯
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnSuBYl4eEbRkAP5gJbi5MOe) · [查看图文解析](./how-deepseek-supports-1m-context.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7705036086988393738)
 
 ### 160. 讲讲 Transformer 的基本架构？Encoder 和 Decoder 分别干什么？
 Encoder 负责理解输入（把文本编码成语义向量），Decoder 负责生成输出（基于语义向量逐 token 生成文本）。GPT 系列只用 Decoder，BERT 只用 Encoder，T5 用完整的 Encoder-Decoder。现在主流的大语言模型基本都是 Decoder-only 架构。
@@ -981,17 +1000,6 @@ MoE 把 Transformer 每层的前馈网络拆成 256 个路由专家和 1 个共�
 评测分三类。代码能力看 SWE-bench 系列，给模型真实 GitHub Issue 和整个仓库，自己定位 bug 写补丁并跑通测试，Pro 版平均要改 170 行，DeepSWE 全部从零出题。Agent 工具能力看 Terminal-Bench 在沙箱里敲命令，MCP-Atlas 考跨服务器调用 MCP，CyberGym 要写出复现漏洞的 PoC。推理能力看 GPQA Diamond，考生物、物理、化学的研究生级推理。
 
 完整答案：[阅读全文《大模型评测集在测什么》](./what-benchmarks-test.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnLkdAVAplpILlAVtk2NdJdJ)
-
-### 161. DeepSeek 是怎么撑起 1M 上下文的？
-
-撑起 1M 上下文要同时解决 KV Cache 显存占用过大和注意力计算开销过高两个问题。标准多头注意力（MHA）每个头都单独存一份 K 和 V，到 1M 上下文时显存根本装不下。第一步是压缩每个 Token 的 KV 体积，GQA 让多个头共享一组 KV，DeepSeek V2/V3 的 MLA 用低秩矩阵把每个 Token 的 K 和 V 压缩成低维向量，撑起 128K 窗口。第二步是 DeepSeek V4 升级到 1M 时用 CSA 和 HCA 减少 KV 的存储份数，CSA 每 4 个 Token 合并成 1 份并只挑最相关的 512 条计算，HCA 每 128 个 Token 合并成 1 份保留全局信息，把 KV Cache 压到 V3 的 7%。第三步在算子层用 Flash Attention 在 GPU 片上高速缓存里分块计算，减少显存读写次数。
-
-🟡 进阶 | 字节、腾讯
-
-### 163. 分词器是什么？
-分词器把文本拆成 token（模型能理解的最小单位）。BPE（字节对编码）从字符出发逐步合并高频对，GPT 系列在用。WordPiece 类似 BPE 但用似然概率选合并对，BERT 在用。SentencePiece 直接在原始文本上训练，不依赖预分词，多语言友好。
-
-🟡 进阶
 
 ### 164. 什么是 Scaling Law？大模型的涌现能力是怎么回事？
 Scaling Law 说的是模型性能随参数量、数据量、算力的增加呈可预测的幂律关系。涌现能力是指模型规模达到某个阈值后突然出现的能力（比如思维链推理），小模型完全不会，大模型突然就会了。
@@ -2366,7 +2374,7 @@ Agent 这一轮变化和以往不太一样。以前的技术迭代，学一门�
 
 Alan Kay 说过一句话，「预测未来最好的办法就是去创造它」。我觉得这话放在今天特别合适。与其等着被 Agent 浪潮推着走，不如自己先把原理搞透，把项目跑通，把面试里会被问到的每一个点都准备好。
 
-所以我们选择了最笨但最扎实的方式。365 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
+所以我们选择了最笨但最扎实的方式。364 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
 
 我始终相信一件事，技术的价值不在于它有多新，而在于你是否真正理解它、用过它、能把它讲清楚。这套题库要做的就是帮你到达这个状态。
 
