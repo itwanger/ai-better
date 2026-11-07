@@ -2,6 +2,16 @@
   "_comment": "配音读法词典。rules 由 pronunciations.py 写入 beats.json 的 ttsText，字幕 text 不变；watch 只列出待复听的 beat。speakers 为 * 表示与音色无关，否则只对列出的音色生效。status: confirmed=用户明确指定读法或复听认可，具体依据见 note，重生成音频仍需单独复听；candidate=读法候选，尚无用户对该读法的明确确认。",
   "rules": [
     {
+      "id": "round-by-round-de-merge",
+      "match": "一轮接一轮地(?=合并下去)",
+      "replace": "一轮接一轮的",
+      "speakers": [
+        "S_j97bqlje2"
+      ],
+      "status": "confirmed",
+      "note": "用户指定“一轮接一轮地合并下去”的“地”读轻声 de。合成文本用同音的“的”引导连读，字幕保留“地”。"
+    },
+    {
       "id": "token-by-token-de-generation",
       "match": "(一个\\s*Token\\s*一个\\s*Token\\s*)地(?=生成)",
       "replace": "\\1的",

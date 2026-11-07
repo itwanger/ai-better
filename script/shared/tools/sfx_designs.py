@@ -9,6 +9,8 @@ DURATIONS = {
     'soft_whoosh': 0.32,
     'focus_air': 0.18,
     'success_pair': 0.46,
+    'pixel_like': 0.13,
+    'pixel_follow': 0.24,
 }
 
 
@@ -52,6 +54,17 @@ def make_cues(rate):
             elif name == 'focus_air':
                 # Compact lens movement, all filtered air with no electronic note.
                 value = (fast * .45 + slow) * math.sin(math.pi * u) ** 3
+            elif name in ('pixel_like', 'pixel_follow'):
+                # Short band-limited pulse tones: a bright tap and a pitched two-note reply.
+                second = name == 'pixel_follow' and t >= .090
+                local = t - .090 if second else t
+                hz = 1046.5 if name == 'pixel_like' else (988 if second else 659.25)
+                phase = 2 * math.pi * hz * local
+                oscillator = math.sin(phase) + .25 * math.sin(3 * phase) + .10 * math.sin(5 * phase)
+                gate = min(1., local / .004) * math.exp(-local * 25)
+                if name == 'pixel_follow' and not second:
+                    gate *= min(1., (.090 - t) / .008)
+                value = oscillator * gate * edge
             else:
                 # Two quiet ascending plucks (C5 -> G5), not a loud fanfare.
                 value = 0.0

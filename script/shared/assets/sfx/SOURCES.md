@@ -12,6 +12,8 @@ Additional original designs in `shared/tools/sfx_designs.py` (2026-11-03):
 | `soft_whoosh` | 320 ms | Filtered air sweep for a scene transition |
 | `focus_air` | 180 ms | Short air movement for a lens entering |
 | `success_pair` | 460 ms | Two ascending plucks for a completed milestone |
+| `pixel_like` | 130 ms | Short arcade pulse for a like-button press |
+| `pixel_follow` | 240 ms | Two rising arcade tones for a follow-button press |
 
 Each new cue has an independent fixed random seed and a zero-ended envelope.
 Library WAVs use a preview peak of about -12 dBFS; mixing synthesizes at the
