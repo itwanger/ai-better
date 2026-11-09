@@ -6,7 +6,7 @@
 
 ## 运行位置
 
-本目录属于 [itwanger/ai-better](https://github.com/itwanger/ai-better) 仓库。`ergo-remotion-video`、`video-script`、`video-sync` 这几个 Skill 不在本仓库，它们放在 [itwanger/toBeBetterJavaer](https://github.com/itwanger/toBeBetterJavaer) 的 `.claude/skills/` 下。toBeBetterJavaer 里的 `docs/src/ai` 是指向 `../../../ai-better` 的软链接，所以两个仓库要放在同一个父目录。
+本目录属于 [itwanger/ai-better](https://github.com/itwanger/ai-better) 仓库。`wanger-pixel-remotion`、`video-script`、`video-sync` 这几个 Skill 不在本仓库，它们放在 [itwanger/toBeBetterJavaer](https://github.com/itwanger/toBeBetterJavaer) 的 `.claude/skills/` 下。toBeBetterJavaer 里的 `docs/src/ai` 是指向 `../../../ai-better` 的软链接，所以两个仓库要放在同一个父目录。
 
 同一套工具有两种运行方式，效果相同。
 

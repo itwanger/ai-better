@@ -1,6 +1,6 @@
 # 视频画面规范
 
-Claude Code（`ergo-remotion-video` Skill）和 Codex 制作二哥视频，画面都按这里的入口执行。目录和命令见 [WORKFLOW.md](WORKFLOW.md)。
+本页存档小超风格的视觉约定。小超视频使用独立的 [chao-remotion](https://github.com/itwanger/chao-remotion)，本仓库后续视频使用 [wanger-pixel-remotion](https://github.com/itwanger/toBeBetterJavaer/tree/master/.claude/skills/wanger-pixel-remotion)。目录和命令见 [WORKFLOW.md](WORKFLOW.md)。
 
 ## 当前风格
 

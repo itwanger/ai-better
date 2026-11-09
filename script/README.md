@@ -4,7 +4,7 @@
 
 这份手册教你把一篇已经确认的文章或口播稿，做成带二哥配音、动画和字幕的 MP4。 **日常工作以“给 AI 发指令、听配音、看预览、提出修改”为主，不要求你自己写动画代码。** 首次电脑配置可交给技术同事完成。
 
-适用工作流：`ergo-remotion-video` Skill，它放在 [itwanger/toBeBetterJavaer](https://github.com/itwanger/toBeBetterJavaer) 仓库的 `.claude/skills/` 下；视频工具、素材和口播稿在本仓库 [itwanger/ai-better](https://github.com/itwanger/ai-better)。主流程以 macOS 为例，截图来自 2026-09-07 实际制作的 KV Cache V2。Windows 员工先请技术同事适配路径、浏览器和软链接，不要直接照抄 macOS 安装命令。
+适用工作流：`wanger-pixel-remotion` Skill，它放在 [itwanger/toBeBetterJavaer](https://github.com/itwanger/toBeBetterJavaer) 仓库的 `.claude/skills/` 下；视频工具、素材和口播稿在本仓库 [itwanger/ai-better](https://github.com/itwanger/ai-better)。小超风格使用独立的 [chao-remotion](https://github.com/itwanger/chao-remotion)。主流程以 macOS 为例，截图来自 2026-09-07 实际制作的 KV Cache V2。Windows 员工先请技术同事适配路径、浏览器和软链接，不要直接照抄 macOS 安装命令。
 
 **先记住：稿子确认 → 配音 → 逐章预览 → 回复“继续” → 完整预览 → 回复“出片” → 检查并交付 MP4。** 浏览器里能播放，不代表已经生成成片。
 
@@ -63,7 +63,7 @@
 
 ### 1.4 本手册使用哪个 Skill
 
-主流程只使用 [ergo-remotion-video](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/SKILL.md)。下表提到的 Skill 也都在 toBeBetterJavaer 的 `.claude/skills/` 下。可按需要搭配：
+主流程只使用 [wanger-pixel-remotion](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/wanger-pixel-remotion/SKILL.md)。下表提到的 Skill 也都在 toBeBetterJavaer 的 `.claude/skills/` 下。可按需要搭配：
 
 | 需求 | 使用方式 |
 |---|---|
@@ -82,7 +82,7 @@
 先按 [2.4](#clone) 准备好两个仓库，再在公司指定的 AI 编程助手中打开整个 `toBeBetterJavaer` 文件夹，然后发送：
 
 ```text
-我要使用这个仓库的 ergo-remotion-video Skill 制作视频。
+我要使用这个仓库的 二哥像素风视频 Skill 制作视频。
 请先读取当前 Skill 和 docs/src/ai/script/shared/WORKFLOW.md，检查：
 1. 当前工作目录是否是 toBeBetterJavaer；Skill 路径是否可读；
    docs/src/ai 是否是指向 ai-better 仓库的有效软链接。
@@ -171,20 +171,20 @@ ln -s ../../../ai-better docs/src/ai
 │       ├── package-lock.json
 │       └── shared/
 └── toBeBetterJavaer/
-    ├── .agents/skills/ergo-remotion-video/SKILL.md
-    ├── .claude/skills/ergo-remotion-video/SKILL.md
+    ├── .agents/skills/wanger-pixel-remotion/SKILL.md
+    ├── .claude/skills/wanger-pixel-remotion/SKILL.md
     └── docs/src/ai                ← 软链接，指向 ../../../ai-better
 ```
 
 从 toBeBetterJavaer 看，`docs/src/ai/script/` 和 `ai-better/script/` 是同一个文件夹。共享工具按自身位置查找 `shared/`，从哪边运行结果都一样。
 
-当前 `.agents/skills/ergo-remotion-video` 是指向 `.claude/skills/ergo-remotion-video` 的软链接，两者是同一套规则。压缩包转移时如果软链接损坏，请技术同事修复；不要另建两份不同内容的 Skill。
+当前 `.agents/skills/wanger-pixel-remotion` 是指向 `.claude/skills/wanger-pixel-remotion` 的软链接，两者是同一套规则。压缩包转移时如果软链接损坏，请技术同事修复；不要另建两份不同内容的 Skill。
 
 如果 AI 没识别 Skill，发送：
 
 ```text
-请直接读取 .agents/skills/ergo-remotion-video/SKILL.md，
-如果这个软链接不可用，检查 .claude/skills/ergo-remotion-video/SKILL.md。
+请直接读取 .agents/skills/wanger-pixel-remotion/SKILL.md，
+如果这个软链接不可用，检查 .claude/skills/wanger-pixel-remotion/SKILL.md。
 按文件里的当前规则执行。请先确认实际读取的路径。
 ```
 
@@ -311,7 +311,7 @@ python3 -c 'import os; print("已设置" if os.environ.get("VOLC_TTS_API_KEY", "
 ### 第一步：给 AI 发开工指令
 
 ```text
-按照仓库当前最新的 ergo-remotion-video Skill，
+按照仓库当前最新的 二哥像素风视频 Skill，
 把 docs/src/ai/video/what-is-kv-cache.md 制作成一个新版本。
 新项目目录用 docs/src/ai/script/what-is-kv-cache-v3。
 
@@ -770,4 +770,4 @@ script/
 
 截图随 README 放在 `shared/guide-assets/`，转发 Markdown 时要一起携带；只发 README 文件会丢图。如果收到的是手册离线包，可双击 `阅读手册.html` 阅读，README 和图片也在包内。 **离线包是培训资料，不是完整视频工作仓库；真正制作仍需团队仓库与账号配置。**
 
-进一步阅读：[主 Skill](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/SKILL.md) · [共享工作流](shared/WORKFLOW.md) · [TTS 约定](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/VOLCENGINE_TTS_GUIDE.md) · [视觉偏好](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/USER_PREFERENCES.md)。Skill 文件在 toBeBetterJavaer 仓库，本地克隆后位于 `toBeBetterJavaer/.claude/skills/ergo-remotion-video/`。
+进一步阅读：[主 Skill](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/wanger-pixel-remotion/SKILL.md) · [共享工作流](shared/WORKFLOW.md) · [TTS 约定](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/VOLCENGINE_TTS_GUIDE.md) · [视觉偏好](https://github.com/itwanger/toBeBetterJavaer/blob/master/.claude/skills/ergo-remotion-video/references/USER_PREFERENCES.md)。Skill 文件在 toBeBetterJavaer 仓库，本地克隆后位于 `toBeBetterJavaer/.claude/skills/ergo-remotion-video/`。
