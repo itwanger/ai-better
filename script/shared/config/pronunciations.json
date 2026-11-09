@@ -648,6 +648,14 @@
         "S_j97bqlje2"
       ],
       "note": "2026-11-05 what-is-transformer 第21段长意群在 Token 后多读重，用户两次确认；词级 SSML suan4 chu1 de5 无效，不作为自动替换。仅加入逗号的候选又重复算。保留全文措辞，改为完整句子/自然意群独立合成后第25单元 ASR 无差异，仍等待用户听感验收。记录 script/what-is-transformer/assets/references/ch8-kv-sentence-repair.json。无全局读音替换，不据此批量拆分旧配音。"
+    },
+    {
+      "id": "guizang-creator",
+      "match": "归藏|(?i:guizang)",
+      "speakers": "*",
+      "targetPinyin": "guī zàng",
+      "status": "user-specified",
+      "note": "作者归藏及其插件归藏设计、dsh-guizang-design：用户指定 guizang。中文专名用 gui1 zang4；逐处核对包名 TTS 展开，保留原字幕。适用此专名，不泛化到其他“藏”字。"
     }
   ]
 }

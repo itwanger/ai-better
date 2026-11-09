@@ -7,6 +7,8 @@ DURATIONS = {
     'soft_pop': 0.13,
     'data_pluck': 0.20,
     'soft_whoosh': 0.32,
+    'pixel_wipe': 0.21,
+    'pixel_jump': 0.17,
     'focus_air': 0.18,
     'success_pair': 0.46,
     'pixel_like': 0.13,
@@ -51,6 +53,12 @@ def make_cues(rate):
                 # Broad, non-tonal sweep with an asymmetric rise and soft release.
                 envelope = math.sin(math.pi * u) ** 2
                 value = (band * (0.35 + 0.65 * u) + slow * .6) * envelope
+            elif name in ('pixel_wipe', 'pixel_jump'):
+                # Original short brush across tiles; a separate upward tone marks takeoff.
+                up = name == 'pixel_jump'
+                phase = 2 * math.pi * ((330 if up else 925)*t + (2400 if up else -1360)*t*t)
+                tone = math.sin(phase) + .16 * math.sin(phase*3)
+                value = (tone if up else .60*tone+1.05*band) * edge * math.exp(-u*2.8)
             elif name == 'focus_air':
                 # Compact lens movement, all filtered air with no electronic note.
                 value = (fast * .45 + slow) * math.sin(math.pi * u) ** 3

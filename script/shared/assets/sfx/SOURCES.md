@@ -11,6 +11,8 @@ Additional original designs in `shared/tools/sfx_designs.py` (2026-11-03):
 | `data_pluck` | 200 ms | Warm harmonic pluck for a key value |
 | `soft_whoosh` | 320 ms | Filtered air sweep for a scene transition |
 | `focus_air` | 180 ms | Short air movement for a lens entering |
+| `pixel_wipe` | 210 ms | Falling tonal brush at the covered frame of a world change |
+| `pixel_jump` | 170 ms | Rising pulse when the runner leaves the top stair |
 | `success_pair` | 460 ms | Two ascending plucks for a completed milestone |
 | `pixel_like` | 130 ms | Short arcade pulse for a like-button press |
 | `pixel_follow` | 240 ms | Two rising arcade tones for a follow-button press |
