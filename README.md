@@ -56,7 +56,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 01 Agent 基础 | 38 | 38 | 38 |
 | 02 热点解读 | 21 | 21 | 19 |
 | 03 上下文与记忆 | 12 | 12 | 12 |
-| 04 LLM 基础与 API | 82 | 13 | 11 |
+| 04 LLM 基础与 API | 82 | 14 | 12 |
 | 05 模型训练与微调 | 32 | 2 | 2 |
 | 06 Claude Code与Codex | 17 | 6 | 6 |
 | 07 DeepSeek专题 | 5 | 5 | 5 |
@@ -66,7 +66,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 11 RAG知识库 | 43 | 2 | 1 |
 | 12 LangChain 与 Spring AI | 21 | 0 | 0 |
 | 13 Agent 产品演进 | 9 | 1 | 1 |
-| **合计** | **364** | **106** | **101** |
+| **合计** | **364** | **107** | **102** |
 <!-- AUTO-GENERATED:STATS:END -->
 
 难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。想在手机上收藏，可以用同步更新的[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)。
@@ -166,8 +166,9 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 </details>
 
 <details>
-<summary><b>04 LLM 基础与 API</b>（82 题，图文详解 13 篇）</summary>
+<summary><b>04 LLM 基础与 API</b>（82 题，图文详解 14 篇）</summary>
 
+- 166\. [DeepSeek API 中的Temperature、Top-P 有什么用？](./video/deepseek-temperature-top-p.md) · [抖音](https://www.douyin.com/video/7705758773213744393)
 - 🟡 163\. [分词器是什么？](./video/what-is-tokenizer.md) · [抖音](https://www.douyin.com/video/7705453048864328975)
 - 🟡 161\. [DeepSeek 是怎么撑起 1M 上下文的？](./video/how-deepseek-supports-1m-context.md) · [抖音](https://www.douyin.com/video/7705036086988393738)
 - 🟢 160\. [讲讲 Transformer 的基本架构？Encoder 和 Decoder 分别干什么？](./video/what-is-transformer.md) · [抖音](https://www.douyin.com/video/7704649100112710912)
@@ -182,7 +183,6 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 - 158\. [SWE-bench、Terminal-Bench、GPQA Diamond 这些大模型评测集到底在测什么？](https://javabetter.cn/ai/video/what-benchmarks-test.html)
 - 🟡 164\. 什么是 Scaling Law？大模型的涌现能力是怎么回事？
 - 🟡 165\. 大模型生成文本时有哪些解码策略？
-- 🟡 166\. Temperature、Top-P、Top-K 分别是什么？怎么调？
 - 🟡 167\. 大模型幻觉问题怎么减少？
 - 🟡 168\. 什么是 CoT（思维链）？为什么效果好？有什么局限？
 - 🟡 169\. 多模型动态切换怎么实现？不重启服务就能换？

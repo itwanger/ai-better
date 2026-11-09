@@ -894,6 +894,12 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 
 聚焦 NLP、Transformer、模型结构、推理机制、API、缓存、Token、结构化输出和模型服务。
 
+### 166. DeepSeek API 中的Temperature、Top-P 有什么用？
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn6qEuqGqsyQForQZlUqtRjc) · [查看图文解析](./deepseek-temperature-top-p.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7705758773213744393)
+
 ### 163. 分词器是什么？
 分词器把文本拆成 token（模型能理解的最小单位）。BPE（字节对编码）从字符出发逐步合并高频对，GPT 系列在用。WordPiece 类似 BPE 但用似然概率选合并对，BERT 在用。SentencePiece 直接在原始文本上训练，不依赖预分词，多语言友好。
 
@@ -1010,11 +1016,6 @@ Scaling Law 说的是模型性能随参数量、数据量、算力的增加呈�
 贪心搜索（每步选概率最高的 token，确定性强但无聊）、束搜索（保留 top-k 条候选路径）、温度采样（temperature 控制随机性）、Top-P 采样（nucleus sampling，动态截断低概率 token）、Top-K 采样（只从前 K 个 token 里采样）。
 
 🟡 进阶
-
-### 166. Temperature、Top-P、Top-K 分别是什么？怎么调？
-Temperature 控制概率分布的“平滑度”（低→保守，高→发散），Top-P 控制累积概率阈值，Top-K 控制候选集大小。代码生成建议低 temperature（0.1-0.3），创意写作用高 temperature（0.7-1.0）。PaiAgent 的 ChatClientFactory 默认 temperature=0.7。
-
-🟡 进阶 | `→ PaiAgent ChatClientFactory temperature 配置`
 
 ### 167. 大模型幻觉问题怎么减少？
 RAG 是最有效的方案之一，让模型基于检索到的真实文档回答，而不是“自由发挥”。派聪明用 generationId 关联 referenceMappings，并在 ChatGenerationStateService / ConversationService 中保存引用详情，前端可以点击“来源”回看命中的 chunk。其他手段还有降低 temperature、增加 system prompt 约束、让模型说“我不确定”。
