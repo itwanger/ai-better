@@ -890,7 +890,7 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7659664856261348642)
 
-## 04、LLM 基础与 API（82 题）
+## 04、LLM 基础与 API（18 题）
 
 聚焦 NLP、Transformer、模型结构、推理机制、API、缓存、Token、结构化输出和模型服务。
 
@@ -899,6 +899,7 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn6qEuqGqsyQForQZlUqtRjc) · [查看图文解析](./deepseek-temperature-top-p.md)
 
 抖音视频：[观看本集视频](https://www.douyin.com/video/7705758773213744393)
+
 
 ### 163. 分词器是什么？
 分词器把文本拆成 token（模型能理解的最小单位）。BPE（字节对编码）从字符出发逐步合并高频对，GPT 系列在用。WordPiece 类似 BPE 但用似然概率选合并对，BERT 在用。SentencePiece 直接在原始文本上训练，不依赖预分词，多语言友好。
@@ -1007,260 +1008,18 @@ MoE 把 Transformer 每层的前馈网络拆成 256 个路由专家和 1 个共�
 
 完整答案：[阅读全文《大模型评测集在测什么》](./what-benchmarks-test.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnLkdAVAplpILlAVtk2NdJdJ)
 
-### 164. 什么是 Scaling Law？大模型的涌现能力是怎么回事？
-Scaling Law 说的是模型性能随参数量、数据量、算力的增加呈可预测的幂律关系。涌现能力是指模型规模达到某个阈值后突然出现的能力（比如思维链推理），小模型完全不会，大模型突然就会了。
+### 168. 什么是 CoT（思维链）？
 
-🟡 进阶
+### 170. OpenAI 和 Anthropic 协议有什么区别？
 
-### 165. 大模型生成文本时有哪些解码策略？
-贪心搜索（每步选概率最高的 token，确定性强但无聊）、束搜索（保留 top-k 条候选路径）、温度采样（temperature 控制随机性）、Top-P 采样（nucleus sampling，动态截断低概率 token）、Top-K 采样（只从前 K 个 token 里采样）。
 
-🟡 进阶
-
-### 167. 大模型幻觉问题怎么减少？
-RAG 是最有效的方案之一，让模型基于检索到的真实文档回答，而不是“自由发挥”。派聪明用 generationId 关联 referenceMappings，并在 ChatGenerationStateService / ConversationService 中保存引用详情，前端可以点击“来源”回看命中的 chunk。其他手段还有降低 temperature、增加 system prompt 约束、让模型说“我不确定”。
-
-🟡 进阶 | `→ 派聪明 generationId + referenceMappings 引用追踪` | 阿里云、京东、蚂蚁
-
-### 168. 什么是 CoT（思维链）？为什么效果好？有什么局限？
-CoT 让模型“一步步想”而不是直接给答案，把推理过程显式化。效果好是因为把复杂问题分解成了多个简单步骤。局限是增加了 token 消耗和延迟，而且模型可能生成“看起来合理但实际错误”的推理链。
-
-🟡 进阶
-
-### 169. 多模型动态切换怎么实现？不重启服务就能换？
-PaiAgent 的 ChatClientFactory 每次调用都 new 一个新的 ChatClient，不用 Spring 单例。每个节点可以配不同的 apiUrl 和 model，第一个节点用 DeepSeek 做初步分析，第二个节点用 GPT 做精细加工，改个配置下次执行就生效。
-
-🟡 进阶 | `→ PaiAgent ChatClientFactory 动态工厂` | Shopee、腾讯、Moka
-
-### 170. OpenAI 兼容协议是什么？各家大模型的差异在哪？
-请求格式统一走 `/v1/chat/completions`，差异在 base_url 和 api_key。响应大部分字段一致，个别细节不同，比如 token 统计有的叫 prompt_tokens 有的叫 input_tokens。PaiAgent 用 Spring AI 的 OpenAiChatModel 统一了 OpenAI、DeepSeek、通义千问三家的接入。
-
-🟡 进阶 | `→ PaiAgent OpenAiApi 统一多厂商`
-
-### 171. 流式输出（SSE / WebSocket）怎么设计？
-派聪明用 WebSocket 做长连接，结合 DeepSeek 流式接口实现“打字机效果”，模型每生成一个 token 就推送给前端。还支持用户主动停止生成。技术细节包括心跳保活、断线重连、背压处理。
-
-🟡 进阶 | `→ 派聪明 WebSocket + DeepSeek 流式接口` | 快手
-
-### 172. 对比使用过哪些主流大模型？你们项目里最终选了哪个？
-PaiAgent 支持 OpenAI、DeepSeek、通义千问、智谱四家。PaiCLI 接了 GLM、DeepSeek V4、Kimi、StepFun 等。选型原则：代码生成优先 DeepSeek/Claude，中文对话优先通义千问/GLM，性价比优先 DeepSeek。没有最好的模型，只有最适合场景的模型。
-
-🟡 进阶 | `→ PaiAgent 四家模型 / PaiCLI 多模型适配` | Shopee、腾讯
-
-### 173. 怎么让 LLM 返回结构化内容，比如和 Java 对象字段一一对应？
+### 173. 怎么让 LLM 返回结构化数据？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-Spring AI 可以通过 `.entity()` 将模型输出映射为 Java 对象；生产环境还需要配合 Schema 约束、字段校验和失败重试。
-
-完整答案：待更新
 
 ### 174. LLM 返回的内容被截断了怎么办？
 
 <p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-先检查输出 Token 上限与 `finish_reason`，再根据场景选择提高上限、缩短上下文、分段生成或续写，并对最终结果做完整性校验。
-
-完整答案：待更新
-
-### 175. Chat Template 是什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-Chat Template 把 API 层的结构化消息翻译成模型训练时见过的线性 token 流，用特殊 token 划分消息边界和角色，不同模型家族格式不同，服务端自动完成。自己拼成「USER: ... ASSISTANT: ...」偏离了训练格式，模型要额外花注意力去推断角色边界，会出现重复执行已完成操作、忽略工具结果、该调工具时生成文本。把工具结果当普通 user 消息传也有问题，Chat Template 会误判为新话题，清掉之前的思考过程。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 176. 多轮工具调用时，历史的 reasoning 要不要回传给模型？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-各家策略不同而且在变。DeepSeek R1 时代要求剥离全部历史思考，因为训练时历史思维链从不出现在输入里。但 Agent 场景下中间思考承载着「为什么调这个工具、排除了哪些假设」，剥离后每轮从零推理，容易重复犯错。所以 DeepSeek V4 反转为只要请求带 tools 参数就必须原样回传 reasoning_content，否则返回 400，Kimi K2、GLM-5 采用同样协议。Claude 要求在工具调用循环里原样回传带签名的 thinking block。把跑到一半的轨迹交给另一家模型时，这些差异会变成实打实的接口错误。
-
-🔴 深入 | `→ PaiCLI`
-
-### 177. 给 Agent 选模型要看哪些维度？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-绝大多数 Agent 需要支持思考的模型，多步决策没有思考能力表现很差。除了成本和榜单成绩，还要看输出 token 速度，20 轮推理每轮慢 2 秒就是多等 40 秒；多模态是否硬需求；厂商的策略边界，模型有能力不等于产品允许你调用。评估驱动选型时区分 TTFT、解码速度、思考延迟和 p95 尾部延迟，性能指标按场景选 Pass@1、Pass^k 或 Pass@k。一个便宜但成功率低的模型，因为频繁重试实际可能更贵。
-
-🟡 进阶 | `→ PaiCLI`
-
-### 178. 什么是词嵌入（Word Embedding）？有哪些常见的词嵌入方法？
-🟡 中等 | `自然语言处理（NLP） / 词嵌入 / Word2Vec` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 179. 是否使用 Word2Vec 训练过数据？在这个过程中，如何获取语料？如何选择超参数？语料、词表和维度大小如何确定？怎样把握训练时长？
-🔴 困难 | `自然语言处理（NLP） / 词嵌入 / Word2Vec` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 180. Word2Vec 有哪些加速方法？
-🔴 困难 | `自然语言处理（NLP） / 词嵌入 / Word2Vec` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 181. 解释 hierarchical softmax 的流程，以及它有什么优点？
-🔴 困难 | `自然语言处理（NLP） / 词嵌入 / Word2Vec / hierarchical softmax` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 182. 说一说负采样技术在 Word2Vec 中的运用。
-🟡 中等 | `自然语言处理（NLP） / 词嵌入 / Word2Vec / 负采样` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 183. CBOW 和 Skip-gram 分别更适合哪些应用场景？
-🟡 中等 | `自然语言处理（NLP） / CBOW / Skip-gram` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 184. 说说 GloVE 技术，怎样进行训练？有哪些应用场景？相比 Word2Vec 有哪些优缺点？
-🔴 困难 | `自然语言处理（NLP） / Word2Vec / GloVE` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 185. 说说 FastText 技术，是否比 Word2Vec 更优越？哪些情况下更适合使用 FastText
-🔴 困难 | `自然语言处理（NLP） / Word2Vec / FastText` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 186. 聊一聊 ELMo 技术，它有哪些优缺点？可以做到一词多义吗？为什么？
-🔴 困难 | `自然语言处理（NLP） / ELMo` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 187. 说说 LSTM 的基本原理。
-🟢 简单 | `自然语言处理（NLP） / LSTM` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 188. 与循环神经网络（RNN）相比，LSTM 是如何解决梯度消失问题的？
-🟡 中等 | `自然语言处理（NLP） / LSTM / RNN / 梯度消失` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 189. 解释一个 LSTM 单元（LSTM cell）的基本组成，以及它们各自的作用。
-🟡 中等 | `自然语言处理（NLP） / LSTM` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 190. LSTM 中，隐藏状态（hidden state）和单元状态（cell state）有什么区别？
-🟡 中等 | `自然语言处理（NLP） / LSTM` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 191. LSTM 和 GRU 有什么区别？
-🟡 中等 | `自然语言处理（NLP） / LSTM / GRU` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 192. 请描述 BERT 模型的架构和应用场景。
-🟡 中等 | `自然语言处理（NLP） / BERT` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 193. BERT 是如何处理自然语言文本中不常见词或者罕见词的？
-🟡 中等 | `自然语言处理（NLP） / BERT` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 194. Word2Vec 到 BERT 有怎样的改进？
-🟡 中等 | `自然语言处理（NLP） / BERT / Word2Vec` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 195. BERT 怎样进行 mask 相比 CBOW 有什么区别？
-🟡 中等 | `自然语言处理（NLP） / BERT / CBOW` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 196. 你有什么办法可以比较好地解决 BERT 输入长度的限制？
-🔴 困难 | `自然语言处理（NLP） / BERT` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 197. 说说你是怎样有效地优化和微调 BERT，以应对你做过的一些特定的 NLP 任务的？
-🔴 困难 | `自然语言处理（NLP） / BERT` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 198. 如何比较文本的相似度？
-🟢 简单 | `自然语言处理（NLP） / 文本分类` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 199. 支持向量机可以用于文本分类任务吗？若可以，请说明。
-🟢 简单 | `自然语言处理（NLP） / 文本分类 / 支持向量机` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 200. 在文本分类任务中，如何处理高维和稀疏数据？
-🟡 中等 | `自然语言处理（NLP） / 文本分类` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 201. 在文本分类任务中，如何处理样本（类别）不平衡的问题？
-🟡 中等 | `自然语言处理（NLP） / 文本分类` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 202. 现有文本分类算法在处理多语种文本数据时可能遭遇哪些挑战？
-🟡 中等 | `自然语言处理（NLP） / 文本分类` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 203. 简述 Word Embedding 可以怎样运用于文本分类任务？
-🟡 中等 | `自然语言处理（NLP） / 文本分类 / Word Embedding` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 204. 简述 LLaMA（Large Language Model Meta AI）的基本原理。
-🟡 中等 | `自然语言处理（NLP） / 大语言模型` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 205. LLaMA 有哪些实际应用？
-🟢 简单 | `自然语言处理（NLP） / 大语言模型` | → PaiCLI / PaiAgent 大模型应用基础
-
-### 206. Transformer 在计算 attention 的时候使用的是点乘还是加法？请说明理由。
-🟡 中等 | `Transformer` | → PaiAgent / PaiCLI 模型选型背景
-
-### 207. self attention 中的 K 和 Q 是用来做什么的？
-🟢 简单 | `Transformer / 自注意力机制` | → PaiAgent / PaiCLI 模型选型背景
-
-### 208. K 和 Q 可以使用同一个值通过对自身进行点乘得到吗？
-🟡 中等 | `Transformer` | → PaiAgent / PaiCLI 模型选型背景
-
-### 209. 如果让 K 和 Q 变成同一个矩阵，你觉得对模型性能会带来怎样的影响？
-🔴 困难 | `Transformer` | → PaiAgent / PaiCLI 模型选型背景
-
-### 210. 在不考虑计算量的情况下，head 能否无限增多？
-🟡 中等 | `Transformer / 多头注意力机制` | → PaiAgent / PaiCLI 模型选型背景
-
-### 211. 在进行多头注意力的时候需要对每个 head 进行降维吗？
-🟡 中等 | `Transformer / 多头注意力机制` | → PaiAgent / PaiCLI 模型选型背景
-
-### 212. 讲一下你对 Transformer 的 Encoder 模块的理解。
-🟡 中等 | `Transformer / Encoder` | → PaiAgent / PaiCLI 模型选型背景
-
-### 213. Transformer 中，Decoder 阶段的多头自注意力和 Encoder 阶段的多头自注意力是相同的吗？
-🟡 中等 | `Transformer / Encoder / Decoder / 多头自注意力机制` | → PaiAgent / PaiCLI 模型选型背景
-
-### 214. 了解 Transformer 模型训练中的梯度裁剪（Gradient Clipping）吗？
-🟡 中等 | `Transformer / 梯度裁剪` | → PaiAgent / PaiCLI 模型选型背景
-
-### 215. Transformer 为什么采用 Layer Normalization 而不是 Batch Normalization
-🟡 中等 | `Transformer / normalization` | → PaiAgent / PaiCLI 模型选型背景
-
-### 216. Transformer 中的注意力遮蔽（Attention Masking）的工作原理是什么？
-🟡 中等 | `Transformer / 注意力遮蔽` | → PaiAgent / PaiCLI 模型选型背景
-
-### 217. 什么是自回归属性（autoregressive property）？
-🟡 中等 | `Transformer / 自回归属性` | → PaiAgent / PaiCLI 模型选型背景
-
-### 218. Transformer 中的“残差连接”可以缓解梯度消失问题吗？
-🟡 中等 | `Transformer / 残差连接 / 梯度消失` | → PaiAgent / PaiCLI 模型选型背景
-
-### 219. Transformer 中，如何处理大型数据集？
-🟡 中等 | `Transformer` | → PaiAgent / PaiCLI 模型选型背景
-
-### 220. Transformer 模型训练完成后，如何评估其性能和效果？
-🟡 中等 | `Transformer` | → PaiAgent / PaiCLI 模型选型背景
-
-### 221. Transformer 模型的性能瓶颈在哪？
-🟡 中等 | `Transformer` | → PaiAgent / PaiCLI 模型选型背景
-
-### 222. 你觉得可以怎样缓解这个性能瓶颈？
-🔴 困难 | `Transformer` | → PaiAgent / PaiCLI 模型选型背景
-
-### 223. 了解 ViT（Vision Transformer） 吗？
-🟡 中等 | `Vision Transformer` | → PaiAgent / PaiCLI 模型选型背景
-
-### 224. 了解 ViLT（Vision-and-Language Transformer） 吗？
-🔴 困难 | `ViLT` | → PaiAgent / PaiCLI 模型选型背景
-
-### 225. ViLT 模型是如何将 Transformer 应用于图像识别任务的
-🟡 中等 | `ViLT / 图像识别` | → PaiAgent / PaiCLI 模型选型背景
-
-### 226. chatGLM 和 GPT 在结构上有什么区别？
-🟡 中等 | `Transformer / 语言模型` | → PaiAgent / PaiCLI 模型选型背景
-
-### 227. 什么是 GPT Structured Outputs？
-🟢 简单 | `AI / 大模型` | → PaiAgent / PaiCLI
-
-### 228. 什么是 GPTCache？
-🟢 简单 | `AI / 大模型` | → PaiCLI / PaiAgent
-
-### 229. 大模型的 Token 是什么？输入 Token 和输出 Token 在计费上有什么区别？
-🟢 简单 | `大模型 / Token / 计费模型` | → PaiCLI / PaiAgent
-
-### 230. MoE 混合专家模型是什么？DeepSeek、Qwen 为什么用 MoE？
-
-<p class="agent-duplicate-question"><span>REVIEW</span> 疑似重复 · 待确认：与「MoE 是什么？DeepSeek 模型为什么采用混合专家架构？」内容重合</p>
-MoE 把一个大模型拆成多个“专家”子网络，每次推理只激活其中几个专家。好处是模型总参数量大（知识储备多），但每次推理的计算量小（只用部分专家）。DeepSeek V3 用的就是 MoE，671B 总参数但每次只激活 37B。
-
-🟡 进阶
-
-### 231. 什么是 Token 缓存机制？它如何帮助降低 AI 应用的成本？
-
-<p class="agent-duplicate-question"><span>REVIEW</span> 疑似重复 · 待确认：与「大模型 API 缓存命中和未命中为什么差价巨大？」内容重合</p>
-🟢 简单 | `大模型 / Token 缓存 / 成本优化` | → PaiCLI / PaiAgent
-
-### 232. KV Cache 是什么？Prompt Caching 又是什么？
-
-<p class="agent-duplicate-question"><span>REVIEW</span> 疑似重复 · 待确认：与「KV Cache 是什么？为什么只缓存 K 和 V，不缓存 Q？」「DeepSeek 的 Prompt Caching 为什么能全自动生效」内容重合</p>
-KV Cache 缓存已计算的 Key/Value 矩阵，避免每生成一个新 token 都重新算前面所有 token 的注意力。Prompt Caching 更上一层，缓存相同前缀 Prompt 的计算结果，多次请求共享同一份缓存。PaiCLI 支持 Prompt Cache 可视化，让用户看到缓存命中率。
-
-🟡 进阶 | `→ PaiCLI Prompt Cache 可视化`
 
 ### 360. 什么是语义缓存？和 KV Cache、Prompt Caching 有什么区别？
 
@@ -1269,8 +1028,6 @@ KV Cache 缓存已计算的 Key/Value 矩阵，避免每生成一个新 token �
 语义缓存存储完整问答对，通过 Embedding 和相似度检索复用答案；结合 GPTCache，理解命中阈值、时效性、用户隔离和适用场景。
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnd4Y1d4ALBcMZ1S5Ot7hntb) · [查看图文解析](./what-is-semantic-caching.md)
-
-🟡 进阶 | `→ 派聪明 / PaiAgent`
 
 ## 05、模型训练与微调（32 题）
 
@@ -2375,7 +2132,7 @@ Agent 这一轮变化和以往不太一样。以前的技术迭代，学一门�
 
 Alan Kay 说过一句话，「预测未来最好的办法就是去创造它」。我觉得这话放在今天特别合适。与其等着被 Agent 浪潮推着走，不如自己先把原理搞透，把项目跑通，把面试里会被问到的每一个点都准备好。
 
-所以我们选择了最笨但最扎实的方式。364 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
+所以我们选择了最笨但最扎实的方式。300 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
 
 我始终相信一件事，技术的价值不在于它有多新，而在于你是否真正理解它、用过它、能把它讲清楚。这套题库要做的就是帮你到达这个状态。
 

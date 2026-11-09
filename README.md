@@ -5,7 +5,7 @@
 </p>
 
 <!-- AUTO-GENERATED:TITLE:START -->
-<h1 align="center">王二讲Agent：AI Agent 面试题 364 道（Agent八股+视频讲解）</h1>
+<h1 align="center">王二讲Agent：AI Agent 面试题 300 道（Agent八股+视频讲解）</h1>
 <!-- AUTO-GENERATED:TITLE:END -->
 
 <p align="center">
@@ -56,7 +56,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 01 Agent 基础 | 38 | 38 | 38 |
 | 02 热点解读 | 21 | 21 | 19 |
 | 03 上下文与记忆 | 12 | 12 | 12 |
-| 04 LLM 基础与 API | 82 | 14 | 12 |
+| 04 LLM 基础与 API | 18 | 14 | 12 |
 | 05 模型训练与微调 | 32 | 2 | 2 |
 | 06 Claude Code与Codex | 17 | 6 | 6 |
 | 07 DeepSeek专题 | 5 | 5 | 5 |
@@ -66,7 +66,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 11 RAG知识库 | 43 | 2 | 1 |
 | 12 LangChain 与 Spring AI | 21 | 0 | 0 |
 | 13 Agent 产品演进 | 9 | 1 | 1 |
-| **合计** | **364** | **107** | **102** |
+| **合计** | **300** | **107** | **102** |
 <!-- AUTO-GENERATED:STATS:END -->
 
 难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。想在手机上收藏，可以用同步更新的[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)。
@@ -166,7 +166,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 </details>
 
 <details>
-<summary><b>04 LLM 基础与 API</b>（82 题，图文详解 14 篇）</summary>
+<summary><b>04 LLM 基础与 API</b>（18 题，图文详解 14 篇）</summary>
 
 - 166\. [DeepSeek API 中的Temperature、Top-P 有什么用？](./video/deepseek-temperature-top-p.md) · [抖音](https://www.douyin.com/video/7705758773213744393)
 - 🟡 163\. [分词器是什么？](./video/what-is-tokenizer.md) · [抖音](https://www.douyin.com/video/7705453048864328975)
@@ -181,75 +181,11 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 - 152\. [大模型 API 缓存命中和未命中为什么差价巨大？](https://javabetter.cn/ai/video/api-cache-hit-miss.html) · [抖音](https://www.douyin.com/video/7672403032797154601) · [B站](https://www.bilibili.com/video/BV1WAuZ6fEXP/)
 - 156\. [MoE 是什么？DeepSeek 模型为什么采用混合专家架构？](https://javabetter.cn/ai/video/what-is-moe.html) · [抖音](https://www.douyin.com/video/7670768776341753122) · [B站](https://www.bilibili.com/video/BV1EKuJ6VEkc/)
 - 158\. [SWE-bench、Terminal-Bench、GPQA Diamond 这些大模型评测集到底在测什么？](https://javabetter.cn/ai/video/what-benchmarks-test.html)
-- 🟡 164\. 什么是 Scaling Law？大模型的涌现能力是怎么回事？
-- 🟡 165\. 大模型生成文本时有哪些解码策略？
-- 🟡 167\. 大模型幻觉问题怎么减少？
-- 🟡 168\. 什么是 CoT（思维链）？为什么效果好？有什么局限？
-- 🟡 169\. 多模型动态切换怎么实现？不重启服务就能换？
-- 🟡 170\. OpenAI 兼容协议是什么？各家大模型的差异在哪？
-- 🟡 171\. 流式输出（SSE / WebSocket）怎么设计？
-- 🟡 172\. 对比使用过哪些主流大模型？你们项目里最终选了哪个？
-- 173\. 怎么让 LLM 返回结构化内容，比如和 Java 对象字段一一对应？
+- 168\. 什么是 CoT（思维链）？
+- 170\. OpenAI 和 Anthropic 协议有什么区别？
+- 173\. 怎么让 LLM 返回结构化数据？
 - 174\. LLM 返回的内容被截断了怎么办？
-- 🟡 175\. Chat Template 是什么？
-- 🔴 176\. 多轮工具调用时，历史的 reasoning 要不要回传给模型？
-- 🟡 177\. 给 Agent 选模型要看哪些维度？
-- 🟡 178\. 什么是词嵌入（Word Embedding）？有哪些常见的词嵌入方法？
-- 🔴 179\. 是否使用 Word2Vec 训练过数据？在这个过程中，如何获取语料？如何选择超参数？语料、词表和维度大小如何确定？怎样把握训练时长？
-- 🔴 180\. Word2Vec 有哪些加速方法？
-- 🔴 181\. 解释 hierarchical softmax 的流程，以及它有什么优点？
-- 🟡 182\. 说一说负采样技术在 Word2Vec 中的运用。
-- 🟡 183\. CBOW 和 Skip-gram 分别更适合哪些应用场景？
-- 🔴 184\. 说说 GloVE 技术，怎样进行训练？有哪些应用场景？相比 Word2Vec 有哪些优缺点？
-- 🔴 185\. 说说 FastText 技术，是否比 Word2Vec 更优越？哪些情况下更适合使用 FastText
-- 🔴 186\. 聊一聊 ELMo 技术，它有哪些优缺点？可以做到一词多义吗？为什么？
-- 🟢 187\. 说说 LSTM 的基本原理。
-- 🟡 188\. 与循环神经网络（RNN）相比，LSTM 是如何解决梯度消失问题的？
-- 🟡 189\. 解释一个 LSTM 单元（LSTM cell）的基本组成，以及它们各自的作用。
-- 🟡 190\. LSTM 中，隐藏状态（hidden state）和单元状态（cell state）有什么区别？
-- 🟡 191\. LSTM 和 GRU 有什么区别？
-- 🟡 192\. 请描述 BERT 模型的架构和应用场景。
-- 🟡 193\. BERT 是如何处理自然语言文本中不常见词或者罕见词的？
-- 🟡 194\. Word2Vec 到 BERT 有怎样的改进？
-- 🟡 195\. BERT 怎样进行 mask 相比 CBOW 有什么区别？
-- 🔴 196\. 你有什么办法可以比较好地解决 BERT 输入长度的限制？
-- 🔴 197\. 说说你是怎样有效地优化和微调 BERT，以应对你做过的一些特定的 NLP 任务的？
-- 🟢 198\. 如何比较文本的相似度？
-- 🟢 199\. 支持向量机可以用于文本分类任务吗？若可以，请说明。
-- 🟡 200\. 在文本分类任务中，如何处理高维和稀疏数据？
-- 🟡 201\. 在文本分类任务中，如何处理样本（类别）不平衡的问题？
-- 🟡 202\. 现有文本分类算法在处理多语种文本数据时可能遭遇哪些挑战？
-- 🟡 203\. 简述 Word Embedding 可以怎样运用于文本分类任务？
-- 🟡 204\. 简述 LLaMA（Large Language Model Meta AI）的基本原理。
-- 🟢 205\. LLaMA 有哪些实际应用？
-- 🟡 206\. Transformer 在计算 attention 的时候使用的是点乘还是加法？请说明理由。
-- 🟢 207\. self attention 中的 K 和 Q 是用来做什么的？
-- 🟡 208\. K 和 Q 可以使用同一个值通过对自身进行点乘得到吗？
-- 🔴 209\. 如果让 K 和 Q 变成同一个矩阵，你觉得对模型性能会带来怎样的影响？
-- 🟡 210\. 在不考虑计算量的情况下，head 能否无限增多？
-- 🟡 211\. 在进行多头注意力的时候需要对每个 head 进行降维吗？
-- 🟡 212\. 讲一下你对 Transformer 的 Encoder 模块的理解。
-- 🟡 213\. Transformer 中，Decoder 阶段的多头自注意力和 Encoder 阶段的多头自注意力是相同的吗？
-- 🟡 214\. 了解 Transformer 模型训练中的梯度裁剪（Gradient Clipping）吗？
-- 🟡 215\. Transformer 为什么采用 Layer Normalization 而不是 Batch Normalization
-- 🟡 216\. Transformer 中的注意力遮蔽（Attention Masking）的工作原理是什么？
-- 🟡 217\. 什么是自回归属性（autoregressive property）？
-- 🟡 218\. Transformer 中的“残差连接”可以缓解梯度消失问题吗？
-- 🟡 219\. Transformer 中，如何处理大型数据集？
-- 🟡 220\. Transformer 模型训练完成后，如何评估其性能和效果？
-- 🟡 221\. Transformer 模型的性能瓶颈在哪？
-- 🔴 222\. 你觉得可以怎样缓解这个性能瓶颈？
-- 🟡 223\. 了解 ViT（Vision Transformer） 吗？
-- 🔴 224\. 了解 ViLT（Vision-and-Language Transformer） 吗？
-- 🟡 225\. ViLT 模型是如何将 Transformer 应用于图像识别任务的
-- 🟡 226\. chatGLM 和 GPT 在结构上有什么区别？
-- 🟢 227\. 什么是 GPT Structured Outputs？
-- 🟢 228\. 什么是 GPTCache？
-- 🟢 229\. 大模型的 Token 是什么？输入 Token 和输出 Token 在计费上有什么区别？
-- 🟡 230\. MoE 混合专家模型是什么？DeepSeek、Qwen 为什么用 MoE？
-- 🟢 231\. 什么是 Token 缓存机制？它如何帮助降低 AI 应用的成本？
-- 🟡 232\. KV Cache 是什么？Prompt Caching 又是什么？
-- 🟡 360\. [什么是语义缓存？和 KV Cache、Prompt Caching 有什么区别？](https://javabetter.cn/ai/video/what-is-semantic-caching.html)
+- 360\. [什么是语义缓存？和 KV Cache、Prompt Caching 有什么区别？](https://javabetter.cn/ai/video/what-is-semantic-caching.html)
 
 </details>
 
