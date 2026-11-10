@@ -2,6 +2,7 @@
 import argparse,base64,json,shutil,subprocess,uuid,urllib.request
 from pathlib import Path
 from project_paths import project_path,load_config,load_volc_key,load_beats,read_json,write_json,request_hash,sha256
+import pixel_outro
 from pronunciations import report as pronunciation_report
 
 def synth(text,out_path,tts,key,ssml=None):
@@ -41,6 +42,7 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--project',required=True,type=project_path);ap.add_argument('--only',type=int,nargs='+');ap.add_argument('--force',action='store_true');ap.add_argument('--retempo',action='store_true');ap.add_argument('--dry-run',action='store_true');args=ap.parse_args()
     root=args.project;cfg=load_config(root);tts=cfg['tts'];_,beats=load_beats(root)
     if tts['audio']['format']!='mp3':raise ValueError('This pipeline currently supports MP3 raw units only')
+    locked=pixel_outro.resolve(root,beats,args.only) if beats else {}
     if args.only:
         unknown=set(args.only)-{b['id'] for b in beats}
         if unknown:raise ValueError(f'Unknown IDs: {sorted(unknown)}')
@@ -50,6 +52,11 @@ def main():
     ffmpeg=shutil.which('ffmpeg');key=None;counts={'synthesize':0,'process':0,'reuse':0}
     for b in beats:
         raw=root/'audio/raw'/f"beat_{b['id']:02d}.mp3";out=root/'audio/processed'/raw.name;text=b.get('ttsText') or b['text'];ssml=b.get('ttsSsml');fingerprint=request_hash(text,tts,ssml);old=records['units'].get(str(b['id']),{})
+        if b["id"] in locked:
+            pixel_outro.apply(locked[b["id"]],b,tts,fingerprint,root,records,args.dry_run)
+            counts["reuse"]+=1
+            if not args.dry_run:write_json(record,records)
+            continue
         valid_raw=raw.exists() and old.get('requestHash')==fingerprint and old.get('rawSha256')==sha256(raw)
         need_raw=args.force or not valid_raw
         if args.retempo and not valid_raw:raise ValueError(f"Unit {b['id']} has missing/stale raw audio; regenerate it before --retempo")

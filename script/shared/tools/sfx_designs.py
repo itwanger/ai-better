@@ -9,6 +9,7 @@ DURATIONS = {
     'soft_whoosh': 0.32,
     'pixel_wipe': 0.21,
     'pixel_jump': 0.17,
+    'pixel_splash': 0.29,
     'focus_air': 0.18,
     'success_pair': 0.46,
     'pixel_like': 0.13,
@@ -59,6 +60,15 @@ def make_cues(rate):
                 phase = 2 * math.pi * ((330 if up else 925)*t + (2400 if up else -1360)*t*t)
                 tone = math.sin(phase) + .16 * math.sin(phase*3)
                 value = (tone if up else .60*tone+1.05*band) * edge * math.exp(-u*2.8)
+            elif name == 'pixel_splash':
+                # Surface impact, short wash, then two quieter bubbles.
+                phase = 185*t + 480*.031*(1-math.exp(-t/.031))
+                value = (.8*math.sin(2*math.pi*phase)*math.exp(-t*30)
+                         + 2.8*band*math.exp(-t*17)) * edge
+                for start, hz in ((.084, 370), (.156, 530)):
+                    local = t-start
+                    if local >= 0:
+                        value += .32*math.sin(2*math.pi*(hz*local+720*local**2))*math.exp(-local*38)*edge
             elif name == 'focus_air':
                 # Compact lens movement, all filtered air with no electronic note.
                 value = (fast * .45 + slow) * math.sin(math.pi * u) ** 3

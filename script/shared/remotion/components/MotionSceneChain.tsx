@@ -44,6 +44,24 @@ export const MotionPlane: React.FC<{
   );
 };
 
+type Handoff = {at: number; duration: number; kind: MotionKind};
+
+// Hold the outgoing shot on its last frame while the incoming shot follows its own narration.
+export function MotionHandoffs({frame, handoffs, draw, clipPath}: {
+  frame: number; handoffs: readonly Handoff[]; draw: (frame: number) => React.ReactNode; clipPath: string;
+}) {
+  const nextIndex=handoffs.findIndex(h=>h.at>frame);
+  const currentIndex=(nextIndex<0 ? handoffs.length : nextIndex)-1;
+  const current=handoffs[currentIndex];
+  const moving=current && frame<current.at+current.duration;
+  return <div style={{position:'absolute',inset:0,clipPath:moving ? clipPath : 'none'}}>
+    {moving && <MotionPlane key={currentIndex-1} frame={frame} exit={current}>
+      {draw(current.at-1)}
+    </MotionPlane>}
+    <MotionPlane key={currentIndex} frame={frame} enter={current}>{draw(frame)}</MotionPlane>
+  </div>;
+}
+
 export type SceneTransition = {kind: MotionKind; duration: number};
 
 /** Selected scene boundaries move; scene-local clocks and total duration never change. */
