@@ -15,6 +15,8 @@ def resolve(project, beats, selected):
         wanted[beats[-1]['id']]='whole'
     elif len(beats)>1 and [norm(x['text']) for x in beats[-2:]]==[norm(QUESTION),norm(BYE)]:
         wanted={beats[-2]['id']:'48',beats[-1]['id']:'49'}
+    elif norm(beats[-1]['text'])==norm(BYE):
+        wanted={beats[-1]['id']:'49'}
     elif norm(''.join(b['text'] for b in beats)).endswith(norm(QUESTION+BYE)):
         # Do not accidentally synthesize a fixed signoff embedded in other prose.
         tail_chars=0

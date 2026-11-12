@@ -656,6 +656,14 @@
       "targetPinyin": "guī zàng",
       "status": "user-specified",
       "note": "作者归藏及其插件归藏设计、dsh-guizang-design：用户指定 guizang。中文专名用 gui1 zang4；逐处核对包名 TTS 展开，保留原字幕。适用此专名，不泛化到其他“藏”字。"
+    },
+    {
+      "id": "protocol-xieyi",
+      "match": "协议",
+      "speakers": "*",
+      "targetPinyin": "xié yì (xie2 yi4)",
+      "status": "user-specified",
+      "note": "2026-11-12 用户指定协议读 xieyi。openai-vs-anthropic-protocol 第24段两处使用词级 py 音素 xie2 yi4；目标读法已确认，合成音频等待试听，不据此重配已认可章节。"
     }
   ]
 }
