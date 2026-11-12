@@ -546,7 +546,27 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 抖音视频：[观看本集视频](https://www.douyin.com/video/7654443885439094042)
 
 
-## 02、热点解读（预留 100 篇，已收录 21 篇）
+## 02、热点解读（预留 100 篇，已收录 23 篇）
+
+### HOT-023. Claude Fable 5.2 和 Mythos 5.2 发布，有哪些新能力？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+了解 Fable 5.2 与 Mythos 5.2 的模型能力和实际应用。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnL0OIOluYrXlNM2YiF4tjCb) · [查看图文解析](./claude-fable-5-2.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7706555517623176463)
+
+### HOT-022. DeepSeek Harness 有哪些值得用的插件？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+了解 DeepSeek Harness 插件架构和四款插件的实际用途。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnfUP1Dahr3lSyDMb8pn5zog) · [查看图文解析](./deepseek-harness-four-plugins.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7706142531712470313)
 
 ### HOT-021. 混元 Hy4 正式版结合 WorkBuddy 有哪些能力？
 
@@ -894,6 +914,12 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 
 聚焦 NLP、Transformer、模型结构、推理机制、API、缓存、Token、结构化输出和模型服务。
 
+### 168. 什么是 CoT（思维链）？
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnq2uBnNAUGN4jOeAvG2bhge) · [查看图文解析](./what-is-cot.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7707112014115540233)
+
 ### 166. DeepSeek API 中的Temperature、Top-P 有什么用？
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn6qEuqGqsyQForQZlUqtRjc) · [查看图文解析](./deepseek-temperature-top-p.md)
@@ -1007,8 +1033,6 @@ MoE 把 Transformer 每层的前馈网络拆成 256 个路由专家和 1 个共�
 评测分三类。代码能力看 SWE-bench 系列，给模型真实 GitHub Issue 和整个仓库，自己定位 bug 写补丁并跑通测试，Pro 版平均要改 170 行，DeepSWE 全部从零出题。Agent 工具能力看 Terminal-Bench 在沙箱里敲命令，MCP-Atlas 考跨服务器调用 MCP，CyberGym 要写出复现漏洞的 PoC。推理能力看 GPQA Diamond，考生物、物理、化学的研究生级推理。
 
 完整答案：[阅读全文《大模型评测集在测什么》](./what-benchmarks-test.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnLkdAVAplpILlAVtk2NdJdJ)
-
-### 168. 什么是 CoT（思维链）？
 
 ### 170. OpenAI 和 Anthropic 协议有什么区别？
 
@@ -2132,7 +2156,7 @@ Agent 这一轮变化和以往不太一样。以前的技术迭代，学一门�
 
 Alan Kay 说过一句话，「预测未来最好的办法就是去创造它」。我觉得这话放在今天特别合适。与其等着被 Agent 浪潮推着走，不如自己先把原理搞透，把项目跑通，把面试里会被问到的每一个点都准备好。
 
-所以我们选择了最笨但最扎实的方式。300 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
+所以我们选择了最笨但最扎实的方式。302 道题，每道题录视频讲，每道题写图文解析，每道题映射到真实项目的真实代码。没有速成，没有捷径，就是一道一道地拆，一个知识点一个知识点地过。
 
 我始终相信一件事，技术的价值不在于它有多新，而在于你是否真正理解它、用过它、能把它讲清楚。这套题库要做的就是帮你到达这个状态。
 

@@ -5,7 +5,7 @@
 </p>
 
 <!-- AUTO-GENERATED:TITLE:START -->
-<h1 align="center">王二讲Agent：AI Agent 面试题 300 道（Agent八股+视频讲解）</h1>
+<h1 align="center">王二讲Agent：AI Agent 面试题 302 道（Agent八股+视频讲解）</h1>
 <!-- AUTO-GENERATED:TITLE:END -->
 
 <p align="center">
@@ -54,9 +54,9 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 分类 | 题数 | 图文详解 | 视频讲解 |
 | --- | ---: | ---: | ---: |
 | 01 Agent 基础 | 38 | 38 | 38 |
-| 02 热点解读 | 21 | 21 | 19 |
+| 02 热点解读 | 23 | 23 | 21 |
 | 03 上下文与记忆 | 12 | 12 | 12 |
-| 04 LLM 基础与 API | 18 | 14 | 12 |
+| 04 LLM 基础与 API | 18 | 15 | 13 |
 | 05 模型训练与微调 | 32 | 2 | 2 |
 | 06 Claude Code与Codex | 17 | 6 | 6 |
 | 07 DeepSeek专题 | 5 | 5 | 5 |
@@ -66,7 +66,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 11 RAG知识库 | 43 | 2 | 1 |
 | 12 LangChain 与 Spring AI | 21 | 0 | 0 |
 | 13 Agent 产品演进 | 9 | 1 | 1 |
-| **合计** | **300** | **107** | **102** |
+| **合计** | **302** | **110** | **105** |
 <!-- AUTO-GENERATED:STATS:END -->
 
 难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。想在手机上收藏，可以用同步更新的[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)。
@@ -121,8 +121,10 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 </details>
 
 <details>
-<summary><b>02 热点解读</b>（21 题，图文详解 21 篇）</summary>
+<summary><b>02 热点解读</b>（23 题，图文详解 23 篇）</summary>
 
+- HOT-023\. [Claude Fable 5.2 和 Mythos 5.2 发布，有哪些新能力？](./video/claude-fable-5-2.md) · [抖音](https://www.douyin.com/video/7706555517623176463)
+- HOT-022\. [DeepSeek Harness 有哪些值得用的插件？](./video/deepseek-harness-four-plugins.md) · [抖音](https://www.douyin.com/video/7706142531712470313)
 - HOT-021\. [混元 Hy4 正式版结合 WorkBuddy 有哪些能力？](./video/hunyuan-hy4.md) · [抖音](https://www.douyin.com/video/7704303050290171179)
 - HOT-020\. [美团 LongCat-2.5 正式版发布，有哪些新能力？](https://javabetter.cn/ai/video/longcat-2-5.html) · [抖音](https://www.douyin.com/video/7703895292533329206)
 - HOT-019\. [DeepSeek Super-agent 是什么？](https://javabetter.cn/ai/video/what-is-super-agent.html) · [抖音](https://www.douyin.com/video/7703197849411996970)
@@ -166,8 +168,9 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 </details>
 
 <details>
-<summary><b>04 LLM 基础与 API</b>（18 题，图文详解 14 篇）</summary>
+<summary><b>04 LLM 基础与 API</b>（18 题，图文详解 15 篇）</summary>
 
+- 168\. [什么是 CoT（思维链）？](./video/what-is-cot.md) · [抖音](https://www.douyin.com/video/7707112014115540233)
 - 166\. [DeepSeek API 中的Temperature、Top-P 有什么用？](./video/deepseek-temperature-top-p.md) · [抖音](https://www.douyin.com/video/7705758773213744393)
 - 🟡 163\. [分词器是什么？](./video/what-is-tokenizer.md) · [抖音](https://www.douyin.com/video/7705453048864328975)
 - 🟡 161\. [DeepSeek 是怎么撑起 1M 上下文的？](./video/how-deepseek-supports-1m-context.md) · [抖音](https://www.douyin.com/video/7705036086988393738)
@@ -181,7 +184,6 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 - 152\. [大模型 API 缓存命中和未命中为什么差价巨大？](https://javabetter.cn/ai/video/api-cache-hit-miss.html) · [抖音](https://www.douyin.com/video/7672403032797154601) · [B站](https://www.bilibili.com/video/BV1WAuZ6fEXP/)
 - 156\. [MoE 是什么？DeepSeek 模型为什么采用混合专家架构？](https://javabetter.cn/ai/video/what-is-moe.html) · [抖音](https://www.douyin.com/video/7670768776341753122) · [B站](https://www.bilibili.com/video/BV1EKuJ6VEkc/)
 - 158\. [SWE-bench、Terminal-Bench、GPQA Diamond 这些大模型评测集到底在测什么？](https://javabetter.cn/ai/video/what-benchmarks-test.html)
-- 168\. 什么是 CoT（思维链）？
 - 170\. OpenAI 和 Anthropic 协议有什么区别？
 - 173\. 怎么让 LLM 返回结构化数据？
 - 174\. LLM 返回的内容被截断了怎么办？
