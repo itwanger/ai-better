@@ -1,5 +1,5 @@
 ---
-title: 搞懂 CoT 思维链，你就掌控 DeepSeek Harness 的神。
+title: 搞懂 CoT 思维链，你就是掌控 DeepSeek Harness 的神。
 ---
 
 在 DeepSeek Harness 里发送一条提示词后，界面会显示“深度求索中”和计时，上方“正在分析请求”这一行会不断刷新，显示模型正在生成的推理片段。
