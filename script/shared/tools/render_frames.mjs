@@ -11,7 +11,7 @@ const require = createRequire(path.join(workspace, 'package.json'));
 const {bundle} = require('@remotion/bundler');
 const {openBrowser, renderStill, selectComposition} = require('@remotion/renderer');
 
-const {values, positionals} = parseArgs({allowPositionals: true, options: {project: {type: 'string'}, composition: {type: 'string'}, 'out-dir': {type: 'string'}}});
+const {values, positionals} = parseArgs({allowPositionals: true, options: {project: {type: 'string'}, composition: {type: 'string'}, 'out-dir': {type: 'string'}, 'pixel-review': {type: 'boolean'}}});
 if (!values.project || !values.composition || !values['out-dir'] || positionals.length === 0) {
   throw new Error('Usage: render_frames.mjs --project <dir> --composition <id> --out-dir <dir> label:frame ...');
 }
@@ -22,13 +22,23 @@ const chrome = process.env.REMOTION_BROWSER_EXECUTABLE || ['/Applications/Google
 
 const serveUrl = await bundle({entryPoint: path.join(cwd, 'src/Root.tsx'), rootDir: cwd, publicDir: path.join(cwd, 'public')});
 const browser = await openBrowser('chrome', chrome ? {browserExecutable: chrome} : {});
-const composition = await selectComposition({serveUrl, id: values.composition, puppeteerInstance: browser});
+const inputProps = values['pixel-review'] ? {pixelReview:true} : {};
+let composition;
 const written = [];
 try {
+  composition = await selectComposition({serveUrl, id: values.composition, inputProps, puppeteerInstance: browser});
   for (const spec of positionals) {
     const [label, frame] = [spec.slice(0, spec.lastIndexOf(':')), Number(spec.slice(spec.lastIndexOf(':') + 1))];
+    if(!label||label.includes('/')||label.includes('\\')||!Number.isInteger(frame)||frame<0||(values['pixel-review']&&frame>=composition.durationInFrames)) throw new Error('Invalid frame spec: '+spec);
+    const selectedFrame=Math.min(frame,composition.durationInFrames-1);
     const output = path.join(outDir, `${label}-${frame}.png`);
-    await renderStill({serveUrl, composition, frame: Math.min(frame, composition.durationInFrames - 1), output, imageFormat: 'png', puppeteerInstance: browser});
+    let geometry;
+    const onBrowserLog = log => { const prefix='PIXEL_REVIEW:'; const at=log.text.indexOf(prefix); if(at>=0){ const row=JSON.parse(log.text.slice(at+prefix.length)); if(row.frame===frame)geometry=row; } };
+    await renderStill({serveUrl, composition, frame:selectedFrame, inputProps, onBrowserLog, logLevel:values['pixel-review']?'error':'info', output, imageFormat: 'png', puppeteerInstance: browser});
+    if(values['pixel-review']){
+      if(!geometry)throw new Error('No PixelReviewProbe output at '+frame+'; install current kit and use PixelWorld');
+      fs.writeFileSync(output.replace(/\.png$/,'.geometry.json'),JSON.stringify(geometry,null,2));
+    }
     written.push(output);
   }
 } finally {

@@ -176,15 +176,17 @@ python3 script/shared/tools/asr_slice.py --project script/<topic> 25:5.6:7.4    
 修正读音后，字幕起点和事件锚点对照新 `ttsText` 改，重新对齐、生成时点并同步提示音。
 
 ```bash
-python3 script/shared/tools/build_timing.py --project script/<topic> --chapter ch2
+# 初次准备或音轨/时点变化：
+python3 script/shared/tools/chapter_pipeline.py --project script/<topic> --chapter ch2 --update-audio
+# 普通视觉修改，静帧按需要指定：
 python3 script/shared/tools/chapter_pipeline.py --project script/<topic> --chapter ch2 --still term:60 --still figure:640
 ```
 
-`chapter_pipeline.py` 依次执行时点生成、混音（存在 sound-plan.json 时）、类型检查、关键帧输出到 `preview/chapter<N>/<label>-<frame>.png`，最后做开口帧检查，任一步失败即停止。
+`chapter_pipeline.py` 默认只做一次类型检查，若显式指定 `--still` 则一次打包输出指定帧。初次准备或配音、时点、动作声音变化才加 `--update-audio`，执行时点生成、事件编译及混音。局部视觉修改不重建音轨。任一步失败即停止。
 
-开口帧检查默认开启：用 `render_frames.mjs` 一次打包，给本章每个 beat 渲染第一个字起音后约 0.4 秒的画面到 `preview/chapter<N>/onset/`，统计主体区（导航之下、字幕之上）的非背景像素，低于 2% 输出 `WARNING beat N`。警告处理掉再交给用户。`--skip-onset` 只在反复调同一处画面时临时关闭。提示音偏移依赖新事件时，先跑一次得到时点，写好 sound-plan 后再跑一次。
+开口帧检查默认关闭；怀疑开口后存在空画面时才加 `--check-onset`。它统计指定开口状态的非背景像素，不能判断设计或语义是否正确，不能为了消除警告改变已认可的构图。密集几何采样与批量短片只在显式 `--full-review` 时运行，不作为每轮交付条件。
 
-镜头有推近、平移或前后状态切换时，另抽全貌、运动中段、稳定后及状态变化前后的帧检查。尤其检查中文对照、侧栏标签和原文在运动中是否重叠；原图内的划线和框选放进 `FigureFocus` 的 children，随图移动，图外说明优先等镜头稳定再入场。不能只检查终点无遮挡，就认定转场也正确。迭代已有视频、只改视觉时，以当前认可版本记录原稿、text/ttsText、配音、混音、既有原图和不受影响章节的文件哈希；完成后核对保持项，已有局部读音修复纳入当前基线。只重出受影响帧，将实际检查结果写入项目的 `preview/chapter<N>/review.json`。
+调整推近、平移或状态切换时，只取改动片段 2–3 个易出问题的状态，或看一段连续预览，不默认重复做两套。检查完整边界、文字遮挡与提前占位；标注随原图移动。保留当前认可版本的配音、素材和无关镜头；普通视觉修改不反复生成哈希清单，最终认可或交付时再归档。新章首次交付正常开声连播一次，之后只核对改动段。
 
 审片同时核对因果和状态：匹配失败后不得画成已写入；覆盖必须让旧值与新值的关系可辨认；交接后的修改应保留前一个人的结果；目录清理只在对应口播与条件成立后发生。按本章实际机制选择检查项，并正常播放相关片段，确认观众能看到原因、过程和结果，结果有稳定阅读时间；不只以静帧无遮挡判断通过。
 
@@ -356,7 +358,7 @@ python3 script/shared/tools/record_tui.py --project script/<topic> --name steer 
 python3 script/shared/tools/mix_effects.py --project script/what-is-agent-reflection
 ```
 
-混音保持原始 `build/voiceover.wav` 和采样长度不变，生成 `build/voiceover-with-effects.wav`、`build/sound-mix.json`。`chapter_pipeline.py` 在存在 sound-plan 时自动混音。预览读取混音文件；项目设置 `deliveryAudio: "build/voiceover-with-effects.wav"` 后（新项目初始化时默认写入），导出入口也采用该音轨。音效计划、配音或混音文件发生变化时，导出入口校验哈希并拒绝过期混音；每次重新生成配音时间轴后必须重新混音。第一章认可样片提供效果参考，不固定每章数量。提示音参考峰值约 -35 至 -31 dBFS、长度约 75–160ms，按实际配音与试听调整；不是响度保证。检查音效窗外配音采样一致、长度不变且无削波。
+混音保持原始 `build/voiceover.wav` 和采样长度不变，生成 `build/voiceover-with-effects.wav`、`build/sound-mix.json`。`chapter_pipeline.py --update-audio` 在存在 sound-plan 时混音，普通视觉修改不混音。预览读取混音文件；项目设置 `deliveryAudio: "build/voiceover-with-effects.wav"` 后（新项目初始化时默认写入），导出入口也采用该音轨。音效计划、配音或混音文件发生变化时，导出入口校验哈希并拒绝过期混音；每次重新生成配音时间轴后必须重新混音。第一章认可样片提供效果参考，不固定每章数量。提示音参考峰值约 -35 至 -31 dBFS、长度约 75–160ms，按实际配音与试听调整；不是响度保证。检查音效窗外配音采样一致、长度不变且无削波。
 
 ### 连续场景转场
 

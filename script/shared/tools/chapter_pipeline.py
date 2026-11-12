@@ -1,18 +1,9 @@
-"""Run one chapter's build chain and stop at the first failure.
+"""Lightweight chapter check: typecheck, plus only explicitly requested stills.
 
-  python3 shared/tools/chapter_pipeline.py --project <dir> --chapter ch2 \
-      --still term:60 --still figure:640 [--skip-mix] [--skip-typecheck]
-
-Steps: build_timing -> mix_effects (when assets/references/sound-plan.json exists) -> typecheck ->
-key frames into preview/chapter<N>/<label>.png via the shared Remotion entry -> beat-onset check.
-
-Beat-onset check: one still per beat about 0.4 s after the first spoken word (preview/chapter<N>/onset/), then the
-share of non-background pixels in the main area (below the chapter strip, above the subtitle). A beat whose
-frame is nearly empty is printed as a warning: the scene waits for a later keyword while the sentence has
-already started. Manually picked stills tend to land after everything has appeared, so this check is on by
-default; --skip-onset turns it off.
-Author the chapter's sound-plan entries between timing and mix when they depend on new events;
-re-run the pipeline afterwards (build_timing is idempotent).
+Use --update-audio for initial preparation or changed narration/timing/sound events.
+Use --full-review only when dense geometry sampling and all scene clips are needed.
+Use --check-onset only to diagnose suspected empty frames at narration onsets.
+Visual-only revisions do not rebuild timing, rewrite event files, or remix audio.
 """
 import argparse, json, subprocess, sys
 from pathlib import Path
@@ -41,28 +32,40 @@ def main() -> None:
     parser.add_argument('--chapter', required=True)
     parser.add_argument('--still', action='append', default=[], help='label:frame (chapter-local frame)')
     parser.add_argument('--composition', help='defaults to Chapter<N>Preview')
+    parser.add_argument('--update-audio', action='store_true', help='rebuild timing/events and mix after audio-related changes')
+    parser.add_argument('--full-review', action='store_true', help='opt in to dense geometry sampling and scene clips')
+    parser.add_argument('--check-onset', action='store_true', help='diagnose suspected empty narration-onset frames')
     parser.add_argument('--skip-mix', action='store_true')
     parser.add_argument('--skip-typecheck', action='store_true')
-    parser.add_argument('--skip-onset', action='store_true', help='skip the per-beat onset stills and empty-frame check')
+    parser.add_argument('--skip-onset', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
     project = args.project; number = args.chapter[2:]
     composition = args.composition or f'Chapter{number}Preview'
     py, node = sys.executable, 'node'
-    run('build_timing', [py, str(TOOLS / 'build_timing.py'), '--project', str(project), '--chapter', args.chapter])
-    if not args.skip_mix and (project / 'assets/references/sound-plan.json').is_file():
-        run('mix_effects', [py, str(TOOLS / 'mix_effects.py'), '--project', str(project)])
+    if args.update_audio:
+        run('build_timing', [py, str(TOOLS / 'build_timing.py'), '--project', str(project), '--chapter', args.chapter])
+        run('pixel action events', [py, str(TOOLS / 'pixel_events.py'), '--project', str(project)])
+        if not args.skip_mix and (project / 'assets/references/sound-plan.json').is_file():
+            run('mix_effects', [py, str(TOOLS / 'mix_effects.py'), '--project', str(project)])
     if not args.skip_typecheck:
         run('typecheck', [node, str(TOOLS / 'remotion.mjs'), 'typecheck', '--project', str(project)])
     out_dir = project / 'preview' / f'chapter{number}'; out_dir.mkdir(parents=True, exist_ok=True)
     rendered = []
-    for still in args.still:
-        label, frame = still.rsplit(':', 1)
-        target = out_dir / f'{label}-{frame}.png'
-        run(f'still {label}@{frame}', [node, str(TOOLS / 'remotion.mjs'), 'still', '--project', str(project), '--composition', composition, '--frame', frame, '--out', str(target)])
-        rendered.append(str(target.relative_to(project)))
-    report = {'chapter': args.chapter, 'composition': composition, 'stills': rendered}
-    if not args.skip_onset:
+    if args.still:
+        run('requested stills', [node, str(TOOLS / 'render_frames.mjs'), '--project', str(project),
+            '--composition', composition, '--out-dir', str(out_dir), *args.still])
+        for still in args.still:
+            label, frame = still.rsplit(':', 1)
+            rendered.append(str((out_dir / f'{label}-{frame}.png').relative_to(project)))
+    report = {'chapter': args.chapter, 'composition': composition, 'stills': rendered,
+        'audioUpdated': args.update_audio, 'fullReviewRequested': args.full_review}
+    if args.check_onset and not args.skip_onset:
         report['onset'] = onset_check(project, args.chapter, composition, out_dir / 'onset')
+    if args.full_review:
+        from review_pixel_chapter import review
+        checked = review(project, args.chapter, composition)
+        if checked is not None:
+            report['pixelReview'] = {'errors': checked['errors'], 'warnings': checked['warnings']}
     print(json.dumps(report, ensure_ascii=False))
 
 

@@ -13,13 +13,13 @@
     },
     {
       "id": "token-by-token-de-generation",
-      "match": "(一个\\s*Token\\s*一个\\s*Token\\s*)地(?=生成)",
+      "match": "(一个\\s*Token\\s*(?:接\\s*)?一个\\s*Token\\s*)地(?=生成|输出)",
       "replace": "\\1的",
       "speakers": [
         "S_j97bqlje2"
       ],
       "status": "confirmed",
-      "note": "2026-11-05 用户指定“一个 Token 一个 Token 地生成”中的“地”读轻声 de。仅此短语在 ttsText 用同音“的”引导，字幕和原稿仍保留“地”；不全局替换地，不加词级 SSML。confirmed 指用户指定目标读法，新配音仍待实际复听。"
+      "note": "2026-11-05 用户指定“一个 Token 一个 Token 地生成”中的“地”读轻声 de。仅此短语在 ttsText 用同音“的”引导，字幕和原稿仍保留“地”；不全局替换地，不加词级 SSML。confirmed 指用户指定目标读法，新配音仍待实际复听。 2026-11-11 CoT 第二章用户再次纠正：同时覆盖“一个 Token 接一个 Token 地输出”，目标轻声 de。"
     },
     {
       "id": "hunyuan-hy4-spoken",
