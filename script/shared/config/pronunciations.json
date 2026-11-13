@@ -452,6 +452,14 @@
       "speakers": "*",
       "status": "confirmed",
       "note": "2026-10-31 xiaomi-ocr-0，用户明确指定server.py读“server 点 py”。只改ttsText，字幕和命令保留server.py。新完整句子仍待用户实听。"
+    },
+    {
+      "id": "android-an-zhuo",
+      "match": "(?i)(?<![A-Za-z0-9])Android(?![A-Za-z0-9])",
+      "replace": "安卓",
+      "speakers": "*",
+      "status": "confirmed",
+      "note": "2026-11-13 DSH Go，用户明确指定 Android 以后统一读作安卓。只改 ttsText，原稿和字幕保留 Android；适用于后续视频。新音频仍需核对。"
     }
   ],
   "watch": [
