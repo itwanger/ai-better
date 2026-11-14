@@ -47,7 +47,251 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 
 Google 搜【王二讲 Agent】也能看到我了。
 
-## 01、Agent 基础（38 题）
+## 01、热点解读（预留 100 篇，已收录 23 篇）
+
+### HOT-023. Claude Fable 5.2 和 Mythos 5.2 发布，有哪些新能力？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+了解 Fable 5.2 与 Mythos 5.2 的模型能力和实际应用。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnL0OIOluYrXlNM2YiF4tjCb) · [查看图文解析](./claude-fable-5-2.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7706555517623176463)
+
+### HOT-022. DeepSeek Harness 有哪些值得用的插件？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+了解 DeepSeek Harness 插件架构和四款插件的实际用途。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnfUP1Dahr3lSyDMb8pn5zog) · [查看图文解析](./deepseek-harness-four-plugins.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7706142531712470313)
+
+### HOT-021. 混元 Hy4 正式版结合 WorkBuddy 有哪些能力？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结合 WorkBuddy 实测，了解混元 Hy4 正式版的多模态视觉、Computer Use 和实际应用。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnW4JVa67AmNthp8i0x2OiDe) · [查看图文解析](./hunyuan-hy4.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7704303050290171179)
+
+### HOT-020. 美团 LongCat-2.5 正式版发布，有哪些新能力？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+了解 LongCat-2.5 的国产算力训练、原生多模态和 DeepSeek Harness 接入。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnZDEdxPk3t9DzP2h9Y3DRsd) · [查看图文解析](./longcat-2-5.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7703895292533329206)
+
+### HOT-019. DeepSeek Super-agent 是什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结合 DeepSeek Harness，理解 Router 与 Worker 如何协作，以及异步任务和 Watchdog 如何支持多任务执行。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8JJPExuHCPBc11QfNhsrRb) · [查看图文解析](./what-is-super-agent.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7703197849411996970)
+
+### HOT-018. Xiaomi-OCR-0 开源：本地 OCR 怎么用？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从本地部署、区域识别、模型训练和 MCP 接入，了解 Xiaomi-OCR-0 的能力与使用方式。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnqqYO96YgPHGfS9OUWfEmoe) · [查看图文解析](./xiaomi-ocr-0.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7702772455210896674)
+
+### HOT-017. GPT-6.1 Terra 发布，Codex 藏了哪三个大招？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结合 Codex 源码，拆解 V8 沙箱中的工具并发编排、原图上下文与跨窗口接力，以及推理档位和长期记忆整理。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn38OgFNR0NxU8hHlcvlvdle) · [查看图文解析](./gpt-6-1-terra.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7701366090923904282)
+
+### HOT-015. Kimi K3.1 Pro 正式发布，国产模型的审美新巅峰。
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+拆解大规模联合强化学习、动态工具加载与保留式思考，以及模型定价和前缀缓存的工程用法。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnnZfeMnKC9MGyxixim0xhef) · [阅读全文《Kimi K3.1 Pro》](./kimi-k3-1-pro.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7700177876540230975)
+
+### HOT-014. 太惊艳了吧？Kimi K3.1 真要来了？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从官方预告、Arena 匿名盲测和推理框架适配线索，梳理 Kimi K3.1 的发布前信息与开发者关注点。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnDdvWNewjj3PinSkcEpFjPd) · [阅读全文《Kimi K3.1 预告》](./kimi-k3-1-preview.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7699856703231151410)
+
+### HOT-013. 真正的 OpenAI！DeepSeek 开源内部推理框架 DeepInfer
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+拆解 DeepInfer 的分离部署、KV Cache 存储、投机解码与异步调度，以及 deepseek-recipe 的协议转换和流式工具解析。
+
+完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnvfbHomZEVAFlg3uoUF3MRe) · [阅读全文《DeepInfer 开源》](./deepseek-open-source-deepinfer.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1qsxk6jECM/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7699074728060816667)
+
+### HOT-012. DeepSeek-V4.1-Flash-1017 真来了，这次是真滴强。
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+拆解 1017 的后训练更新、基准对比、许愿式编程和三个本地案例，以及 Search & Fetch 的接入信息。
+
+完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnT0hadTTvylXP4PWRxu2RWh) · [阅读全文《DeepSeek 1017 更新》](./deepseek-v4-1-flash-1017.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1jtsf6xEmR/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7697933506416037146)
+
+### HOT-011. REA 保姆级教程：DeepSeek Harness 实操
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，并为每条结论生成 Evidence 记录。DeepSeek Harness 没有一键接入，需要在 cordis.patch.yml 里接入 REA 的 MCP，再安装 Skill，最后跑通官方的恐龙游戏逆向案例。
+
+完整内容：[阅读全文《REA 接入 DeepSeek Harness》](./rea-deepseek-harness-tutorial.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn7fW4j9GEHSijqOJpqq4r8f)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1F5xK6EEMz/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7696102369058196736)
+
+### HOT-010. 最近爆火的 Personal Agent 到底是什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从 Grok Bot、Muse、Cue、dots 四款产品，理解 Personal Agent 的持续记忆、执行环境、用户身份和权限边界，以及它和聊天助手、Coding Agent 的区别。
+
+完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn3FTN6yR5TNRgnucNhfyXYf) · [阅读全文《Personal Agent》](./what-is-personal-agent.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1SdH562Eip/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7695348838801886499)
+
+
+### HOT-009. Claude Haiku 5.5 怎么在成本和智能之间做选择？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+结合推理档位、上下文窗口、自适应思考和缓存，拆解 Haiku 5.5 的成本与能力取舍，以及在 Claude Code 中承担摘要、压缩、分类、路由和子 Agent 任务的用法。
+
+完整内容：[阅读全文《Claude Haiku 5.5 解读》](./claude-haiku-5-5.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnoAiq8fR9jVWeczNVjGoQie)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1YBn16iEuN/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7694223913370258729)
+
+### HOT-008. CPU、GPU、NPU 到底有什么区别？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从 Codex 的本机执行、云端 LLM 推理和端侧 AI 三个场景，理解 CPU 的调度能力、GPU 的并行计算与显存带宽，以及 NPU 的低功耗推理。区分 Prefill 和 Decode，也说明 TOPS 为什么不能直接代表实际使用体验。
+
+完整内容：[阅读全文《CPU、GPU、NPU 的区别》](./cpu-gpu-npu-difference.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnEQp2HuPJVzfYbflqUpCfpg)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1YWnz6QEr9/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7693854535088868643)
+
+### HOT-007. Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+Kolibri 用 78B 总参数、3.46B 激活参数降低每次推理的计算量，结合混合专家和滑动窗口注意力控制开销；后训练数据由 GLM-5.3、Qwen3.8 等模型生成，文章拆解其训练方法、跑分和使用边界。
+
+完整内容：[阅读全文《Kolibri 解读》](./aleph-alpha-kolibri.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn6e2SW7YQEFrvYi1Yc8aGih)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1TFpg6YEz3/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7693484001561972019)
+
+### HOT-006. Gemini 4 Argon 发布，100 万 Token 输出意味着什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从 Prefill、Decode 和 KV Cache 的成本差异，理解百万 Token 输出的工程难点；结合长代码修改、安全攻防和 CodeMender 的工作方式，拆解 Gemini 4 Argon 的能力与使用边界。
+
+完整内容：[阅读全文《Gemini 4 Argon 解读》](./gemini-4-argon.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnqR0RwJxlmp9OctEP11Vuhf)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV18vpg6zEox/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7691703611381894415)
+
+### HOT-005. MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？
+
+HySparse2 将模型分成 Self-Decoder 和 Cross-Decoder：前半段保留全注意力与滑动窗口，后半段结合全注意力与稀疏注意力。通过模块内部 KV Reuse 和跨段 KV Bridging，让后半段复用或从前半段计算 KV Cache，使 Prefill 提前结束，减少长输入和工具返回内容带来的计算成本。
+
+完整内容：[阅读全文《MiMo-V3 与 HySparse2》](./mimo-v3-hysparse2.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8ifqMip2ndBgZX8vEnj6pf)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV19uaZ6PEi1/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7689435090677402895)
+
+
+### HOT-004. 推荐 5 个复刻 Jev 的开源项目
+
+开源社区在 48 小时内复刻出了 Jev，思路是扔掉全量语言模型头，换成轻量决策头，冻结底层参数只挂 LoRA 微调，块因果掩码让单次前向并发完成多项决策。文中盘点 Kev（Qwen3.5 基座，兼容官方 SDK，本地首选）、Nimble（对比数据构建，准确率 90.1%）、Laya（ModernBERT 双向编码器，单次 33 毫秒）、Open-Jev（截流下一个 token 的概率对数）四个项目，以及意图路由、工具护栏、历史剪枝三个落地入口。
+
+完整内容：[阅读全文《Jev 开源复刻》](./open-source-jev-replicas.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnCCyZe87o2bYZAKoURy0dPf)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1zzaZ6CEbM/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7688302955489021238)
+
+### HOT-003. 不生成文本的 Jev，为什么让 14 万开发者排队？
+
+Jev 是 TypeSafe AI 9 月 15 日发布的 System One 模型，不生成文本，只做判断。给它一段应用状态和一个预定义的结构化问题，它用一次前向计算直接在选项上分配概率，支持是否、单选、打分三种决策。它用 RLCD 训练校准过的置信度，比同类 LLM 快 40 到 200 倍，便宜 40 到 400 倍。Agent 里意图路由、审核、风控初筛这类高频小决策交给它，复杂推理仍然交给大模型。
+
+完整内容：[阅读全文《Jev 是什么》](./what-is-jev.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8m4NWZ9CZdeWUmjS9OOEab)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7687944233659026722)
+
+### HOT-016. GPT Images 2.5 实测，图像生成升级了什么？
+
+<p class="agent-new-question"><span>NEW</span> 新增题目</p>
+
+从生成速度、局部编辑、多轮一致性和 Sketch 草图功能，理解 GPT Images 2.5 的使用方式。
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnsJT6oJ0xXRadGj1s0qutrf) · [查看图文解析](./chatgpt-images-2-5.md)
+
+B站视频：[观看本集视频](https://www.bilibili.com/video/BV1Vzhe6YEeC/)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7683756814344703266)
+
+### HOT-002. GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？
+
+GPT-6 Astra 在 ARC-AGI-3 上拿到 99.9%，靠的是紧凑符号世界模型加有状态的 Harness。它能直接操作电脑，网络安全等级首次达到 Critical。模型越强，Harness 的设计就越关键。
+
+完整内容：[阅读全文《GPT-6 Astra 解读》](./gpt-6-astra.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnp9S8C6LB632Cn2gMicQp5d)
+
+### HOT-001. Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？
+
+官网和 API 共用 Cloudflare 做流量入口，入口挂了就全挂。中转还能跑，是因为 OpenAI 兼容协议让切换模型零成本，而各家模型的能力和风格已经趋同到难以分辨。文中给了三个验证中转到底在调谁的方法。
+
+完整内容：[阅读全文《官网全崩中转为什么还能用》](./why-relay-still-works.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnRxRSfq7atYGxxjXecbYBcb)
+
+## 02、Agent 基础（38 题）
 
 ### 38. Computer Use 是什么？说说它的原理
 
@@ -546,250 +790,6 @@ Agent 本身不做工具选择，选择权在 LLM 手里。ToolRegistry 把所�
 抖音视频：[观看本集视频](https://www.douyin.com/video/7654443885439094042)
 
 
-## 02、热点解读（预留 100 篇，已收录 23 篇）
-
-### HOT-023. Claude Fable 5.2 和 Mythos 5.2 发布，有哪些新能力？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-了解 Fable 5.2 与 Mythos 5.2 的模型能力和实际应用。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnL0OIOluYrXlNM2YiF4tjCb) · [查看图文解析](./claude-fable-5-2.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7706555517623176463)
-
-### HOT-022. DeepSeek Harness 有哪些值得用的插件？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-了解 DeepSeek Harness 插件架构和四款插件的实际用途。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnfUP1Dahr3lSyDMb8pn5zog) · [查看图文解析](./deepseek-harness-four-plugins.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7706142531712470313)
-
-### HOT-021. 混元 Hy4 正式版结合 WorkBuddy 有哪些能力？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-结合 WorkBuddy 实测，了解混元 Hy4 正式版的多模态视觉、Computer Use 和实际应用。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnW4JVa67AmNthp8i0x2OiDe) · [查看图文解析](./hunyuan-hy4.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7704303050290171179)
-
-### HOT-020. 美团 LongCat-2.5 正式版发布，有哪些新能力？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-了解 LongCat-2.5 的国产算力训练、原生多模态和 DeepSeek Harness 接入。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnZDEdxPk3t9DzP2h9Y3DRsd) · [查看图文解析](./longcat-2-5.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7703895292533329206)
-
-### HOT-019. DeepSeek Super-agent 是什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-结合 DeepSeek Harness，理解 Router 与 Worker 如何协作，以及异步任务和 Watchdog 如何支持多任务执行。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8JJPExuHCPBc11QfNhsrRb) · [查看图文解析](./what-is-super-agent.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7703197849411996970)
-
-### HOT-018. Xiaomi-OCR-0 开源：本地 OCR 怎么用？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-从本地部署、区域识别、模型训练和 MCP 接入，了解 Xiaomi-OCR-0 的能力与使用方式。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnqqYO96YgPHGfS9OUWfEmoe) · [查看图文解析](./xiaomi-ocr-0.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7702772455210896674)
-
-### HOT-017. GPT-6.1 Terra 发布，Codex 藏了哪三个大招？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-结合 Codex 源码，拆解 V8 沙箱中的工具并发编排、原图上下文与跨窗口接力，以及推理档位和长期记忆整理。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn38OgFNR0NxU8hHlcvlvdle) · [查看图文解析](./gpt-6-1-terra.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7701366090923904282)
-
-### HOT-015. Kimi K3.1 Pro 正式发布，国产模型的审美新巅峰。
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-拆解大规模联合强化学习、动态工具加载与保留式思考，以及模型定价和前缀缓存的工程用法。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnnZfeMnKC9MGyxixim0xhef) · [阅读全文《Kimi K3.1 Pro》](./kimi-k3-1-pro.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7700177876540230975)
-
-### HOT-014. 太惊艳了吧？Kimi K3.1 真要来了？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-从官方预告、Arena 匿名盲测和推理框架适配线索，梳理 Kimi K3.1 的发布前信息与开发者关注点。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnDdvWNewjj3PinSkcEpFjPd) · [阅读全文《Kimi K3.1 预告》](./kimi-k3-1-preview.md)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7699856703231151410)
-
-### HOT-013. 真正的 OpenAI！DeepSeek 开源内部推理框架 DeepInfer
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-拆解 DeepInfer 的分离部署、KV Cache 存储、投机解码与异步调度，以及 deepseek-recipe 的协议转换和流式工具解析。
-
-完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnvfbHomZEVAFlg3uoUF3MRe) · [阅读全文《DeepInfer 开源》](./deepseek-open-source-deepinfer.md)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1qsxk6jECM/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7699074728060816667)
-
-### HOT-012. DeepSeek-V4.1-Flash-1017 真来了，这次是真滴强。
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-拆解 1017 的后训练更新、基准对比、许愿式编程和三个本地案例，以及 Search & Fetch 的接入信息。
-
-完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnT0hadTTvylXP4PWRxu2RWh) · [阅读全文《DeepSeek 1017 更新》](./deepseek-v4-1-flash-1017.md)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1jtsf6xEmR/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7697933506416037146)
-
-### HOT-011. REA 保姆级教程：DeepSeek Harness 实操
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-REA 把反汇编器、浏览器调试和安卓反编译打包成 MCP 工具，并为每条结论生成 Evidence 记录。DeepSeek Harness 没有一键接入，需要在 cordis.patch.yml 里接入 REA 的 MCP，再安装 Skill，最后跑通官方的恐龙游戏逆向案例。
-
-完整内容：[阅读全文《REA 接入 DeepSeek Harness》](./rea-deepseek-harness-tutorial.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn7fW4j9GEHSijqOJpqq4r8f)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1F5xK6EEMz/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7696102369058196736)
-
-### HOT-010. 最近爆火的 Personal Agent 到底是什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-从 Grok Bot、Muse、Cue、dots 四款产品，理解 Personal Agent 的持续记忆、执行环境、用户身份和权限边界，以及它和聊天助手、Coding Agent 的区别。
-
-完整内容：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn3FTN6yR5TNRgnucNhfyXYf) · [阅读全文《Personal Agent》](./what-is-personal-agent.md)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1SdH562Eip/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7695348838801886499)
-
-
-### HOT-009. Claude Haiku 5.5 怎么在成本和智能之间做选择？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-结合推理档位、上下文窗口、自适应思考和缓存，拆解 Haiku 5.5 的成本与能力取舍，以及在 Claude Code 中承担摘要、压缩、分类、路由和子 Agent 任务的用法。
-
-完整内容：[阅读全文《Claude Haiku 5.5 解读》](./claude-haiku-5-5.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnoAiq8fR9jVWeczNVjGoQie)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1YBn16iEuN/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7694223913370258729)
-
-### HOT-008. CPU、GPU、NPU 到底有什么区别？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-从 Codex 的本机执行、云端 LLM 推理和端侧 AI 三个场景，理解 CPU 的调度能力、GPU 的并行计算与显存带宽，以及 NPU 的低功耗推理。区分 Prefill 和 Decode，也说明 TOPS 为什么不能直接代表实际使用体验。
-
-完整内容：[阅读全文《CPU、GPU、NPU 的区别》](./cpu-gpu-npu-difference.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnEQp2HuPJVzfYbflqUpCfpg)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1YWnz6QEr9/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7693854535088868643)
-
-### HOT-007. Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-Kolibri 用 78B 总参数、3.46B 激活参数降低每次推理的计算量，结合混合专家和滑动窗口注意力控制开销；后训练数据由 GLM-5.3、Qwen3.8 等模型生成，文章拆解其训练方法、跑分和使用边界。
-
-完整内容：[阅读全文《Kolibri 解读》](./aleph-alpha-kolibri.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn6e2SW7YQEFrvYi1Yc8aGih)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1TFpg6YEz3/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7693484001561972019)
-
-### HOT-006. Gemini 4 Argon 发布，100 万 Token 输出意味着什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-从 Prefill、Decode 和 KV Cache 的成本差异，理解百万 Token 输出的工程难点；结合长代码修改、安全攻防和 CodeMender 的工作方式，拆解 Gemini 4 Argon 的能力与使用边界。
-
-完整内容：[阅读全文《Gemini 4 Argon 解读》](./gemini-4-argon.md) · [飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnqR0RwJxlmp9OctEP11Vuhf)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV18vpg6zEox/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7691703611381894415)
-
-### HOT-005. MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？
-
-HySparse2 将模型分成 Self-Decoder 和 Cross-Decoder：前半段保留全注意力与滑动窗口，后半段结合全注意力与稀疏注意力。通过模块内部 KV Reuse 和跨段 KV Bridging，让后半段复用或从前半段计算 KV Cache，使 Prefill 提前结束，减少长输入和工具返回内容带来的计算成本。
-
-完整内容：[阅读全文《MiMo-V3 与 HySparse2》](./mimo-v3-hysparse2.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8ifqMip2ndBgZX8vEnj6pf)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV19uaZ6PEi1/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7689435090677402895)
-
-
-### HOT-004. 推荐 5 个复刻 Jev 的开源项目
-
-开源社区在 48 小时内复刻出了 Jev，思路是扔掉全量语言模型头，换成轻量决策头，冻结底层参数只挂 LoRA 微调，块因果掩码让单次前向并发完成多项决策。文中盘点 Kev（Qwen3.5 基座，兼容官方 SDK，本地首选）、Nimble（对比数据构建，准确率 90.1%）、Laya（ModernBERT 双向编码器，单次 33 毫秒）、Open-Jev（截流下一个 token 的概率对数）四个项目，以及意图路由、工具护栏、历史剪枝三个落地入口。
-
-完整内容：[阅读全文《Jev 开源复刻》](./open-source-jev-replicas.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnCCyZe87o2bYZAKoURy0dPf)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1zzaZ6CEbM/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7688302955489021238)
-
-### HOT-003. 不生成文本的 Jev，为什么让 14 万开发者排队？
-
-Jev 是 TypeSafe AI 9 月 15 日发布的 System One 模型，不生成文本，只做判断。给它一段应用状态和一个预定义的结构化问题，它用一次前向计算直接在选项上分配概率，支持是否、单选、打分三种决策。它用 RLCD 训练校准过的置信度，比同类 LLM 快 40 到 200 倍，便宜 40 到 400 倍。Agent 里意图路由、审核、风控初筛这类高频小决策交给它，复杂推理仍然交给大模型。
-
-完整内容：[阅读全文《Jev 是什么》](./what-is-jev.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcn8m4NWZ9CZdeWUmjS9OOEab)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7687944233659026722)
-
-### HOT-016. GPT Images 2.5 实测，图像生成升级了什么？
-
-<p class="agent-new-question"><span>NEW</span> 新增题目</p>
-
-从生成速度、局部编辑、多轮一致性和 Sketch 草图功能，理解 GPT Images 2.5 的使用方式。
-
-完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnsJT6oJ0xXRadGj1s0qutrf) · [查看图文解析](./chatgpt-images-2-5.md)
-
-B站视频：[观看本集视频](https://www.bilibili.com/video/BV1Vzhe6YEeC/)
-
-抖音视频：[观看本集视频](https://www.douyin.com/video/7683756814344703266)
-
-### HOT-002. GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？
-
-GPT-6 Astra 在 ARC-AGI-3 上拿到 99.9%，靠的是紧凑符号世界模型加有状态的 Harness。它能直接操作电脑，网络安全等级首次达到 Critical。模型越强，Harness 的设计就越关键。
-
-完整内容：[阅读全文《GPT-6 Astra 解读》](./gpt-6-astra.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnp9S8C6LB632Cn2gMicQp5d)
-
-### HOT-001. Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？
-
-官网和 API 共用 Cloudflare 做流量入口，入口挂了就全挂。中转还能跑，是因为 OpenAI 兼容协议让切换模型零成本，而各家模型的能力和风格已经趋同到难以分辨。文中给了三个验证中转到底在调谁的方法。
-
-完整内容：[阅读全文《官网全崩中转为什么还能用》](./why-relay-still-works.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnRxRSfq7atYGxxjXecbYBcb)
-
 ## 03、上下文与记忆（12 题）
 
 聚焦上下文窗口、Context Engineering、短期记忆、长期记忆、压缩、检索与会话隔离。
@@ -914,6 +914,13 @@ Prompt Engineering 只管写好一句提示词，上下文工程要让 LLM 在�
 
 聚焦 NLP、Transformer、模型结构、推理机制、API、缓存、Token、结构化输出和模型服务。
 
+### 170. OpenAI 和 Anthropic 协议有什么区别？
+
+完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnZqCoF7oFNKTEgTfn69TgMf) · [查看图文解析](./openai-vs-anthropic-protocol.md)
+
+抖音视频：[观看本集视频](https://www.douyin.com/video/7707510476745231626)
+
+
 ### 168. 什么是 CoT（思维链）？
 
 完整答案：[飞书详细答案](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnq2uBnNAUGN4jOeAvG2bhge) · [查看图文解析](./what-is-cot.md)
@@ -1033,9 +1040,6 @@ MoE 把 Transformer 每层的前馈网络拆成 256 个路由专家和 1 个共�
 评测分三类。代码能力看 SWE-bench 系列，给模型真实 GitHub Issue 和整个仓库，自己定位 bug 写补丁并跑通测试，Pro 版平均要改 170 行，DeepSWE 全部从零出题。Agent 工具能力看 Terminal-Bench 在沙箱里敲命令，MCP-Atlas 考跨服务器调用 MCP，CyberGym 要写出复现漏洞的 PoC。推理能力看 GPQA Diamond，考生物、物理、化学的研究生级推理。
 
 完整答案：[阅读全文《大模型评测集在测什么》](./what-benchmarks-test.md) · [飞书版](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb#doxcnLkdAVAplpILlAVtk2NdJdJ)
-
-### 170. OpenAI 和 Anthropic 协议有什么区别？
-
 
 ### 173. 怎么让 LLM 返回结构化数据？
 

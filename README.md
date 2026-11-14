@@ -53,10 +53,10 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 <!-- AUTO-GENERATED:STATS:START -->
 | 分类 | 题数 | 图文详解 | 视频讲解 |
 | --- | ---: | ---: | ---: |
-| 01 Agent 基础 | 38 | 38 | 38 |
-| 02 热点解读 | 23 | 23 | 21 |
+| 01 热点解读 | 23 | 23 | 21 |
+| 02 Agent 基础 | 38 | 38 | 38 |
 | 03 上下文与记忆 | 12 | 12 | 12 |
-| 04 LLM 基础与 API | 18 | 15 | 13 |
+| 04 LLM 基础与 API | 18 | 16 | 14 |
 | 05 模型训练与微调 | 32 | 2 | 2 |
 | 06 Claude Code与Codex | 17 | 6 | 6 |
 | 07 DeepSeek专题 | 5 | 5 | 5 |
@@ -66,7 +66,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 11 RAG知识库 | 43 | 2 | 1 |
 | 12 LangChain 与 Spring AI | 21 | 0 | 0 |
 | 13 Agent 产品演进 | 9 | 1 | 1 |
-| **合计** | **302** | **110** | **105** |
+| **合计** | **302** | **111** | **106** |
 <!-- AUTO-GENERATED:STATS:END -->
 
 难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。想在手机上收藏，可以用同步更新的[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)。
@@ -77,7 +77,36 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 
 <!-- AUTO-GENERATED:CATALOG:START -->
 <details>
-<summary><b>01 Agent 基础</b>（38 题，图文详解 38 篇）</summary>
+<summary><b>01 热点解读</b>（23 题，图文详解 23 篇）</summary>
+
+- HOT-023\. [Claude Fable 5.2 和 Mythos 5.2 发布，有哪些新能力？](./video/claude-fable-5-2.md) · [抖音](https://www.douyin.com/video/7706555517623176463)
+- HOT-022\. [DeepSeek Harness 有哪些值得用的插件？](./video/deepseek-harness-four-plugins.md) · [抖音](https://www.douyin.com/video/7706142531712470313)
+- HOT-021\. [混元 Hy4 正式版结合 WorkBuddy 有哪些能力？](./video/hunyuan-hy4.md) · [抖音](https://www.douyin.com/video/7704303050290171179)
+- HOT-020\. [美团 LongCat-2.5 正式版发布，有哪些新能力？](https://javabetter.cn/ai/video/longcat-2-5.html) · [抖音](https://www.douyin.com/video/7703895292533329206)
+- HOT-019\. [DeepSeek Super-agent 是什么？](https://javabetter.cn/ai/video/what-is-super-agent.html) · [抖音](https://www.douyin.com/video/7703197849411996970)
+- HOT-018\. [Xiaomi-OCR-0 开源：本地 OCR 怎么用？](https://javabetter.cn/ai/video/xiaomi-ocr-0.html) · [抖音](https://www.douyin.com/video/7702772455210896674)
+- HOT-017\. [GPT-6.1 Terra 发布，Codex 藏了哪三个大招？](https://javabetter.cn/ai/video/gpt-6-1-terra.html) · [抖音](https://www.douyin.com/video/7701366090923904282)
+- HOT-015\. [Kimi K3.1 Pro 正式发布，国产模型的审美新巅峰。](https://javabetter.cn/ai/video/kimi-k3-1-pro.html) · [抖音](https://www.douyin.com/video/7700177876540230975)
+- HOT-014\. [太惊艳了吧？Kimi K3.1 真要来了？](https://javabetter.cn/ai/video/kimi-k3-1-preview.html) · [抖音](https://www.douyin.com/video/7699856703231151410)
+- HOT-013\. [真正的 OpenAI！DeepSeek 开源内部推理框架 DeepInfer](https://javabetter.cn/ai/video/deepseek-open-source-deepinfer.html) · [抖音](https://www.douyin.com/video/7699074728060816667) · [B站](https://www.bilibili.com/video/BV1qsxk6jECM/)
+- HOT-012\. [DeepSeek-V4.1-Flash-1017 真来了，这次是真滴强。](https://javabetter.cn/ai/video/deepseek-v4-1-flash-1017.html) · [抖音](https://www.douyin.com/video/7697933506416037146) · [B站](https://www.bilibili.com/video/BV1jtsf6xEmR/)
+- HOT-011\. [REA 保姆级教程：DeepSeek Harness 实操](https://javabetter.cn/ai/video/rea-deepseek-harness-tutorial.html) · [抖音](https://www.douyin.com/video/7696102369058196736) · [B站](https://www.bilibili.com/video/BV1F5xK6EEMz/)
+- HOT-010\. [最近爆火的 Personal Agent 到底是什么？](https://javabetter.cn/ai/video/what-is-personal-agent.html) · [抖音](https://www.douyin.com/video/7695348838801886499) · [B站](https://www.bilibili.com/video/BV1SdH562Eip/)
+- HOT-009\. [Claude Haiku 5.5 怎么在成本和智能之间做选择？](https://javabetter.cn/ai/video/claude-haiku-5-5.html) · [抖音](https://www.douyin.com/video/7694223913370258729) · [B站](https://www.bilibili.com/video/BV1YBn16iEuN/)
+- HOT-008\. [CPU、GPU、NPU 到底有什么区别？](https://javabetter.cn/ai/video/cpu-gpu-npu-difference.html) · [抖音](https://www.douyin.com/video/7693854535088868643) · [B站](https://www.bilibili.com/video/BV1YWnz6QEr9/)
+- HOT-007\. [Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？](https://javabetter.cn/ai/video/aleph-alpha-kolibri.html) · [抖音](https://www.douyin.com/video/7693484001561972019) · [B站](https://www.bilibili.com/video/BV1TFpg6YEz3/)
+- HOT-006\. [Gemini 4 Argon 发布，100 万 Token 输出意味着什么？](https://javabetter.cn/ai/video/gemini-4-argon.html) · [抖音](https://www.douyin.com/video/7691703611381894415) · [B站](https://www.bilibili.com/video/BV18vpg6zEox/)
+- HOT-005\. [MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？](https://javabetter.cn/ai/video/mimo-v3-hysparse2.html) · [抖音](https://www.douyin.com/video/7689435090677402895) · [B站](https://www.bilibili.com/video/BV19uaZ6PEi1/)
+- HOT-004\. [推荐 5 个复刻 Jev 的开源项目](https://javabetter.cn/ai/video/open-source-jev-replicas.html) · [抖音](https://www.douyin.com/video/7688302955489021238) · [B站](https://www.bilibili.com/video/BV1zzaZ6CEbM/)
+- HOT-003\. [不生成文本的 Jev，为什么让 14 万开发者排队？](https://javabetter.cn/ai/video/what-is-jev.html) · [抖音](https://www.douyin.com/video/7687944233659026722) · [B站](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
+- HOT-016\. [GPT Images 2.5 实测，图像生成升级了什么？](https://javabetter.cn/ai/video/chatgpt-images-2-5.html) · [抖音](https://www.douyin.com/video/7683756814344703266) · [B站](https://www.bilibili.com/video/BV1Vzhe6YEeC/)
+- HOT-002\. [GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？](https://javabetter.cn/ai/video/gpt-6-astra.html)
+- HOT-001\. [Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？](https://javabetter.cn/ai/video/why-relay-still-works.html)
+
+</details>
+
+<details>
+<summary><b>02 Agent 基础</b>（38 题，图文详解 38 篇）</summary>
 
 - 🟡 38\. [Computer Use 是什么？说说它的原理](https://javabetter.cn/ai/video/what-is-computer-use.html) · [抖音](https://www.douyin.com/video/7700961195594976575)
 - 37\. [说说 Browser Use 的原理](https://javabetter.cn/ai/video/what-is-browser-use.html) · [抖音](https://www.douyin.com/video/7700568507443842367)
@@ -121,35 +150,6 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 </details>
 
 <details>
-<summary><b>02 热点解读</b>（23 题，图文详解 23 篇）</summary>
-
-- HOT-023\. [Claude Fable 5.2 和 Mythos 5.2 发布，有哪些新能力？](./video/claude-fable-5-2.md) · [抖音](https://www.douyin.com/video/7706555517623176463)
-- HOT-022\. [DeepSeek Harness 有哪些值得用的插件？](./video/deepseek-harness-four-plugins.md) · [抖音](https://www.douyin.com/video/7706142531712470313)
-- HOT-021\. [混元 Hy4 正式版结合 WorkBuddy 有哪些能力？](./video/hunyuan-hy4.md) · [抖音](https://www.douyin.com/video/7704303050290171179)
-- HOT-020\. [美团 LongCat-2.5 正式版发布，有哪些新能力？](https://javabetter.cn/ai/video/longcat-2-5.html) · [抖音](https://www.douyin.com/video/7703895292533329206)
-- HOT-019\. [DeepSeek Super-agent 是什么？](https://javabetter.cn/ai/video/what-is-super-agent.html) · [抖音](https://www.douyin.com/video/7703197849411996970)
-- HOT-018\. [Xiaomi-OCR-0 开源：本地 OCR 怎么用？](https://javabetter.cn/ai/video/xiaomi-ocr-0.html) · [抖音](https://www.douyin.com/video/7702772455210896674)
-- HOT-017\. [GPT-6.1 Terra 发布，Codex 藏了哪三个大招？](https://javabetter.cn/ai/video/gpt-6-1-terra.html) · [抖音](https://www.douyin.com/video/7701366090923904282)
-- HOT-015\. [Kimi K3.1 Pro 正式发布，国产模型的审美新巅峰。](https://javabetter.cn/ai/video/kimi-k3-1-pro.html) · [抖音](https://www.douyin.com/video/7700177876540230975)
-- HOT-014\. [太惊艳了吧？Kimi K3.1 真要来了？](https://javabetter.cn/ai/video/kimi-k3-1-preview.html) · [抖音](https://www.douyin.com/video/7699856703231151410)
-- HOT-013\. [真正的 OpenAI！DeepSeek 开源内部推理框架 DeepInfer](https://javabetter.cn/ai/video/deepseek-open-source-deepinfer.html) · [抖音](https://www.douyin.com/video/7699074728060816667) · [B站](https://www.bilibili.com/video/BV1qsxk6jECM/)
-- HOT-012\. [DeepSeek-V4.1-Flash-1017 真来了，这次是真滴强。](https://javabetter.cn/ai/video/deepseek-v4-1-flash-1017.html) · [抖音](https://www.douyin.com/video/7697933506416037146) · [B站](https://www.bilibili.com/video/BV1jtsf6xEmR/)
-- HOT-011\. [REA 保姆级教程：DeepSeek Harness 实操](https://javabetter.cn/ai/video/rea-deepseek-harness-tutorial.html) · [抖音](https://www.douyin.com/video/7696102369058196736) · [B站](https://www.bilibili.com/video/BV1F5xK6EEMz/)
-- HOT-010\. [最近爆火的 Personal Agent 到底是什么？](https://javabetter.cn/ai/video/what-is-personal-agent.html) · [抖音](https://www.douyin.com/video/7695348838801886499) · [B站](https://www.bilibili.com/video/BV1SdH562Eip/)
-- HOT-009\. [Claude Haiku 5.5 怎么在成本和智能之间做选择？](https://javabetter.cn/ai/video/claude-haiku-5-5.html) · [抖音](https://www.douyin.com/video/7694223913370258729) · [B站](https://www.bilibili.com/video/BV1YBn16iEuN/)
-- HOT-008\. [CPU、GPU、NPU 到底有什么区别？](https://javabetter.cn/ai/video/cpu-gpu-npu-difference.html) · [抖音](https://www.douyin.com/video/7693854535088868643) · [B站](https://www.bilibili.com/video/BV1YWnz6QEr9/)
-- HOT-007\. [Kolibri 如何蒸馏 GLM-5.3 和 Qwen3.8？](https://javabetter.cn/ai/video/aleph-alpha-kolibri.html) · [抖音](https://www.douyin.com/video/7693484001561972019) · [B站](https://www.bilibili.com/video/BV1TFpg6YEz3/)
-- HOT-006\. [Gemini 4 Argon 发布，100 万 Token 输出意味着什么？](https://javabetter.cn/ai/video/gemini-4-argon.html) · [抖音](https://www.douyin.com/video/7691703611381894415) · [B站](https://www.bilibili.com/video/BV18vpg6zEox/)
-- HOT-005\. [MiMo-V3 的 HySparse2 和混合滑动窗口注意力有什么区别？](https://javabetter.cn/ai/video/mimo-v3-hysparse2.html) · [抖音](https://www.douyin.com/video/7689435090677402895) · [B站](https://www.bilibili.com/video/BV19uaZ6PEi1/)
-- HOT-004\. [推荐 5 个复刻 Jev 的开源项目](https://javabetter.cn/ai/video/open-source-jev-replicas.html) · [抖音](https://www.douyin.com/video/7688302955489021238) · [B站](https://www.bilibili.com/video/BV1zzaZ6CEbM/)
-- HOT-003\. [不生成文本的 Jev，为什么让 14 万开发者排队？](https://javabetter.cn/ai/video/what-is-jev.html) · [抖音](https://www.douyin.com/video/7687944233659026722) · [B站](https://www.bilibili.com/video/BV1eUaZ6qEDR/)
-- HOT-016\. [GPT Images 2.5 实测，图像生成升级了什么？](https://javabetter.cn/ai/video/chatgpt-images-2-5.html) · [抖音](https://www.douyin.com/video/7683756814344703266) · [B站](https://www.bilibili.com/video/BV1Vzhe6YEeC/)
-- HOT-002\. [GPT-6 Astra 全量上线，为什么 OpenAI 敢说 AGI 时代来了？](https://javabetter.cn/ai/video/gpt-6-astra.html)
-- HOT-001\. [Claude、ChatGPT、Grok 全崩，你的中转为什么还能用？](https://javabetter.cn/ai/video/why-relay-still-works.html)
-
-</details>
-
-<details>
 <summary><b>03 上下文与记忆</b>（12 题，图文详解 12 篇）</summary>
 
 - 50\. [说说 DeepSeek Harness 的上下文压缩原理](https://javabetter.cn/ai/video/agent-memory-compaction-methods.html) · [抖音](https://www.douyin.com/video/7702426892510448931)
@@ -168,8 +168,9 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 </details>
 
 <details>
-<summary><b>04 LLM 基础与 API</b>（18 题，图文详解 15 篇）</summary>
+<summary><b>04 LLM 基础与 API</b>（18 题，图文详解 16 篇）</summary>
 
+- 170\. [OpenAI 和 Anthropic 协议有什么区别？](./video/openai-vs-anthropic-protocol.md) · [抖音](https://www.douyin.com/video/7707510476745231626)
 - 168\. [什么是 CoT（思维链）？](./video/what-is-cot.md) · [抖音](https://www.douyin.com/video/7707112014115540233)
 - 166\. [DeepSeek API 中的Temperature、Top-P 有什么用？](./video/deepseek-temperature-top-p.md) · [抖音](https://www.douyin.com/video/7705758773213744393)
 - 🟡 163\. [分词器是什么？](./video/what-is-tokenizer.md) · [抖音](https://www.douyin.com/video/7705453048864328975)
@@ -184,7 +185,6 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 - 152\. [大模型 API 缓存命中和未命中为什么差价巨大？](https://javabetter.cn/ai/video/api-cache-hit-miss.html) · [抖音](https://www.douyin.com/video/7672403032797154601) · [B站](https://www.bilibili.com/video/BV1WAuZ6fEXP/)
 - 156\. [MoE 是什么？DeepSeek 模型为什么采用混合专家架构？](https://javabetter.cn/ai/video/what-is-moe.html) · [抖音](https://www.douyin.com/video/7670768776341753122) · [B站](https://www.bilibili.com/video/BV1EKuJ6VEkc/)
 - 158\. [SWE-bench、Terminal-Bench、GPQA Diamond 这些大模型评测集到底在测什么？](https://javabetter.cn/ai/video/what-benchmarks-test.html)
-- 170\. OpenAI 和 Anthropic 协议有什么区别？
 - 173\. 怎么让 LLM 返回结构化数据？
 - 174\. LLM 返回的内容被截断了怎么办？
 - 360\. [什么是语义缓存？和 KV Cache、Prompt Caching 有什么区别？](https://javabetter.cn/ai/video/what-is-semantic-caching.html)
