@@ -5,7 +5,7 @@
 </p>
 
 <!-- AUTO-GENERATED:TITLE:START -->
-<h1 align="center">王二讲Agent：AI Agent 面试题 302 道（Agent八股+视频讲解）</h1>
+<h1 align="center">王二讲Agent：AI Agent 面试题 303 道（Agent八股+视频讲解）</h1>
 <!-- AUTO-GENERATED:TITLE:END -->
 
 <p align="center">
@@ -53,7 +53,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 <!-- AUTO-GENERATED:STATS:START -->
 | 分类 | 题数 | 图文详解 | 视频讲解 |
 | --- | ---: | ---: | ---: |
-| 01 热点解读 | 23 | 23 | 21 |
+| 01 热点解读 | 24 | 24 | 22 |
 | 02 Agent 基础 | 38 | 38 | 38 |
 | 03 上下文与记忆 | 12 | 12 | 12 |
 | 04 LLM 基础与 API | 18 | 16 | 14 |
@@ -66,7 +66,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 11 RAG知识库 | 43 | 2 | 1 |
 | 12 LangChain 与 Spring AI | 21 | 0 | 0 |
 | 13 Agent 产品演进 | 9 | 1 | 1 |
-| **合计** | **302** | **111** | **106** |
+| **合计** | **303** | **112** | **107** |
 <!-- AUTO-GENERATED:STATS:END -->
 
 难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。想在手机上收藏，可以用同步更新的[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)。
@@ -77,8 +77,9 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 
 <!-- AUTO-GENERATED:CATALOG:START -->
 <details>
-<summary><b>01 热点解读</b>（23 题，图文详解 23 篇）</summary>
+<summary><b>01 热点解读</b>（24 题，图文详解 24 篇）</summary>
 
+- HOT-024\. [DSH Go 如何在手机上运行 DeepSeek Harness？](./video/dsh-go.md) · [抖音](https://www.douyin.com/video/7707955151327317290)
 - HOT-023\. [Claude Fable 5.2 和 Mythos 5.2 发布，有哪些新能力？](./video/claude-fable-5-2.md) · [抖音](https://www.douyin.com/video/7706555517623176463)
 - HOT-022\. [DeepSeek Harness 有哪些值得用的插件？](./video/deepseek-harness-four-plugins.md) · [抖音](https://www.douyin.com/video/7706142531712470313)
 - HOT-021\. [混元 Hy4 正式版结合 WorkBuddy 有哪些能力？](./video/hunyuan-hy4.md) · [抖音](https://www.douyin.com/video/7704303050290171179)
