@@ -40,6 +40,8 @@ def main() -> None:
     parser.add_argument('--skip-onset', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
     project = args.project; number = args.chapter[2:]
+    from outro_audio import require_declaration, verify as verify_outro
+    require_declaration(project, args.chapter)
     composition = args.composition or f'Chapter{number}Preview'
     py, node = sys.executable, 'node'
     if args.update_audio:
@@ -49,6 +51,7 @@ def main() -> None:
             run('mix_effects', [py, str(TOOLS / 'mix_effects.py'), '--project', str(project)])
     if not args.skip_typecheck:
         run('typecheck', [node, str(TOOLS / 'remotion.mjs'), 'typecheck', '--project', str(project)])
+    outro = verify_outro(project, args.chapter) if (project / 'assets/references/pixel-actions.json').exists() else None
     out_dir = project / 'preview' / f'chapter{number}'; out_dir.mkdir(parents=True, exist_ok=True)
     rendered = []
     if args.still:
@@ -59,6 +62,8 @@ def main() -> None:
             rendered.append(str((out_dir / f'{label}-{frame}.png').relative_to(project)))
     report = {'chapter': args.chapter, 'composition': composition, 'stills': rendered,
         'audioUpdated': args.update_audio, 'fullReviewRequested': args.full_review}
+    if outro is not None:
+        report['outroAudio'] = outro
     if args.check_onset and not args.skip_onset:
         report['onset'] = onset_check(project, args.chapter, composition, out_dir / 'onset')
     if args.full_review:

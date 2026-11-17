@@ -31,13 +31,16 @@ export const MotionPlane: React.FC<{
   const entering = enter && frame < enter.at + enter.duration;
   const leaving = exit && frame >= exit.at;
   const motion = leaving ? exit : entering ? enter : undefined;
-  const p = motion ? move(frame, motion.at, motion.duration) : 0;
+  if (!motion) {
+    return <div style={{position: 'absolute', inset: 0}}>{children}</div>;
+  }
+  const p = move(frame, motion.at, motion.duration);
   // Keep the incoming recording opaque; crossfading it would ghost UI text over the bird.
-  const opacity = motion?.kind === 'push' && leaving ? 1 - p : 1;
+  const opacity = motion.kind === 'push' && leaving ? 1 - p : 1;
   return (
     <div style={{position: 'absolute', inset: 0, perspective: 2400, perspectiveOrigin: '960px 504px'}}>
       <div style={{position: 'absolute', inset: 0, opacity, transformOrigin: '960px 504px',
-        transform: motion ? transforms(motion.kind, p, !leaving) : 'none'}}>
+        transform: transforms(motion.kind, p, !leaving)}}>
         {children}
       </div>
     </div>

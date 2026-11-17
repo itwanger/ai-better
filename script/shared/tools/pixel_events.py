@@ -30,7 +30,16 @@ def compile_events(project):
     project=Path(project);source=project/'assets/references/pixel-actions.json'
     if not source.exists():return None
     load=lambda p:json.loads((project/p).read_text())
-    data=resolve(json.loads(source.read_text()),load('build/cues.json'),load('build/chapters.json'))
+    authored=json.loads(source.read_text())
+    cues=load('build/cues.json');chapters=load('build/chapters.json')
+    from outro_audio import derive_events
+    automatic=derive_events(project,authored,cues,chapters)
+    # A declared outro owns these two sounds; reject stale hand-written copies.
+    for new in automatic:
+        for old in authored['events']:
+            if old['chapter']==new['chapter'] and old['at']['beatId']==new['at']['beatId'] and abs(old['at'].get('offsetFrames',0)-new['at']['offsetFrames'])<=6 and old.get('sound'):
+                raise ValueError('Remove manual outro button sound before using powerUpOutros: '+old['id'])
+    data=resolve({'events':authored['events']+automatic},cues,chapters)
     output={'schemaVersion':1,'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'chapters':data}
     # Confirm every effect exists before touching a plan.
     from sfx_designs import make_cues

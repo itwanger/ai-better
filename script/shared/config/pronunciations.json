@@ -672,6 +672,24 @@
       "targetPinyin": "xié yì (xie2 yi4)",
       "status": "user-specified",
       "note": "2026-11-12 用户指定协议读 xieyi。openai-vs-anthropic-protocol 第24段两处使用词级 py 音素 xie2 yi4；目标读法已确认，合成音频等待试听，不据此重配已认可章节。"
+    },
+    {
+      "id": "jishu-odd-number",
+      "match": "奇数",
+      "speakers": "*",
+      "targetPinyin": "ji1 shu4",
+      "status": "confirmed-in-complete-sentence",
+      "note": "2026-11-15 用户指定数学语境的“奇数”读 jī shù，不读 qí shù。字幕与纯文本保持奇数；本期 deepseek-app-api beat28 用单元级SSML <phoneme alphabet=\"py\" ph=\"ji1\">奇</phoneme>数 整句重合成。目标读法已由用户指定，新音频尚待试听；后续遇到奇数/奇数字节须按此目标处理，不将ASR识别奇数当作发音验收。",
+      "validatedExamples": [
+        {
+          "project": "deepseek-app-api",
+          "beatId": 28,
+          "speakerId": "S_j97bqlje2",
+          "method": "ttsSsml / py ji1 on odd-number character",
+          "processedSha256": "0ffd912865fabcd30306b9df0b14bac1782b205036a1d4121ae5f4174aced05d",
+          "userAcceptedOn": "2026-11-15"
+        }
+      ]
     }
   ]
 }
