@@ -5,7 +5,7 @@
 </p>
 
 <!-- AUTO-GENERATED:TITLE:START -->
-<h1 align="center">王二讲Agent：AI Agent 面试题 304 道（Agent八股+视频讲解）</h1>
+<h1 align="center">王二讲Agent：AI Agent 面试题 302 道（Agent八股+视频讲解）</h1>
 <!-- AUTO-GENERATED:TITLE:END -->
 
 <p align="center">
@@ -56,7 +56,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 01 热点解读 | 25 | 25 | 23 |
 | 02 Agent 基础 | 38 | 38 | 38 |
 | 03 上下文与记忆 | 12 | 12 | 12 |
-| 04 LLM 基础与 API | 18 | 16 | 14 |
+| 04 LLM 基础与 API | 16 | 16 | 14 |
 | 05 模型训练与微调 | 32 | 2 | 2 |
 | 06 Claude Code与Codex | 17 | 6 | 6 |
 | 07 DeepSeek专题 | 5 | 5 | 5 |
@@ -66,7 +66,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 | 11 RAG知识库 | 43 | 2 | 1 |
 | 12 LangChain 与 Spring AI | 21 | 0 | 0 |
 | 13 Agent 产品演进 | 9 | 1 | 1 |
-| **合计** | **304** | **113** | **108** |
+| **合计** | **302** | **113** | **108** |
 <!-- AUTO-GENERATED:STATS:END -->
 
 难度分三级：🟢 基础、🟡 进阶、🔴 深入。推荐到 [javabetter.cn/ai/video](https://javabetter.cn/ai/video/) 在线阅读，有侧边栏目录、站内搜索和内嵌视频，体验比直接看 Markdown 好。想在手机上收藏，可以用同步更新的[飞书知识库](https://my.feishu.cn/wiki/AcJywdpZ9ioWSOkNTnVcuQ7enMb)。
@@ -170,7 +170,7 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 </details>
 
 <details>
-<summary><b>04 LLM 基础与 API</b>（18 题，图文详解 16 篇）</summary>
+<summary><b>04 LLM 基础与 API</b>（16 题，图文详解 16 篇）</summary>
 
 - 170\. [OpenAI 和 Anthropic 协议有什么区别？](./video/openai-vs-anthropic-protocol.md) · [抖音](https://www.douyin.com/video/7707510476745231626)
 - 168\. [什么是 CoT（思维链）？](./video/what-is-cot.md) · [抖音](https://www.douyin.com/video/7707112014115540233)
@@ -187,8 +187,6 @@ AI 正在成为我们生活中不可或缺的一部分，那为了让全天下�
 - 152\. [大模型 API 缓存命中和未命中为什么差价巨大？](https://javabetter.cn/ai/video/api-cache-hit-miss.html) · [抖音](https://www.douyin.com/video/7672403032797154601) · [B站](https://www.bilibili.com/video/BV1WAuZ6fEXP/)
 - 156\. [MoE 是什么？DeepSeek 模型为什么采用混合专家架构？](https://javabetter.cn/ai/video/what-is-moe.html) · [抖音](https://www.douyin.com/video/7670768776341753122) · [B站](https://www.bilibili.com/video/BV1EKuJ6VEkc/)
 - 158\. [SWE-bench、Terminal-Bench、GPQA Diamond 这些大模型评测集到底在测什么？](https://javabetter.cn/ai/video/what-benchmarks-test.html)
-- 173\. 怎么让 LLM 返回结构化数据？
-- 174\. LLM 返回的内容被截断了怎么办？
 - 360\. [什么是语义缓存？和 KV Cache、Prompt Caching 有什么区别？](https://javabetter.cn/ai/video/what-is-semantic-caching.html)
 
 </details>
